@@ -72,7 +72,9 @@ class Client
                 if (!is_array($params["products"])) {
                     throw new Exception("El parametro products no cumple con el formato requerido.");
                 } else {
-                    $this->proccessImport->importProducts($params["products"], $currentClient);
+                    foreach ($currentClient->indexes as $key => $index) {
+                        $this->proccessImport->importProducts($params["products"], $currentClient, $index->id);
+                    }
                 }
             }
             
