@@ -1,0 +1,180 @@
+<?php
+
+namespace App\Http\Controllers\Api\Search;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Helpers\System\CoreHttp;
+use App\Helpers\Search\Import;
+
+class Process extends Controller
+{
+    /**
+     * @var Import
+     */
+    protected $import;
+
+    /**
+     * @var CoreHttp
+     */
+    protected $coreHttp;
+
+    public function __construct() {
+        $this->import = new Import();
+        $this->coreHttp = new CoreHttp();
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function importSingle(Request $request)
+    {
+        return response()->json(
+            $this->import->singleProduct(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function importCollection(Request $request)
+    {
+        return response()->json(
+            $this->import->collectionsProduct(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function importIndexSearch(Request $request)
+    {
+        return response()->json(
+            $this->import->processIndexCatalog(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updateStatusIndexSearch(Request $request)
+    {
+        return response()->json(
+            $this->import->updateSearchIndex(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function importAttributes(Request $request)
+    {
+        return response()->json(
+            $this->import->proccessImportAttributes(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function disableSingleProduct(Request $request)
+    {
+        return response()->json(
+            $this->import->changeStatusProduct(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function disableCollectionProduct(Request $request)
+    {
+        return response()->json(
+            $this->import->changeStatusCollectionProduct(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function desactivateSingleProduct(Request $request)
+    {
+        return response()->json(
+            $this->import->changeStatusIndexProduct(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function desactivateCollectionProduct(Request $request)
+    {
+        return response()->json(
+            $this->import->changeStatusIndexCollectionProduct(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteSingleProduct(Request $request)
+    {
+        return response()->json(
+            $this->import->deleteSingleProduct(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteCollectionProduct(Request $request)
+    {
+        return response()->json(
+            $this->import->deleteCollectionProduct(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
+}
