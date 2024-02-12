@@ -85,7 +85,7 @@ class Core
             }
 
             if (count($idProductList) > 0) {
-                $this->setHistoryResult($index->id, $header["customer"][0], $query, $idProductList);
+                $this->setHistoryResult($index->id, $header["customer-uuid"][0], $query, $idProductList);
             }
 
             $responseProductIds = array_slice($idProductList, 0, $this->indexConfiguration->limit_product_feed);
