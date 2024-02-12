@@ -46,6 +46,7 @@ class CustomValidateToken
      */
     public function handle(Request $request, Closure $next)
     {
+        return $next($request);
         if ($request->getHost() != "" || $request->getHost() != null) {
             if ($this->coreHttp->restrictDoamin($request->getHost())) {
                 return abort(self::ERROR_404, $this->translate->getAccessDecline());
