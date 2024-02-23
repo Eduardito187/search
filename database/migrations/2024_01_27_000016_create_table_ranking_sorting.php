@@ -13,6 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
+        //attribute_order
         Schema::create('ranking_sorting', function (Blueprint $table) {
             $table->unsignedBigInteger('id_attribute')->nullable();
             $table->foreign('id_attribute')->references('id')->on('attributes')->onDelete('cascade');

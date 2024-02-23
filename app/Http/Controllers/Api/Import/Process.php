@@ -84,10 +84,66 @@ class Process extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
+    public function importAttributesFilter(Request $request)
+    {
+        return response()->json(
+            $this->import->proccessImportAttributeFilter(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
     public function importAttributes(Request $request)
     {
         return response()->json(
             $this->import->proccessImportAttributes(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function importAttributesOrder(Request $request)
+    {
+        return response()->json(
+            $this->import->proccessImportAttributesOrder(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function importAttributesSearch(Request $request)
+    {
+        return response()->json(
+            $this->import->proccessImportAttributesSearch(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function importAttributesRulesExclude(Request $request)
+    {
+        return response()->json(
+            $this->import->proccessImportAttributesRulesExclude(
                 $request->all(),
                 $request->header()
             )

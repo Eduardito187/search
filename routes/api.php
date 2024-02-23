@@ -41,6 +41,10 @@ Route::middleware([CustomValidateToken::class])->group(function () {
         Route::post('import/importCollection', 'importCollection');
         Route::post('import/importIndexSearch', 'importIndexSearch');
         Route::post('import/updateStatusIndexSearch', 'updateStatusIndexSearch');
+        Route::post('import/importAttributesFilter', 'importAttributesFilter');
+        Route::post('import/importAttributesOrder', 'importAttributesOrder');
+        Route::post('import/importAttributesSearch', 'importAttributesSearch');
+        Route::post('import/importAttributesRulesExclude', 'importAttributesRulesExclude');
         Route::post('import/importAttributes', 'importAttributes');
         Route::post('import/disableSingleProduct', 'disableSingleProduct');
         Route::post('import/disableCollectionProduct', 'disableCollectionProduct');

@@ -13,13 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('filters_attributes', function (Blueprint $table) {
+        Schema::create('attributes_rules_exclude', function (Blueprint $table) {
             $table->unsignedBigInteger('id_client')->nullable();
             $table->foreign('id_client')->references('id')->on('client')->onDelete('cascade');
             $table->unsignedBigInteger('id_attribute')->nullable();
             $table->foreign('id_attribute')->references('id')->on('attributes')->onDelete('cascade');
-            $table->integer('sort');
-            $table->boolean('status');
+            $table->unsignedBigInteger('id_condition')->nullable();
+            $table->foreign('id_condition')->references('id')->on('conditions_excludes')->onDelete('cascade');
+            $table->integer('value');
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
         });
@@ -32,10 +33,11 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('filters_attributes', function (Blueprint $table) {
+        Schema::dropIfExists('attributes_rules_exclude', function (Blueprint $table) {
             $table->dropConstrainedForeignId('id_client');
             $table->dropConstrainedForeignId('id_attribute');
+            $table->dropConstrainedForeignId('id_condition');
         });
-        Schema::dropIfExists('filters_attributes');
+        Schema::dropIfExists('attributes_rules_exclude');
     }
 };

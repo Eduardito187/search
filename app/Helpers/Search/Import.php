@@ -3,6 +3,7 @@
 namespace App\Helpers\Search;
 
 use App\Models\Attributes;
+use App\Models\AttributeSearch;
 use App\Models\IndexCatalog;
 use Exception;
 use App\Models\IndexConfiguration;
@@ -11,8 +12,13 @@ use App\Models\ProductAttribute;
 use App\Models\ProductIndex;
 use App\Helpers\System\CoreHttp;
 use App\Models\AccessIndex;
+use App\Models\AttributesRulesExclude;
 use App\Models\AutorizationToken;
+use App\Models\ConditionsExcludes;
+use App\Models\FiltersAttributes;
 use App\Models\ProductMedia;
+use App\Models\RankingSorting;
+use App\Models\SortingType;
 use App\Models\TypeAttribute;
 use Illuminate\Support\Str;
 
@@ -189,6 +195,170 @@ class Import
     /**
      * @inheritDoc
      */
+    public function proccessImportAttributeFilter($params, $headers)
+    {
+        try {
+            if ($this->coreHttp->validateTokenRequest($headers)) {
+                throw new Exception("Token de acceso no válido.");
+            }
+
+            $token = $this->coreHttp->getTokenRequest($headers);
+            $clientToken = $this->coreHttp->getClientToken($token);
+
+            if(!$clientToken) {
+                throw new Exception("La cuenta no es válida.");
+            }
+
+            $client = $clientToken->client;
+            
+            if (!is_array($params) || !array_key_exists("attributes", $params)) {
+                throw new Exception("Formato incorrecto de consulta.");
+            }
+    
+            if (!is_array($params["attributes"])) {
+                throw new Exception("El parametro que se esta pasando es incorrecto");
+            }
+
+            if (array_key_exists("attributes", $params) ) {
+                if (!is_array($params["attributes"])) {
+                    throw new Exception("El parametro attributes no cumple con el formato requerido.");
+                } else {
+                    $this->importAttributesFilters($params["attributes"], $client);
+                }
+            };
+
+            return $this->coreHttp->constructResponse([], "Proceso ejecutado exitosamente.", 200, true);
+        } catch (Exception $e) {
+            return $this->coreHttp->constructResponse([], $e->getMessage(), 500, false);
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function proccessImportAttributesRulesExclude($params, $headers)
+    {
+        try {
+            if ($this->coreHttp->validateTokenRequest($headers)) {
+                throw new Exception("Token de acceso no válido.");
+            }
+
+            $token = $this->coreHttp->getTokenRequest($headers);
+            $clientToken = $this->coreHttp->getClientToken($token);
+
+            if(!$clientToken) {
+                throw new Exception("La cuenta no es válida.");
+            }
+
+            $client = $clientToken->client;
+            
+            if (!is_array($params) || !array_key_exists("attributes", $params)) {
+                throw new Exception("Formato incorrecto de consulta.");
+            }
+    
+            if (!is_array($params["attributes"])) {
+                throw new Exception("El parametro que se esta pasando es incorrecto");
+            }
+
+            if (array_key_exists("attributes", $params) ) {
+                if (!is_array($params["attributes"])) {
+                    throw new Exception("El parametro attributes no cumple con el formato requerido.");
+                } else {
+                    $this->importAttributesRulesExclude($params["attributes"], $client);
+                }
+            };
+
+            return $this->coreHttp->constructResponse([], "Proceso ejecutado exitosamente.", 200, true);
+        } catch (Exception $e) {
+            return $this->coreHttp->constructResponse([], $e->getMessage(), 500, false);
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function proccessImportAttributesSearch($params, $headers)
+    {
+        try {
+            if ($this->coreHttp->validateTokenRequest($headers)) {
+                throw new Exception("Token de acceso no válido.");
+            }
+
+            $token = $this->coreHttp->getTokenRequest($headers);
+            $clientToken = $this->coreHttp->getClientToken($token);
+
+            if(!$clientToken) {
+                throw new Exception("La cuenta no es válida.");
+            }
+
+            $client = $clientToken->client;
+            
+            if (!is_array($params) || !array_key_exists("attributes", $params)) {
+                throw new Exception("Formato incorrecto de consulta.");
+            }
+    
+            if (!is_array($params["attributes"])) {
+                throw new Exception("El parametro que se esta pasando es incorrecto");
+            }
+
+            if (array_key_exists("attributes", $params) ) {
+                if (!is_array($params["attributes"])) {
+                    throw new Exception("El parametro attributes no cumple con el formato requerido.");
+                } else {
+                    $this->importAttributesSearch($params["attributes"], $client);
+                }
+            };
+
+            return $this->coreHttp->constructResponse([], "Proceso ejecutado exitosamente.", 200, true);
+        } catch (Exception $e) {
+            return $this->coreHttp->constructResponse([], $e->getMessage(), 500, false);
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function proccessImportAttributesOrder($params, $headers)
+    {
+        try {
+            if ($this->coreHttp->validateTokenRequest($headers)) {
+                throw new Exception("Token de acceso no válido.");
+            }
+
+            $token = $this->coreHttp->getTokenRequest($headers);
+            $clientToken = $this->coreHttp->getClientToken($token);
+
+            if(!$clientToken) {
+                throw new Exception("La cuenta no es válida.");
+            }
+
+            $client = $clientToken->client;
+            
+            if (!is_array($params) || !array_key_exists("attributes", $params)) {
+                throw new Exception("Formato incorrecto de consulta.");
+            }
+    
+            if (!is_array($params["attributes"])) {
+                throw new Exception("El parametro que se esta pasando es incorrecto");
+            }
+
+            if (array_key_exists("attributes", $params) ) {
+                if (!is_array($params["attributes"])) {
+                    throw new Exception("El parametro attributes no cumple con el formato requerido.");
+                } else {
+                    $this->importAttributesOrders($params["attributes"], $client);
+                }
+            };
+
+            return $this->coreHttp->constructResponse([], "Proceso ejecutado exitosamente.", 200, true);
+        } catch (Exception $e) {
+            return $this->coreHttp->constructResponse([], $e->getMessage(), 500, false);
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function proccessImportAttributes($params, $headers)
     {
         try {
@@ -321,6 +491,9 @@ class Import
         }
     }
 
+    /**
+     * @inheritDoc
+     */
     public function onlyCreateProduct($name, $sku, $idClient)
     {
         try {
@@ -620,6 +793,9 @@ class Import
         }
     }
 
+    /**
+     * @inheritDoc
+     */
     public function createIndexCatalog($code, $name, $status, $client)
     {
         try {
@@ -648,6 +824,9 @@ class Import
         return IndexCatalog::where('code', $code)->where('id_client', $idClient)->exists();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function updateIndexCatalog($code, $name, $status, $client)
     {
         $index = IndexCatalog::where("code", $code)->where('id_client', $client->id)->first();
@@ -667,6 +846,9 @@ class Import
         }
     }
 
+    /**
+     * @inheritDoc
+     */
     public function createAccessIndex($idAutorizationToken, $idIndex, $idClient)
     {
         try {
@@ -681,6 +863,9 @@ class Import
         }
     }
 
+    /**
+     * @inheritDoc
+     */
     public function createIndexCatalogConfig($idCatalogIndex, $status = false)
     {
         try {
@@ -700,6 +885,9 @@ class Import
         }
     }
 
+    /**
+     * @inheritDoc
+     */
     public function generateToken()
     {
         $token = "";
@@ -719,6 +907,9 @@ class Import
         return IndexConfiguration::where('api_key', $code)->exists();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function gettypeAttribute($type)
     {
         $typeAttribute = TypeAttribute::where("type", $type)->first();
@@ -738,6 +929,9 @@ class Import
         return Attributes::where('code', $code)->where('id_client', $idClient)->exists();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function createAttribute($name, $code, $label, $idType, $idClient)
     {
         try {
@@ -757,6 +951,9 @@ class Import
         }
     }
 
+    /**
+     * @inheritDoc
+     */
     public function updateAttribute($name, $code, $label, $idType, $idClient)
     {
         $attribtue = Attributes::where('code', $code)->where('id_client', $idClient)->first();
@@ -771,6 +968,9 @@ class Import
         }
     }
 
+    /**
+     * @inheritDoc
+     */
     public function importProducts($productsArray, $currentClient, $idIndex)
     {
         foreach ($productsArray as $product) {
@@ -778,6 +978,9 @@ class Import
         }
     }
 
+    /**
+     * @inheritDoc
+     */
     public function importProduct($product, $currentClient, $idIndex)
     {
         if (
@@ -823,6 +1026,284 @@ class Import
         }
     }
 
+    /**
+     * @inheritDoc
+     */
+    public function getAttributeByCliente($code, $idClient)
+    {
+        return Attributes::where('code', $code)->where('id_client', $idClient)->where('status', 1)->first();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getAttributeSortingByIndex($idAttribute, $idIndex)
+    {
+        return RankingSorting::where('id_attribute', $idAttribute)->where('id_index', $idIndex)->first();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getAttributeSearchByIndex($idAttribute, $idIndex)
+    {
+        return AttributeSearch::where('id_attribute', $idAttribute)->where('id_index', $idIndex)->first();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getAttributeRulesExcludeByClient($idAttribute, $idClient)
+    {
+        return AttributesRulesExclude::where('id_client', $idClient)->where('id_attribute', $idAttribute)->first();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getSortingType($name)
+    {
+        return SortingType::where('name', $name)->first();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getConditionExclude($code)
+    {
+        return ConditionsExcludes::where('code', $code)->first();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function importAttributesRulesExclude($attributes, $currentClient)
+    {
+        foreach ($attributes as $key => $attribute) {
+            if (
+                (isset($attribute["code"]) && isset($attribute["condition"]) && isset($attribute["value"])) &&
+                (is_string($attribute["code"]) && is_string($attribute["condition"]) && is_string($attribute["value"]))
+            ) {
+                $attribute = $this->getAttributeByCliente($attribute["code"], $currentClient->id);
+
+                if ($attribute != null) {
+
+                    $attributeRuleExclude = $this->getAttributeRulesExcludeByClient($attribute->id, $currentClient->id);
+
+                    if (!$attributeRuleExclude) {
+                        $condition = $this->getConditionExclude($attribute["condition"]);
+
+                        if ($condition != null) {
+                            $this->createRulesExclude(
+                                $attribute->id,
+                                $$currentClient->id,
+                                $condition->id,
+                                $attribute["value"]
+                            );
+                        }
+                    } else {
+                        $condition = $this->getConditionExclude($attribute["condition"]);
+
+                        if ($condition != null) {
+                            $attributeRuleExclude->id_condition = $condition->id;
+                            $attributeRuleExclude->value = $attribute["value"];
+                            $attributeRuleExclude->save();
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function importAttributesSearch($attributes, $currentClient)
+    {
+        foreach ($attributes as $key => $attribute) {
+            if (
+                (isset($attribute["code"]) && isset($attribute["sort"])) &&
+                (is_string($attribute["code"]) && is_string($attribute["sort"]))
+            ) {
+                $attribute = $this->getAttributeByCliente($attribute["code"], $currentClient->id);
+
+                if ($attribute != null) {
+
+                    foreach ($currentClient->indexes as $key => $index) {
+                        $sttributeSearch = $this->getAttributeSearchByIndex($attribute->id, $index->id);
+
+                        if (!$sttributeSearch) {
+                            $this->createAttributeSearch(
+                                $attribute->id,
+                                $index->id,
+                                $attribute["sort"]
+                            );
+                        } else {
+                            $sttributeSearch->order = $attribute["sort"];
+                            $sttributeSearch->save();
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function importAttributesOrders($attributes, $currentClient)
+    {
+        foreach ($attributes as $key => $attribute) {
+            if (
+                (isset($attribute["code"]) && isset($attribute["sort"]) && isset($attribute["sorting_type"])) &&
+                (is_string($attribute["code"]) && is_string($attribute["sort"]) && is_string($attribute["sorting_type"]))
+            ) {
+                $attribute = $this->getAttributeByCliente($attribute["code"], $currentClient->id);
+
+                if ($attribute != null) {
+
+                    foreach ($currentClient->indexes as $key => $index) {
+                        $attributeSorting = $this->getAttributeSortingByIndex($attribute->id, $index->id);
+
+                        if (!$attributeSorting) {
+                            $sortingType = $this->getSortingType($attribute["sorting_type"]);
+
+                            if ($sortingType != null) {
+                                $this->createAttributeSorting(
+                                    $attribute->id,
+                                    $index->id,
+                                    $sortingType->id, 
+                                    $attribute["sort"]
+                                );
+                            }
+                        } else {
+                            $sortingType = $this->getSortingType($attribute["sorting_type"]);
+
+                            if ($sortingType != null) {
+                                $attributeSorting->order = $attribute["sort"];
+                                $attributeSorting->id_sort_type = $sortingType->id;
+                                $attributeSorting->save();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function createRulesExclude($idAttribute, $idClient, $idCondition, $value)
+    {
+        try {
+            $newItem = new AttributesRulesExclude();
+            $newItem->id_client = $idClient;
+            $newItem->id_attribute = $idAttribute;
+            $newItem->id_condition = $idCondition;
+            $newItem->value = $value;
+            $newItem->created_at = date("Y-m-d H:i:s");
+            $newItem->updated_at = null;
+            $newItem->save();
+            return $newItem->id;
+        } catch (Exception $th) {
+            return null;
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function createAttributeSearch($idAttribute, $idIndex, $order)
+    {
+        try {
+            $newItem = new AttributeSearch();
+            $newItem->id_attribute = $idAttribute;
+            $newItem->id_index = $idIndex;
+            $newItem->order = $order;
+            $newItem->save();
+            return $newItem->id;
+        } catch (Exception $th) {
+            return null;
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function createAttributeSorting($idAttribute, $idIndex, $sortId, $order)
+    {
+        try {
+            $newItem = new RankingSorting();
+            $newItem->id_attribute = $idAttribute;
+            $newItem->id_index = $idIndex;
+            $newItem->id_sort_type = $sortId;
+            $newItem->order = $order;
+            $newItem->save();
+            return $newItem->id;
+        } catch (Exception $th) {
+            return null;
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function importAttributesFilters($attributes, $currentClient)
+    {
+        foreach ($attributes as $key => $attribute) {
+            if (
+                (isset($attribute["code"]) && isset($attribute["sort"])) &&
+                (is_string($attribute["code"]) && is_string($attribute["sort"]))
+            ) {
+                $attribute = $this->getAttributeByCliente($attribute["code"], $currentClient->id);
+
+                if ($attribute != null) {
+
+                    $filterAttribute = $this->getAttributeFilter($currentClient->id, $attribute->id);
+
+                    if (!$filterAttribute) {
+                        $this->createFilterAttribute($currentClient->id, $attribute->id, $attribute["sort"]);
+                    } else {
+                        $filterAttribute->status = true;
+                        $filterAttribute->save();
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function createFilterAttribute($idClient, $idAttribute, $sort)
+    {
+        try {
+            $newItem = new FiltersAttributes();
+            $newItem->id_client = $idClient;
+            $newItem->id_attribute = $idAttribute;
+            $newItem->sort = $sort;
+            $newItem->status = 1;
+            $newItem->created_at = date("Y-m-d H:i:s");
+            $newItem->updated_at = null;
+            $newItem->save();
+            return $newItem->id;
+        } catch (Exception $th) {
+            return null;
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getAttributeFilter($idClient, $idAttribute)
+    {
+        return FiltersAttributes::where('id_client', $idClient)->where('id_attribute', $idAttribute)->first();
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function importAttributes($attributes, $currentClient)
     {
         foreach ($attributes as $key => $attribute) {
@@ -855,6 +1336,9 @@ class Import
         }
     }
 
+    /**
+     * @inheritDoc
+     */
     public function importIndexCatalog($indexArray, $currentClient)
     {
         foreach ($indexArray as $key => $index) {
