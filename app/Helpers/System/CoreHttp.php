@@ -151,7 +151,7 @@ class CoreHttp
             throw new Exception("Error en autorización.");
         }
 
-        $token = $this->getToken($authorization);
+        $token = $this->getToken($authorization[0]);
 
         if ($token == null) {
             throw new Exception("Error en autorización.");
