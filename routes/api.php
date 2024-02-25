@@ -6,7 +6,7 @@ use App\Http\Middleware\CustomValidateToken;
 use App\Http\Middleware\AdminValidateToken;
 use App\Http\Controllers\Api\System;
 use App\Http\Controllers\Api\Search\Product as SearchProduct;
-use App\Http\Controllers\Api\Search\Process as SearchProccess;
+use App\Http\Controllers\Api\Import\Process as SearchProccess;
 use App\Http\Controllers\Api\System\Core as SystemCore;
 
 /*
