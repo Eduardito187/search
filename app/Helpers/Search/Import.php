@@ -1090,13 +1090,13 @@ class Import
 
                     $attributeRuleExclude = $this->getAttributeRulesExcludeByClient($attributeItem->id, $currentClient->id);
 
-                    if (!$attributeRuleExclude) {
+                    if ($attributeRuleExclude == null) {
                         $condition = $this->getConditionExclude($attribute["condition"]);
 
                         if ($condition != null) {
                             $this->createRulesExclude(
                                 $attributeItem->id,
-                                $$currentClient->id,
+                                $currentClient->id,
                                 $condition->id,
                                 $attribute["value"]
                             );
@@ -1132,7 +1132,7 @@ class Import
                     foreach ($currentClient->indexes as $key => $index) {
                         $sttributeSearch = $this->getAttributeSearchByIndex($attributeItem->id, $index->id);
 
-                        if (!$sttributeSearch) {
+                        if ($sttributeSearch == null) {
                             $this->createAttributeSearch(
                                 $attributeItem->id,
                                 $index->id,
@@ -1168,7 +1168,7 @@ class Import
                         if (!$attributeSorting) {
                             $sortingType = $this->getSortingType($attribute["sorting_type"]);
 
-                            if ($sortingType != null) {
+                            if ($sortingType == null) {
                                 $this->createAttributeSorting(
                                     $attributeItem->id,
                                     $index->id,
@@ -1262,7 +1262,7 @@ class Import
 
                     $filterAttribute = $this->getAttributeFilter($currentClient->id, $attribute->id);
 
-                    if (!$filterAttribute) {
+                    if ($filterAttribute == null) {
                         $this->createFilterAttribute($currentClient->id, $attribute->id, $attribute["sort"]);
                     } else {
                         $filterAttribute->status = true;
