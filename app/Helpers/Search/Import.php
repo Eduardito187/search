@@ -198,7 +198,7 @@ class Import
     public function proccessImportAttributeFilter($params, $headers)
     {
         try {
-            if ($this->coreHttp->validateTokenRequest($headers)) {
+            if (!$this->coreHttp->validateTokenRequest($headers)) {
                 throw new Exception("Token de acceso no válido.");
             }
 
@@ -239,7 +239,7 @@ class Import
     public function proccessImportAttributesRulesExclude($params, $headers)
     {
         try {
-            if ($this->coreHttp->validateTokenRequest($headers)) {
+            if (!$this->coreHttp->validateTokenRequest($headers)) {
                 throw new Exception("Token de acceso no válido.");
             }
 
@@ -280,7 +280,7 @@ class Import
     public function proccessImportAttributesSearch($params, $headers)
     {
         try {
-            if ($this->coreHttp->validateTokenRequest($headers)) {
+            if (!$this->coreHttp->validateTokenRequest($headers)) {
                 throw new Exception("Token de acceso no válido.");
             }
 
@@ -321,7 +321,7 @@ class Import
     public function proccessImportAttributesOrder($params, $headers)
     {
         try {
-            if ($this->coreHttp->validateTokenRequest($headers)) {
+            if (!$this->coreHttp->validateTokenRequest($headers)) {
                 throw new Exception("Token de acceso no válido.");
             }
 
@@ -362,7 +362,7 @@ class Import
     public function proccessImportAttributes($params, $headers)
     {
         try {
-            if ($this->coreHttp->validateTokenRequest($headers)) {
+            if (!$this->coreHttp->validateTokenRequest($headers)) {
                 throw new Exception("Token de acceso no válido.");
             }
 
@@ -602,7 +602,7 @@ class Import
     public function deleteSingleProduct($params, $headers)
     {
         try {
-            if ($this->coreHttp->validateTokenRequest($headers)) {
+            if (!$this->coreHttp->validateTokenRequest($headers)) {
                 throw new Exception("Token de acceso no válido.");
             }
 
@@ -628,7 +628,7 @@ class Import
     public function deleteCollectionProduct($params, $headers)
     {
         try {
-            if ($this->coreHttp->validateTokenRequest($headers)) {
+            if (!$this->coreHttp->validateTokenRequest($headers)) {
                 throw new Exception("Token de acceso no válido.");
             }
 
@@ -730,7 +730,7 @@ class Import
     public function changeStatusProduct($params, $headers)
     {
         try {
-            if ($this->coreHttp->validateTokenRequest($headers)) {
+            if (!$this->coreHttp->validateTokenRequest($headers)) {
                 throw new Exception("Token de acceso no válido.");
             }
 
@@ -763,7 +763,7 @@ class Import
     public function changeStatusCollectionProduct($params, $headers)
     {
         try {
-            if ($this->coreHttp->validateTokenRequest($headers)) {
+            if (!$this->coreHttp->validateTokenRequest($headers)) {
                 throw new Exception("Token de acceso no válido.");
             }
 
