@@ -1084,18 +1084,18 @@ class Import
                 (isset($attribute["code"]) && isset($attribute["condition"]) && isset($attribute["value"])) &&
                 (is_string($attribute["code"]) && is_string($attribute["condition"]) && is_string($attribute["value"]))
             ) {
-                $attribute = $this->getAttributeByCliente($attribute["code"], $currentClient->id);
+                $attributeItem = $this->getAttributeByCliente($attribute["code"], $currentClient->id);
 
-                if ($attribute != null) {
+                if ($attributeItem != null) {
 
-                    $attributeRuleExclude = $this->getAttributeRulesExcludeByClient($attribute->id, $currentClient->id);
+                    $attributeRuleExclude = $this->getAttributeRulesExcludeByClient($attributeItem->id, $currentClient->id);
 
                     if (!$attributeRuleExclude) {
                         $condition = $this->getConditionExclude($attribute["condition"]);
 
                         if ($condition != null) {
                             $this->createRulesExclude(
-                                $attribute->id,
+                                $attributeItem->id,
                                 $$currentClient->id,
                                 $condition->id,
                                 $attribute["value"]
@@ -1125,16 +1125,16 @@ class Import
                 (isset($attribute["code"]) && isset($attribute["sort"])) &&
                 (is_string($attribute["code"]) && is_string($attribute["sort"]))
             ) {
-                $attribute = $this->getAttributeByCliente($attribute["code"], $currentClient->id);
+                $attributeItem = $this->getAttributeByCliente($attribute["code"], $currentClient->id);
 
-                if ($attribute != null) {
+                if ($attributeItem != null) {
 
                     foreach ($currentClient->indexes as $key => $index) {
-                        $sttributeSearch = $this->getAttributeSearchByIndex($attribute->id, $index->id);
+                        $sttributeSearch = $this->getAttributeSearchByIndex($attributeItem->id, $index->id);
 
                         if (!$sttributeSearch) {
                             $this->createAttributeSearch(
-                                $attribute->id,
+                                $attributeItem->id,
                                 $index->id,
                                 $attribute["sort"]
                             );
@@ -1158,19 +1158,19 @@ class Import
                 (isset($attribute["code"]) && isset($attribute["sort"]) && isset($attribute["sorting_type"])) &&
                 (is_string($attribute["code"]) && is_string($attribute["sort"]) && is_string($attribute["sorting_type"]))
             ) {
-                $attribute = $this->getAttributeByCliente($attribute["code"], $currentClient->id);
+                $attributeItem = $this->getAttributeByCliente($attribute["code"], $currentClient->id);
 
-                if ($attribute != null) {
+                if ($attributeItem != null) {
 
                     foreach ($currentClient->indexes as $key => $index) {
-                        $attributeSorting = $this->getAttributeSortingByIndex($attribute->id, $index->id);
+                        $attributeSorting = $this->getAttributeSortingByIndex($attributeItem->id, $index->id);
 
                         if (!$attributeSorting) {
                             $sortingType = $this->getSortingType($attribute["sorting_type"]);
 
                             if ($sortingType != null) {
                                 $this->createAttributeSorting(
-                                    $attribute->id,
+                                    $attributeItem->id,
                                     $index->id,
                                     $sortingType->id, 
                                     $attribute["sort"]
