@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\Search;
+namespace App\Http\Controllers\Api\Import;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
