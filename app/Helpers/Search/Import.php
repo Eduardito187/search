@@ -168,7 +168,6 @@ class Import
     {
         try {
             $this->coreHttp->validateApiKey($headers);
-            \Illuminate\Support\Facades\Log::info("singleProduct => ".json_encode($params));
     
             if (!is_array($params) || !array_key_exists("sku", $params) || !array_key_exists("name", $params) || !array_key_exists("attributes", $params)) {
                 throw new Exception("Formato incorrecto de consulta.");
@@ -211,7 +210,6 @@ class Import
             }
 
             $client = $clientToken->client;
-            \Illuminate\Support\Facades\Log::info("proccessImportAttributeFilter => ".json_encode($params));
             
             if (!is_array($params) || !array_key_exists("attributes", $params)) {
                 throw new Exception("Formato incorrecto de consulta.");
@@ -253,7 +251,6 @@ class Import
             }
 
             $client = $clientToken->client;
-            \Illuminate\Support\Facades\Log::info("proccessImportAttributesRulesExclude => ".json_encode($params));
             
             if (!is_array($params) || !array_key_exists("attributes", $params)) {
                 throw new Exception("Formato incorrecto de consulta.");
@@ -295,7 +292,6 @@ class Import
             }
 
             $client = $clientToken->client;
-            \Illuminate\Support\Facades\Log::info("proccessImportAttributesSearch => ".json_encode($params));
             
             if (!is_array($params) || !array_key_exists("attributes", $params)) {
                 throw new Exception("Formato incorrecto de consulta.");
@@ -337,7 +333,6 @@ class Import
             }
 
             $client = $clientToken->client;
-            \Illuminate\Support\Facades\Log::info("proccessImportAttributesOrder => ".json_encode($params));
             
             if (!is_array($params) || !array_key_exists("attributes", $params)) {
                 throw new Exception("Formato incorrecto de consulta.");
@@ -379,7 +374,6 @@ class Import
             }
 
             $client = $clientToken->client;
-            \Illuminate\Support\Facades\Log::info("proccessImportAttributes => ".json_encode($params));
             
             if (!is_array($params) || !array_key_exists("attributes", $params)) {
                 throw new Exception("Formato incorrecto de consulta.");
@@ -432,7 +426,6 @@ class Import
     {
         try {
             $this->coreHttp->validateApiKey($headers);
-            \Illuminate\Support\Facades\Log::info("processIndexCatalog => ".json_encode($params));
     
             if (!is_array($params) || !array_key_exists("sku", $params) || !array_key_exists("name", $params) || !array_key_exists("attributes", $params)) {
                 throw new Exception("Formato incorrecto de consulta.");
@@ -471,7 +464,6 @@ class Import
     {
         try {
             $this->coreHttp->validateApiKey($headers);
-            \Illuminate\Support\Facades\Log::info("collectionsProduct => ".json_encode($params));
     
             if (!is_array($params) || !array_key_exists("products", $params) || !is_array($params["products"])) {
                 throw new Exception("Formato incorrecto de consulta.");
@@ -567,7 +559,6 @@ class Import
     {
         try {
             $this->coreHttp->validateApiKey($headers);
-            \Illuminate\Support\Facades\Log::info("changeStatusIndexProduct => ".json_encode($params));
 
             if (!is_array($params) || !array_key_exists("sku", $params)) {
                 throw new Exception("Formato incorrecto de consulta.");
@@ -690,7 +681,6 @@ class Import
     {
         try {
             $this->coreHttp->validateApiKey($headers);
-            \Illuminate\Support\Facades\Log::info("changeStatusIndexCollectionProduct => ".json_encode($params));
 
             if (!is_array($params) || !array_key_exists("products", $params)) {
                 throw new Exception("Formato incorrecto de consulta.");
@@ -1319,8 +1309,12 @@ class Import
         foreach ($attributes as $key => $attribute) {
             if (
                 (isset($attribute["name"]) && isset($attribute["code"]) && isset($attribute["label"]) && isset($attribute["type"])) &&
-                (is_string($attribute["name"]) && is_string($attribute["code"]) && is_string($attribute["label"]) && is_string($attribute["type"]))
+                (is_string($attribute["name"]) && is_string($attribute["code"]) && is_string($attribute["label"]))
             ) {
+                if ($attribute["type"] == "" || $attribute["type"] == null) {
+                    $attribute["type"] = "string";
+                }
+
                 $type = $this->gettypeAttribute($attribute["type"]);
 
                 if ($type != null) {
