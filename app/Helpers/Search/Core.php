@@ -84,11 +84,11 @@ class Core
                 $idProductList = $this->getProductsFilters($idProductList);
             }
 
-            if (count($idProductList) > 0) {
-                $this->setHistoryResult($index->id, $header["customer-uuid"][0], $query, $idProductList);
-            }
-
             $responseProductIds = array_slice($idProductList, 0, $this->indexConfiguration->limit_product_feed);
+
+            if (count($responseProductIds) > 0) {
+                $this->setHistoryResult($index->id, $header["customer-uuid"][0], $query, $responseProductIds);
+            }
 
             return $this->coreHttp->constructResponse(
                 [
@@ -156,12 +156,12 @@ class Core
             if (count($idProductList) > 0) {
                 $idProductList = $this->getProductsFilters($idProductList);
             }
-
-            if (count($idProductList) > 0) {
-                $this->setHistoryResult($index->id, $header["customer-uuid"][0], $query, $idProductList);
-            }
     
             $responseProductIds = array_slice($idProductList, 0, $this->indexConfiguration->page_limit);
+
+            if (count($responseProductIds) > 0) {
+                $this->setHistoryResult($index->id, $header["customer-uuid"][0], $query, $responseProductIds);
+            }
     
             return $this->coreHttp->constructResponse(
                 [
