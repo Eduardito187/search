@@ -1141,7 +1141,7 @@ class Import
                         if (!$attributeSorting) {
                             $sortingType = $this->getSortingType($attribute["sorting_type"]);
 
-                            if ($sortingType == null) {
+                            if ($sortingType != null) {
                                 $this->createAttributeSorting(
                                     $attributeItem->id,
                                     $index->id,
