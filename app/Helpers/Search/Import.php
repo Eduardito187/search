@@ -900,7 +900,7 @@ class Import
     /**
      * @inheritDoc
      */
-    public function gettypeAttribute($type)
+    public function getTypeAttribute($type)
     {
         $typeAttribute = TypeAttribute::where("type", $type)->first();
 
@@ -1293,6 +1293,7 @@ class Import
     public function importAttributes($attributes, $currentClient)
     {
         foreach ($attributes as $key => $attribute) {
+            \Illuminate\Support\Facades\Log::info("attribute => ".json_encode($attribute));
             if (
                 (isset($attribute["name"]) && isset($attribute["code"]) && isset($attribute["label"]) && isset($attribute["type"])) &&
                 (is_string($attribute["name"]) && is_string($attribute["code"]) && is_string($attribute["label"]))
@@ -1301,7 +1302,7 @@ class Import
                     $attribute["type"] = "string";
                 }
 
-                $type = $this->gettypeAttribute($attribute["type"]);
+                $type = $this->getTypeAttribute($attribute["type"]);
 
                 if ($type != null) {
                     if ($this->existAttribute($attribute["code"], $currentClient->id)) {
