@@ -25,7 +25,7 @@ class IndexCatalog extends Model
     }
 
     public function client() {
-        return $this->hasOne(Client::class, 'id_client', 'id');
+        return $this->hasOne(Client::class, 'id', 'id_client');
     }
 
     public function productsIndex() {
