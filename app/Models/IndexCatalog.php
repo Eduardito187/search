@@ -29,6 +29,6 @@ class IndexCatalog extends Model
     }
 
     public function productsIndex() {
-        return $this->hasMany(ProductIndex::class, 'id', 'id_index');
+        return $this->hasMany(ProductIndex::class, 'id_index', 'id_index');
     }
 }

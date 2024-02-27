@@ -581,7 +581,7 @@ class Import
             } else {
                 $productIndex = ProductIndex::where("id_index", $this->indexConfiguration->id_index_catalog)->where("id_product", $product->id)->first();
 
-                if (!$productIndex) {
+                if ($productIndex != null) {
                     $productIndex->status = $params["status"] ?? false;
                     $productIndex->updated_at = date("Y-m-d H:i:s");
                     $productIndex->save();
