@@ -16,6 +16,7 @@ use App\Models\AttributesRulesExclude;
 use App\Models\AutorizationToken;
 use App\Models\ConditionsExcludes;
 use App\Models\FiltersAttributes;
+use App\Models\Media;
 use App\Models\ProductMedia;
 use App\Models\RankingSorting;
 use App\Models\SortingType;
@@ -961,8 +962,8 @@ class Import
     public function importProduct($product, $currentClient, $idIndex)
     {
         if (
-            (isset($product["name"]) && isset($product["sku"])) &&
-            (is_string($product["name"]) && is_string($product["sku"]))
+            (isset($product["name"]) && isset($product["sku"]) && isset($product["image"])) &&
+            (is_string($product["name"]) && is_string($product["sku"]) && is_string($product["image"]))
         ) {
             if ($this->existProduct($product["sku"], $currentClient->id)) {
                 $updateProduct = $this->updateProduct(
@@ -973,7 +974,7 @@ class Import
                 );
 
                 if ($updateProduct != null) {
-                    $this->createProductIndex($updateProduct, $idIndex);
+                    $this->setProductMedia($product->id, $idIndex, $product["image"]);
 
                     if (isset($product["attributes"]) && is_array($product["attributes"])) {
                         $this->updateAttributes($product["attributes"], $updateProduct, $idIndex);
@@ -987,6 +988,7 @@ class Import
                 );
 
                 if ($newProduct != null) {
+                    $this->setProductMedia($product->id, $idIndex, $product["image"]);
                     $this->createProductIndex($newProduct, $idIndex);
 
                     if (isset($product["attributes"]) && is_array($product["attributes"])) {
@@ -996,6 +998,74 @@ class Import
                     $this->incrementIndexProductCount();
                 }
             }
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setProductMedia($idProduct, $idIndex, $url)
+    {
+        $idMedia = $this->createMedia($url);
+
+        if ($idMedia != null) {
+            $this->deleteProductMedia($idProduct, $idIndex);
+            $this->registerProductMedia($idProduct, $idIndex, $idMedia);
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function deleteProductMedia($idProduct, $idIndex)
+    {
+        return ProductMedia::where('id_product', $idProduct)->where('id_index', $idIndex)->first();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function registerProductMedia($idProduct, $idIndex, $idMedia)
+    {
+        $newItem = new ProductMedia();
+        $newItem->id_product = $idProduct;
+        $newItem->id_media = $idIndex;
+        $newItem->id_index = $idMedia;
+        $newItem->save();
+        return $newItem->id;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getMedia($url)
+    {
+        return Media::where('url', $url)->first();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function createMedia($url)
+    {
+        try {
+            $media = $this->getMedia($url);
+
+            if (!$media) {
+                $newItem = new Media();
+                $newItem->url = $url;
+                $newItem->created_at = date("Y-m-d H:i:s");
+                $newItem->updated_at = null;
+                $newItem->save();
+                return $newItem->id;
+            } else {
+                $media->url = $url;
+                $media->updated_at = date("Y-m-d H:i:s");
+                $media->save();
+                return $media->id;
+            }
+        } catch (Exception $th) {
+            return null;
         }
     }
 

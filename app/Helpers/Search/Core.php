@@ -233,7 +233,7 @@ class Core
                 array(
                     "name" => $productData->name,
                     "sku" => $productData->sku,
-                    "images" => $this->getPicturesProduct($productData)
+                    "image" => $this->getPicturesProduct($productData)
                 ),
                 $productsAttributes
             );
@@ -285,17 +285,15 @@ class Core
 
     /**
      * @param Product $product
-     * @return array
+     * @return string|null
      */
     public function getPicturesProduct(Product $product)
     {
-        $data = [];
-
         foreach ($product->productMedia as $productMedia) {
-            $data[] = $productMedia->media->url;
+            return $productMedia->media->url;
         }
 
-        return $data;
+        return null;
     }
 
     /**
