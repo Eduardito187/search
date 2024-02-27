@@ -487,11 +487,7 @@ class Import
 
             return $this->coreHttp->constructResponse([], "Productos creados exitosamente.", 200, true);
         } catch (Exception $e) {
-            $mensaje = $e->getMessage();
-            $archivo = $e->getFile();
-            $linea = $e->getLine();
-            $traza = $e->getTrace();
-            return $this->coreHttp->constructResponse([], json_encode($traza), 500, false);
+            return $this->coreHttp->constructResponse([], $e->getMessage(), 500, false);
         }
     }
 
