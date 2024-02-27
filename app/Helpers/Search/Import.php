@@ -539,13 +539,7 @@ class Import
      */
     public function updateProductIndex($idProduct, $idIndex)
     {
-        $productIndex = ProductIndex::where('id_product', $idProduct)->where('id_index', $idIndex)->first();
-
-        if ($productIndex != null) {
-            $productIndex->status = true;
-            $productIndex->updated_at = date("Y-m-d H:i:s");
-            $productIndex->save();
-        }
+        ProductIndex::where('id_product', $idProduct)->where('id_index', $idIndex)->update(['status' => true, 'updated_at' => date("Y-m-d H:i:s")]);
     }
 
     /**
@@ -702,15 +696,7 @@ class Import
                 if (!$product) {
                     throw new Exception(__("El producto %1 no existe.", $productArray["sku"]));
                 } else {
-                    $productIndex = ProductIndex::where("id_index", $this->indexConfiguration->id_index_catalog)->where("id_product", $product->id)->first();
-    
-                    if ($productIndex != null) {
-                        $productIndex->status = $productArray["status"] ?? false;
-                        $productIndex->updated_at = date("Y-m-d H:i:s");
-                        $product->save();
-                    } else {
-                        throw new Exception(__("El producto %1 no es de tu propiedad.", $productArray["sku"]));
-                    }
+                    $this->updateProductIndex($product->id, $this->indexConfiguration->id_index_catalog);
                 }
             }
 
