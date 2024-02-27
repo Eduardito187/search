@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreign('id_attribute')->references('id')->on('attributes')->onDelete('cascade');
             $table->unsignedBigInteger('id_index')->nullable();
             $table->foreign('id_index')->references('id')->on('index_catalog')->onDelete('cascade');
-            $table->longText('value');
+            $table->longText('value')->nullable();
         });
     }
 
