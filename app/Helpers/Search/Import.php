@@ -1293,7 +1293,6 @@ class Import
     public function importAttributes($attributes, $currentClient)
     {
         foreach ($attributes as $key => $attribute) {
-            \Illuminate\Support\Facades\Log::info("attribute => ".json_encode($attribute));
             if (
                 (isset($attribute["name"]) && isset($attribute["code"]) && isset($attribute["label"]) && array_key_exists("type", $attribute)) &&
                 (is_string($attribute["name"]) && is_string($attribute["code"]) && is_string($attribute["label"]))
@@ -1305,9 +1304,7 @@ class Import
                 $type = $this->getTypeAttribute($attribute["type"]);
 
                 if ($type != null) {
-                    \Illuminate\Support\Facades\Log::info("exist type");
                     if ($this->existAttribute($attribute["code"], $currentClient->id)) {
-                        \Illuminate\Support\Facades\Log::info("update attribute");
                         $this->updateAttribute(
                             $attribute["name"],
                             $attribute["code"],
@@ -1316,7 +1313,6 @@ class Import
                             $currentClient->id
                         );
                     } else {
-                        \Illuminate\Support\Facades\Log::info("create attribute");
                         $this->createAttribute(
                             $attribute["name"],
                             $attribute["code"],
