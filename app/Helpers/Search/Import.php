@@ -487,7 +487,10 @@ class Import
 
             return $this->coreHttp->constructResponse([], "Productos creados exitosamente.", 200, true);
         } catch (Exception $e) {
-            return $this->coreHttp->constructResponse([], $e->getMessage(), 500, false);
+            $mensaje = $e->getMessage();
+            $linea = $e->getLine();
+            $mensaje = "Excepción en la línea $linea: $mensaje";
+            return $this->coreHttp->constructResponse([], $mensaje, 500, false);
         }
     }
 
