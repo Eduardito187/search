@@ -145,15 +145,6 @@ class Import
     /**
      * @inheritDoc
      */
-    public function incrementIndexProduct($index)
-    {
-        $index->count_product = $index->count_product + 1;
-        $index->save();
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function incrementIndexProductCount()
     {
         $indexCatalog = $this->indexConfiguration->indexCatalog;
@@ -1002,7 +993,7 @@ class Import
                         $this->updateAttributes($product["attributes"], $newProduct, $idIndex);
                     }
 
-                    $this->incrementIndexProduct($idIndex);
+                    $this->incrementIndexProductCount();
                 }
             }
         }
