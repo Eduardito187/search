@@ -1029,8 +1029,8 @@ class Import
     {
         $newItem = new ProductMedia();
         $newItem->id_product = $idProduct;
-        $newItem->id_media = $idIndex;
-        $newItem->id_index = $idMedia;
+        $newItem->id_index = $idIndex;
+        $newItem->id_media = $idMedia;
         $newItem->save();
         return $newItem->id;
     }
