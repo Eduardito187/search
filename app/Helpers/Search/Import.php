@@ -974,7 +974,7 @@ class Import
                 );
 
                 if ($updateProduct != null) {
-                    $this->setProductMedia($product->id, $idIndex, $product["image"]);
+                    $this->setProductMedia($updateProduct->id, $idIndex, $product["image"]);
 
                     if (isset($product["attributes"]) && is_array($product["attributes"])) {
                         $this->updateAttributes($product["attributes"], $updateProduct, $idIndex);
@@ -988,7 +988,7 @@ class Import
                 );
 
                 if ($newProduct != null) {
-                    $this->setProductMedia($product->id, $idIndex, $product["image"]);
+                    $this->setProductMedia($newProduct->id, $idIndex, $product["image"]);
                     $this->createProductIndex($newProduct, $idIndex);
 
                     if (isset($product["attributes"]) && is_array($product["attributes"])) {
