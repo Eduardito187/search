@@ -1295,10 +1295,10 @@ class Import
         foreach ($attributes as $key => $attribute) {
             \Illuminate\Support\Facades\Log::info("attribute => ".json_encode($attribute));
             if (
-                (isset($attribute["name"]) && isset($attribute["code"]) && isset($attribute["label"]) && !empty($attribute["type"])) &&
+                (isset($attribute["name"]) && isset($attribute["code"]) && isset($attribute["label"]) && array_key_exists("type", $attribute)) &&
                 (is_string($attribute["name"]) && is_string($attribute["code"]) && is_string($attribute["label"]))
             ) {
-                if ($attribute["type"] == "" || $attribute["type"] == null) {
+                if ($attribute["type"] == "" || $attribute["type"] == null || empty($attribute["type"])) {
                     $attribute["type"] = "string";
                 }
 
