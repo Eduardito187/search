@@ -488,8 +488,16 @@ class Import
             return $this->coreHttp->constructResponse([], "Productos creados exitosamente.", 200, true);
         } catch (Exception $e) {
             $mensaje = $e->getMessage();
+            $archivo = $e->getFile();
             $linea = $e->getLine();
-            $mensaje = "Excepción en la línea $linea: $mensaje";
+            $traza = $e->getTrace();
+        
+            // Obtener la información de la última llamada en la traza
+            $ultimaLlamada = end($traza);
+        
+            $funcion = $ultimaLlamada['function'];
+        
+            $mensaje = "Excepción en $archivo, línea $linea, función $funcion: $mensaje";
             return $this->coreHttp->constructResponse([], $mensaje, 500, false);
         }
     }
