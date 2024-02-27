@@ -1305,7 +1305,9 @@ class Import
                 $type = $this->getTypeAttribute($attribute["type"]);
 
                 if ($type != null) {
+                    \Illuminate\Support\Facades\Log::info("exist type");
                     if ($this->existAttribute($attribute["code"], $currentClient->id)) {
+                        \Illuminate\Support\Facades\Log::info("update attribute");
                         $this->updateAttribute(
                             $attribute["name"],
                             $attribute["code"],
@@ -1314,6 +1316,7 @@ class Import
                             $currentClient->id
                         );
                     } else {
+                        \Illuminate\Support\Facades\Log::info("create attribute");
                         $this->createAttribute(
                             $attribute["name"],
                             $attribute["code"],
