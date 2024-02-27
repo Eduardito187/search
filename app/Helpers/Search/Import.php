@@ -537,7 +537,7 @@ class Import
     {
         $productIndex = ProductIndex::where('id_product', $idProduct)->where('id_index', $idIndex)->first();
 
-        if (!$productIndex) {
+        if ($productIndex) {
             $productIndex->status = true;
             $productIndex->updated_at = date("Y-m-d H:i:s");
             $productIndex->save();
