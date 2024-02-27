@@ -491,14 +491,7 @@ class Import
             $archivo = $e->getFile();
             $linea = $e->getLine();
             $traza = $e->getTrace();
-        
-            // Obtener la información de la última llamada en la traza
-            $ultimaLlamada = end($traza);
-        
-            $funcion = $ultimaLlamada['function'];
-        
-            $mensaje = "Excepción en $archivo, línea $linea, función $funcion: $mensaje";
-            return $this->coreHttp->constructResponse([], $mensaje, 500, false);
+            return $this->coreHttp->constructResponse([], json_encode($traza), 500, false);
         }
     }
 
