@@ -700,7 +700,7 @@ class Import
                 } else {
                     $productIndex = ProductIndex::where("id_index", $this->indexConfiguration->id_index_catalog)->where("id_product", $product->id)->first();
     
-                    if (!$productIndex) {
+                    if ($productIndex != null) {
                         $productIndex->status = $productArray["status"] ?? false;
                         $productIndex->updated_at = date("Y-m-d H:i:s");
                         $product->save();
@@ -996,12 +996,10 @@ class Import
                 );
 
                 if ($updateProduct != null) {
-                    foreach ($currentClient->indexes as $index) {
-                        $this->createProductIndex($updateProduct, $index->id);
+                    $this->createProductIndex($updateProduct, $idIndex);
 
-                        if (isset($product["attributes"]) && is_array($product["attributes"])) {
-                            $this->updateAttributes($product["attributes"], $updateProduct, $index->id);
-                        }
+                    if (isset($product["attributes"]) && is_array($product["attributes"])) {
+                        $this->updateAttributes($product["attributes"], $updateProduct, $idIndex);
                     }
                 }
             } else {
@@ -1012,15 +1010,13 @@ class Import
                 );
 
                 if ($newProduct != null) {
-                    foreach ($currentClient->indexes as $index) {
-                        $this->createProductIndex($newProduct, $index->id);
+                    $this->createProductIndex($newProduct, $idIndex);
 
-                        if (isset($product["attributes"]) && is_array($product["attributes"])) {
-                            $this->updateAttributes($product["attributes"], $newProduct, $index->id);
-                        }
-
-                        $this->incrementIndexProduct($index);
+                    if (isset($product["attributes"]) && is_array($product["attributes"])) {
+                        $this->updateAttributes($product["attributes"], $newProduct, $idIndex);
                     }
+
+                    $this->incrementIndexProduct($idIndex);
                 }
             }
         }
