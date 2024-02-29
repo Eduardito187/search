@@ -76,6 +76,15 @@ class Core
                 );
             }
 
+            $idProductList = array_merge(
+                $idProductList,
+                $this->getProductsLike(
+                    $index->id_client,
+                    $query,
+                    $idProductList
+                )
+            );
+
             if (count($idProductList) > 0) {
                 $idProductList = $this->getProductsIndexFilters($idProductList, $index->id);
             }
@@ -148,6 +157,15 @@ class Core
                     )
                 );
             }
+
+            $idProductList = array_merge(
+                $idProductList,
+                $this->getProductsLike(
+                    $index->id_client,
+                    $query,
+                    $idProductList
+                )
+            );
 
             if (count($idProductList) > 0) {
                 $idProductList = $this->getProductsIndexFilters($idProductList, $index->id);
@@ -394,6 +412,20 @@ class Core
         return ProductAttribute::where('id_attribute', $idAttribute)
             ->where('id_index', $idIndex)->where('value', 'like', '%'.$query.'%')
             ->whereNotIn('id_product', $excludeIds)->pluck('id_product')->unique()->toArray();
+    }
+
+    /**
+     * @param int $idClient
+     * @param string $parametter
+     * @param array $excludeIds
+     * @return array
+     */
+    public function getProductsLike(int $idClient, string $parametter, array $excludeIds = [])
+    {
+        return Product::where('id_client', $idClient)->whereNotIn('id', $excludeIds)->where(function ($query) use ($parametter) {
+            $query->where('sku', 'like', '%'.$parametter.'%')
+                  ->orWhere('name', 'like', '%'.$parametter.'%');
+            })->pluck('id')->unique()->toArray();
     }
 
     public function setHistoryResult($idIndex, $customer, $query, $resultProducts)
