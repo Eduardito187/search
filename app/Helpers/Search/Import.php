@@ -934,16 +934,19 @@ class Import
      */
     public function updateAttribute($name, $code, $label, $idType, $idClient)
     {
-        $attribtue = Attributes::where('code', $code)->where('id_client', $idClient)->first();
+        $attribute = Attributes::where('code', $code)->where('id_client', $idClient)->first();
 
-        if ($attribtue) {
-            $attribtue->name = $name;
-            $attribtue->code = $code;
-            $attribtue->label = $label;
-            $attribtue->id_type = $idType;
-            $attribtue->id_client = $idClient;
-            $attribtue->updated_at = date("Y-m-d H:i:s");
+        if ($attribute) {
+            $attribute->name = $name;
+            $attribute->code = $code;
+            $attribute->label = $label;
+            $attribute->id_type = $idType;
+            $attribute->id_client = $idClient;
+            $attribute->updated_at = date("Y-m-d H:i:s");
+            return $attribute->id;
         }
+
+        return null;
     }
 
     /**
@@ -1122,6 +1125,8 @@ class Import
      */
     public function importAttributesRulesExclude($attributes, $currentClient)
     {
+        $attributesProccess = [];
+
         foreach ($attributes as $key => $attribute) {
             if (
                 (isset($attribute["code"]) && isset($attribute["condition"]) && isset($attribute["value"])) &&
@@ -1153,9 +1158,21 @@ class Import
                             $attributeRuleExclude->save();
                         }
                     }
+
+                    $attributesProccess[] = $attributeItem->id;
                 }
             }
         }
+
+        $this->disabledRulesExcludeNoProccess($attributesProccess, $currentClient->id);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function disabledRulesExcludeNoProccess($attributesProccess, $idClient)
+    {
+        AttributesRulesExclude::where('id_client', $idClient)->whereNotIn('id_attribute', $attributesProccess)->delete();
     }
 
     /**
@@ -1163,6 +1180,8 @@ class Import
      */
     public function importAttributesSearch($attributes, $currentClient)
     {
+        $attributesProccess = [];
+
         foreach ($attributes as $key => $attribute) {
             if (
                 (isset($attribute["code"]) && isset($attribute["sort"])) &&
@@ -1186,9 +1205,23 @@ class Import
                             $sttributeSearch->save();
                         }
                     }
+
+                    $attributesProccess[] = $attributeItem->id;
                 }
             }
         }
+
+        foreach ($currentClient->indexes as $key => $index) {
+            $this->disabledSearchNoProccess($attributesProccess, $index->id);
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function disabledSearchNoProccess($attributesProccess, $idIndex)
+    {
+        AttributeSearch::where('id_index', $idIndex)->whereNotIn('id_attribute', $attributesProccess)->delete();
     }
 
     /**
@@ -1196,6 +1229,8 @@ class Import
      */
     public function importAttributesOrders($attributes, $currentClient)
     {
+        $attributesProccess = [];
+
         foreach ($attributes as $key => $attribute) {
             if (
                 (isset($attribute["code"]) && isset($attribute["sort"]) && isset($attribute["sorting_type"])) &&
@@ -1229,9 +1264,23 @@ class Import
                             }
                         }
                     }
+
+                    $attributesProccess[] = $attributeItem->id;
                 }
             }
         }
+
+        foreach ($currentClient->indexes as $key => $index) {
+            $this->disabledOrderNoProccess($attributesProccess, $index->id);
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function disabledOrderNoProccess($attributesProccess, $idIndex)
+    {
+        RankingSorting::where('id_index', $idIndex)->whereNotIn('id_attribute', $attributesProccess)->delete();
     }
 
     /**
@@ -1294,6 +1343,8 @@ class Import
      */
     public function importAttributesFilters($attributes, $currentClient)
     {
+        $attributesProccess = [];
+
         foreach ($attributes as $key => $attribute) {
             if (
                 (isset($attribute["code"]) && isset($attribute["sort"])) &&
@@ -1311,9 +1362,21 @@ class Import
                         $filterAttribute->status = true;
                         $filterAttribute->save();
                     }
+
+                    $attributesProccess[] = $attribute->id;
                 }
             }
         }
+
+        $this->disabledFiltersNoProccess($attributesProccess, $currentClient->id);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function disabledFiltersNoProccess($attributesProccess, $idClient)
+    {
+        FiltersAttributes::where('id_client', $idClient)->whereNotIn('id_attribute', $attributesProccess)->update(['status' => 0]);
     }
 
     /**
@@ -1349,6 +1412,8 @@ class Import
      */
     public function importAttributes($attributes, $currentClient)
     {
+        $attributesProccess = [];
+
         foreach ($attributes as $key => $attribute) {
             if (
                 (isset($attribute["name"]) && isset($attribute["code"]) && isset($attribute["label"]) && array_key_exists("type", $attribute)) &&
@@ -1359,10 +1424,11 @@ class Import
                 }
 
                 $type = $this->getTypeAttribute($attribute["type"]);
+                $idAttribute = null;
 
                 if ($type != null) {
                     if ($this->existAttribute($attribute["code"], $currentClient->id)) {
-                        $this->updateAttribute(
+                        $idAttribute = $this->updateAttribute(
                             $attribute["name"],
                             $attribute["code"],
                             $attribute["label"],
@@ -1370,7 +1436,7 @@ class Import
                             $currentClient->id
                         );
                     } else {
-                        $this->createAttribute(
+                        $idAttribute = $this->createAttribute(
                             $attribute["name"],
                             $attribute["code"],
                             $attribute["label"],
@@ -1379,8 +1445,22 @@ class Import
                         );
                     }
                 }
+
+                if ($idAttribute != null) {
+                    $attributesProccess[] = $idAttribute;
+                }
             }
         }
+
+        $this->disabledAttributtesNoProccess($attributesProccess, $currentClient->id);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function disabledAttributtesNoProccess($attributesProccess, $idClient)
+    {
+        Attributes::where('id_client', $idClient)->whereNotIn('id', $attributesProccess)->update(['status' => 0]);
     }
 
     /**
