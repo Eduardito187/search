@@ -201,18 +201,15 @@ class Core
                 if ($filters != null && count($filters) > 0) {
                     \Illuminate\Support\Facades\Log::info("filters valid");
                     foreach ($filters as $key => $filter) {
-                        if (
-                            (isset($filter["code"]) && isset($filter["value"]) && isset($filter["range"])) &&
-                            (is_string($filter["code"]) && is_string($filter["value"]) && is_array($filter["range"]))
-                        ) {
+                        if (isset($filter["code"]) && is_string($filter["code"])) {
                             $attribute = $this->getAttributeByCode($filter["code"]);
                             \Illuminate\Support\Facades\Log::info("attribute => ".$attribute);
 
                             if ($attribute != null) {
-                                if (isset($filter["range"]) && count($filter["range"]) > 0) {
+                                if (isset($filter["range"]) && is_array($filter["range"]) && count($filter["range"]) > 0) {
                                     \Illuminate\Support\Facades\Log::info("filter => range");
                                     $idProductList = $this->getProductFilterApplyRange($attribute->id, $index->id, $idProductList, $filter["range"][0], $filter["range"][1]);
-                                } else {
+                                } else if (isset($filter["value"]) && is_string($filter["value"])) {
                                     \Illuminate\Support\Facades\Log::info("filter => simple");
                                     $idProductList = $this->getProductFilterApply($attribute->id, $index->id, $idProductList, $filter["value"]);
                                 }
