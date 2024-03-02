@@ -293,6 +293,7 @@ class Core
                 $typeFilter = $this->getTypeFilter($index->id_client, $filter->id_attribute);
 
                 $filterResponse[] = [
+                    "label" => $filter->attribute->label,
                     "code" => $filter->attribute->code,
                     "type" => $typeFilter,
                     "data" => $this->getValueAttributeFilter($filter->id_attribute, $index->id, $responseProductIds)
