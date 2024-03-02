@@ -11,6 +11,7 @@ use App\Models\Product;
 use App\Models\ProductAttribute;
 use App\Models\RankingSorting;
 use App\Helpers\System\CoreHttp;
+use App\Models\AttributeFilterType;
 use App\Models\BackupQuery;
 use App\Models\FiltersAttributes;
 use App\Models\HistoryCustomer;
@@ -284,7 +285,13 @@ class Core
             $filterResponse = [];
 
             foreach ($filterOrder as $key => $filter) {
-                $filterResponse[] = [$filter->attribute->code => $this->getValueAttributeFilter($filter->id_attribute, $index->id, $responseProductIds)];
+                $typeFilter = $this->getTypeFilter($index->id_client, $filter->id_attribute);
+
+                $filterResponse[] = [
+                    "code" => $filter->attribute->code,
+                    "type" => $typeFilter,
+                    "data" => $this->getValueAttributeFilter($filter->id_attribute, $index->id, $responseProductIds)
+                ];
             }
     
             return $this->coreHttp->constructResponse(
@@ -299,6 +306,20 @@ class Core
         } catch (Exception $e) {
             return $this->coreHttp->constructResponse([], $e->getMessage(), 500, false);
         }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getTypeFilter($idClient, $idAttribute)
+    {
+        $type = AttributeFilterType::where("id_client", $idClient)->where("id_attribute", $idAttribute)->first();
+
+        if (!$type) {
+            return "list";
+        }
+
+        return $type->type;
     }
 
     /**
