@@ -53,11 +53,15 @@ class Core
             }
 
             $query = $body["query"];
-            $filters = $body["filters"];
+            $filters = null;
             $index = $this->getIndexByApiKey($header["api-key"][0]);
 
             if ($index->count_product == 0) {
                 throw new Exception("El indice no cuenta con productos disponible para su busqueda.");
+            }
+
+            if (isset($body["filters"])) {
+                $filters = $body["filters"];
             }
 
             $attributesSearch = $this->getSearchAttributesByIndex($index);
@@ -142,11 +146,15 @@ class Core
             }
 
             $query = $body["query"];
-            $filters = $body["filters"];
+            $filters = null;
             $index = $this->getIndexByApiKey($header["api-key"][0]);
     
             if ($index->count_product == 0) {
                 throw new Exception("El indice no cuenta con productos disponible para su busqueda.");
+            }
+
+            if (isset($body["filters"])) {
+                $filters = $body["filters"];
             }
     
             $attributesSearch = $this->getSearchAttributesByIndex($index);
@@ -189,7 +197,7 @@ class Core
                     $idProductList = $this->getProductsFilters($idProductList);
                 }
 
-                if (count($filters) > 0) {
+                if ($filters != null && count($filters) > 0) {
                     foreach ($filters as $key => $filter) {
                         if (
                             (isset($filter["code"]) && isset($filter["value"]) && isset($filter["range"])) &&
