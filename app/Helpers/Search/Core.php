@@ -107,7 +107,8 @@ class Core
                     $this->setHistoryResult($index->id, $header["customer-uuid"][0], $query, $responseProductIds);
                 }
             } else {
-                $responseProductIds = json_decode($backupQuery->list_products);
+                $idProductList = json_decode($backupQuery->list_products);
+                $responseProductIds = array_slice($idProductList, 0, $this->indexConfiguration->page_limit);
             }
 
             return $this->coreHttp->constructResponse(
