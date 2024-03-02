@@ -204,13 +204,18 @@ class Core
                             (is_string($filter["code"]) && is_string($filter["value"]) && is_array($filter["range"]))
                         ) {
                             $attribute = $this->getAttributeByCode($filter["code"]);
+                            \Illuminate\Support\Facades\Log::info("attribute => ".$attribute);
 
                             if ($attribute != null) {
-                                if (!isset($filter["range"]) || count($filter["range"]) == 0) {
-                                    $idProductList = $this->getProductFilterApply($attribute->id, $index->id, $idProductList, $filter["value"]);
-                                } else {
+                                if (isset($filter["range"]) && count($filter["range"]) > 0) {
+                                    \Illuminate\Support\Facades\Log::info("filter => range");
                                     $idProductList = $this->getProductFilterApplyRange($attribute->id, $index->id, $idProductList, $filter["range"][0], $filter["range"][1]);
+                                } else {
+                                    \Illuminate\Support\Facades\Log::info("filter => simple");
+                                    $idProductList = $this->getProductFilterApply($attribute->id, $index->id, $idProductList, $filter["value"]);
                                 }
+
+                                \Illuminate\Support\Facades\Log::info("filter => ".json_encode($idProductList));
                             }
                         }
                     }
