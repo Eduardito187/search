@@ -168,6 +168,7 @@ class Core
             $responseProductIds = [];
 
             if ($backupQuery == null) {
+                \Illuminate\Support\Facades\Log::info("backupQuery isNULL");
                 foreach ($attributesSearch as $attributeSearchable) {
                     $idProductList = array_merge(
                         $idProductList,
@@ -198,6 +199,7 @@ class Core
                 }
 
                 if ($filters != null && count($filters) > 0) {
+                    \Illuminate\Support\Facades\Log::info("filters valid");
                     foreach ($filters as $key => $filter) {
                         if (
                             (isset($filter["code"]) && isset($filter["value"]) && isset($filter["range"])) &&
@@ -231,6 +233,7 @@ class Core
                     $this->setHistoryResult($index->id, $header["customer-uuid"][0], $query, $responseProductIds);
                 }
             } else {
+                \Illuminate\Support\Facades\Log::info("backupQuery is NOt NULL");
                 $idProductList = json_decode($backupQuery->list_products);
                 $responseProductIds = array_slice($idProductList, 0, $this->indexConfiguration->page_limit);
             }
