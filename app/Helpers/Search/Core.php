@@ -94,13 +94,10 @@ class Core
 
                 if (count($idProductList) > 0) {
                     $idProductList = $this->getProductsIndexFilters($idProductList, $index->id);
-                }
-
-                if (count($idProductList) > 0) {
                     $idProductList = $this->getProductsFilters($idProductList);
+                    $this->setBackupQuery($index->id, $header["customer-uuid"][0], $query, $idProductList, $filters);
                 }
 
-                $this->setBackupQuery($index->id, $header["customer-uuid"][0], $query, $idProductList, $filters);
                 $responseProductIds = array_slice($idProductList, 0, $this->indexConfiguration->limit_product_feed);
 
                 if (count($responseProductIds) > 0) {
@@ -108,7 +105,7 @@ class Core
                 }
             } else {
                 $idProductList = json_decode($backupQuery->list_products);
-                $responseProductIds = array_slice($idProductList, 0, $this->indexConfiguration->page_limit);
+                $responseProductIds = array_slice($idProductList, 0, $this->indexConfiguration->limit_product_feed);
             }
 
             return $this->coreHttp->constructResponse(
