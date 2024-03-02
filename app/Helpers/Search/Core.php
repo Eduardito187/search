@@ -223,14 +223,14 @@ class Core
                     $this->setBackupQuery($index->id, $header["customer-uuid"][0], $query, $idProductList, $filters);
                 }
         
-                $responseProductIds = array_slice($idProductList, ($pagination - 1), $this->indexConfiguration->page_limit);
+                $responseProductIds = array_slice($idProductList, (($pagination - 1) * $this->indexConfiguration->page_limit), $this->indexConfiguration->page_limit);
     
                 if (count($responseProductIds) > 0) {
                     $this->setHistoryResult($index->id, $header["customer-uuid"][0], $query, $responseProductIds);
                 }
             } else {
                 $idProductList = json_decode($backupQuery->list_products);
-                $responseProductIds = array_slice($idProductList, ($pagination - 1), $this->indexConfiguration->page_limit);
+                $responseProductIds = array_slice($idProductList, (($pagination - 1) * $this->indexConfiguration->page_limit), $this->indexConfiguration->page_limit);
             }
     
             return $this->coreHttp->constructResponse(
