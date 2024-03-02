@@ -100,11 +100,11 @@ class Core
                     $idProductList = $this->getProductsFilters($idProductList);
                 }
 
+                $this->setBackupQuery($index->id, $header["customer-uuid"][0], $query, $idProductList, $filters);
                 $responseProductIds = array_slice($idProductList, 0, $this->indexConfiguration->limit_product_feed);
 
                 if (count($responseProductIds) > 0) {
                     $this->setHistoryResult($index->id, $header["customer-uuid"][0], $query, $responseProductIds);
-                    $this->setBackupQuery($index->id, $header["customer-uuid"][0], $query, $responseProductIds, $filters);
                 }
             } else {
                 $responseProductIds = json_decode($backupQuery->list_products);
@@ -190,8 +190,6 @@ class Core
                 if (count($idProductList) > 0) {
                     $idProductList = $this->getProductsFilters($idProductList);
                 }
-        
-                $responseProductIds = array_slice($idProductList, 0, $this->indexConfiguration->page_limit);
 
                 if (count($filters) > 0) {
                     foreach ($filters as $key => $filter) {
@@ -203,18 +201,23 @@ class Core
 
                             if ($attribute != null) {
                                 if (!isset($filter["range"]) || count($filter["range"]) == 0) {
-                                    $responseProductIds = $this->getProductFilterApply($attribute->id, $index->id, $responseProductIds, $filter["value"]);
+                                    $idProductList = $this->getProductFilterApply($attribute->id, $index->id, $idProductList, $filter["value"]);
                                 } else {
-                                    $responseProductIds = $this->getProductFilterApplyRange($attribute->id, $index->id, $responseProductIds, $filter["range"][0], $filter["range"][1]);
+                                    $idProductList = $this->getProductFilterApplyRange($attribute->id, $index->id, $idProductList, $filter["range"][0], $filter["range"][1]);
                                 }
                             }
                         }
                     }
                 }
+
+                if (count($idProductList) > 0) {
+                    $this->setBackupQuery($index->id, $header["customer-uuid"][0], $query, $idProductList, $filters);
+                }
+        
+                $responseProductIds = array_slice($idProductList, 0, $this->indexConfiguration->page_limit);
     
                 if (count($responseProductIds) > 0) {
                     $this->setHistoryResult($index->id, $header["customer-uuid"][0], $query, $responseProductIds);
-                    $this->setBackupQuery($index->id, $header["customer-uuid"][0], $query, $responseProductIds, $filters);
                 }
             } else {
                 $responseProductIds = json_decode($backupQuery->list_products);
