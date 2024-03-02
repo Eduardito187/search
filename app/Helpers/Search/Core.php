@@ -168,7 +168,6 @@ class Core
             $responseProductIds = [];
 
             if ($backupQuery == null) {
-                \Illuminate\Support\Facades\Log::info("backupQuery isNULL");
                 foreach ($attributesSearch as $attributeSearchable) {
                     $idProductList = array_merge(
                         $idProductList,
@@ -224,7 +223,6 @@ class Core
                     $this->setHistoryResult($index->id, $header["customer-uuid"][0], $query, $responseProductIds);
                 }
             } else {
-                \Illuminate\Support\Facades\Log::info("backupQuery is NOt NULL");
                 $idProductList = json_decode($backupQuery->list_products);
                 $responseProductIds = array_slice($idProductList, 0, $this->indexConfiguration->page_limit);
             }
@@ -262,11 +260,15 @@ class Core
             }
 
             $query = $body["query"];
-            $filters = $body["filters"];
+            $filters = null;
             $index = $this->getIndexByApiKey($header["api-key"][0]);
     
             if ($index->count_product == 0) {
                 throw new Exception("El indice no cuenta con productos disponible para su busqueda.");
+            }
+
+            if (isset($body["filters"])) {
+                $filters = $body["filters"];
             }
     
             $attributesSearch = $this->getSearchAttributesByIndex($index);
