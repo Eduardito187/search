@@ -35,6 +35,7 @@ Route::middleware([CustomValidateToken::class])->group(function () {
     Route::controller(SearchProduct::class)->group(function() {
         Route::post('search/productFeed', 'searchProductFeed');
         Route::post('search/productResult', 'searchProductResult');
+        Route::post('search/getFiltersPage', 'getFiltersPage');
     });
     Route::controller(SearchProccess::class)->group(function() {
         Route::post('import/importSingle', 'importSingle');

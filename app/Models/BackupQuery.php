@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\IndexCatalog;
 
-class HistoryCustomer extends Model
+class BackupQuery extends Model
 {
     use HasFactory;
 
-    protected $table = 'history_customer';
-    protected $fillable = ['id_index', 'customer_uuid', 'query', 'count_result', 'filters'];
+    protected $table = 'backup_query';
+    protected $fillable = ['id_index', 'customer_uuid', 'query', 'list_products', 'filters'];
     protected $hidden = ['created_at'];
     public $incrementing = false;
     public $timestamps = false;

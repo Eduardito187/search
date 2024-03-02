@@ -11,6 +11,8 @@ use App\Models\Product;
 use App\Models\ProductAttribute;
 use App\Models\RankingSorting;
 use App\Helpers\System\CoreHttp;
+use App\Models\BackupQuery;
+use App\Models\FiltersAttributes;
 use App\Models\HistoryCustomer;
 use App\Models\ProductIndex;
 use Illuminate\Support\Str;
@@ -38,18 +40,20 @@ class Core
     }
 
     /**
-     * @param string|null $query
+     * @param array $body
      * @param array $header
      */
-    public function productFeed(string|null $query, array $header = [])
+    public function productFeed(array $body, array $header = [])
     {
         try {
             $this->coreHttp->validateApiKey($header);
 
-            if (is_null($query) || $query == '') {
+            if (!is_array($body) || !isset($body["query"])) {
                 throw new Exception("Parametro de busqueda no valido.");
             }
 
+            $query = $body["query"];
+            $filters = $body["filters"];
             $index = $this->getIndexByApiKey($header["api-key"][0]);
 
             if ($index->count_product == 0) {
@@ -63,40 +67,47 @@ class Core
             }
 
             $idProductList = [];
+            $backupQuery = $this->getBackupQuery($index->id, $header["customer-uuid"][0], $query, $idProductList, $filters);
+            $responseProductIds = [];
 
-            foreach ($attributesSearch as $attributeSearchable) {
+            if ($backupQuery == null) {
+                foreach ($attributesSearch as $attributeSearchable) {
+                    $idProductList = array_merge(
+                        $idProductList,
+                        $this->getProductsIdFilters(
+                            $attributeSearchable->id_attribute,
+                            $index->id,
+                            $query,
+                            $idProductList
+                        )
+                    );
+                }
+
                 $idProductList = array_merge(
                     $idProductList,
-                    $this->getProductsIdFilters(
-                        $attributeSearchable->id_attribute,
-                        $index->id,
+                    $this->getProductsLike(
+                        $index->id_client,
                         $query,
                         $idProductList
                     )
                 );
-            }
 
-            $idProductList = array_merge(
-                $idProductList,
-                $this->getProductsLike(
-                    $index->id_client,
-                    $query,
-                    $idProductList
-                )
-            );
+                if (count($idProductList) > 0) {
+                    $idProductList = $this->getProductsIndexFilters($idProductList, $index->id);
+                }
 
-            if (count($idProductList) > 0) {
-                $idProductList = $this->getProductsIndexFilters($idProductList, $index->id);
-            }
+                if (count($idProductList) > 0) {
+                    $idProductList = $this->getProductsFilters($idProductList);
+                }
 
-            if (count($idProductList) > 0) {
-                $idProductList = $this->getProductsFilters($idProductList);
-            }
+                $responseProductIds = array_slice($idProductList, 0, $this->indexConfiguration->limit_product_feed);
 
-            $responseProductIds = array_slice($idProductList, 0, $this->indexConfiguration->limit_product_feed);
-
-            if (count($responseProductIds) > 0) {
-                $this->setHistoryResult($index->id, $header["customer-uuid"][0], $query, $responseProductIds);
+                if (count($responseProductIds) > 0) {
+                    $this->setHistoryResult($index->id, $header["customer-uuid"][0], $query, $responseProductIds);
+                    $this->setBackupQuery($index->id, $header["customer-uuid"][0], $query, $responseProductIds, $filters);
+                }
+            } else {
+                $responseProductIds = json_decode($backupQuery->list_products);
             }
 
             return $this->coreHttp->constructResponse(
@@ -116,10 +127,10 @@ class Core
     }
 
     /**
-     * @param string|null $query
+     * @param array $body
      * @param array $header
      */
-    public function productResult(string|null $query, array $header = [])
+    public function productResult(array $body, array $header = [])
     {
         try {
             $this->coreHttp->validateApiKey($header);
@@ -128,10 +139,12 @@ class Core
                 throw new Exception("No existe un customer uuid.");
             }
 
-            if (is_null($query) || $query == '') {
+            if (!is_array($body) || !isset($body["query"])) {
                 throw new Exception("Parametro de busqueda no valido.");
             }
-    
+
+            $query = $body["query"];
+            $filters = $body["filters"];
             $index = $this->getIndexByApiKey($header["api-key"][0]);
     
             if ($index->count_product == 0) {
@@ -143,50 +156,75 @@ class Core
             if (count($attributesSearch) == 0) {
                 throw new Exception("El indice no cuenta con atributos para su busqueda.");
             }
-    
+
             $idProductList = [];
+            $backupQuery = $this->getBackupQuery($index->id, $header["customer-uuid"][0], $query, $idProductList, $filters);
+            $responseProductIds = [];
+
+            if ($backupQuery == null) {
+                foreach ($attributesSearch as $attributeSearchable) {
+                    $idProductList = array_merge(
+                        $idProductList,
+                        $this->getProductsIdFilters(
+                            $attributeSearchable->id_attribute,
+                            $index->id,
+                            $query,
+                            $idProductList
+                        )
+                    );
+                }
     
-            foreach ($attributesSearch as $attributeSearchable) {
                 $idProductList = array_merge(
                     $idProductList,
-                    $this->getProductsIdFilters(
-                        $attributeSearchable->id_attribute,
-                        $index->id,
+                    $this->getProductsLike(
+                        $index->id_client,
                         $query,
                         $idProductList
                     )
                 );
-            }
-
-            $idProductList = array_merge(
-                $idProductList,
-                $this->getProductsLike(
-                    $index->id_client,
-                    $query,
-                    $idProductList
-                )
-            );
-
-            if (count($idProductList) > 0) {
-                $idProductList = $this->getProductsIndexFilters($idProductList, $index->id);
-            }
-
-            if (count($idProductList) > 0) {
-                $idProductList = $this->getProductsFilters($idProductList);
-            }
     
-            $responseProductIds = array_slice($idProductList, 0, $this->indexConfiguration->page_limit);
+                if (count($idProductList) > 0) {
+                    $idProductList = $this->getProductsIndexFilters($idProductList, $index->id);
+                }
+    
+                if (count($idProductList) > 0) {
+                    $idProductList = $this->getProductsFilters($idProductList);
+                }
+        
+                $responseProductIds = array_slice($idProductList, 0, $this->indexConfiguration->page_limit);
 
-            if (count($responseProductIds) > 0) {
-                $this->setHistoryResult($index->id, $header["customer-uuid"][0], $query, $responseProductIds);
+                if (count($filters) > 0) {
+                    foreach ($filters as $key => $filter) {
+                        if (
+                            (isset($filter["code"]) && isset($filter["value"]) && isset($filter["range"])) &&
+                            (is_string($filter["code"]) && is_string($filter["value"]) && is_array($filter["range"]))
+                        ) {
+                            $attribute = $this->getAttributeByCode($filter["code"]);
+
+                            if ($attribute != null) {
+                                if (!isset($filter["range"]) || count($filter["range"]) == 0) {
+                                    $responseProductIds = $this->getProductFilterApply($attribute->id, $index->id, $responseProductIds, $filter["value"]);
+                                } else {
+                                    $responseProductIds = $this->getProductFilterApplyRange($attribute->id, $index->id, $responseProductIds, $filter["range"][0], $filter["range"][1]);
+                                }
+                            }
+                        }
+                    }
+                }
+    
+                if (count($responseProductIds) > 0) {
+                    $this->setHistoryResult($index->id, $header["customer-uuid"][0], $query, $responseProductIds);
+                    $this->setBackupQuery($index->id, $header["customer-uuid"][0], $query, $responseProductIds, $filters);
+                }
+            } else {
+                $responseProductIds = json_decode($backupQuery->list_products);
             }
     
             return $this->coreHttp->constructResponse(
                 [
                     "products" => $this->responseProducts($responseProductIds, $index),
                     "count" => count($responseProductIds),
-                    "total" => count($idProductList),
-                    "suggestion" => $this->getSuggestionQuery($index->id, $header["customer-uuid"][0], $query)
+                    "total" => count($idProductList)
                 ],
                 "Proceso ejecutado exitosamente.",
                 200,
@@ -195,6 +233,107 @@ class Core
         } catch (Exception $e) {
             return $this->coreHttp->constructResponse([], $e->getMessage(), 500, false);
         }
+    }
+
+    /**
+     * @param array $body
+     * @param array $header
+     */
+    public function getFiltersPage(array $body, array $header = [])
+    {
+        try {
+            $this->coreHttp->validateApiKey($header);
+    
+            if (!array_key_exists("customer-uuid", $header)) {
+                throw new Exception("No existe un customer uuid.");
+            }
+
+            if (!is_array($body) || !isset($body["query"])) {
+                throw new Exception("Parametro de busqueda no valido.");
+            }
+
+            $query = $body["query"];
+            $filters = $body["filters"];
+            $index = $this->getIndexByApiKey($header["api-key"][0]);
+    
+            if ($index->count_product == 0) {
+                throw new Exception("El indice no cuenta con productos disponible para su busqueda.");
+            }
+    
+            $attributesSearch = $this->getSearchAttributesByIndex($index);
+    
+            if (count($attributesSearch) == 0) {
+                throw new Exception("El indice no cuenta con atributos para su busqueda.");
+            }
+
+            $idProductList = [];
+            $backupQuery = $this->getBackupQuery($index->id, $header["customer-uuid"][0], $query, $idProductList, $filters);
+            $responseProductIds = json_decode($backupQuery->list_products);
+            $filterOrder = $this->getFilterOrder($index->id_client);
+            $filterResponse = [];
+
+            foreach ($filterOrder as $key => $filter) {
+                $filterResponse[] = [$filter->attribute->code => $this->getValueAttributeFilter($filter->id_attribute, $index->id, $responseProductIds)];
+            }
+    
+            return $this->coreHttp->constructResponse(
+                [
+                    "filters" => $filterResponse,
+                    "total" => count($filterResponse)
+                ],
+                "Proceso ejecutado exitosamente.",
+                200,
+                true
+            );
+        } catch (Exception $e) {
+            return $this->coreHttp->constructResponse([], $e->getMessage(), 500, false);
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getProductFilterApplyRange($idAttribute, $idIndex, $idProducts, $min, $max)
+    {
+        return ProductAttribute::where('id_attribute', $idAttribute)
+            ->where('id_index', $idIndex)->whereBetween('value', [$min, $max])
+            ->whereIn('id_product', $idProducts)->whereNotNull('value')->pluck('id_product')->toArray();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getProductFilterApply($idAttribute, $idIndex, $idProducts, $value)
+    {
+        return ProductAttribute::where('id_attribute', $idAttribute)->where('id_index', $idIndex)->where('value', $value)
+            ->whereIn('id_product', $idProducts)->whereNotNull('value')
+            ->pluck('id_product')->toArray();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getValueAttributeFilter($idAttribute, $idIndex, $idProducts)
+    {
+        return ProductAttribute::where('id_attribute', $idAttribute)->where('id_index', $idIndex)
+            ->whereIn('id_product', $idProducts)->whereNotNull('value')
+            ->pluck('value')->toArray();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getFilterOrder($idClient)
+    {
+        return FiltersAttributes::where("id_client", $idClient)->orderBy('sort')->get();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getAttributeByCode($code)
+    {
+        return Attributes::where('code', $code)->first();
     }
 
     /**
@@ -428,6 +567,39 @@ class Core
             })->pluck('id')->unique()->toArray();
     }
 
+    /**
+     * @inheritDoc
+     */
+    public function getBackupQuery($idIndex, $customer, $query, $resultProducts, $filters)
+    {
+        $backup = BackupQuery::where('id_index', $idIndex)->where('customer_uuid', $customer)->where('query', $query)
+            ->where('filters', json_encode($filters))->first();
+
+        if (!$backup) {
+            return null;
+        }
+
+        return $backup;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setBackupQuery($idIndex, $customer, $query, $resultProducts, $filters)
+    {
+        $newItem = new BackupQuery();
+        $newItem->id_index = $idIndex;
+        $newItem->customer_uuid = $customer;
+        $newItem->query = $query;
+        $newItem->list_products = json_encode($resultProducts);
+        $newItem->filters = json_encode($filters);
+        $newItem->created_at = date('Y-m-d H:i:s');
+        $newItem->save();
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function setHistoryResult($idIndex, $customer, $query, $resultProducts)
     {
         $HistoryCustomer = new HistoryCustomer();
@@ -435,11 +607,13 @@ class Core
         $HistoryCustomer->customer_uuid = $customer;
         $HistoryCustomer->query = $query;
         $HistoryCustomer->count_result = count($resultProducts);
-        $HistoryCustomer->list_products = json_encode($resultProducts);
         $HistoryCustomer->created_at = date('Y-m-d H:i:s');
         $HistoryCustomer->save();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getSuggestionQuery($index, $customer, $query)
     {
         return HistoryCustomer::where('customer_uuid', $customer)

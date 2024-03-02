@@ -32,7 +32,7 @@ class Product extends Controller
     {
         return response()->json(
             $this->core->productFeed(
-                $request->all()["query"],
+                $request->all(),
                 $request->header()
             )
         );
@@ -46,7 +46,21 @@ class Product extends Controller
     {
         return response()->json(
             $this->core->productResult(
-                $request->all()["query"],
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getFiltersPage(Request $request)
+    {
+        return response()->json(
+            $this->core->getFiltersPage(
+                $request->all(),
                 $request->header()
             )
         );

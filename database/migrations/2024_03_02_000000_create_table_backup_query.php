@@ -13,12 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('history_customer', function (Blueprint $table) {
+        Schema::create('backup_query', function (Blueprint $table) {
             $table->unsignedBigInteger('id_index')->nullable();
             $table->foreign('id_index')->references('id')->on('index_catalog')->onDelete('cascade');
             $table->string('customer_uuid');
             $table->string('query');
             $table->integer('count_result');
+            $table->longText('list_products');
+            $table->longText('filters');
             $table->timestamp('created_at');
         });
     }
@@ -30,9 +32,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('history_customer', function (Blueprint $table) {
+        Schema::dropIfExists('backup_query', function (Blueprint $table) {
             $table->dropConstrainedForeignId('id_index');
         });
-        Schema::dropIfExists('history_customer');
+        Schema::dropIfExists('backup_query');
     }
 };
