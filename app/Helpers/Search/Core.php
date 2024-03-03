@@ -148,10 +148,15 @@ class Core
 
             $query = $body["query"];
             $filters = null;
+            $pagination = 1;
             $index = $this->getIndexByApiKey($header["api-key"][0]);
     
             if ($index->count_product == 0) {
                 throw new Exception("El indice no cuenta con productos disponible para su busqueda.");
+            }
+
+            if (isset($body["pagination"])) {
+                $pagination = $body["pagination"];
             }
 
             if (isset($body["filters"])) {
@@ -218,14 +223,14 @@ class Core
                     $this->setBackupQuery($index->id, $header["customer-uuid"][0], $query, $idProductList, $filters);
                 }
         
-                $responseProductIds = array_slice($idProductList, 0, $this->indexConfiguration->page_limit);
+                $responseProductIds = array_slice($idProductList, (($pagination - 1) * $this->indexConfiguration->page_limit), $this->indexConfiguration->page_limit);
     
                 if (count($responseProductIds) > 0) {
                     $this->setHistoryResult($index->id, $header["customer-uuid"][0], $query, $responseProductIds);
                 }
             } else {
                 $idProductList = json_decode($backupQuery->list_products);
-                $responseProductIds = array_slice($idProductList, 0, $this->indexConfiguration->page_limit);
+                $responseProductIds = array_slice($idProductList, (($pagination - 1) * $this->indexConfiguration->page_limit), $this->indexConfiguration->page_limit);
             }
     
             return $this->coreHttp->constructResponse(
@@ -288,6 +293,7 @@ class Core
                 $typeFilter = $this->getTypeFilter($index->id_client, $filter->id_attribute);
 
                 $filterResponse[] = [
+                    "label" => $filter->attribute->label,
                     "code" => $filter->attribute->code,
                     "type" => $typeFilter,
                     "data" => $this->getValueAttributeFilter($filter->id_attribute, $index->id, $responseProductIds)
