@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('backupDB:cron')->daily();
         $schedule->command('disabledIndexProducts:cron')->daily();
-        $schedule->command('disabledProducts:cron')->daily();
+        $schedule->command('deleteBackupQuery:cron')->daily();
     }
 
     /**

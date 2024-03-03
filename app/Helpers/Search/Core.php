@@ -354,7 +354,7 @@ class Core
     {
         return ProductAttribute::where('id_attribute', $idAttribute)->where('id_index', $idIndex)
             ->whereIn('id_product', $idProducts)->whereNotNull('value')
-            ->distinct()->pluck('value')->toArray();
+            ->distinct()->pluck('value')->toArray(); 
     }
 
     /**

@@ -56,9 +56,9 @@ return [
             'path' => storage_path('logs/backupDB.log'),
             'level' => 'info',
         ],
-        'disabledProducts' => [
+        'deleteBackupQuery' => [
             'driver' => 'single',
-            'path' => storage_path('logs/disabledProducts.log'),
+            'path' => storage_path('logs/deleteBackupQuery.log'),
             'level' => 'info',
         ],
         'disabledIndexProducts' => [
