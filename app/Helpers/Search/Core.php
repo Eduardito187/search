@@ -207,12 +207,15 @@ class Core
                     foreach ($filters as $key => $filter) {
                         if (isset($filter["code"]) && is_string($filter["code"])) {
                             $attribute = $this->getAttributeByCode($filter["code"]);
+                            $typeFilter = $this->getTypeFilter($index->id_client, $attribute->id);
 
                             if ($attribute != null) {
-                                if (isset($filter["range"]) && is_array($filter["range"]) && count($filter["range"]) > 0) {
-                                    $idProductList = $this->getProductFilterApplyRange($attribute->id, $index->id, $idProductList, $filter["range"][0], $filter["range"][1]);
-                                } else if (isset($filter["value"]) && is_array($filter["value"]) && count($filter["value"]) > 0) {
-                                    $idProductList = $this->getProductFilterApply($attribute->id, $index->id, $idProductList, $filter["value"]);
+                                if (isset($filter["value"]) && is_array($filter["value"]) && count($filter["value"]) > 0) {
+                                    if ($typeFilter == "list") {
+                                        $idProductList = $this->getProductFilterApply($attribute->id, $index->id, $idProductList, $filter["value"]);
+                                    } else if ($typeFilter == "slider") {
+                                        $idProductList = $this->getProductFilterApplyRange($attribute->id, $index->id, $idProductList, $filter["value"][0], $filter["value"][1]);
+                                    }
                                 }
                             }
                         }
