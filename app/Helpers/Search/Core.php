@@ -344,8 +344,7 @@ class Core
     public function getProductFilterApply($idAttribute, $idIndex, $idProducts, $valueList)
     {
         return ProductAttribute::where('id_attribute', $idAttribute)->where('id_index', $idIndex)->whereIn('value', $valueList)
-            ->whereIn('id_product', $idProducts)->whereNotNull('value')
-            ->pluck('id_product')->toArray();
+            ->whereIn('id_product', $idProducts)->whereNotNull('value')->pluck('id_product')->toArray();
     }
 
     /**
