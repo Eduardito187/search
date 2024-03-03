@@ -32,7 +32,7 @@ class DeleteBackupQuery extends Command
     public function handle()
     {
         $fechaLimite = Carbon::now()->subMinutes(10);
-        $backupsToDelete = BackupQuery::where('updated_at', '<', $fechaLimite)->get();
+        $backupsToDelete = BackupQuery::where('created_at', '<', $fechaLimite)->get();
         $backupsToDelete->each->delete();
 
         Log::channel('deleteBackupQuery')->info("Cron deleteBackupQuery ejecutado.");
