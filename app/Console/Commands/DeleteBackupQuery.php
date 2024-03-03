@@ -22,7 +22,7 @@ class DeleteBackupQuery extends Command
      *
      * @var string
      */
-    protected $description = 'Desactiva productos no actualizados en las ultimas 24hrs.';
+    protected $description = 'Elimina la cache de las busquedas de 10min.';
 
     /**
      * Execute the console command.
