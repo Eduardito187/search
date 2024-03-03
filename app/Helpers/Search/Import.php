@@ -515,6 +515,7 @@ class Import
         }
 
         $product->name = $name;
+        $product->status = true;
         $product->updated_at = date("Y-m-d H:i:s");
         $product->save();
         $this->updateProductIndex($product->id, $idIndex);
