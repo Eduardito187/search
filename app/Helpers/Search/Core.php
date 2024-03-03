@@ -206,7 +206,7 @@ class Core
                             if ($attribute != null) {
                                 if (isset($filter["range"]) && is_array($filter["range"]) && count($filter["range"]) > 0) {
                                     $idProductList = $this->getProductFilterApplyRange($attribute->id, $index->id, $idProductList, $filter["range"][0], $filter["range"][1]);
-                                } else if (isset($filter["value"]) && is_string($filter["value"])) {
+                                } else if (isset($filter["value"]) && is_array($filter["value"]) && count($filter["value"]) > 0) {
                                     $idProductList = $this->getProductFilterApply($attribute->id, $index->id, $idProductList, $filter["value"]);
                                 }
                             }
@@ -335,9 +335,9 @@ class Core
     /**
      * @inheritDoc
      */
-    public function getProductFilterApply($idAttribute, $idIndex, $idProducts, $value)
+    public function getProductFilterApply($idAttribute, $idIndex, $idProducts, $valueList)
     {
-        return ProductAttribute::where('id_attribute', $idAttribute)->where('id_index', $idIndex)->where('value', $value)
+        return ProductAttribute::where('id_attribute', $idAttribute)->where('id_index', $idIndex)->whereIn('value', $valueList)
             ->whereIn('id_product', $idProducts)->whereNotNull('value')
             ->pluck('id_product')->toArray();
     }
