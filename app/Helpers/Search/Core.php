@@ -411,7 +411,9 @@ class Core
         $allAttributes = $this->getAllAtributesIdEnabled();
         $price = Attributes::where('code', 'price')->where('id_client', $clientId)->first();
         $specialPrice = Attributes::where('code', 'special_price')->where('id_client', $clientId)->first();
-        $numberFormat = [$price->id, $specialPrice->id];
+        $cuotaInicial = Attributes::where('code', 'cuota_inicial')->where('id_client', $clientId)->first();
+        $cuotaMonto3 = Attributes::where('code', 'minicuota_monto_tres')->where('id_client', $clientId)->first();
+        $numberFormat = [$price->id, $specialPrice->id, $cuotaInicial->id, $cuotaMonto3->id];
         $productsAttributes = [];
 
         foreach ($products as $productData) {
