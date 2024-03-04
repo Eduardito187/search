@@ -395,26 +395,30 @@ class Core
             $rankingSortable[$value] = [];
         }
 
-        return $this->getValuesProduct($rankingSortable, $products, $index->id);
+        return $this->getValuesProduct($rankingSortable, $products, $index->id, $index->id_client);
     }
 
     /**
      * @param array $rankingSortable
      * @param mixed $products
      * @param int $indexId
+     * @param int $clientId
      * @return array
      */
-    public function getValuesProduct(array $rankingSortable, mixed $products, $indexId)
+    public function getValuesProduct(array $rankingSortable, mixed $products, $indexId, $clientId)
     {
         $itemsResponse = [];
         $allAttributes = $this->getAllAtributesIdEnabled();
+        $price = Attributes::where('code', 'price')->where('id_client', $clientId)->first();
+        $specialPrice = Attributes::where('code', 'special_price')->where('id_client', $clientId)->first();
+        $numberFormat = [$price->id, $specialPrice->id];
         $productsAttributes = [];
 
         foreach ($products as $productData) {
             $valueAttribute = [];
 
             foreach ($allAttributes as $key => $idAttribute) {
-                $valueAttribute = $this->getProductAttributeIndexValue($idAttribute, $productData->id, $indexId);
+                $valueAttribute = $this->getProductAttributeIndexValue($idAttribute, $productData->id, $indexId, $numberFormat);
 
                 if ($valueAttribute !== null) {
                     $productsAttributes = array_merge($productsAttributes, $valueAttribute);
@@ -465,9 +469,10 @@ class Core
      * @param int $idAttribute
      * @param int $idProduct
      * @param int $idIndex
+     * @param array $numberFormat
      * @return array|null
      */
-    public function getProductAttributeIndexValue($idAttribute, $idProduct, $idIndex)
+    public function getProductAttributeIndexValue($idAttribute, $idProduct, $idIndex, $numberFormat)
     {
         $value = ProductAttribute::where("id_attribute", $idAttribute)->where("id_product", $idProduct)->where("id_index", $idIndex)->first();
         $this->currentValue = null;
@@ -477,6 +482,11 @@ class Core
         }
 
         $this->currentValue = $value->value;
+
+        if (in_array($idAttribute, $numberFormat)) {
+            return array($value->attribute->code => number_format($value->value, 2));
+        }
+
         return array($value->attribute->code => $value->value);
     }
 

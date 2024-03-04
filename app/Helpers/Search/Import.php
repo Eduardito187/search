@@ -523,6 +523,7 @@ class Import
         return $product;
     }
 
+
     /**
      * @inheritDoc
      */
