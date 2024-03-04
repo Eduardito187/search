@@ -414,13 +414,15 @@ class Core
         $cuotaInicial = Attributes::where('code', 'cuota_inicial')->where('id_client', $clientId)->first();
         $cuotaMonto3 = Attributes::where('code', 'minicuota_monto_tres')->where('id_client', $clientId)->first();
         $numberFormat = [$price->id, $specialPrice->id, $cuotaInicial->id, $cuotaMonto3->id];
+        $miniCuotaTotal = Attributes::where('code', 'minicuota_cuota_total')->where('id_client', $clientId)->first();
+        $arrayFormat = [$miniCuotaTotal->id];
         $productsAttributes = [];
 
         foreach ($products as $productData) {
             $valueAttribute = [];
 
             foreach ($allAttributes as $key => $idAttribute) {
-                $valueAttribute = $this->getProductAttributeIndexValue($idAttribute, $productData->id, $indexId, $numberFormat);
+                $valueAttribute = $this->getProductAttributeIndexValue($idAttribute, $productData->id, $indexId, $numberFormat, $arrayFormat);
 
                 if ($valueAttribute !== null) {
                     $productsAttributes = array_merge($productsAttributes, $valueAttribute);
@@ -472,9 +474,10 @@ class Core
      * @param int $idProduct
      * @param int $idIndex
      * @param array $numberFormat
+     * @param array $arrayFormat
      * @return array|null
      */
-    public function getProductAttributeIndexValue($idAttribute, $idProduct, $idIndex, $numberFormat)
+    public function getProductAttributeIndexValue($idAttribute, $idProduct, $idIndex, $numberFormat, $arrayFormat)
     {
         $value = ProductAttribute::where("id_attribute", $idAttribute)->where("id_product", $idProduct)->where("id_index", $idIndex)->first();
         $this->currentValue = null;
@@ -487,6 +490,8 @@ class Core
 
         if (in_array($idAttribute, $numberFormat)) {
             return array($value->attribute->code => number_format($value->value, 2));
+        } else if (in_array($idAttribute, $arrayFormat)) {
+            return array($value->attribute->code => json_decode($value->value, true));
         }
 
         return array($value->attribute->code => $value->value);
