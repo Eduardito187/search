@@ -12,6 +12,7 @@ use App\Models\ProductAttribute;
 use App\Models\RankingSorting;
 use App\Helpers\System\CoreHttp;
 use App\Models\AttributeFilterType;
+use App\Models\AttributesRulesExclude;
 use App\Models\BackupQuery;
 use App\Models\FiltersAttributes;
 use App\Models\HistoryCustomer;
@@ -399,6 +400,33 @@ class Core
     }
 
     /**
+     * @inheritDoc
+     */
+    public function existInRulesExclude($idAttribute, $value, $allRules)
+    {
+        foreach ($allRules as $key => $rule) {
+            if ($rule->id_attribute == $idAttribute) {
+                switch ($rule->id_condition) {
+                    case 1:
+                        return $value >= $rule->value;
+                    case 2:
+                        return $value > $rule->value;
+                    case 3:
+                        return $value <= $rule->value;
+                    case 4:
+                        return $value < $rule->value;
+                    case 5:
+                        return $value == $rule->value;
+                    default:
+                        return false;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * @param array $rankingSortable
      * @param mixed $products
      * @param int $indexId
@@ -409,6 +437,7 @@ class Core
     {
         $itemsResponse = [];
         $allAttributes = $this->getAllAtributesIdEnabled();
+        $allRulesExcludes = AttributesRulesExclude::all();
         $price = Attributes::where('code', 'price')->where('id_client', $clientId)->first();
         $specialPrice = Attributes::where('code', 'special_price')->where('id_client', $clientId)->first();
         $cuotaInicial = Attributes::where('code', 'cuota_inicial')->where('id_client', $clientId)->first();
