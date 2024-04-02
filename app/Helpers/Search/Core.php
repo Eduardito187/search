@@ -635,9 +635,25 @@ class Core
      */
     public function getProductsIdFilters(int $idAttribute, int $idIndex, string $query, array $excludeIds = [])
     {
+        /*
         return ProductAttribute::where('id_attribute', $idAttribute)
             ->where('id_index', $idIndex)->where('value', 'like', '%'.$query.'%')
             ->whereNotIn('id_product', $excludeIds)->pluck('id_product')->unique()->toArray();
+            */
+
+        return ProductAttribute::join('product_index', function ($join) use ($idAttribute, $idIndex) {
+                $join->on('product_attribute.id_product', '=', 'product_index.id_product')
+                     ->on('product_attribute.id_index', '=', 'product_index.id_index');
+            })
+            ->where('product_attribute.id_attribute', $idAttribute)
+            ->where('product_attribute.id_index', $idIndex)
+            ->where('product_attribute.value', 'like', '%' . $query . '%')
+            ->where('product_index.status', 1)
+            ->whereNotIn('product_attribute.id_product', $excludeIds)
+            ->pluck('product_attribute.id_product')
+            ->unique()
+            ->toArray();
+        
     }
 
     /**
@@ -648,7 +664,7 @@ class Core
      */
     public function getProductsLike(int $idClient, string $parametter, array $excludeIds = [])
     {
-        return Product::where('id_client', $idClient)->whereNotIn('id', $excludeIds)->where(function ($query) use ($parametter) {
+        return Product::where('id_client', $idClient)->where('status', 1)->whereNotIn('id', $excludeIds)->where(function ($query) use ($parametter) {
             $query->where('sku', 'like', '%'.$parametter.'%')
                   ->orWhere('name', 'like', '%'.$parametter.'%');
             })->pluck('id')->unique()->toArray();
