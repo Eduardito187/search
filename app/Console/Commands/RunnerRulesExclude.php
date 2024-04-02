@@ -91,9 +91,9 @@ class RunnerRulesExclude extends Command
                         ->pluck('product_attribute.id_product')->toArray();
                 }
 
-                ProductIndex::where('status', true)->whereIn('id_product', $idProductsDisabled)->update(['status' => false]);
                 $productsWithoutAttributes = Product::leftJoin('product_attribute', 'product.id', '=', 'product_attribute.id_product')->where('product_attribute.id_attribute', $rule->id_attribute)->where('product_attribute.id_index', $index->id)->whereNull('product_attribute.id_product')->pluck('product.id')->toArray();
-                ProductIndex::where('status', true)->whereIn('id_product', $productsWithoutAttributes)->update(['status' => false]);
+                ProductIndex::where('status', true)->whereIn('id_product', array_merge($idProductsDisabled, $productsWithoutAttributes))->update(['status' => false]);
+                Log::channel('runnerRulesExclude')->info("productsId => ".json_encode(array_merge($idProductsDisabled, $productsWithoutAttributes)));
             }
         }
 
