@@ -74,6 +74,14 @@ class Import
     /**
      * @inheritDoc
      */
+    public function deleteValueProductAttribute($idIndex, $idProduct, $idAttribute)
+    {
+        return ProductAttribute::where('id_index', $idIndex)->where('id_product', $idProduct)->where('id_attribute', $idAttribute)->delete();
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function verifyProductAttributeIndex($idIndex, $idProduct, $idAttribute)
     {
         return ProductAttribute::where('id_index', $idIndex)->where('id_product', $idProduct)->where('id_attribute', $idAttribute)->exists();
@@ -104,18 +112,13 @@ class Import
             $attribute = $this->getAttributeByCode($attributeArray["code"]);
 
             if ($attribute) {
-                if ($this->verifyProductAttributeIndex($idIndex, $product->id, $attribute->id)) {
-                    $productAttribute = $this->getProductAttributeIndex($idIndex, $product->id, $attribute->id);
-                    $productAttribute->value = $attributeArray["value"];
-                    $productAttribute->save();
-                } else {
-                    $productAttribute = new ProductAttribute();
-                    $productAttribute->id_index = $idIndex;
-                    $productAttribute->id_product = $product->id;
-                    $productAttribute->id_attribute = $attribute->id;
-                    $productAttribute->value = $attributeArray["value"];
-                    $productAttribute->save();
-                }
+                $this->deleteValueProductAttribute($idIndex, $product->id, $attribute->id);
+                $productAttribute = new ProductAttribute();
+                $productAttribute->id_index = $idIndex;
+                $productAttribute->id_product = $product->id;
+                $productAttribute->id_attribute = $attribute->id;
+                $productAttribute->value = $attributeArray["value"];
+                $productAttribute->save();
             }
         }
     }
