@@ -475,9 +475,10 @@ class Core
 
         if (count($rankingSortable) > 0) {
             \Illuminate\Support\Facades\Log::info("rankingSortable => ".json_encode($rankingSortable));
-            $rankingSortable = reset($rankingSortable);
-            $keyAttributeSortable = key($rankingSortable);
+            //Solo toma en cuenta el primer ranking sortable
+            $keyAttributeSortable = array_key_first($rankingSortable);
             $attributeSortable = $this->getRatingSorting($keyAttributeSortable, $indexId);
+            $rankingSortable = $rankingSortable[$keyAttributeSortable];
     
             if ($attributeSortable != null) {
                 $sorting = $attributeSortable->sortingType->name;
