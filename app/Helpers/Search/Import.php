@@ -949,6 +949,7 @@ class Import
             $attribute->id_client = $idClient;
             $attribute->status = 1;
             $attribute->updated_at = date("Y-m-d H:i:s");
+            $attribute->save();
             return $attribute->id;
         }
 
