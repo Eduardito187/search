@@ -1236,7 +1236,6 @@ class Import
      */
     public function importAttributesOrders($attributes, $currentClient)
     {
-        \Illuminate\Support\Facades\Log::info(json_encode($attributes));
         $attributesProccess = [];
 
         foreach ($attributes as $key => $attribute) {

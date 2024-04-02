@@ -396,6 +396,7 @@ class Core
             $rankingSortable[$value] = [];
         }
 
+        \Illuminate\Support\Facades\Log::info(json_encode($rankingSortable));
         return $this->getValuesProduct($rankingSortable, $products, $index->id, $index->id_client);
     }
 
