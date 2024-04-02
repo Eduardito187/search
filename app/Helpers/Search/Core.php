@@ -396,7 +396,6 @@ class Core
             $rankingSortable[$value] = [];
         }
 
-        \Illuminate\Support\Facades\Log::info(json_encode($rankingSortable));
         return $this->getValuesProduct($rankingSortable, $products, $index->id, $index->id_client);
     }
 
@@ -477,14 +476,16 @@ class Core
         if (count($rankingSortable) > 0) {
             $rankingSortable = reset($rankingSortable);
             $keyAttributeSortable = key($rankingSortable);
+            \Illuminate\Support\Facades\Log::info("keyAttributeSortable => ".json_encode($keyAttributeSortable));
+            \Illuminate\Support\Facades\Log::info("indexId => ".json_encode($indexId));
             $attributeSortable = $this->getRatingSorting($keyAttributeSortable, $indexId);
     
-            if ($rankingSortable != null) {
+            if ($attributeSortable != null) {
                 $sorting = $attributeSortable->sortingType->name;
     
-                if ($sorting == "Ascending") {
+                if ($sorting == "ASC") {
                     asort($rankingSortable);
-                } else if ($sorting == "Descending") {
+                } else if ($sorting == "DESC") {
                     arsort($rankingSortable);
                 }
             }
