@@ -437,7 +437,6 @@ class Core
     {
         $itemsResponse = [];
         $allAttributes = $this->getAllAtributesIdEnabled();
-        $allRulesExcludes = AttributesRulesExclude::all();
         $price = Attributes::where('code', 'price')->where('id_client', $clientId)->first();
         $specialPrice = Attributes::where('code', 'special_price')->where('id_client', $clientId)->first();
         $cuotaInicial = Attributes::where('code', 'cuota_inicial')->where('id_client', $clientId)->first();
@@ -463,6 +462,7 @@ class Core
                     }
                 }
             }
+
             $itemsResponse[$productData->id] = array_merge(
                 array(
                     "name" => $productData->name,
@@ -474,7 +474,6 @@ class Core
         }
 
         if (count($rankingSortable) > 0) {
-            \Illuminate\Support\Facades\Log::info("rankingSortable => ".json_encode($rankingSortable));
             //Solo toma en cuenta el primer ranking sortable
             $keyAttributeSortable = array_key_first($rankingSortable);
             $attributeSortable = $this->getRatingSorting($keyAttributeSortable, $indexId);
@@ -482,7 +481,6 @@ class Core
     
             if ($attributeSortable != null) {
                 $sorting = $attributeSortable->sortingType->name;
-                \Illuminate\Support\Facades\Log::info("sorting => ".json_encode($sorting));
     
                 if ($sorting == "ASC") {
                     asort($rankingSortable);

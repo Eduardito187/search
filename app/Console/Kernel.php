@@ -17,6 +17,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('backupDB:cron')->dailyAt('0:00');
         $schedule->command('deleteBackupQuery:cron')->everyFiveMinutes();
+        $schedule->command('runnerRulesExclude:cron')->everyFiveMinutes();
         $schedule->command('disabledIndexProducts:cron')->twiceDaily(0, 12);
     }
 

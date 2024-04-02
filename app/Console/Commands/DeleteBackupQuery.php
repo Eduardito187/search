@@ -5,7 +5,6 @@ namespace App\Console\Commands;
 use App\Models\BackupQuery;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
-use App\Models\Product;
 use Carbon\Carbon;
 
 class DeleteBackupQuery extends Command
