@@ -1419,6 +1419,7 @@ class Import
     public function importAttributes($attributes, $currentClient)
     {
         $attributesProccess = [];
+        \Illuminate\Support\Facades\Log::info(json_encode($attributes));
 
         foreach ($attributes as $key => $attribute) {
             if (
@@ -1458,6 +1459,7 @@ class Import
             }
         }
 
+        \Illuminate\Support\Facades\Log::info(json_encode($attributesProccess));
         $this->disabledAttributtesNoProccess($attributesProccess, $currentClient->id);
     }
 
