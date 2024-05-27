@@ -18,3 +18,7 @@ use App\Http\Controllers\Partner;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/login', function () {
+    return view('frontend.account.login.login');
+});
