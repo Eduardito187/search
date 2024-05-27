@@ -289,7 +289,7 @@ class Core
 
             $idProductList = [];
             $backupQuery = $this->getBackupQuery($index->id, $header["customer-uuid"][0], $query, $idProductList, $filters);
-            $responseProductIds = json_decode($backupQuery->list_products);
+            $responseProductIds = json_decode($backupQuery->list_products ?? '[]');
             $filterOrder = $this->getFilterOrder($index->id_client);
             $filterResponse = [];
 
