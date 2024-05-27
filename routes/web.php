@@ -20,5 +20,9 @@ Route::get('/', function () {
 });
 
 Route::get('/login', function () {
-    return view('frontend.account.login.login');
+    return view('frontend.account.login.login')->with('bodyClass', 'body-login');
+});
+
+Route::get('/restore-password', function () {
+    return view('frontend.account.reset.reset')->with('bodyClass', 'body-restore');
 });

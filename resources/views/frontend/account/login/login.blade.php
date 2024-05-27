@@ -11,11 +11,11 @@
             <h2>WELCOME</h2>
             <form action="login.php" method="post" id="loginForm">
                 <div class="input-group">
-                    <i class="fas fa-user"></i>
+                    <i class="fa fa-user"></i>
                     <input type="text" name="username" placeholder="Username" required>
                 </div>
                 <div class="input-group">
-                    <i class="fas fa-lock"></i>
+                    <i class="fa fa-lock"></i>
                     <input type="password" name="password" placeholder="Password" required>
                 </div>
                 <button type="submit">LOGIN</button>

@@ -5,15 +5,17 @@
     font-family: 'Arial', sans-serif;
 }
 
-body {
+.body-login {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: #8a2be2;
+    margin: 0;
 }
 
-.container {
+.body-login .container {
     width: 100%;
     max-width: 400px;
     background: #fff;
@@ -23,28 +25,28 @@ body {
     text-align: center;
 }
 
-.avatar {
+.body-login .container .login-form .avatar {
     margin-bottom: 20px;
 }
 
-.avatar img {
+.body-login .container .login-form .avatar img {
     width: 100px;
     height: 100px;
     border-radius: 50%;
 }
 
-h2 {
+.body-login .container .login-form h2 {
     margin-bottom: 20px;
     font-size: 24px;
     color: #333;
 }
 
-.input-group {
+.body-login .container .login-form form .input-group {
     position: relative;
     margin-bottom: 20px;
 }
 
-.input-group i {
+.body-login .container .login-form form .input-group i {
     position: absolute;
     top: 50%;
     left: 10px;
@@ -52,7 +54,7 @@ h2 {
     color: #8a2be2;
 }
 
-.input-group input {
+.body-login .container .login-form form .input-group input {
     width: 100%;
     padding: 10px 10px 10px 40px;
     border: 1px solid #ddd;
@@ -60,7 +62,7 @@ h2 {
     font-size: 16px;
 }
 
-button {
+.body-login .container .login-form form button {
     width: 100%;
     padding: 10px;
     background: #8a2be2;
@@ -71,17 +73,17 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+.body-login .container .login-form form button:hover {
     background: #6a1bb0;
 }
 
-.forgot-password {
+.body-login .container .login-form form .forgot-password {
     display: block;
     margin-top: 10px;
     color: #8a2be2;
     text-decoration: none;
 }
 
-.forgot-password:hover {
+.body-login .container .login-form form .forgot-password:hover {
     text-decoration: underline;
 }
