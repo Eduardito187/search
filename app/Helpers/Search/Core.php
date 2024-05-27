@@ -469,14 +469,16 @@ class Core
                 }
             }
 
-            $itemsResponse[$productData->id] = array_merge(
-                array(
-                    "name" => $productData->name,
-                    "sku" => $productData->sku,
-                    "image" => $this->getPicturesProduct($productData)
-                ),
-                $productsAttributes
-            );
+            if (isset($productsAttributes["price"])) {
+                $itemsResponse[$productData->id] = array_merge(
+                    array(
+                        "name" => $productData->name,
+                        "sku" => $productData->sku,
+                        "image" => $this->getPicturesProduct($productData)
+                    ),
+                    $productsAttributes
+                );
+            }
         }
 
         if (count($rankingSortable) > 0) {
