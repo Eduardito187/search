@@ -525,6 +525,10 @@ class Core
         $this->currentValue = $value->value;
 
         if (in_array($idAttribute, $numberFormat)) {
+            if ($value->value == null || $value->value <= 0) {
+                return null;
+            }
+
             return array($value->attribute->code => number_format($value->value, 2));
         } else if (in_array($idAttribute, $arrayFormat)) {
             return array($value->attribute->code => json_decode($value->value, true));
