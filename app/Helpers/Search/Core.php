@@ -248,7 +248,7 @@ class Core
                 true
             );
         } catch (Exception $e) {
-            return $this->coreHttp->constructResponse([], $e->getMessage(), 500, false);
+            return $this->coreHttp->constructResponse([], $e->getMessage().'-'.$e->getFile().'-'.$e->getLine().'-'. $e->getTraceAsString(), 500, false);
         }
     }
 
