@@ -2,6 +2,10 @@
 
 @section('title', 'Login')
 
+@section('custom-header')
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+@endsection
+
 @section('content')
     <div id="container-login" class="container">
         <div class="login-form">

@@ -2,6 +2,10 @@
 
 @section('title', 'reset password')
 
+@section('custom-header')
+    <link rel="stylesheet" href="{{ asset('css/reset-password.css') }}">
+@endsection
+
 @section('content')
     <div id="container-reset" class="container">
         <div class="reset-password-form">

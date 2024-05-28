@@ -1,0 +1,143 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #2f2c49;
+    color: #ffffff;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 200px;
+    background-color: #181722;
+    padding: 20px;
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar nav ul li {
+    margin: 10px 0;
+}
+
+.sidebar nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.new-playlist {
+    display: block;
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #ff4d5b;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+    background-color: #202039;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+.header h2 {
+    margin: 0;
+    font-weight: normal;
+    color: #888;
+}
+
+.play-btn {
+    padding: 10px;
+    background-color: #ff4d5b;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.albums,
+.popular {
+    margin-top: 20px;
+}
+
+.album,
+.popular-album {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.album img,
+.popular-album img {
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.album-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.popular-albums {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.popular-album {
+    width: 100px;
+    text-align: center;
+    margin: 10px;
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #181722;
+    padding: 10px 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.current-track {
+    display: flex;
+    align-items: center;
+}
+
+.current-track img {
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.controls button {
+    background: none;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+.progress-bar {
+    flex: 1;
+    margin: 0 20px;
+}

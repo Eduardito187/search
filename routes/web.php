@@ -26,3 +26,6 @@ Route::get('/login', function () {
 Route::get('/restore-password', function () {
     return view('frontend.account.reset.reset')->with('bodyClass', 'body-restore');
 });
+Route::get('/home', function () {
+    return view('frontend.account.home.home')->with('bodyClass', 'body-home');
+});
