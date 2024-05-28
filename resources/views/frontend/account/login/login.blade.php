@@ -3,24 +3,28 @@
 @section('title', 'Login')
 
 @section('content')
-    <div class="container">
+    <div id="container-login" class="container">
         <div class="login-form">
             <div class="avatar">
                 <img src="{{ asset('img/picture-logo.png') }}" alt="Avatar">
             </div>
             <h2>EduardSearch</h2>
-            <form action="login.php" method="post" id="loginForm">
+            <div id="loginForm">
                 <div class="input-group">
                     <i class="fa fa-user"></i>
-                    <input type="text" name="username" placeholder="Username" required>
+                    <input type="email" name="username" v-model="mail" placeholder="Username" required>
                 </div>
                 <div class="input-group">
                     <i class="fa fa-lock"></i>
-                    <input type="password" name="password" placeholder="Password" required>
+                    <input type="password" name="password" v-model="password" placeholder="Password" required>
                 </div>
-                <button type="submit">LOGIN</button>
+                <button type="button">LOGIN</button>
                 <a href="/restore-password" class="forgot-password">Forgot Password?</a>
-            </form>
+            </div>
         </div>
     </div>
+@endsection
+
+@section('custom-footer')
+    <script src="{{ asset('js/login/form-login.js') }}"></script>
 @endsection

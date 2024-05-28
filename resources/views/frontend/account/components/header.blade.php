@@ -9,5 +9,6 @@
         <link rel="stylesheet" href="{{ asset('css/login.css') }}">
         <link rel="stylesheet" href="{{ asset('css/reset-password.css') }}">
         <script src="{{ asset('js/vue.js') }}"></script>
+        @yield('custom-header')
     </head>
     <body class="{{ $bodyClass }}">

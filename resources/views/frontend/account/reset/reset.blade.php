@@ -3,7 +3,7 @@
 @section('title', 'reset password')
 
 @section('content')
-    <div class="container">
+    <div id="container-reset" class="container">
         <div class="reset-password-form">
             <div class="avatar">
                 <img src="{{ asset('img/picture-logo.png') }}" alt="Avatar">
@@ -11,13 +11,17 @@
             <div class="form-header">
                 <h1>Reset Password</h1>
             </div>
-            <form id="reset-password-form" action="/send-reset-link" method="POST">
+            <div id="reset-password-form">
                 <div class="form-group">
                     <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" id="email" name="email" v-model="mail" required>
                 </div>
-                <button type="submit">Send Reset Link</button>
-            </form>
+                <button type="button">Send Reset Link</button>
+            </div>
         </div>
     </div>
+@endsection
+
+@section('custom-footer')
+    <script src="{{ asset('js/login/form-restore.js') }}"></script>
 @endsection
