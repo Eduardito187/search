@@ -41,12 +41,12 @@
     color: #333;
 }
 
-.body-login .container .login-form form .input-group {
+.body-login .container .login-form #loginForm .input-group {
     position: relative;
     margin-bottom: 20px;
 }
 
-.body-login .container .login-form form .input-group i {
+.body-login .container .login-form #loginForm .input-group i {
     position: absolute;
     top: 50%;
     left: 10px;
@@ -54,7 +54,7 @@
     color: #8a2be2;
 }
 
-.body-login .container .login-form form .input-group input {
+.body-login .container .login-form #loginForm .input-group input {
     width: 100%;
     padding: 10px 10px 10px 40px;
     border: 1px solid #ddd;
@@ -62,7 +62,7 @@
     font-size: 16px;
 }
 
-.body-login .container .login-form form button {
+.body-login .container .login-form #loginForm button {
     width: 100%;
     padding: 10px;
     background: #8a2be2;
@@ -73,17 +73,17 @@
     cursor: pointer;
 }
 
-.body-login .container .login-form form button:hover {
+.body-login .container .login-form #loginForm button:hover {
     background: #6a1bb0;
 }
 
-.body-login .container .login-form form .forgot-password {
+.body-login .container .login-form #loginForm .forgot-password {
     display: block;
     margin-top: 10px;
     color: #8a2be2;
     text-decoration: none;
 }
 
-.body-login .container .login-form form .forgot-password:hover {
+.body-login .container .login-form #loginForm .forgot-password:hover {
     text-decoration: underline;
 }
