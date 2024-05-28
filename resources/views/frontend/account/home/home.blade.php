@@ -23,7 +23,11 @@
           <li><a href="#"><i class="fa fa-comment-alt"></i> Comments <span class="badge">3</span></a></li>
           <li><a href="#"><i class="fa fa-calendar-alt"></i> Calendar</a></li>
           <li class="submenu">
-            <a href="#"><i class="fa fa-folder"></i> Projects <i class="fa fa-chevron-down"></i></a>
+            <a href="#">
+                <i class="fa fa-folder"></i> 
+                Projects 
+                <i class="fa fa-chevron-down"></i>
+            </a>
             <ul>
               <li><a href="#">Project 1</a></li>
               <li><a href="#">Project 2</a></li>

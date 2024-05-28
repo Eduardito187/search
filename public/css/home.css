@@ -41,7 +41,7 @@ body {
 }
 
 .search input {
-    width: 100%;
+    width: calc(100% - 20px);
     padding: 10px;
     border: none;
     border-radius: 5px;
@@ -92,6 +92,12 @@ body {
     list-style: none;
     padding: 0;
     margin: 0;
+}
+
+.submenu a .fa-chevron-down {
+    position: absolute;
+    right: 10px;
+    top: 15px;
 }
 
 .submenu ul li a {
