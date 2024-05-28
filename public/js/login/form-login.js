@@ -3,5 +3,10 @@ new Vue({
     data: {
         mail: '',
         password: ''
+    },
+    methods: {
+        validateData() {
+          console.log(this.mail, this.password);
+        }
     }
 });
