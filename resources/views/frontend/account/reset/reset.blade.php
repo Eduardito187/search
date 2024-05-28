@@ -16,7 +16,7 @@
                     <label for="email">Email Address</label>
                     <input type="email" id="email" name="email" v-model="mail" required>
                 </div>
-                <button type="button" :disabled="mail.length == 0">Send Reset Link</button>
+                <button type="button" :disabled="mail.length == 0 ? true : false">Send Reset Link</button>
             </div>
         </div>
     </div>
