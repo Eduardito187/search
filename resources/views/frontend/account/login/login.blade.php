@@ -18,7 +18,7 @@
                     <i class="fa fa-lock"></i>
                     <input type="password" name="password" v-model="password" placeholder="Password" required>
                 </div>
-                <button type="button" :disabled="mail.length == 0 && password.length == 0 ? true : false" @click="validateData">LOGIN</button>
+                <button type="button" :disabled="mail.length == 0 || password.length == 0 ? true : false" @click="validateData">LOGIN</button>
                 <a href="/restore-password" class="forgot-password">Forgot Password?</a>
             </div>
         </div>
