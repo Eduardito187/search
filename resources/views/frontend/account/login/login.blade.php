@@ -6,9 +6,9 @@
     <div class="container">
         <div class="login-form">
             <div class="avatar">
-                <img src="avatar.png" alt="Avatar">
+                <img src="{{ asset('img/picture-logo.png') }}" alt="Avatar">
             </div>
-            <h2>WELCOME</h2>
+            <h2>EduardSearch</h2>
             <form action="login.php" method="post" id="loginForm">
                 <div class="input-group">
                     <i class="fa fa-user"></i>

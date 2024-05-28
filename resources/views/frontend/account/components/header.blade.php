@@ -8,5 +8,6 @@
         <link rel="stylesheet" href="{{ asset('css/font-awesome-4.7.0/css/font-awesome.css') }}">
         <link rel="stylesheet" href="{{ asset('css/login.css') }}">
         <link rel="stylesheet" href="{{ asset('css/reset-password.css') }}">
+        <script src="{{ asset('js/vue.js') }}"></script>
     </head>
     <body class="{{ $bodyClass }}">
