@@ -5,6 +5,9 @@
 @section('content')
     <div class="container">
         <div class="reset-password-form">
+            <div class="avatar">
+                <img src="{{ asset('img/picture-logo.png') }}" alt="Avatar">
+            </div>
             <div class="form-header">
                 <h1>Reset Password</h1>
             </div>

@@ -19,7 +19,7 @@
                     <input type="password" name="password" placeholder="Password" required>
                 </div>
                 <button type="submit">LOGIN</button>
-                <a href="#" class="forgot-password">Forgot Password?</a>
+                <a href="/restore-password" class="forgot-password">Forgot Password?</a>
             </form>
         </div>
     </div>
