@@ -1,8 +1,8 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #2f2c49;
-    color: #ffffff;
+    background-color: #f4f4f9;
+    color: #333;
 }
 
 .container {
@@ -11,133 +11,112 @@ body {
 }
 
 .sidebar {
-    width: 200px;
-    background-color: #181722;
+    width: 250px;
+    background-color: #2f2c49;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
     padding: 20px;
 }
 
-.sidebar nav ul {
+.logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.brand {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.search {
+    padding: 0 20px;
+}
+
+.search input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin: 20px 0;
+}
+
+.menu {
+    flex: 1;
+}
+
+.menu ul {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
-.sidebar nav ul li {
-    margin: 10px 0;
+.menu ul li {
+    position: relative;
 }
 
-.sidebar nav ul li a {
+.menu ul li a {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
     color: #ffffff;
     text-decoration: none;
 }
 
-.new-playlist {
-    display: block;
-    margin: 20px 0;
-    padding: 10px;
+.menu ul li a:hover,
+.menu ul li a.active {
+    background-color: #44426a;
+}
+
+.menu ul li a i {
+    margin-right: 10px;
+}
+
+.menu ul li .badge {
     background-color: #ff4d5b;
-    border: none;
     color: #ffffff;
-    cursor: pointer;
+    border-radius: 12px;
+    padding: 2px 8px;
+    margin-left: auto;
+}
+
+.submenu ul {
+    display: none;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.submenu ul li a {
+    padding-left: 40px;
+}
+
+.submenu.open ul {
+    display: block;
 }
 
 .content {
     flex: 1;
     padding: 20px;
-    background-color: #202039;
 }
 
-.header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+header {
+    background-color: #ffffff;
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
 }
 
-.header h1 {
+header h1 {
     margin: 0;
 }
 
-.header h2 {
-    margin: 0;
-    font-weight: normal;
-    color: #888;
-}
-
-.play-btn {
-    padding: 10px;
-    background-color: #ff4d5b;
-    border: none;
-    color: #ffffff;
-    cursor: pointer;
-}
-
-.albums,
-.popular {
-    margin-top: 20px;
-}
-
-.album,
-.popular-album {
-    display: flex;
-    align-items: center;
-    margin: 10px 0;
-}
-
-.album img,
-.popular-album img {
-    width: 50px;
-    height: 50px;
-    border-radius: 4px;
-    margin-right: 10px;
-}
-
-.album-info {
-    display: flex;
-    flex-direction: column;
-}
-
-.popular-albums {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.popular-album {
-    width: 100px;
-    text-align: center;
-    margin: 10px;
-}
-
-.footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #181722;
-    padding: 10px 20px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-
-.current-track {
-    display: flex;
-    align-items: center;
-}
-
-.current-track img {
-    width: 50px;
-    height: 50px;
-    border-radius: 4px;
-    margin-right: 10px;
-}
-
-.controls button {
-    background: none;
-    border: none;
-    color: #ffffff;
-    cursor: pointer;
-    margin: 0 10px;
-}
-
-.progress-bar {
-    flex: 1;
-    margin: 0 20px;
+.dashboard-content {
+    padding: 20px;
 }

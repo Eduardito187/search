@@ -9,95 +9,43 @@
 @section('content')
 <div class="container">
     <aside class="sidebar">
-      <nav>
+      <div class="sidebar-header">
+        <img src="https://via.placeholder.com/50" alt="Logo" class="logo">
+        <span class="brand">Acme</span>
+      </div>
+      <div class="search">
+        <input type="text" placeholder="Search">
+      </div>
+      <nav class="menu">
         <ul>
-          <li><a href="#">Recommendations</a></li>
-          <li><a href="#">New Releases</a></li>
-          <li><a href="#">Top Charts</a></li>
-          <li><a href="#">Radio</a></li>
-          <li><a href="#">Feed</a></li>
-        </ul>
-        <button class="new-playlist">New Playlist</button>
-        <ul>
-          <li><a href="#">Top Charts Compilation</a></li>
-          <li><a href="#">This is Angry</a></li>
-          <li><a href="#">Best of Mine</a></li>
-          <li><a href="#">Best of Christmas Hits</a></li>
+          <li><a href="#"><i class="fa fa-home"></i> Dashboard</a></li>
+          <li><a href="#"><i class="fa fa-th"></i> Overview</a></li>
+          <li><a href="#"><i class="fa fa-comment-alt"></i> Comments <span class="badge">3</span></a></li>
+          <li><a href="#"><i class="fa fa-calendar-alt"></i> Calendar</a></li>
+          <li class="submenu">
+            <a href="#"><i class="fa fa-folder"></i> Projects <i class="fa fa-chevron-down"></i></a>
+            <ul>
+              <li><a href="#">Project 1</a></li>
+              <li><a href="#">Project 2</a></li>
+              <li><a href="#">Project 3</a></li>
+            </ul>
+          </li>
+          <li><a href="#"><i class="fa fa-chart-bar"></i> Analytics</a></li>
+          <li><a href="#"><i class="fa fa-star"></i> Starred</a></li>
+          <li><a href="#"><i class="fa fa-user"></i> User</a></li>
+          <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
         </ul>
       </nav>
     </aside>
     <main class="content">
-      <header class="header">
-        <h1>José Carreras</h1>
-        <h2>Bel Canto</h2>
-        <button class="play-btn">Play</button>
+      <header>
+        <h1>My Dashboard</h1>
       </header>
-      <section class="albums">
-        <div class="album">
-          <img src="https://via.placeholder.com/150" alt="Album Art">
-          <div class="album-info">
-            <h3>Awake</h3>
-            <p>José Carreras</p>
-            <span>8:04</span>
-          </div>
-        </div>
-        <div class="album">
-          <img src="https://via.placeholder.com/150" alt="Album Art">
-          <div class="album-info">
-            <h3>Best Day</h3>
-            <p>Mac Miller</p>
-            <span>3:55</span>
-          </div>
-        </div>
-        <div class="album">
-          <img src="https://via.placeholder.com/150" alt="Album Art">
-          <div class="album-info">
-            <h3>Beautiful</h3>
-            <p>Eminem</p>
-            <span>5:36</span>
-          </div>
-        </div>
-      </section>
-      <section class="popular">
-        <h2>Popular</h2>
-        <div class="popular-albums">
-          <div class="popular-album">
-            <img src="https://via.placeholder.com/100" alt="Popular Album Art">
-            <p>Rihanna</p>
-          </div>
-          <div class="popular-album">
-            <img src="https://via.placeholder.com/100" alt="Popular Album Art">
-            <p>Eminem</p>
-          </div>
-          <div class="popular-album">
-            <img src="https://via.placeholder.com/100" alt="Popular Album Art">
-            <p>Mac Miller</p>
-          </div>
-          <div class="popular-album">
-            <img src="https://via.placeholder.com/100" alt="Popular Album Art">
-            <p>Kendrick Lamar</p>
-          </div>
-        </div>
+      <section class="dashboard-content">
+        <!-- Dashboard content goes here -->
       </section>
     </main>
   </div>
-  <footer class="footer">
-    <div class="current-track">
-      <img src="https://via.placeholder.com/50" alt="Current Track Art">
-      <div class="track-info">
-        <p>Grunt 15</p>
-        <p>YouTube</p>
-      </div>
-    </div>
-    <div class="controls">
-      <button class="prev-btn">Prev</button>
-      <button class="play-pause-btn">Play/Pause</button>
-      <button class="next-btn">Next</button>
-    </div>
-    <div class="progress-bar">
-      <input type="range" min="0" max="100" value="50">
-    </div>
-  </footer>
 @endsection
 
 @section('custom-footer')
