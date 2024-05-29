@@ -13,10 +13,34 @@ new Vue({
             this.messageInfo = '';
 
             if (!this.validateEmail()) {
-                this.classMessageInfo = 'alert-info';
+                this.classMessageInfo = 'alert-warning';
                 this.messageInfo = 'El email ingresado en incorrecto.';
                 return false;
             }
+
+            $.ajax({
+                url: window.configFrontend.base_url_frontend+'api/account/generate-password',
+                type: 'POST',
+                data: JSON.stringify(
+                    {
+                        password:this.password
+                    }
+                ),
+                contentType: 'application/json',
+                dataType: 'json',
+                showLoader: true,
+                headers: {
+                    'Authorization': "Bearer "+window.configFrontend.token_access_frontend,
+                    'Cache-Control': 'no-cache'
+                },
+                success: function (response) {
+                    console.log(response);
+                },
+                error: function (error) {
+                    this.classMessageInfo = 'alert-danger';
+                    this.messageInfo = error;
+                }
+            });
 
             $.ajax({
                 url: window.configFrontend.base_url_frontend+'api/account/login',
@@ -38,7 +62,8 @@ new Vue({
                     console.log(response);
                 },
                 error: function (error) {
-                    console.log(error);
+                    this.classMessageInfo = 'alert-danger';
+                    this.messageInfo = error;
                 }
             });
         },
