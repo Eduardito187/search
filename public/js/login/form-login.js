@@ -4,12 +4,45 @@ new Vue({
         mail: '',
         password: '',
         versionApp: '',
-        appName: ''
+        appName: '',
+        messageInfo: '',
+        classMessageInfo: ''
     },
     methods: {
         validateData() {
-          console.log(this.mail, this.password);
+            if (!this.validateEmail()) {
+                this.classMessageInfo = 'alert-info';
+                this.messageInfo = 'El email ingresado en incorrecto.';
+            }
+
+            $.ajax({
+                url: window.configFrontend.base_url_frontend+'/api/account/login',
+                type: 'POST',
+                data: JSON.stringify(
+                    {
+                        mail:this.mail,
+                        password:this.password
+                    }
+                ),
+                contentType: 'application/json',
+                dataType: 'json',
+                showLoader: true,
+                headers: {
+                    'Authorization': "Bearer "+window.configFrontend.token_access_frontend,
+                    'Cache-Control': 'no-cache'
+                },
+                success: function (response) {
+                    console.log(response);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
         },
+        validateEmail() {
+            var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(String(this.mail).toLowerCase());
+        }
     },
     mounted() {
         this.versionApp = window.configFrontend.version_frontend;
