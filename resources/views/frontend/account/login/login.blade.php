@@ -12,7 +12,7 @@
             <div class="avatar">
                 <img src="{{ asset('img/picture-logo.png') }}" alt="Avatar">
             </div>
-            <h2>EduardSearch</h2>
+            <h2>{{getAppName()}}</h2>
             <div id="loginForm">
                 <div class="input-group">
                     <i class="fa fa-user"></i>
@@ -24,6 +24,9 @@
                 </div>
                 <button type="button" :disabled="mail.length == 0 || password.length == 0 ? true : false" @click="validateData">LOGIN</button>
                 <a href="/restore-password" class="forgot-password">Forgot Password?</a>
+            </div>
+            <div>
+                <small>Versión {{getVersionApp()}}</small>
             </div>
         </div>
     </div>

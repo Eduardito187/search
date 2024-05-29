@@ -7,6 +7,12 @@ new Vue({
     methods: {
         validateData() {
           console.log(this.mail, this.password);
-        }
+        },
+        getVersionApp() {
+            return window.configFrontend.version_frontend;
+        },
+        getAppName() {
+            return window.configFrontend.app_name_frontend;
+        },
     }
 });
