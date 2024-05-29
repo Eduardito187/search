@@ -3,9 +3,15 @@ new Vue({
     data: {
         mail: '',
         versionApp: '',
-        appName: ''
+        appName: '',
+        messageInfo: '',
+        classMessageInfo: ''
     },
     methods: {
+        setMessageAlert(message, className) {
+            this.classMessageInfo = className;
+            this.messageInfo = message;
+        },
         validateData() {
             console.log(this.mail);
             if (!validateEmail()) {
