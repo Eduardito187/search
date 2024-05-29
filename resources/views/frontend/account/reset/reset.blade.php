@@ -1,26 +1,27 @@
 @extends('frontend.account.components.body-login')
 
-@section('title', 'reset password')
+@section('title', 'Reset Password|EduardSearch')
 
 @section('custom-header')
-    <link rel="stylesheet" href="{{ asset('css/reset-password.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
 @endsection
 
 @section('content')
     <div id="container-reset" class="container">
-        <div class="reset-password-form">
+        <div class="login-form">
             <div class="avatar">
                 <img src="{{ asset('img/picture-logo.png') }}" alt="Avatar">
             </div>
-            <div class="form-header">
-                <h1>Reset Password</h1>
-            </div>
-            <div id="reset-password-form">
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" v-model="mail" required>
+            <h2 v-html="appName"></h2>
+            <div id="loginForm">
+                <div class="input-group">
+                    <i class="fa fa-user"></i>
+                    <input type="email" name="mail" v-model="mail" placeholder="Mail" required>
                 </div>
                 <button type="button" :disabled="mail.length == 0 ? true : false" @click="validateData">Send Reset Link</button>
+            </div>
+            <div>
+                <small><strong v-html="versionApp"></strong></small>
             </div>
         </div>
     </div>

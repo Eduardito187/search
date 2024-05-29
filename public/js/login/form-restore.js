@@ -1,7 +1,9 @@
 new Vue({
     el: '#container-reset',
     data: {
-        mail: ''
+        mail: '',
+        versionApp: '',
+        appName: ''
     },
     methods: {
         validateData() {
@@ -14,5 +16,9 @@ new Vue({
             var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             return re.test(String(this.mail).toLowerCase());
         }
-    }
+    },
+    mounted() {
+        this.versionApp = window.configFrontend.version_frontend;
+        this.appName = window.configFrontend.app_name_frontend;
+    },
 });

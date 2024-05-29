@@ -26,7 +26,7 @@
                 <a href="/restore-password" class="forgot-password">Forgot Password?</a>
             </div>
             <div>
-                <small>Versión <strong v-html="versionApp"></strong></small>
+                <small><strong v-html="versionApp"></strong></small>
             </div>
         </div>
     </div>
