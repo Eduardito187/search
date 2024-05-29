@@ -29,7 +29,7 @@ Route::middleware([CustomValidateToken::class])->group(function () {
     Route::controller(Account::class)->group(function() {
         Route::post('account/login', 'customerValidateLogin');
         Route::post('account/reset-password', 'customerResetPassword');
-        Route::post('account/generate-password', 'generatePasswordCustomer');
+        Route::post('account/generate-password', 'generatePassword');
     });
 
     Route::controller(System::class)->group(function() {
