@@ -9,12 +9,15 @@ new Vue({
         classMessageInfo: ''
     },
     methods: {
+        setMessageAlert(message, className) {
+            this.classMessageInfo = className;
+            this.messageInfo = message;
+        },
         validateData() {
             this.messageInfo = '';
 
             if (!this.validateEmail()) {
-                this.classMessageInfo = 'alert-warning';
-                this.messageInfo = 'El email ingresado en incorrecto.';
+                this.setMessageAlert('El email ingresado en incorrecto.', 'alert-warning');
                 return false;
             }
 
@@ -35,11 +38,18 @@ new Vue({
                     'Cache-Control': 'no-cache'
                 },
                 success: function (response) {
-                    console.log(response);
+                    if (response.status) {
+                        if (response.response.status) {
+                            this.setMessageAlert(response.response.message, 'alert-success');
+                        } else {
+                            this.setMessageAlert(response.response.message, 'alert-danger');
+                        }
+                    } else {
+                        this.setMessageAlert(response.responseText, 'alert-danger');
+                    }
                 },
                 error: function (error) {
-                    this.classMessageInfo = 'alert-danger';
-                    this.messageInfo = error;
+                    this.setMessageAlert(error, 'alert-danger');
                 }
             });
         },
