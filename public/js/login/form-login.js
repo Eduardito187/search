@@ -16,7 +16,7 @@ new Vue({
             }
 
             $.ajax({
-                url: window.configFrontend.base_url_frontend+'/api/account/login',
+                url: window.configFrontend.base_url_frontend+'api/account/login',
                 type: 'POST',
                 data: JSON.stringify(
                     {
