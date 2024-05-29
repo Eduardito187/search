@@ -12,7 +12,7 @@
             <div class="avatar">
                 <img src="{{ asset('img/picture-logo.png') }}" alt="Avatar">
             </div>
-            <h2>{{appName}}</h2>
+            <h2 v-html="appName"></h2>
             <div id="loginForm">
                 <div class="input-group">
                     <i class="fa fa-user"></i>
@@ -26,7 +26,7 @@
                 <a href="/restore-password" class="forgot-password">Forgot Password?</a>
             </div>
             <div>
-                <small>Versión {{versionApp}}</small>
+                <small>Versión <strong v-html="versionApp"></strong></small>
             </div>
         </div>
     </div>
