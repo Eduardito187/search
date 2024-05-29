@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="{{ asset('css/font-awesome-4.7.0/css/font-awesome.css') }}">
         <script src="{{ asset('js/Vue/vue.js') }}"></script>
         <script>
-            window.configFrontend = <?= \App\Helpers\Base\ConfigFrontend::getConfigFrontend() ?>;
+            window.configFrontend = <?= json_encode(\App\Helpers\Base\ConfigFrontend::getConfigFrontend()); ?>;
         </script>
         @yield('custom-header')
     </head>
