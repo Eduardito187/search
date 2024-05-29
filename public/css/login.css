@@ -5,7 +5,7 @@
     font-family: 'Arial', sans-serif;
 }
 
-.body-login {
+body {
     font-family: Arial, sans-serif;
     background: linear-gradient(135deg, #6e8efb, #a777e3);
     display: flex;
@@ -15,7 +15,7 @@
     margin: 0;
 }
 
-.body-login .container {
+body .container {
     width: 100%;
     max-width: 400px;
     background: #fff;
@@ -25,28 +25,28 @@
     text-align: center;
 }
 
-.body-login .container .login-form .avatar {
+body .container .login-form .avatar {
     margin-bottom: 20px;
 }
 
-.body-login .container .login-form .avatar img {
+body .container .login-form .avatar img {
     width: 100px;
     height: 100px;
     border-radius: 20px;
 }
 
-.body-login .container .login-form h2 {
+body .container .login-form h2 {
     margin-bottom: 20px;
     font-size: 24px;
     color: #333;
 }
 
-.body-login .container .login-form #loginForm .input-group {
+body .container .login-form #loginForm .input-group {
     position: relative;
     margin-bottom: 20px;
 }
 
-.body-login .container .login-form #loginForm .input-group i {
+body .container .login-form #loginForm .input-group i {
     position: absolute;
     top: 50%;
     left: 10px;
@@ -54,7 +54,7 @@
     color: #8a2be2;
 }
 
-.body-login .container .login-form #loginForm .input-group input {
+body .container .login-form #loginForm .input-group input {
     width: 100%;
     padding: 10px 10px 10px 40px;
     border: 1px solid #ddd;
@@ -62,7 +62,7 @@
     font-size: 16px;
 }
 
-.body-login .container .login-form #loginForm button {
+body .container .login-form #loginForm button {
     width: 100%;
     padding: 10px;
     background: #8a2be2;
@@ -73,21 +73,21 @@
     cursor: pointer;
 }
 
-.body-login .container .login-form #loginForm button:hover {
+body .container .login-form #loginForm button:hover {
     background: #6a1bb0;
 }
 
-.body-login .container .login-form #loginForm .forgot-password {
+body .container .login-form #loginForm .forgot-password {
     display: block;
     margin-top: 10px;
     color: #8a2be2;
     text-decoration: none;
 }
 
-.body-login .container .login-form #loginForm .forgot-password:hover {
+body .container .login-form #loginForm .forgot-password:hover {
     text-decoration: underline;
 }
 
-.body-login .container .login-form #loginForm {
+body .container .login-form #loginForm {
     margin-bottom: 10px;
 }
