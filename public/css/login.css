@@ -87,3 +87,7 @@
 .body-login .container .login-form #loginForm .forgot-password:hover {
     text-decoration: underline;
 }
+
+.body-login .container .login-form #loginForm {
+    margin-bottom: 10px;
+}
