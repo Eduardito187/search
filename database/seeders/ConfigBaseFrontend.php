@@ -23,7 +23,7 @@ class ConfigBaseFrontend extends Seeder
                 'value' => Tools::generateTokenFrontendRandom(),
                 'status' => true,
                 'created_at' => date('Y-m-d H:i:s'),
-                'updated_at	' => null
+                'updated_at' => null
             ]);
         }
 
@@ -34,7 +34,7 @@ class ConfigBaseFrontend extends Seeder
                 'value' => 'https://search.grazcompany.com/',
                 'status' => true,
                 'created_at' => date('Y-m-d H:i:s'),
-                'updated_at	' => null
+                'updated_at' => null
             ]);
         }
 
@@ -45,7 +45,7 @@ class ConfigBaseFrontend extends Seeder
                 'value' => 'V 1.0.0',
                 'status' => true,
                 'created_at' => date('Y-m-d H:i:s'),
-                'updated_at	' => null
+                'updated_at' => null
             ]);
         }
 
@@ -56,7 +56,7 @@ class ConfigBaseFrontend extends Seeder
                 'value' => 'EduardSearch',
                 'status' => true,
                 'created_at' => date('Y-m-d H:i:s'),
-                'updated_at	' => null
+                'updated_at' => null
             ]);
         }
 
@@ -67,7 +67,7 @@ class ConfigBaseFrontend extends Seeder
                 'value' => 'EduardSearch ©',
                 'status' => true,
                 'created_at' => date('Y-m-d H:i:s'),
-                'updated_at	' => null
+                'updated_at' => null
             ]);
         }
 
@@ -78,7 +78,7 @@ class ConfigBaseFrontend extends Seeder
                 'value' => 'EduardSearch',
                 'status' => true,
                 'created_at' => date('Y-m-d H:i:s'),
-                'updated_at	' => null
+                'updated_at' => null
             ]);
         }
     }
