@@ -23,15 +23,15 @@ class ConfigFrontend
     /**
      * @return array
      */
-    public function getConfigFrontend()
+    static public function getConfigFrontend()
     {
         return [
-            self::TOKEN_ACCESS_FRONTEND => $this->getValueConfig(self::TOKEN_ACCESS_FRONTEND),
-            self::BASE_URL_FRONTEND => $this->getValueConfig(self::BASE_URL_FRONTEND),
-            self::VERSION_FRONTEND => $this->getValueConfig(self::VERSION_FRONTEND),
-            self::APP_NAME_FRONTEND => $this->getValueConfig(self::APP_NAME_FRONTEND),
-            self::COPYRIGHT_FRONTEND => $this->getValueConfig(self::COPYRIGHT_FRONTEND),
-            self::ENVIRONMENT_FRONTEND => $this->getValueConfig(self::ENVIRONMENT_FRONTEND)
+            self::TOKEN_ACCESS_FRONTEND => self::getValueConfig(self::TOKEN_ACCESS_FRONTEND),
+            self::BASE_URL_FRONTEND => self::getValueConfig(self::BASE_URL_FRONTEND),
+            self::VERSION_FRONTEND => self::getValueConfig(self::VERSION_FRONTEND),
+            self::APP_NAME_FRONTEND => self::getValueConfig(self::APP_NAME_FRONTEND),
+            self::COPYRIGHT_FRONTEND => self::getValueConfig(self::COPYRIGHT_FRONTEND),
+            self::ENVIRONMENT_FRONTEND => self::getValueConfig(self::ENVIRONMENT_FRONTEND)
         ];
     }
 
@@ -39,7 +39,7 @@ class ConfigFrontend
      * @param string $codeConfig
      * @return string
      */
-    public function getValueConfig($codeConfig)
+    static public function getValueConfig($codeConfig)
     {
         $valueConfig = Config::where('code', $codeConfig)->where('status', true)->first();
 
