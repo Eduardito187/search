@@ -41,6 +41,7 @@ new Vue({
                 success: function (response) {
                     if (response.status) {
                         if (response.response.status) {
+                            localStorage.setItem('customer_frontend', response.response.customer);
                             self.setMessageAlert(response.response.message, 'alert-success');
                         } else {
                             self.setMessageAlert(response.response.message, 'alert-danger');
