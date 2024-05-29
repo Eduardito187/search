@@ -14,9 +14,7 @@
             </div>
             <h2 v-html="appName"></h2>
             <div id="loginForm">
-                <div v-if="messageInfo.length > 0" :class="'alert '+classMessageInfo" role="alert">
-                    <span :html="messageInfo"></span>
-                </div>
+                <div v-if="messageInfo.length > 0" :class="'alert '+classMessageInfo" role="alert" v-html="messageInfo"></div>
                 <div class="input-group">
                     <i class="fa fa-user"></i>
                     <input type="email" name="mail" v-model="mail" placeholder="Mail" required>
