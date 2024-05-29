@@ -6,6 +6,7 @@ use App\Models\IndexConfiguration;
 use Exception;
 use App\Models\AutorizationToken;
 use App\Helpers\Text\Translate;
+use App\Models\Config;
 use App\Models\RestrictDomain;
 use App\Models\SystemToken;
 
@@ -123,7 +124,15 @@ class CoreHttp
             return false;
         }
 
-        return AutorizationToken::where('token', $token)->where('status', true)->exists();
+        if (AutorizationToken::where('token', $token)->where('status', true)->exists()) {
+            return true;
+        } else {
+            if (Config::where('code', 'token_access_frontend')->where('value', $token)->where('status', true)->exists()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 
     /**

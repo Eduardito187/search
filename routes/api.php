@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\System;
 use App\Http\Controllers\Api\Search\Product as SearchProduct;
 use App\Http\Controllers\Api\Import\Process as SearchProccess;
 use App\Http\Controllers\Api\System\Core as SystemCore;
+use App\Http\Controllers\Api\Customer\Account;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::middleware([CustomValidateToken::class])->group(function () {
+    Route::controller(Account::class)->group(function() {
+        Route::post('account/login', 'customerValidateLogin');
+        Route::post('account/reset-password', 'customerResetPassword');
+    });
+
     Route::controller(System::class)->group(function() {
         Route::get('system/getAllIp', 'getAllIp');
         Route::get('system/getAllConfig', 'getAllConfig');
@@ -32,11 +38,13 @@ Route::middleware([CustomValidateToken::class])->group(function () {
         Route::get('system/getAllRestictIp', 'getAllRestictIp');
         Route::get('system/getAllRestictDomain', 'getAllRestictDomain');
     });
+
     Route::controller(SearchProduct::class)->group(function() {
         Route::post('search/productFeed', 'searchProductFeed');
         Route::post('search/productResult', 'searchProductResult');
         Route::post('search/getFiltersPage', 'getFiltersPage');
     });
+
     Route::controller(SearchProccess::class)->group(function() {
         Route::post('import/importSingle', 'importSingle');
         Route::post('import/importCollection', 'importCollection');
