@@ -10,9 +10,12 @@ new Vue({
     },
     methods: {
         validateData() {
+            this.messageInfo = '';
+
             if (!this.validateEmail()) {
                 this.classMessageInfo = 'alert-info';
                 this.messageInfo = 'El email ingresado en incorrecto.';
+                return false;
             }
 
             $.ajax({
