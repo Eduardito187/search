@@ -2,16 +2,12 @@
 
 namespace App\Helpers\Base;
 
-use App\Models\City;
 use App\Models\Config;
-use App\Models\Country;
-use App\Models\IntegrationsAPI;
 use App\Models\Ip;
-use App\Models\Localization;
 use App\Models\RestrictIp;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Migrations;
-use App\Models\Municipality;
+use Illuminate\Support\Str;
 
 class Tools
 {
@@ -28,41 +24,6 @@ class Tools
         $restrictIp = RestrictIp::all();
 
         return $restrictIp->toArray();
-    }
-
-    /**
-     * @return array
-     */
-    public function getAllCountry()
-    {
-        $allCountry = Country::all();
-
-        return $allCountry->toArray();
-    }
-
-    /**
-     * @return array
-     */
-    public function getAllCity()
-    {
-        $allCity = City::all();
-
-        return $allCity->toArray();
-    }
-
-    /**
-     * @return array
-     */
-    public function getAllMunicipality()
-    {
-        $data = [];
-        $allMunicipality = Municipality::all();
-
-        foreach ($allMunicipality as $key => $municipality) {
-            $data[] = $this->getMunicipalityArray($municipality);
-        }
-
-        return $data;
     }
 
     /**
@@ -94,31 +55,11 @@ class Tools
     /**
      * @return array
      */
-    public function getAllLocalization()
-    {
-        $localization = Localization::all();
-
-        return $localization->toArray();
-    }
-
-    /**
-     * @return array
-     */
     public function getAllIp()
     {
         $ip = Ip::all();
 
         return $ip->toArray();
-    }
-
-    /**
-     * @return array
-     */
-    public function getAllIntegrationApi()
-    {
-        $integrationsAPI = IntegrationsAPI::all();
-
-        return $integrationsAPI->toArray();
     }
 
     /**
@@ -146,6 +87,20 @@ class Tools
      */
     public function generateToken(string $value){
         return Hash::make($value, [
+            "rounds" => 12,
+        ]);
+    }
+
+    /**
+     * @return string
+     */
+    static public function generateTokenFrontendRandom()
+    {
+        $timestamp = now()->timestamp;
+        $randomString = Str::random(12);
+        $randomValue = $timestamp . '_' . $randomString;
+
+        return Hash::make($randomValue, [
             "rounds" => 12,
         ]);
     }

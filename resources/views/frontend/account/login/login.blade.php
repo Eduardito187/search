@@ -16,7 +16,7 @@
             <div id="loginForm">
                 <div class="input-group">
                     <i class="fa fa-user"></i>
-                    <input type="email" name="username" v-model="mail" placeholder="Username" required>
+                    <input type="email" name="mail" v-model="mail" placeholder="Mail" required>
                 </div>
                 <div class="input-group">
                     <i class="fa fa-lock"></i>
