@@ -3,6 +3,7 @@
 namespace App\Helpers\Account;
 
 use App\Helpers\System\CoreHttp;
+use App\Models\CustomersAccount;
 use Exception;
 
 class Customer
@@ -33,7 +34,7 @@ class Customer
             }
 
             return $this->coreHttp->constructResponse(
-                [],
+                $this->validateLoginAccount($body["mail"], $body["password"]),
                 "Proceso ejecutado exitosamente.",
                 200,
                 true
@@ -64,6 +65,23 @@ class Customer
         } catch (Exception $e) {
             return $this->coreHttp->constructResponse([], $e->getMessage(), 500, false);
         }
+    }
+
+    public function validateLoginAccount($mail, $password)
+    {
+        $customer = CustomersAccount::where('mail', $mail)->first();
+
+        if ($customer != null) {
+            $encryptPassword = $this->encriptionPawd($password);
+
+            if ($customer->password == $encryptPassword) {
+                return ["message" => 'Inicio de sesion exitoso.', "status" => true, 'customer' => $this->encriptionPawd($mail)];
+            } else {
+                return ["message" => 'Contraseña erronea.', "status" => false];
+            }
+        }
+
+        return ["message" => 'El mail no esta asignado a una cuenta.', "status" => false];
     }
 
     /**
