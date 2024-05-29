@@ -14,10 +14,11 @@ new Vue({
             this.messageInfo = message;
         },
         validateData() {
+            let self = this;
             this.messageInfo = '';
 
             if (!this.validateEmail()) {
-                this.setMessageAlert('El email ingresado en incorrecto.', 'alert-warning');
+                self.setMessageAlert('El email ingresado en incorrecto.', 'alert-warning');
                 return false;
             }
 
@@ -40,16 +41,16 @@ new Vue({
                 success: function (response) {
                     if (response.status) {
                         if (response.response.status) {
-                            this.setMessageAlert(response.response.message, 'alert-success');
+                            self.setMessageAlert(response.response.message, 'alert-success');
                         } else {
-                            this.setMessageAlert(response.response.message, 'alert-danger');
+                            self.setMessageAlert(response.response.message, 'alert-danger');
                         }
                     } else {
-                        this.setMessageAlert(response.responseText, 'alert-danger');
+                        self.setMessageAlert(response.responseText, 'alert-danger');
                     }
                 },
                 error: function (error) {
-                    this.setMessageAlert(error, 'alert-danger');
+                    self.setMessageAlert(error, 'alert-danger');
                 }
             });
         },
