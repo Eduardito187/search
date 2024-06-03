@@ -21,29 +21,26 @@ new Vue({
     },
     loadCustomer() {
       let self = this;
-      $.ajax({
-        url: window.configFrontend.base_url_frontend + 'api/account/customer-information',
-        type: 'POST',
-        contentType: 'application/json',
-        dataType: 'json',
-        showLoader: true,
+
+      fetch(window.configFrontend.base_url_frontend + 'api/account/customer-information', {
+        method: 'POST',
         headers: {
+          'Content-Type': 'application/json',
           'Authorization': "Bearer " + window.configFrontend.token_access_frontend,
           'Cache-Control': 'no-cache',
           'Customer-Key': localStorage.getItem('customer_frontend')
-        },
-        success: function (response) {
-          if (response.status) {
-            if (response.code == 200) {
-              self.customer = response.response;
-              self.loadedPage = true;
-            }
-          }
-        },
-        error: function (error) {
-          self.setMessageAlert(error, 'alert-danger');
         }
-      });
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status && data.code == 200) {
+            self.customer = data.response;
+            self.loadedPage = true;
+          }
+        })
+        .catch(error => {
+          self.setMessageAlert(error, 'alert-danger');
+        });
     }
   },
   mounted() {
