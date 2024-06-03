@@ -20,6 +20,7 @@ new Vue({
       this.messageInfo = message;
     },
     loadCustomer() {
+      let self = this;
       $.ajax({
         url: window.configFrontend.base_url_frontend + 'api/account/customer-information',
         type: 'POST',
@@ -33,6 +34,7 @@ new Vue({
         },
         success: function (response) {
           console.log(response);
+          self.loadedPage = true;
         },
         error: function (error) {
           self.setMessageAlert(error, 'alert-danger');
@@ -43,7 +45,7 @@ new Vue({
   mounted() {
     this.versionApp = window.configFrontend.version_frontend;
     this.appName = window.configFrontend.app_name_frontend;
-    this.loadedPage = true;
+    this.loadCustomer();
   },
   created() {
   }
