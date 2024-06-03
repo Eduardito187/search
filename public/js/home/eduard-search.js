@@ -4,19 +4,18 @@ document.addEventListener('DOMContentLoaded', () => {
     submenu.classList.toggle('open');
   });
 });
+
 $(document).ready(function() {
-  alert("header sticky");
   if ($('#header-page').length > 0) {
     var lastScrollTop = 0;
     var headerHeight = $('#header-page').outerHeight();
 
     $(".content-page").scroll(function() {
       var st = $(this).scrollTop();
-      console.log("st", st);
       if (st > lastScrollTop && st > headerHeight) {
         $('#header-page').addClass('sticky');
       } else {
-        if (st + $(".content-page").height() < $(".content-page").height()) {
+        if (st <= headerHeight) {
           $('#header-page').removeClass('sticky');
         }
       }
