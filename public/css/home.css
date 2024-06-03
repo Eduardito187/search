@@ -1,8 +1,8 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
     color: #333;
-    background: linear-gradient(135deg, #6e8efb, #a777e3);
 }
 
 .container-screen {
@@ -12,6 +12,7 @@ body {
 
 .sidebar {
     width: 250px;
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
     color: #ffffff;
     display: flex;
     flex-direction: column;
@@ -176,6 +177,7 @@ canvas {
 }
 
 #header-page {
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
     color: #fff;
     padding: 20px;
     text-align: left;
@@ -189,7 +191,6 @@ canvas {
 #content-page {
     padding: 20px;
     margin-top: 100px;
-    background-color: #ffffff;
 }
 
 .sticky {
