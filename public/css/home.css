@@ -164,6 +164,7 @@ header h1 {
 
 .container-row {
     width: 100%;
+    max-width: 100%;
 }
 
 .margin-bottom-20 {
@@ -179,7 +180,7 @@ canvas {
     background-color: #333;
     color: #fff;
     padding: 20px;
-    text-align: center;
+    text-align: left;
     position: absolute;
     top: 0;
     width: 100%;
@@ -193,5 +194,5 @@ canvas {
 }
 
 .sticky {
-    top: -80px;
+    position: fixed !important;
 }
