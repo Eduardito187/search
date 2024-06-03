@@ -30,7 +30,7 @@ new Vue({
         headers: {
           'Authorization': "Bearer " + window.configFrontend.token_access_frontend,
           'Cache-Control': 'no-cache',
-          'customer-information': localStorage.getItem('customer_frontend')
+          'Customer-Key': localStorage.getItem('customer_frontend')
         },
         success: function (response) {
           console.log(response);

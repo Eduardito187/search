@@ -29,12 +29,12 @@ class Customer
     public function getCustomerInformation(array $body, array $header = [])
     {
         try {
-            if (!is_array($header) || !isset($header["Customer-Informatio"])) {
+            if (!is_array($header) || !isset($header["Customer-Key"])) {
                 throw new Exception("Parametros no validos.");
             }
 
             return $this->coreHttp->constructResponse(
-                $this->getCustomerByEncryption($header["Customer-Informatio"]),
+                $this->getCustomerByEncryption($header["Customer-Key"]),
                 "Proceso ejecutado exitosamente.",
                 200,
                 true
