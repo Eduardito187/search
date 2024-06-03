@@ -12,7 +12,7 @@
     <aside class="sidebar">
       <div class="sidebar-header">
         <img src="https://via.placeholder.com/50" alt="Logo" class="logo">
-        <span class="brand" v-if="customer != null">{{customer.first_name}}</span>
+        <span class="brand" v-if="customer != null">@{{customer.first_name}}</span>
       </div>
       <div class="search">
         <input type="text" placeholder="Search">
