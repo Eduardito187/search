@@ -20,8 +20,8 @@
         <ul>
           <li><a href="#"><i class="fa fa-home"></i> Dashboard</a></li>
           <li><a href="#"><i class="fa fa-th"></i> Overview</a></li>
-          <li><a href="#"><i class="fa fa-comment-alt"></i> Comments <span class="badge">3</span></a></li>
-          <li><a href="#"><i class="fa fa-calendar-alt"></i> Calendar</a></li>
+          <li><a href="#"><i class="fa fa-comment"></i> Comments <span class="badge">3</span></a></li>
+          <li><a href="#"><i class="fa fa-calendar"></i> Calendar</a></li>
           <li class="submenu">
             <a href="#">
                 <i class="fa fa-folder"></i> 
