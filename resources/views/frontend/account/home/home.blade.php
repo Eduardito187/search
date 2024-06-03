@@ -47,14 +47,14 @@
       </header>
       <section class="dashboard-content">
         <div>
-            <div class="row mb-4">
+            <div class="container-row margin-bottom-20">
                 <div class="col-12">
                     <div class="card p-3 chart-large">
                         <canvas class="chart" id="barChart"></canvas>
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="container-row">
                 <div class="col-md-4 mb-4">
                     <div class="card p-3 chart">
                         <canvas class="chart" id="lineChart"></canvas>

@@ -148,3 +148,11 @@ header h1 {
 .large-number {
     font-size: 40px;
 }
+
+.container-row {
+    width: 100%;
+}
+
+.margin-bottom-20 {
+    margin-bottom: 20px;
+}
