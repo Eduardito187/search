@@ -63,15 +63,14 @@
             </div>
             <div class="container-row margin-bottom-20">
                 <div class="col-md-6 margin-bottom-20">
-                    <div class="card p-3 chart">
-                        <div class="chart" id="doughnutChart"></div>
-                    </div>
+                  <div class="card p-3 chart">
+                    <div class="chart" id="doughnutChart"></div>
+                  </div>
                 </div>
                 <div class="col-md-6 margin-bottom-20">
-                    <div class="card p-3 text-center">
-                        <p class="small-text">Some Text</p>
-                        <div class="large-number">11,3</div>
-                    </div>
+                  <div class="card p-3 chart">
+                    <div class="chart" id="doughnutChartV2"></div>
+                  </div>
                 </div>
             </div>
         </div>
