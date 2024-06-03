@@ -87,7 +87,7 @@ new Vue({
             }
             };
     
-            var chart = new ApexCharts(document.querySelector("#chart"), options);
+            var chart = new ApexCharts(document.querySelector("#barChart"), options);
             chart.render();
 
           }
