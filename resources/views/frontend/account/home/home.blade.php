@@ -4,6 +4,7 @@
 
 @section('custom-header')
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+    <script src="{{ asset('js/home/eduard-search.js') }}"></script>
 @endsection
 
 @section('content')
@@ -53,5 +54,4 @@
 @endsection
 
 @section('custom-footer')
-    <script src="{{ asset('js/home/eduard-search.js') }}"></script>
 @endsection
