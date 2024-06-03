@@ -23,28 +23,6 @@ new Vue({
             }
 
             $.ajax({
-                url: window.configFrontend.base_url_frontend+'api/account/generate-password',
-                type: 'POST',
-                data: JSON.stringify(
-                    {
-                        password:"123456"
-                    }
-                ),
-                contentType: 'application/json',
-                dataType: 'json',
-                showLoader: true,
-                headers: {
-                    'Authorization': "Bearer "+window.configFrontend.token_access_frontend,
-                    'Cache-Control': 'no-cache'
-                },
-                success: function (response) {
-                    console.log(response);
-                },
-                error: function (error) {
-                    self.setMessageAlert(error, 'alert-danger');
-                }
-            });
-            $.ajax({
                 url: window.configFrontend.base_url_frontend+'api/account/login',
                 type: 'POST',
                 data: JSON.stringify(

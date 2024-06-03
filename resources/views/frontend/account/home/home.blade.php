@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-<div class="container-screen">
+<div class="container-screen" id="home-container">
     <aside class="sidebar">
       <div class="sidebar-header">
         <img src="https://via.placeholder.com/50" alt="Logo" class="logo">
