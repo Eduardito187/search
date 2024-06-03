@@ -74,6 +74,14 @@
                 </div>
             </div>
         </div>
+        <div class="footer">
+          <div class="pull-right">
+              <span style="margin-right:8px;" class="text-muted font-bold welcome-message">@{{appName}}</span>  <a class="text-muted" href="/"><strong>@{{versionApp}}</strong> </a> 
+          </div>
+          <div>
+              <strong>Copyright</strong> @{{appName}} © @{{currentYear}}
+          </div>
+        </div>
       </section>
     </main>
   </div>

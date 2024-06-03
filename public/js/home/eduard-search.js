@@ -32,6 +32,7 @@ new Vue({
     versionApp: '',
     appName: '',
     messageInfo: '',
+    currentYear: '',
     classMessageInfo: ''
   },
   methods: {
@@ -193,6 +194,7 @@ new Vue({
   mounted() {
     this.versionApp = window.configFrontend.version_frontend;
     this.appName = window.configFrontend.app_name_frontend;
+    this.currentYear = window.configFrontend.server_year
     this.loadCustomer();
   },
   created() {
