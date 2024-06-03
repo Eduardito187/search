@@ -96,7 +96,7 @@ class Customer
      */
     public function getCustomerByEncryption(string $keyEncryption)
     {
-        $descryptionMail = $this->decipheredPwd($keyEncryption);
+        $descryptionMail = $this->decrypt($keyEncryption);
         
         $customer = CustomersAccount::where('mail', $descryptionMail)->first();
 
@@ -138,7 +138,7 @@ class Customer
             $encryptPassword = $this->encryptedPawd($password);
 
             if ($customer->password == $encryptPassword) {
-                return ["message" => 'Inicio de sesion exitoso.', "status" => true, 'customer' => $this->encryptedPawd($mail)];
+                return ["message" => 'Inicio de sesion exitoso.', "status" => true, 'customer' => $this->encrypt($mail)];
             } else {
                 return ["message" => 'Contraseña erronea.', "status" => false];
             }
@@ -176,18 +176,30 @@ class Customer
      * @param string $password
      * @return string
      */
-    public function decipheredPwd(string $password){
-        list($encrypted_data, $iv) = explode('::', base64_decode($password), 2);
-        return openssl_decrypt($encrypted_data, 'aes-256-cbc', env('ENCRYPTION_KEY'), 0, $iv);
+    public function encryptedPawd(string $password){
+        return hash_hmac('sha256', $password, env('ENCRYPTION_KEY'));
     }
 
     /**
-     * @param string $password
+     * @param string $data
      * @return string
      */
-    public function encryptedPawd(string $password){
-        $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length('aes-256-cbc'));
-        $encrypted = openssl_encrypt($password, 'aes-256-cbc', env('ENCRYPTION_KEY'), 0, $iv);
-        return base64_encode($encrypted . '::' . $iv);
+    function encrypt($data)
+    {
+        $iv = str_repeat('0', openssl_cipher_iv_length('aes-256-cbc'));
+        $encrypted = openssl_encrypt($data, 'aes-256-cbc', env('ENCRYPTION_KEY'), 0, $iv);
+        return base64_encode($encrypted);
     }
+
+    /**
+     * @param string $data
+     * @return string
+     */
+    function decrypt($data)
+    {
+        $iv = str_repeat('0', openssl_cipher_iv_length('aes-256-cbc'));
+        $encrypted_data = base64_decode($data);
+        return openssl_decrypt($encrypted_data, 'aes-256-cbc', env('ENCRYPTION_KEY'), 0, $iv);
+    }
+    
 }
