@@ -29,6 +29,7 @@ class Customer
     public function getCustomerInformation(array $body, array $header = [])
     {
         try {
+            print_r($header);
             if (!is_array($header) || !isset($header["Customer-Key"])) {
                 throw new Exception("Parametros no validos.");
             }
