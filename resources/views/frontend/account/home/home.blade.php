@@ -48,24 +48,26 @@
       <section class="dashboard-content">
         <div>
             <div class="container-row margin-bottom-20">
-                <div class="col-12">
-                    <div class="card p-3 chart-large">
-                        <canvas class="chart" id="barChart"></canvas>
-                    </div>
+              <div class="col-12">
+                <div class="card p-3 chart-large">
+                  <canvas class="chart" id="barChart"></canvas>
                 </div>
+              </div>
             </div>
-            <div class="container-row">
-                <div class="col-md-4 mb-4">
-                    <div class="card p-3 chart">
-                        <canvas class="chart" id="lineChart"></canvas>
-                    </div>
+            <div class="container-row margin-bottom-20">
+              <div class="col-12">
+                <div class="card p-3 chart">
+                  <canvas class="chart" id="lineChart"></canvas>
                 </div>
-                <div class="col-md-4 mb-4">
+              </div>
+            </div>
+            <div class="container-row margin-bottom-20">
+                <div class="col-md-6 margin-bottom-20">
                     <div class="card p-3 chart">
                         <canvas class="chart" id="doughnutChart"></canvas>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
+                <div class="col-md-6 margin-bottom-20">
                     <div class="card p-3 text-center">
                         <p class="small-text">Some Text</p>
                         <div class="large-number">11,3</div>
