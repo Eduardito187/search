@@ -46,7 +46,33 @@
         <h1>My Dashboard</h1>
       </header>
       <section class="dashboard-content">
-        <!-- Dashboard content goes here -->
+        <div class="container dashboard-container">
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="card p-3 chart-large">
+                        <div class="chart" id="barChart"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card p-3 chart">
+                        <div class="chart" id="lineChart"></div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card p-3 chart">
+                        <div class="chart" id="doughnutChart"></div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card p-3 text-center">
+                        <p class="small-text">Some Text</p>
+                        <div class="large-number">11,3</div>
+                    </div>
+                </div>
+            </div>
+        </div>
       </section>
     </main>
   </div>

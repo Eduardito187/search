@@ -126,3 +126,30 @@ header h1 {
 .dashboard-content {
     padding: 20px;
 }
+
+.dashboard-container {
+    padding: 20px;
+    background-color: #f7f7f7;
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.chart {
+    height: 200px;
+}
+
+.chart-large {
+    height: 300px;
+}
+
+.small-text {
+    font-size: 12px;
+}
+
+.large-number {
+    font-size: 40px;
+}
