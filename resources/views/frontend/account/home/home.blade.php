@@ -50,26 +50,26 @@
             <div class="container-row margin-bottom-20">
               <div class="col-12">
                 <div class="card p-3 chart-large">
-                  <div class="chart" id="barChart"></div>
+                  <div id="barChart"></div>
                 </div>
               </div>
             </div>
             <div class="container-row margin-bottom-20">
               <div class="col-12">
                 <div class="card p-3 chart">
-                  <div class="chart" id="lineChart"></div>
+                  <div id="lineChart"></div>
                 </div>
               </div>
             </div>
             <div class="container-row margin-bottom-20">
                 <div class="col-md-6 margin-bottom-20">
                   <div class="card p-3 chart">
-                    <div class="chart" id="doughnutChart"></div>
+                    <div id="doughnutChart"></div>
                   </div>
                 </div>
                 <div class="col-md-6 margin-bottom-20">
                   <div class="card p-3 chart">
-                    <div class="chart" id="doughnutChartV2"></div>
+                    <div id="doughnutChartV2"></div>
                   </div>
                 </div>
             </div>
