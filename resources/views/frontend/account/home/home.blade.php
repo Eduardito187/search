@@ -50,21 +50,21 @@
             <div class="container-row margin-bottom-20">
               <div class="col-12">
                 <div class="card p-3 chart-large">
-                  <canvas class="chart" id="barChart"></canvas>
+                  <div class="chart" id="barChart"></div>
                 </div>
               </div>
             </div>
             <div class="container-row margin-bottom-20">
               <div class="col-12">
                 <div class="card p-3 chart">
-                  <canvas class="chart" id="lineChart"></canvas>
+                  <div class="chart" id="lineChart"></div>
                 </div>
               </div>
             </div>
             <div class="container-row margin-bottom-20">
                 <div class="col-md-6 margin-bottom-20">
                     <div class="card p-3 chart">
-                        <canvas class="chart" id="doughnutChart"></canvas>
+                        <div class="chart" id="doughnutChart"></div>
                     </div>
                 </div>
                 <div class="col-md-6 margin-bottom-20">
