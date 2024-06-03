@@ -27,6 +27,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware([CustomValidateToken::class])->group(function () {
     Route::controller(Account::class)->group(function() {
+        Route::post('account/customer-information', 'getCustomerInformation');
         Route::post('account/login', 'customerValidateLogin');
         Route::post('account/reset-password', 'customerResetPassword');
         Route::post('account/generate-password', 'generatePassword');

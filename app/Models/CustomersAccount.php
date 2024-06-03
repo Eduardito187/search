@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Client;
+use App\Models\CustomerAccountInformation;
 
 class CustomersAccount extends Model
 {
@@ -20,5 +21,8 @@ class CustomersAccount extends Model
 
     public function client() {
         return $this->hasOne(Client::class, 'id', 'id_client');
+    }
+    public function customerAccountInformation() {
+        return $this->hasOne(CustomerAccountInformation::class, 'id_customers_account', 'id');
     }
 }
