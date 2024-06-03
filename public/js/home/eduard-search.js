@@ -5,23 +5,23 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 $(document).ready(function() {
-  var lastScrollTop = 0;
-  var headerHeight = $('#header-page').outerHeight();
+  alert("header sticky");
+  if ($('#header-page').length > 0) {
+    var lastScrollTop = 0;
+    var headerHeight = $('#header-page').outerHeight();
 
-  $(window).scroll(function() {
+    $(window).scroll(function() {
       var st = $(this).scrollTop();
-
-      // Comprobar si el scroll está hacia abajo y si el encabezado no es visible
       if (st > lastScrollTop && st > headerHeight) {
-          $('#header-page').addClass('sticky');
+        $('#header-page').addClass('sticky');
       } else {
-          // Comprobar si el scroll está hacia arriba
-          if (st + $(window).height() < $(document).height()) {
-              $('#header-page').removeClass('sticky');
-          }
+        if (st + $(window).height() < $(document).height()) {
+          $('#header-page').removeClass('sticky');
+        }
       }
       lastScrollTop = st;
-  });
+    });
+  }
 });
 
 new Vue({
