@@ -29,7 +29,6 @@ class Customer
     public function getCustomerInformation(array $body, array $header = [])
     {
         try {
-            print_r($header);
             if (
                 !is_array($header) ||
                 !isset($header["customer-key"]) ||
@@ -40,7 +39,7 @@ class Customer
             }
 
             return $this->coreHttp->constructResponse(
-                $this->getCustomerByEncryption($header["customer-key"]),
+                $this->getCustomerByEncryption($header["customer-key"][0]),
                 "Proceso ejecutado exitosamente.",
                 200,
                 true
