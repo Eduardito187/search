@@ -134,11 +134,11 @@ header h1 {
 }
 
 .chart {
-    height: 400px;
+    height: auto;
 }
 
 .chart-large {
-    height: 400px;
+    height: auto;
 }
 
 .small-text {
