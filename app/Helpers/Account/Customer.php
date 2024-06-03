@@ -30,12 +30,17 @@ class Customer
     {
         try {
             print_r($header);
-            if (!is_array($header) || !isset($header["Customer-Key"])) {
+            if (
+                !is_array($header) ||
+                !isset($header["customer-key"]) ||
+                !is_array($header["customer-key"]) ||
+                count($header["customer-key"]) == 0
+            ) {
                 throw new Exception("Parametros no validos.");
             }
 
             return $this->coreHttp->constructResponse(
-                $this->getCustomerByEncryption($header["Customer-Key"]),
+                $this->getCustomerByEncryption($header["customer-key"]),
                 "Proceso ejecutado exitosamente.",
                 200,
                 true
