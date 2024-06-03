@@ -41,11 +41,11 @@
         </ul>
       </nav>
     </aside>
-    <main class="content">
-      <header>
+    <main class="content-page">
+      <header id="header-page">
         <h1>My Dashboard</h1>
       </header>
-      <section class="dashboard-content">
+      <section class="dashboard-content" id="content-page">
         <div>
             <div class="container-row margin-bottom-20">
               <div class="col-12">

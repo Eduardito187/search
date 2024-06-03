@@ -4,6 +4,26 @@ document.addEventListener('DOMContentLoaded', () => {
     submenu.classList.toggle('open');
   });
 });
+$(document).ready(function() {
+  var lastScrollTop = 0;
+  var headerHeight = $('#header-page').outerHeight();
+
+  $(window).scroll(function() {
+      var st = $(this).scrollTop();
+
+      // Comprobar si el scroll está hacia abajo y si el encabezado no es visible
+      if (st > lastScrollTop && st > headerHeight) {
+          $('#header-page').addClass('sticky');
+      } else {
+          // Comprobar si el scroll está hacia arriba
+          if (st + $(window).height() < $(document).height()) {
+              $('#header-page').removeClass('sticky');
+          }
+      }
+      lastScrollTop = st;
+  });
+});
+
 new Vue({
   el: '#home-container',
   data: {
