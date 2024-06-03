@@ -10,12 +10,12 @@ $(document).ready(function() {
     var lastScrollTop = 0;
     var headerHeight = $('#header-page').outerHeight();
 
-    $(window).scroll(function() {
+    $(".content-page").scroll(function() {
       var st = $(this).scrollTop();
       if (st > lastScrollTop && st > headerHeight) {
         $('#header-page').addClass('sticky');
       } else {
-        if (st + $(window).height() < $(document).height()) {
+        if (st + $(".content-page").height() < $(document).height()) {
           $('#header-page').removeClass('sticky');
         }
       }
