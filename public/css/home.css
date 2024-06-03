@@ -136,6 +136,7 @@ header h1 {
 .chart {
     height: auto;
     max-height: 350px;
+    padding: 20px;
 }
 
 .chart-large {

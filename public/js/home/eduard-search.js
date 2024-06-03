@@ -148,7 +148,8 @@ new Vue({
             var options = {
               series: [70],
               chart: {
-              type: 'radialBar'
+                height: '300px',
+              type: 'radialBar',
             },
             plotOptions: {
               radialBar: {
