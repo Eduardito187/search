@@ -12,6 +12,7 @@ $(document).ready(function() {
 
     $(".content-page").scroll(function() {
       var st = $(this).scrollTop();
+      console.log("st", st);
       if (st > lastScrollTop && st > headerHeight) {
         $('#header-page').addClass('sticky');
       } else {
