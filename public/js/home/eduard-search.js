@@ -36,17 +36,7 @@ new Vue({
           if (data.status && data.code == 200) {
             self.customer = data.response;
             self.loadedPage = true;
-          }
-        })
-        .catch(error => {
-          self.setMessageAlert(error, 'alert-danger');
-        });
-    }
-  },
-  mounted() {
-    this.versionApp = window.configFrontend.version_frontend;
-    this.appName = window.configFrontend.app_name_frontend;
-    this.loadCustomer();
+            
     $(document).ready(function() {
       // Initialize your charts here using Chart.js or any other charting library
       var ctxBar = document.getElementById('barChart').getContext('2d');
@@ -108,6 +98,17 @@ new Vue({
           }
       });
   });
+          }
+        })
+        .catch(error => {
+          self.setMessageAlert(error, 'alert-danger');
+        });
+    }
+  },
+  mounted() {
+    this.versionApp = window.configFrontend.version_frontend;
+    this.appName = window.configFrontend.app_name_frontend;
+    this.loadCustomer();
   },
   created() {
   }

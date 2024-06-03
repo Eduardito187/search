@@ -127,11 +127,6 @@ header h1 {
     padding: 20px;
 }
 
-.dashboard-container {
-    padding: 20px;
-    background-color: #f7f7f7;
-}
-
 .card {
     border: none;
     border-radius: 10px;
