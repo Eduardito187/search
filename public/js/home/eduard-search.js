@@ -15,7 +15,7 @@ $(document).ready(function() {
       if (st > lastScrollTop && st > headerHeight) {
         $('#header-page').addClass('sticky');
       } else {
-        if (st + $(".content-page").height() < $(document).height()) {
+        if (st + $(".content-page").height() < $(".content-page").height()) {
           $('#header-page').removeClass('sticky');
         }
       }
