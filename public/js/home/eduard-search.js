@@ -125,7 +125,7 @@ new Vue({
             var options = {
               series: [44, 55, 13, 43, 22],
               chart: {
-              width: '100%',
+                height: '300px',
               type: 'pie',
             },
             labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],

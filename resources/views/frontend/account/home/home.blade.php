@@ -56,7 +56,7 @@
             </div>
             <div class="container-row margin-bottom-20">
               <div class="col-12">
-                <div class="card p-3 chart">
+                <div class="card p-3 chart-large">
                   <div id="lineChart"></div>
                 </div>
               </div>
