@@ -33,8 +33,12 @@ new Vue({
           'Customer-Key': localStorage.getItem('customer_frontend')
         },
         success: function (response) {
-          console.log(response);
-          self.loadedPage = true;
+          if (response.status) {
+            if (response.code == 200) {
+              self.customer = response.response;
+              self.loadedPage = true;
+            }
+          }
         },
         error: function (error) {
           self.setMessageAlert(error, 'alert-danger');
