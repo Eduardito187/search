@@ -44,6 +44,7 @@ new Vue({
                             localStorage.setItem('customer_frontend', response.response.customer);
                             self.createCookie('customer_backend', response.response.customer);
                             self.setMessageAlert(response.response.message, 'alert-success');
+                            window.location.href = '/home';
                         } else {
                             self.setMessageAlert(response.response.message, 'alert-danger');
                         }
