@@ -18,7 +18,7 @@ $routes = [
     '/indexes' => 'indexes',
     '/settings' => 'settings',
     '/users' => 'users',
-    '/' => 'welcome',
+    '/home' => 'welcome',
 ];
 
 // Asociar las rutas a las vistas

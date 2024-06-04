@@ -25,7 +25,7 @@ $(document).ready(function() {
 });
 
 const routes = [
-  { path: '/', component: HomeSection },
+  { path: '/home', component: HomeSection },
   { path: '/dashboard', component: DashboardSection },
   { path: '/indexes', component: IndexesSection },
   { path: '/settings', component: SettingsSection },
