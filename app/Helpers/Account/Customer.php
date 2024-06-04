@@ -26,11 +26,9 @@ class Customer
      * @param Request $request
      * @return array
      */
-    public function closeSession(Request $request)
+    public function closeSession(array $body, array $header = [])
     {
         try {
-            $header = $request->header();
-
             if (
                 !is_array($header) ||
                 !isset($header["customer-key"]) ||
@@ -41,7 +39,7 @@ class Customer
             }
 
             $this->validateCustomerEncryption($header["customer-key"][0]);
-            $this->removeSession($request, "customer_backend");
+            $this->removeCookie("customer_backend");
 
             return $this->coreHttp->constructResponse(
                 [],
@@ -55,13 +53,12 @@ class Customer
     }
 
     /**
-     * @param Request $request
      * @param string $key
      * @return void
      */
-    public function removeSession(Request $request, string $key)
+    public function removeCookie(string $key)
     {
-        $request->session()->forget($key);
+        $_COOKIE[$key] = null;
     }
 
     /**
@@ -69,9 +66,9 @@ class Customer
      * @param string $value
      * @return void
      */
-    public function setSession(string $key, string $value)
+    public function setCookie(string $key, string $value)
     {
-        session($key, $value);
+        $_COOKIE[$key] = $value;
     }
 
     /**
@@ -214,7 +211,7 @@ class Customer
 
             if ($customer->password == $encryptPassword) {
                 $encryptKey = $this->encrypt($mail);
-                $this->setSession("customer_backend", $encryptKey);
+                $this->setCookie("customer_backend", $encryptKey);
 
                 return ["message" => 'Inicio de sesion exitoso.', "status" => true, 'customer' => $encryptKey];
             } else {

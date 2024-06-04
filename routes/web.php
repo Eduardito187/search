@@ -31,7 +31,7 @@ foreach ($routes as $route => $view) {
 
 Route::get('/login', function () {
     // Imprimir el contenido
-    return response(json_encode(session()));
+    return response($_COOKIE["customer_backend"]);
     return view('frontend.account.login.login')->with('bodyClass', 'body-login');
 });
 
