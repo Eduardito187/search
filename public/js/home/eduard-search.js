@@ -34,6 +34,7 @@ const routes = [
 
 // Creamos la instancia del enrutador
 const router = new VueRouter({
+  mode: 'history',
   routes
 });
 
@@ -42,6 +43,7 @@ Vue.prototype.$appName = window.configFrontend.app_name_frontend;
 Vue.prototype.$currentYear = window.configFrontend.server_year;
 Vue.prototype.$loadedPage = false;
 Vue.prototype.$customer = null;
+let self = this;
 
 fetch(window.configFrontend.base_url_frontend + 'api/account/customer-information', {
   method: 'POST',
@@ -55,8 +57,8 @@ fetch(window.configFrontend.base_url_frontend + 'api/account/customer-informatio
   .then(response => response.json())
   .then(data => {
     if (data.status && data.code == 200) {
-      Vue.prototype.$customer = data.response;
-      Vue.prototype.$loadedPage = true;
+      self.$customer = data.response;
+      self.$loadedPage = true;
     }
   })
   .catch(error => {
