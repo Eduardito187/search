@@ -46,10 +46,6 @@
         <h1>My Dashboard</h1>
       </header>
       <section class="dashboard-content" id="content-page">
-        <dashboard-section></dashboard-section>
-        <indexes-section></indexes-section>
-        <settings-section></settings-section>
-        <users-section></users-section>
         
       </section>
       <div class="footer">
