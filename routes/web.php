@@ -15,8 +15,8 @@ use App\Http\Controllers\Partner;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('*', function () {
+    return view('frontend.account.home.home')->with('bodyClass', 'body-home');
 });
 
 Route::get('/login', function () {
