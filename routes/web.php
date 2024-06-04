@@ -15,9 +15,21 @@ use App\Http\Controllers\Partner;
 |
 */
 
-Route::get('*', function () {
-    return view('frontend.account.home.home')->with('bodyClass', 'body-home');
-});
+$routes = [
+    '/dashboard' => 'dashboard',
+    '/indexes' => 'indexes',
+    '/settings' => 'settings',
+    '/users' => 'users',
+    '/home' => 'home',
+    '/' => 'welcome',
+];
+
+// Asociar las rutas a las vistas
+foreach ($routes as $route => $view) {
+    Route::get($route, function () {
+        return view('frontend.account.home.home')->with('bodyClass', 'body-home');
+    });
+}
 
 Route::get('/login', function () {
     return view('frontend.account.login.login')->with('bodyClass', 'body-login');
@@ -25,7 +37,4 @@ Route::get('/login', function () {
 
 Route::get('/restore-password', function () {
     return view('frontend.account.reset.reset')->with('bodyClass', 'body-restore');
-});
-Route::get('/home', function () {
-    return view('frontend.account.home.home')->with('bodyClass', 'body-home');
 });
