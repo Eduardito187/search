@@ -42,15 +42,13 @@ Vue.prototype.$versionApp = window.configFrontend.version_frontend;
 Vue.prototype.$appName = window.configFrontend.app_name_frontend;
 Vue.prototype.$currentYear = window.configFrontend.server_year;
 
-const globalState = Vue.observable({
-  $versionApp : window.configFrontend.version_frontend,
-  $appName : window.configFrontend.app_name_frontend,
-  $currentYear : window.configFrontend.server_year
-});
-
 new Vue({
   el: '#home-container',
   router,
+  data: {
+    customer: null,
+    loadedPage: false,
+  },
   methods: {
     loadedCustomer() {
       let self = this;
@@ -67,8 +65,8 @@ new Vue({
         .then(response => response.json())
         .then(data => {
           if (data.status && data.code == 200) {
-            globalState.$customer = data.response;
-            globalState.$loadedPage = true;
+            self.customer = data.response;
+            self.loadedPage = true;
             console.log(data);
           }
         })
