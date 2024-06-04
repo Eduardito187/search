@@ -42,7 +42,7 @@ new Vue({
                     if (response.status) {
                         if (response.response.status) {
                             localStorage.setItem('customer_frontend', response.response.customer);
-                            self.createCookie('customer_frontend', response.response.customer);
+                            self.createCookie('customer_backend', response.response.customer);
                             self.setMessageAlert(response.response.message, 'alert-success');
                         } else {
                             self.setMessageAlert(response.response.message, 'alert-danger');
