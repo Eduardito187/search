@@ -205,3 +205,92 @@ canvas {
     padding: 10px;
     background-color: #ffffff;
 }
+
+.container-index {
+    width: 90%;
+    margin: auto;
+}
+
+.container-index .top-cards {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.container-index .card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    width: 23%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.container-index .card h2 {
+    font-size: 18px;
+    color: #333;
+}
+
+.container-index .card p {
+    font-size: 24px;
+    margin: 10px 0;
+    color: #007bff;
+}
+
+.container-index .card span {
+    font-size: 14px;
+    color: #999;
+}
+
+.container-index .main-content {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.container-index .sales-overview {
+    width: 65%;
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.container-index .get-started {
+    width: 30%;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    border-radius: 8px;
+    color: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.container-index .get-started h2 {
+    font-size: 24px;
+}
+
+.container-index .bottom-content {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.container-index .sales-by-country, .container-index .categories {
+    width: 48%;
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.container-index .sales-by-country ul, .container-index .categories ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.container-index .sales-by-country li, .container-index .categories li {
+    margin-bottom: 10px;
+}
