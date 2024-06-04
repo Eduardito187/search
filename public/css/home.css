@@ -196,3 +196,11 @@ canvas {
 .sticky {
     position: fixed !important;
 }
+
+footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0px;
+    left: 250px;
+    right: 0px;
+}
