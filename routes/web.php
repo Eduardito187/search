@@ -18,7 +18,6 @@ $routes = [
     '/indexes' => 'indexes',
     '/settings' => 'settings',
     '/users' => 'users',
-    '/home' => 'home',
     '/' => 'welcome',
 ];
 
