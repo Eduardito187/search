@@ -46,6 +46,10 @@
         <h1>My Dashboard</h1>
       </header>
       <section class="dashboard-content" id="content-page">
+        <dashboard-section></dashboard-section>
+        <indexes-section></indexes-section>
+        <settings-section></settings-section>
+        <users-section></users-section>
         <div>
             <div class="container-row margin-bottom-20">
               <div class="container-row">
@@ -88,5 +92,9 @@
 @endsection
 
 @section('custom-footer')
+    <script src="{{ asset('js/home/components/dashboard.js') }}"></script>
+    <script src="{{ asset('js/home/components/indexes.js') }}"></script>
+    <script src="{{ asset('js/home/components/settings.js') }}"></script>
+    <script src="{{ asset('js/home/components/users.js') }}"></script>
     <script src="{{ asset('js/home/eduard-search.js') }}"></script>
 @endsection
