@@ -206,6 +206,6 @@ canvas {
     background-color: #ffffff;
 }
 
-#content-page div {
+#content-page #container-body {
     margin-bottom: 100px;
 }

@@ -46,7 +46,7 @@
         <h1>My Dashboard</h1>
       </header>
       <section class="dashboard-content" id="content-page">
-        <div>
+        <div id="container-body">
             <div class="container-row margin-bottom-20">
               <div class="container-row">
                 <div class="card p-3 chart-large">
