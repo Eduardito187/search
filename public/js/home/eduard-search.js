@@ -44,32 +44,36 @@ Vue.prototype.$currentYear = window.configFrontend.server_year;
 Vue.prototype.$loadedPage = false;
 Vue.prototype.$customer = null;
 
-function loadedCustomer(self)
-{
-  fetch(window.configFrontend.base_url_frontend + 'api/account/customer-information', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': "Bearer " + window.configFrontend.token_access_frontend,
-      'Cache-Control': 'no-cache',
-      'Customer-Key': localStorage.getItem('customer_frontend')
-    }
-  })
-    .then(response => response.json())
-    .then(data => {
-      if (data.status && data.code == 200) {
-        self.$customer = data.response;
-        self.$loadedPage = true;
-        console.log(data);
-      }
-    })
-    .catch(error => {
-      console.log(error, 'alert-danger');
-    });
-}
-loadedCustomer(this);
-
 new Vue({
   el: '#home-container',
-  router
+  router,
+  methods: {
+    loadedCustomer() {
+      let self = this;
+
+      fetch(window.configFrontend.base_url_frontend + 'api/account/customer-information', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': "Bearer " + window.configFrontend.token_access_frontend,
+          'Cache-Control': 'no-cache',
+          'Customer-Key': localStorage.getItem('customer_frontend')
+        }
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status && data.code == 200) {
+            self.$customer = data.response;
+            self.$loadedPage = true;
+            console.log(data);
+          }
+        })
+        .catch(error => {
+          console.log(error, 'alert-danger');
+        });
+    }
+  },
+  created() {
+    this.loadedCustomer();
+  }
 });
