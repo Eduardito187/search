@@ -8,7 +8,7 @@ var HomeSection = {
             <div class="mb-4"></div>
         </div>
 
-        <div class="card mb-1">
+        <div class="card mb-2">
             <div class="card-header">
                 Busquedas
             </div>
@@ -20,7 +20,7 @@ var HomeSection = {
             </div>
         </div>
 
-        <div class="card mb-1">
+        <div class="card mb-2">
             <div class="card-header">
                 Sugeridos
             </div>
@@ -32,7 +32,7 @@ var HomeSection = {
             </div>
         </div>
 
-        <div class="card mb-1">
+        <div class="card mb-2">
             <div class="card-header">
                 Data
             </div>
