@@ -311,3 +311,7 @@ canvas {
     background-color: #44426a;
     cursor: pointer;
 }
+
+.jumbotron {
+    background-color: #ffffff;
+}
