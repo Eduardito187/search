@@ -49,7 +49,7 @@ new Vue({
   router,
   methods: {
     loadedCustomer() {
-      let self = this;
+      let self = Vue.prototype;
 
       fetch(window.configFrontend.base_url_frontend + 'api/account/customer-information', {
         method: 'POST',
