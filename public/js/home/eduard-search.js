@@ -44,31 +44,31 @@ Vue.prototype.$currentYear = window.configFrontend.server_year;
 Vue.prototype.$loadedPage = false;
 Vue.prototype.$customer = null;
 
-export default {
-  created() {
-
-    fetch(window.configFrontend.base_url_frontend + 'api/account/customer-information', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': "Bearer " + window.configFrontend.token_access_frontend,
-        'Cache-Control': 'no-cache',
-        'Customer-Key': localStorage.getItem('customer_frontend')
+function loadedCustomer()
+{
+  let self = this;
+  fetch(window.configFrontend.base_url_frontend + 'api/account/customer-information', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': "Bearer " + window.configFrontend.token_access_frontend,
+      'Cache-Control': 'no-cache',
+      'Customer-Key': localStorage.getItem('customer_frontend')
+    }
+  })
+    .then(response => response.json())
+    .then(data => {
+      if (data.status && data.code == 200) {
+        self.$customer = data.response;
+        self.$loadedPage = true;
+        console.log(data);
       }
     })
-      .then(response => response.json())
-      .then(data => {
-        if (data.status && data.code == 200) {
-          this.$customer = data.response;
-          this.$loadedPage = true;
-          console.log(data);
-        }
-      })
-      .catch(error => {
-        console.log(error, 'alert-danger');
-      });
-  }
-};
+    .catch(error => {
+      console.log(error, 'alert-danger');
+    });
+}
+loadedCustomer();
 
 new Vue({
   el: '#home-container',
