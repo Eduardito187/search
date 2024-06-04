@@ -197,7 +197,7 @@ canvas {
     position: fixed !important;
 }
 
-footer {
+.footer {
     width: 100%;
     position: fixed;
     bottom: 0px;
