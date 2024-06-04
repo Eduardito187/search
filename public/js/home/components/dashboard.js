@@ -1,6 +1,6 @@
 Vue.component('dashboard-section', {
     template: `
-    <div>
+    <div class="container-dashboard">
         <div class="container-row margin-bottom-20">
             <div class="container-row">
                 <div class="card p-3 chart-large">
