@@ -46,7 +46,7 @@
         <h1>My Dashboard</h1>
       </header>
       <section class="dashboard-content" id="content-page">
-        
+        <router-view></router-view>
       </section>
       <div class="footer">
         <div class="pull-right">
