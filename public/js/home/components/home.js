@@ -5,8 +5,10 @@ var HomeSection = {
             <h1 class="display-4">Welcome!</h1>
             <p class="lead">Check what's happening on your EduardSearch implementation.</p>
             <hr class="my-4">
+            <div class="mb-4"></div>
         </div>
-        <div class="card">
+
+        <div class="card mb-1">
             <div class="card-header">
                 Busquedas
             </div>
@@ -18,7 +20,7 @@ var HomeSection = {
             </div>
         </div>
 
-        <div class="card">
+        <div class="card mb-1">
             <div class="card-header">
                 Sugeridos
             </div>
@@ -30,7 +32,7 @@ var HomeSection = {
             </div>
         </div>
 
-        <div class="card">
+        <div class="card mb-1">
             <div class="card-header">
                 Data
             </div>
