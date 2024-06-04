@@ -13,9 +13,6 @@
         <img src="https://via.placeholder.com/50" alt="Logo" class="logo">
         <span class="brand" v-if="customer != null">@{{customer.first_name}}</span>
       </div>
-      <div class="search">
-        <input type="text" placeholder="Search">
-      </div>
       <nav class="menu">
         <ul>
           <li><router-link to="/dashboard"><i class="fa fa-home"></i> Dashboard</router-link></li>
