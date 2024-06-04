@@ -1,3 +1,3 @@
-Vue.component('settings-section', {
+var SettingsSection = {
     template: '<div>Hola, soy un settings!</div>'
-});
+};

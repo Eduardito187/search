@@ -1,4 +1,4 @@
-Vue.component('indexes-section', {
+var IndexesSection = {
     template: `
     <div class="container-index">
         <div class="top-cards">
@@ -53,4 +53,4 @@ Vue.component('indexes-section', {
         </div>
     </div>
     `
-});
+};

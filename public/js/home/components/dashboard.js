@@ -1,4 +1,4 @@
-Vue.component('dashboard-section', {
+var DashboardSection = {
     template: `
     <div class="container-dashboard">
         <div class="container-row margin-bottom-20">
@@ -169,4 +169,4 @@ Vue.component('dashboard-section', {
     mounted() {
         this.initializeCharts();
     }
-});
+};

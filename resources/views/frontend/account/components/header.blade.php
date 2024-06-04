@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="{{ asset('css/bootstrap/css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/ApexChart/apexcharts.min.css') }}">
         <script src="{{ asset('js/Vue/vue.js') }}"></script>
+        <script src="{{ asset('js/Vue/vue-router.js') }}"></script>
         <script src="{{ asset('js/Axios/axios.min.js') }}"></script>
         <script>
             window.configFrontend = <?= json_encode(\App\Helpers\Base\ConfigFrontend::getConfigFrontend()); ?>;

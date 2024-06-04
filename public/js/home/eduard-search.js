@@ -24,52 +24,46 @@ $(document).ready(function() {
   }
 });
 
+const routes = [
+  { path: '/', component: HomeSection },
+  { path: '/dashboard', component: DashboardSection },
+  { path: '/indexes', component: IndexesSection },
+  { path: '/settings', component: SettingsSection },
+  { path: '/users', component: UsersSection }
+];
+
+// Creamos la instancia del enrutador
+const router = new VueRouter({
+  routes
+});
+
+Vue.prototype.$versionApp = window.configFrontend.version_frontend;
+Vue.prototype.$appName = window.configFrontend.app_name_frontend;
+Vue.prototype.$currentYear = window.configFrontend.server_year;
+Vue.prototype.$loadedPage = false;
+Vue.prototype.$customer = null;
+
+fetch(window.configFrontend.base_url_frontend + 'api/account/customer-information', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': "Bearer " + window.configFrontend.token_access_frontend,
+    'Cache-Control': 'no-cache',
+    'Customer-Key': localStorage.getItem('customer_frontend')
+  }
+})
+  .then(response => response.json())
+  .then(data => {
+    if (data.status && data.code == 200) {
+      this.$customer = data.response;
+      this.$loadedPage = true;
+    }
+  })
+  .catch(error => {
+    self.setMessageAlert(error, 'alert-danger');
+  });
+
 new Vue({
   el: '#home-container',
-  data: {
-    customer: null,
-    loadedPage: false,
-    versionApp: '',
-    appName: '',
-    messageInfo: '',
-    currentYear: '',
-    classMessageInfo: ''
-  },
-  methods: {
-    setMessageAlert(message, className) {
-      this.classMessageInfo = className;
-      this.messageInfo = message;
-    },
-    loadCustomer() {
-      let self = this;
-
-      fetch(window.configFrontend.base_url_frontend + 'api/account/customer-information', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': "Bearer " + window.configFrontend.token_access_frontend,
-          'Cache-Control': 'no-cache',
-          'Customer-Key': localStorage.getItem('customer_frontend')
-        }
-      })
-        .then(response => response.json())
-        .then(data => {
-          if (data.status && data.code == 200) {
-            self.customer = data.response;
-            self.loadedPage = true;
-          }
-        })
-        .catch(error => {
-          self.setMessageAlert(error, 'alert-danger');
-        });
-    }
-  },
-  mounted() {
-    this.versionApp = window.configFrontend.version_frontend;
-    this.appName = window.configFrontend.app_name_frontend;
-    this.currentYear = window.configFrontend.server_year
-    this.loadCustomer();
-  },
-  created() {
-  }
+  router
 });
