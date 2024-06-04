@@ -73,6 +73,10 @@ new Vue({
         .catch(error => {
           console.log(error, 'alert-danger');
         });
+    },
+    closeSession() {
+      localStorage.removeItem('customer_frontend');
+      this.$router.push('/login');
     }
   },
   created() {

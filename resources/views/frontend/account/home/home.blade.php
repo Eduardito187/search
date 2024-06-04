@@ -21,7 +21,7 @@
           <li><router-link to="/settings"><i class="fa fa-cog"></i> Settings</router-link></li>
         </ul>
       </nav>
-      <div class="close-session">
+      <div class="close-session" @click="closeSession()">
   	    <i class="fa fa-sign-out"></i> Close session
       </div>
     </aside>
