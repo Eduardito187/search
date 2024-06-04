@@ -27,10 +27,7 @@ class Account extends Controller
     public function closeSession(Request $request)
     {
         return response()->json(
-            $this->customer->closeSession(
-                $request->all(),
-                $request->header()
-            )
+            $this->customer->closeSession($request)
         );
     }
 

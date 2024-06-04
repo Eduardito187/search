@@ -2,8 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-use Illuminate\Support\Facades\Session;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,13 +30,7 @@ foreach ($routes as $route => $view) {
 }
 
 Route::get('/login', function () {
-    $userId = "";
-    // También puedes verificar si un valor existe en la sesión
-    if (Session::has('customer_backend')) {
-        $userId = Session::get('customer_backend');
-    } else {
-        $userId = "No session";
-    }
+    $userId = session("customer_backend");
 
     // Imprimir el contenido
     return response($userId);

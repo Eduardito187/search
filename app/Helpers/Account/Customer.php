@@ -5,7 +5,7 @@ namespace App\Helpers\Account;
 use App\Helpers\System\CoreHttp;
 use App\Models\CustomersAccount;
 use Exception;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
 
 class Customer
 {
@@ -23,13 +23,14 @@ class Customer
     }
 
     /**
-     * @param array $body
-     * @param array $header
+     * @param Request $request
      * @return array
      */
-    public function closeSession(array $body, array $header = [])
+    public function closeSession(Request $request)
     {
         try {
+            $header = $request->header();
+
             if (
                 !is_array($header) ||
                 !isset($header["customer-key"]) ||
@@ -40,7 +41,7 @@ class Customer
             }
 
             $this->validateCustomerEncryption($header["customer-key"][0]);
-            $this->removeSession("customer_backend");
+            $this->removeSession($request, "customer_backend");
 
             return $this->coreHttp->constructResponse(
                 [],
@@ -54,12 +55,13 @@ class Customer
     }
 
     /**
+     * @param Request $request
      * @param string $key
      * @return void
      */
-    public function removeSession(string $key)
+    public function removeSession(Request $request, string $key)
     {
-        Session::forget($key);
+        $request->session()->forget($key);
     }
 
     /**
@@ -69,7 +71,7 @@ class Customer
      */
     public function setSession(string $key, string $value)
     {
-        Session::put($key, $value);
+        session($key, $value);
     }
 
     /**
@@ -209,10 +211,11 @@ class Customer
 
         if ($customer != null) {
             $encryptPassword = $this->encryptedPawd($password);
-            $encryptKey = $this->encrypt($mail);
-            $this->setSession("customer_backend", $encryptKey);
 
             if ($customer->password == $encryptPassword) {
+                $encryptKey = $this->encrypt($mail);
+                $this->setSession("customer_backend", $encryptKey);
+
                 return ["message" => 'Inicio de sesion exitoso.', "status" => true, 'customer' => $encryptKey];
             } else {
                 return ["message" => 'Contraseña erronea.', "status" => false];
