@@ -50,34 +50,7 @@
         <indexes-section></indexes-section>
         <settings-section></settings-section>
         <users-section></users-section>
-        <div>
-            <div class="container-row margin-bottom-20">
-              <div class="container-row">
-                <div class="card p-3 chart-large">
-                  <div id="barChart"></div>
-                </div>
-              </div>
-            </div>
-            <div class="container-row margin-bottom-20">
-              <div class="container-row">
-                <div class="card p-3 chart-large">
-                  <div id="lineChart"></div>
-                </div>
-              </div>
-            </div>
-            <div class="container-row margin-bottom-20">
-                <div class="col-md-6 margin-bottom-20">
-                  <div class="card p-3 chart">
-                    <div id="doughnutChart"></div>
-                  </div>
-                </div>
-                <div class="col-md-6 margin-bottom-20">
-                  <div class="card p-3 chart">
-                    <div id="doughnutChartV2"></div>
-                  </div>
-                </div>
-            </div>
-        </div>
+        
       </section>
       <div class="footer">
         <div class="pull-right">
