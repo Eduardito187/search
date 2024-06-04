@@ -51,6 +51,10 @@ new Vue({
   },
   methods: {
     loadedCustomer() {
+      if (!localStorage.getItem('customer_frontend') || localStorage.getItem('customer_frontend') == null) {
+        this.closeSession();
+      }
+
       let self = this;
 
       fetch(window.configFrontend.base_url_frontend + 'api/account/customer-information', {
@@ -76,7 +80,8 @@ new Vue({
     },
     closeSession() {
       localStorage.removeItem('customer_frontend');
-      this.$router.push('/login');
+      //this.$router.push('/login');
+      window.location.href = '/login';
     }
   },
   created() {
