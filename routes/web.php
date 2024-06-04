@@ -25,12 +25,15 @@ $routes = [
 // Asociar las rutas a las vistas
 foreach ($routes as $route => $view) {
     Route::get($route, function () {
+        if (!isset($_COOKIE["customer_backend"])) {
+            return redirect('/login');
+        }
+
         return view('frontend.account.home.home')->with('bodyClass', 'body-home');
     });
 }
 
 Route::get('/login', function () {
-    return response($_COOKIE["customer_backend"]);
     return view('frontend.account.login.login')->with('bodyClass', 'body-login');
 });
 
