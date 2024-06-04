@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="{{ asset('css/font-awesome-4.7.0/css/font-awesome.css') }}">
         <link rel="stylesheet" href="{{ asset('css/bootstrap/css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/ApexChart/apexcharts.min.css') }}">
+        <script src="{{ asset('js/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('js/Vue/vue.js') }}"></script>
         <script src="{{ asset('js/Vue/vue-router.js') }}"></script>
         <script src="{{ asset('js/Axios/axios.min.js') }}"></script>
