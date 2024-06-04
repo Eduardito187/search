@@ -34,9 +34,17 @@ foreach ($routes as $route => $view) {
 }
 
 Route::get('/login', function () {
+    if (isset($_COOKIE["customer_backend"])) {
+        return redirect('/home');
+    }
+
     return view('frontend.account.login.login')->with('bodyClass', 'body-login');
 });
 
 Route::get('/restore-password', function () {
+    if (isset($_COOKIE["customer_backend"])) {
+        return redirect('/home');
+    }
+
     return view('frontend.account.reset.reset')->with('bodyClass', 'body-restore');
 });
