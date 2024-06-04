@@ -5,6 +5,7 @@ namespace App\Helpers\Account;
 use App\Helpers\System\CoreHttp;
 use App\Models\CustomersAccount;
 use Exception;
+use Illuminate\Support\Facades\Session;
 
 class Customer
 {
@@ -19,6 +20,56 @@ class Customer
     public function __construct()
     {
         $this->coreHttp = new CoreHttp();
+    }
+
+    /**
+     * @param array $body
+     * @param array $header
+     * @return array
+     */
+    public function closeSession(array $body, array $header = [])
+    {
+        try {
+            if (
+                !is_array($header) ||
+                !isset($header["customer-key"]) ||
+                !is_array($header["customer-key"]) ||
+                count($header["customer-key"]) == 0
+            ) {
+                throw new Exception("Parametros no validos.");
+            }
+
+            $this->validateCustomerEncryption($header["customer-key"][0]);
+            $this->removeSession("customer_backend");
+
+            return $this->coreHttp->constructResponse(
+                [],
+                "Proceso ejecutado exitosamente.",
+                200,
+                true
+            );
+        } catch (Exception $e) {
+            return $this->coreHttp->constructResponse([], $e->getMessage(), 500, false);
+        }
+    }
+
+    /**
+     * @param string $key
+     * @return void
+     */
+    public function removeSession(string $key)
+    {
+        Session::forget($key);
+    }
+
+    /**
+     * @param string $key
+     * @param string $value
+     * @return void
+     */
+    public function setSession(string $key, string $value)
+    {
+        Session::put($key, $value);
     }
 
     /**
@@ -97,6 +148,23 @@ class Customer
 
     /**
      * @param string $keyEncryption
+     * @return bool
+     */
+    public function validateCustomerEncryption(string $keyEncryption)
+    {
+        $descryptionMail = $this->decrypt($keyEncryption);
+        
+        $customer = CustomersAccount::where('mail', $descryptionMail)->first();
+
+        if ($customer == null) {
+            throw new Exception("Customer no indentificado.");
+        }
+
+        return true;
+    }
+
+    /**
+     * @param string $keyEncryption
      * @return array
      */
     public function getCustomerByEncryption(string $keyEncryption)
@@ -141,9 +209,11 @@ class Customer
 
         if ($customer != null) {
             $encryptPassword = $this->encryptedPawd($password);
+            $encryptKey = $this->encrypt($mail);
+            $this->setSession("customer_backend", $encryptKey);
 
             if ($customer->password == $encryptPassword) {
-                return ["message" => 'Inicio de sesion exitoso.', "status" => true, 'customer' => $this->encrypt($mail)];
+                return ["message" => 'Inicio de sesion exitoso.', "status" => true, 'customer' => $encryptKey];
             } else {
                 return ["message" => 'Contraseña erronea.', "status" => false];
             }

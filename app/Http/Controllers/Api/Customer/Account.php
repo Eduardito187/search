@@ -24,6 +24,20 @@ class Account extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
+    public function closeSession(Request $request)
+    {
+        return response()->json(
+            $this->customer->closeSession(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
     public function getCustomerInformation(Request $request)
     {
         return response()->json(

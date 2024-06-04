@@ -79,9 +79,18 @@ new Vue({
         });
     },
     closeSession() {
+      fetch(window.configFrontend.base_url_frontend + 'api/account/close-session', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': "Bearer " + window.configFrontend.token_access_frontend,
+          'Cache-Control': 'no-cache',
+          'Customer-Key': localStorage.getItem('customer_frontend')
+        }
+      });
       localStorage.removeItem('customer_frontend');
       //this.$router.push('/login');
-      window.location.href = '/login';
+      //window.location.href = '/login';
     }
   },
   created() {
