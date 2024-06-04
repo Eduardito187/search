@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Partner;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +32,16 @@ foreach ($routes as $route => $view) {
 }
 
 Route::get('/login', function () {
+    $userId = "";
+    // También puedes verificar si un valor existe en la sesión
+    if (Session::has('customer_backend')) {
+        $userId = Session::get('customer_backend');
+    } else {
+        $userId = "No session";
+    }
+
+    // Imprimir el contenido
+    return response($userId);
     return view('frontend.account.login.login')->with('bodyClass', 'body-login');
 });
 
