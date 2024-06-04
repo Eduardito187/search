@@ -67,7 +67,7 @@ function loadedCustomer(self)
       console.log(error, 'alert-danger');
     });
 }
-loadedCustomer(Vue.prototype);
+loadedCustomer(this);
 
 new Vue({
   el: '#home-container',
