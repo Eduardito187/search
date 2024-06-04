@@ -33,7 +33,7 @@ Route::get('/login', function () {
     $userId = session("customer_backend");
 
     // Imprimir el contenido
-    return response($userId);
+    //return response($userId);
     return view('frontend.account.login.login')->with('bodyClass', 'body-login');
 });
 
