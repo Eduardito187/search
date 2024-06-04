@@ -30,10 +30,8 @@ foreach ($routes as $route => $view) {
 }
 
 Route::get('/login', function () {
-    $userId = session("customer_backend");
-
     // Imprimir el contenido
-    return response($userId);
+    return response(session());
     return view('frontend.account.login.login')->with('bodyClass', 'body-login');
 });
 
