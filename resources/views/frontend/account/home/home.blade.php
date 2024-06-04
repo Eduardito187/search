@@ -18,7 +18,7 @@
       </div>
       <nav class="menu">
         <ul>
-          <li><a href="#"><i class="fa fa-home"></i> Dashboard</a></li>
+          <li><router-link to="/dashboard"><i class="fa fa-home"></i> Dashboard</router-link></li>
           <li><a href="#"><i class="fa fa-th"></i> Overview</a></li>
           <li><a href="#"><i class="fa fa-comment"></i> Comments <span class="badge">3</span></a></li>
           <li><a href="#"><i class="fa fa-calendar"></i> Calendar</a></li>
@@ -36,8 +36,9 @@
           </li>
           <li><a href="#"><i class="fa fa-chart-bar"></i> Analytics</a></li>
           <li><a href="#"><i class="fa fa-star"></i> Starred</a></li>
-          <li><a href="#"><i class="fa fa-user"></i> User</a></li>
-          <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
+          <li><router-link to="/indexes"><i class="fa fa-star"></i> Indexes</router-link></li>
+          <li><router-link to="/users"><i class="fa fa-user"></i> Users</router-link></li>
+          <li><router-link to="/settings"><i class="fa fa-cog"></i> Settings</router-link></li>
         </ul>
       </nav>
     </aside>
