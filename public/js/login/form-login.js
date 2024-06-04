@@ -36,7 +36,6 @@ new Vue({
                 showLoader: true,
                 headers: {
                     'Authorization': "Bearer "+window.configFrontend.token_access_frontend,
-                    'Cache-Control': 'no-cache'
                 },
                 success: function (response) {
                     if (response.status) {

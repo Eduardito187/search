@@ -62,7 +62,6 @@ new Vue({
         headers: {
           'Content-Type': 'application/json',
           'Authorization': "Bearer " + window.configFrontend.token_access_frontend,
-          'Cache-Control': 'no-cache',
           'Customer-Key': localStorage.getItem('customer_frontend')
         }
       })
@@ -84,7 +83,6 @@ new Vue({
         headers: {
           'Content-Type': 'application/json',
           'Authorization': "Bearer " + window.configFrontend.token_access_frontend,
-          'Cache-Control': 'no-cache',
           'Customer-Key': localStorage.getItem('customer_frontend')
         }
       });
