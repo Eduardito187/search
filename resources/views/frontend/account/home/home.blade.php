@@ -65,6 +65,7 @@
 @endsection
 
 @section('custom-footer')
+    <script src="{{ asset('js/home/components/home.js') }}"></script>
     <script src="{{ asset('js/home/components/dashboard.js') }}"></script>
     <script src="{{ asset('js/home/components/indexes.js') }}"></script>
     <script src="{{ asset('js/home/components/settings.js') }}"></script>
