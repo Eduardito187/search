@@ -25,11 +25,11 @@ $(document).ready(function() {
 });
 
 const routes = [
-  { path: '/home', component: HomeSection },
-  { path: '/dashboard', component: DashboardSection },
-  { path: '/indexes', component: IndexesSection },
-  { path: '/settings', component: SettingsSection },
-  { path: '/users', component: UsersSection }
+  { path: '/home', component: HomeSection, name: 'Home' },
+  { path: '/dashboard', component: DashboardSection, name: 'Dashboard' },
+  { path: '/indexes', component: IndexesSection, name: 'Index' },
+  { path: '/settings', component: SettingsSection, name: 'Setting' },
+  { path: '/users', component: UsersSection, name: 'Users' }
 ];
 
 // Creamos la instancia del enrutador
