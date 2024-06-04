@@ -5,7 +5,6 @@ var HomeSection = {
         <p class="lead">Check what's happening on your EduardSearch implementation.</p>
         <hr class="my-4">
     </div>
-    
     <div class="card">
         <div class="card-header">
             Busquedas
@@ -17,6 +16,7 @@ var HomeSection = {
             </blockquote>
         </div>
     </div>
+
     <div class="card">
         <div class="card-header">
             Sugeridos
@@ -28,6 +28,7 @@ var HomeSection = {
             </blockquote>
         </div>
     </div>
+    
     <div class="card">
         <div class="card-header">
             Data
