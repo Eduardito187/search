@@ -43,28 +43,32 @@ Vue.prototype.$appName = window.configFrontend.app_name_frontend;
 Vue.prototype.$currentYear = window.configFrontend.server_year;
 Vue.prototype.$loadedPage = false;
 Vue.prototype.$customer = null;
-let self = Vue.prototype;
 
-fetch(window.configFrontend.base_url_frontend + 'api/account/customer-information', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': "Bearer " + window.configFrontend.token_access_frontend,
-    'Cache-Control': 'no-cache',
-    'Customer-Key': localStorage.getItem('customer_frontend')
+export default {
+  created() {
+
+    fetch(window.configFrontend.base_url_frontend + 'api/account/customer-information', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': "Bearer " + window.configFrontend.token_access_frontend,
+        'Cache-Control': 'no-cache',
+        'Customer-Key': localStorage.getItem('customer_frontend')
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status && data.code == 200) {
+          this.$customer = data.response;
+          this.$loadedPage = true;
+          console.log(data);
+        }
+      })
+      .catch(error => {
+        console.log(error, 'alert-danger');
+      });
   }
-})
-  .then(response => response.json())
-  .then(data => {
-    if (data.status && data.code == 200) {
-      self.$customer = data.response;
-      self.$loadedPage = true;
-      console.log(data);
-    }
-  })
-  .catch(error => {
-    console.log(error, 'alert-danger');
-  });
+};
 
 new Vue({
   el: '#home-container',
