@@ -42,6 +42,7 @@ new Vue({
                     if (response.status) {
                         if (response.response.status) {
                             localStorage.setItem('customer_frontend', response.response.customer);
+                            self.createCookie('customer_frontend', response.response.customer);
                             self.setMessageAlert(response.response.message, 'alert-success');
                         } else {
                             self.setMessageAlert(response.response.message, 'alert-danger');
@@ -54,6 +55,12 @@ new Vue({
                     self.setMessageAlert(error, 'alert-danger');
                 }
             });
+        },
+        createCookie(name, valor) {
+            var fecha = new Date();
+            fecha.setTime(fecha.getTime() + (365 * 24 * 60 * 60 * 1000));
+            var expira = "expires=" + fecha.toUTCString();
+            document.cookie = name + "=" + valor + ";" + expira + ";path=/";
         },
         validateEmail() {
             var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
