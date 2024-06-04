@@ -55,8 +55,8 @@ fetch(window.configFrontend.base_url_frontend + 'api/account/customer-informatio
   .then(response => response.json())
   .then(data => {
     if (data.status && data.code == 200) {
-      this.$customer = data.response;
-      this.$loadedPage = true;
+      Vue.prototype.$customer = data.response;
+      Vue.prototype.$loadedPage = true;
     }
   })
   .catch(error => {
