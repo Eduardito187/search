@@ -8,7 +8,7 @@
 
 @section('content')
 <div class="container-screen" id="home-container">
-    <aside class="sidebar">
+    <aside class="sidebar" v-if="loadedPage">
       <div class="sidebar-header">
         <img src="https://via.placeholder.com/50" alt="Logo" class="logo">
         <span class="brand" v-if="customer != null">@{{customer.first_name}}</span>
@@ -25,7 +25,7 @@
   	    <i class="fa fa-sign-out"></i> Close session
       </div>
     </aside>
-    <main class="content-page">
+    <main class="content-page" v-if="loadedPage">
       <header id="header-page">
         <h1>My Dashboard</h1>
       </header>
