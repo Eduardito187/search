@@ -46,7 +46,7 @@
         <h1>My Dashboard</h1>
       </header>
       <section class="dashboard-content" id="content-page">
-        <div id="container-body">
+        <div>
             <div class="container-row margin-bottom-20">
               <div class="container-row">
                 <div class="card p-3 chart-large">
@@ -74,15 +74,15 @@
                 </div>
             </div>
         </div>
-        <div class="footer">
-          <div class="pull-right">
-              <span style="margin-right:8px;" class="text-muted font-bold welcome-message">@{{appName}}</span>  <a class="text-muted" href="/"><strong>@{{versionApp}}</strong> </a> 
-          </div>
-          <div>
-              <strong>Copyright</strong> @{{appName}} © @{{currentYear}}
-          </div>
-        </div>
       </section>
+      <div class="footer">
+        <div class="pull-right">
+          <span style="margin-right:8px;" class="text-muted font-bold welcome-message">@{{appName}}</span>  <a class="text-muted" href="/"><strong>@{{versionApp}}</strong> </a> 
+        </div>
+        <div>
+          <strong>Copyright</strong> @{{appName}} © @{{currentYear}}
+        </div>
+      </div>
     </main>
   </div>
 @endsection

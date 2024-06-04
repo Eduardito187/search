@@ -117,7 +117,7 @@ body {
     position: fixed;
     left: 250px;
     bottom: 0px;
-    top: 0px;
+    top: 40px;
     right: 0px;
     overflow-x: auto;
 }
@@ -204,8 +204,4 @@ canvas {
     right: 0px;
     padding: 10px;
     background-color: #ffffff;
-}
-
-#content-page #container-body {
-    margin-bottom: 100px;
 }
