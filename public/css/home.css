@@ -198,9 +198,14 @@ canvas {
 }
 
 .footer {
-    width: 100%;
     position: fixed;
     bottom: 0px;
     left: 250px;
     right: 0px;
+    padding: 10px;
+    background-color: #ffffff;
+}
+
+#content-page div {
+    margin-bottom: 100px;
 }
