@@ -294,3 +294,20 @@ canvas {
 .container-index .sales-by-country li, .container-index .categories li {
     margin-bottom: 10px;
 }
+
+.close-session {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.close-session i {
+    margin-right: 10px;
+}
+
+.close-session:hover {
+    background-color: #44426a;
+    cursor: pointer;
+}

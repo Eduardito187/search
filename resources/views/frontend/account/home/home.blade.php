@@ -21,12 +21,8 @@
           <li><router-link to="/settings"><i class="fa fa-cog"></i> Settings</router-link></li>
         </ul>
       </nav>
-      <div style="    display: flex;
-    align-items: center;
-    padding: 15px 20px;
-    color: #ffffff;
-    text-decoration: none;">
-  	    <i class="fa fa-cog"></i> Close session
+      <div class="close-session">
+  	    <i class="fa fa-sign-out"></i> Close session
       </div>
     </aside>
     <main class="content-page">
