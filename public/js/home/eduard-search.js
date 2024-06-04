@@ -43,7 +43,7 @@ Vue.prototype.$appName = window.configFrontend.app_name_frontend;
 Vue.prototype.$currentYear = window.configFrontend.server_year;
 Vue.prototype.$loadedPage = false;
 Vue.prototype.$customer = null;
-let self = this;
+let self = Vue.prototype;
 
 fetch(window.configFrontend.base_url_frontend + 'api/account/customer-information', {
   method: 'POST',
@@ -59,10 +59,11 @@ fetch(window.configFrontend.base_url_frontend + 'api/account/customer-informatio
     if (data.status && data.code == 200) {
       self.$customer = data.response;
       self.$loadedPage = true;
+      console.log(data);
     }
   })
   .catch(error => {
-    self.setMessageAlert(error, 'alert-danger');
+    console.log(error, 'alert-danger');
   });
 
 new Vue({
