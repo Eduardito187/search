@@ -44,9 +44,8 @@ Vue.prototype.$currentYear = window.configFrontend.server_year;
 Vue.prototype.$loadedPage = false;
 Vue.prototype.$customer = null;
 
-function loadedCustomer()
+function loadedCustomer(self)
 {
-  let self = this;
   fetch(window.configFrontend.base_url_frontend + 'api/account/customer-information', {
     method: 'POST',
     headers: {
@@ -68,7 +67,7 @@ function loadedCustomer()
       console.log(error, 'alert-danger');
     });
 }
-loadedCustomer();
+loadedCustomer(Vue.prototype);
 
 new Vue({
   el: '#home-container',
