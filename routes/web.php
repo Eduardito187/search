@@ -21,7 +21,8 @@ $routes = [
     '/home' => 'welcome',
     '/support' => 'support',
     '/contacts' => 'contacts',
-    '/notifications' => 'notifications'
+    '/notifications' => 'notifications',
+    '/account' => 'account'
 ];
 
 // Asociar las rutas a las vistas

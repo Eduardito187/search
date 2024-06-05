@@ -1,7 +1,7 @@
 var NotificationsSection = {
     template: `
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 mb-4">
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
@@ -16,7 +16,7 @@ var NotificationsSection = {
                 </div>
             </div>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-12 mb-4">
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
@@ -31,7 +31,7 @@ var NotificationsSection = {
                 </div>
             </div>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-12 mb-4">
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
@@ -46,7 +46,7 @@ var NotificationsSection = {
                 </div>
             </div>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-12 mb-4">
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">

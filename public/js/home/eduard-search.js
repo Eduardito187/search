@@ -32,7 +32,8 @@ const routes = [
   { path: '/users', component: UsersSection, name: 'Users' },
   { path: '/support', component: SupportSection, name: 'Support' },
   { path: '/contacts', component: ContactsSection, name: 'Contacts' },
-  { path: '/notifications', component: NotificationsSection, name: 'Notifications' }
+  { path: '/notifications', component: NotificationsSection, name: 'Notifications' },
+  { path: '/account', component: AccountSection, name: 'Account' }
 ];
 
 // Creamos la instancia del enrutador
