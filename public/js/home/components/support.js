@@ -11,8 +11,10 @@ var SupportSection = {
                         </div>
                         <div class="col-md-8">
                             <div class="row">
-                                <div class="alert alert-info custom-alert" role="alert">
-                                    <i class="bi bi-info-circle"></i> Algolia cannot currently access your account.
+                                <div class="col-md-12">
+                                    <div class="alert alert-info custom-alert" role="alert">
+                                        <i class="bi bi-info-circle"></i> Algolia cannot currently access your account.
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">

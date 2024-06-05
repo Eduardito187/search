@@ -51,5 +51,6 @@
     <script src="{{ asset('js/home/components/settings.js') }}"></script>
     <script src="{{ asset('js/home/components/users.js') }}"></script>
     <script src="{{ asset('js/home/components/support.js') }}"></script>
+    <script src="{{ asset('js/home/components/contacts.js') }}"></script>
     <script src="{{ asset('js/home/eduard-search.js') }}"></script>
 @endsection
