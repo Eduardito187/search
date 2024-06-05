@@ -2,9 +2,9 @@ var SettingsSection = {
     template: `
     <div class="container mt-5">
         <div class="row">
+            <h2>Organization Settings</h2>
             <div class="col-md-12">
-                <h2>Organization Settings</h2>
-                <div class="card mb-3">
+                <div class="card col-md-4 mb-3">
                     <div class="card-header">
                         General
                     </div>
@@ -16,7 +16,7 @@ var SettingsSection = {
                     </div>
                 </div>
 
-                <div class="card mb-3">
+                <div class="card col-md-4 mb-3">
                     <div class="card-header">
                         Billing
                     </div>
@@ -31,7 +31,7 @@ var SettingsSection = {
                     </div>
                 </div>
 
-                <div class="card mb-3">
+                <div class="card col-md-4 mb-3">
                     <div class="card-header">
                         Team and Access
                     </div>
@@ -42,9 +42,11 @@ var SettingsSection = {
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <h2>Personal Settings</h2>
-                <div class="card mb-3">
+            <h2>Personal Settings</h2>
+            <div class="col-md-12">
+                <div class="card col-md-4 mb-3">
                     <div class="card-header">
                         Personal Settings
                     </div>
