@@ -318,3 +318,11 @@ canvas {
     padding-left: 10px;
     padding-right: 10px;
 }
+
+.card-header {
+    font-weight: bold;
+    background-color: #ffffff;
+}
+.list-group-item {
+    cursor: pointer;
+}
