@@ -327,13 +327,3 @@ canvas {
 .list-group-item {
     cursor: pointer;
 }
-
-.custom-card {
-    margin-top: 20px;
-}
-.custom-alert {
-    margin-top: 10px;
-}
-.custom-select {
-    width: 200px;
-}
