@@ -62,6 +62,7 @@ var SettingsSection = {
                                 <a href="#" class="list-group-item list-group-item-action">Account details</a>
                                 <a href="#" class="list-group-item list-group-item-action">Email notifications</a>
                                 <a href="#" class="list-group-item list-group-item-action">Contacts</a>
+                                <a href="#" class="list-group-item list-group-item-action">Support</a>
                             </div>
                         </div>
                     </div>
