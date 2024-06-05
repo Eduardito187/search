@@ -11,26 +11,19 @@ var ContactsSection = {
                         </div>
                         <div class="col-md-8">
                             <div class="row">
-                                <div class="col-md-12">
-                                    <div class="alert alert-info custom-alert" role="alert">
-                                        <i class="bi bi-info-circle"></i> Algolia cannot currently access your account.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-6">
                                     <label for="access-level" class="form-label">Data Privacy Officer name</label>
-                                    <input type="text" class="form-input" />
+                                    <input type="text" class="form-control" />
                                 </div>
                                 <div class="col-md-6">
                                     <label for="period" class="form-label">Phone number</label>
-                                    <input type="text" class="form-input" />
+                                    <input type="text" class="form-control" />
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <label for="access-level" class="form-label">Mails</label>
-                                    <input type="text" class="form-input" />
+                                    <input type="text" class="form-control" />
                                 </div>
                             </div>
                         </div>
@@ -45,7 +38,7 @@ var ContactsSection = {
                             <div class="row">
                                 <div class="col-md-12">
                                     <label for="access-level" class="form-label">Mails</label>
-                                    <input type="text" class="form-input" />
+                                    <input type="text" class="form-control" />
                                 </div>
                             </div>
                         </div>
