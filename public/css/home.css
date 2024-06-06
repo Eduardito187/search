@@ -395,3 +395,16 @@ canvas {
 .api-key-value span {
     display: block;
 }
+
+#header-page {
+    display: flex;
+}
+
+#header-page .section-back {
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
