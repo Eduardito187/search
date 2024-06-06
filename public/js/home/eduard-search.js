@@ -1,10 +1,3 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const submenu = document.querySelector('.submenu');
-  submenu.addEventListener('click', () => {
-    submenu.classList.toggle('open');
-  });
-});
-
 $(document).ready(function() {
   if ($('#header-page').length > 0) {
     var lastScrollTop = 0;
