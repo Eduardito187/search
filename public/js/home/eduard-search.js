@@ -35,7 +35,9 @@ const routes = [
   { path: '/notifications', component: NotificationsSection, name: 'Notifications' },
   { path: '/account', component: AccountSection, name: 'Account' },
   { path: '/team', component: TeamSection, name: 'Team' },
-  { path: '/keys', component: KeySection, name: 'Keys' }
+  { path: '/keys', component: KeySection, name: 'Keys' },
+  { path: '/application', component: ApplicationSection, name: 'Application' },
+  { path: '/infraestructura', component: InfraestructuraSection, name: 'Infraestructura' }
 ];
 
 const router = new VueRouter({
