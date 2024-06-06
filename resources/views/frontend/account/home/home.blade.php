@@ -27,7 +27,9 @@
     </aside>
     <main class="content-page" v-if="loadedPage">
       <header id="header-page">
-        <h1 v-if="isBackAction()">back</h1>
+        <div v-if="isBackAction()">
+          <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        </div>
         <h1>@{{$route.name}}</h1>
       </header>
       <section class="dashboard-content" id="content-page">
