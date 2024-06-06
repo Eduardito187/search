@@ -380,6 +380,7 @@ canvas {
     padding: 20px;
     border-radius: 5px;
     margin-bottom: 20px;
+    display: ruby-text;
 }
 
 .api-key-header {
@@ -388,6 +389,7 @@ canvas {
 
 .api-key-value {
     margin-top: 10px;
+    display: flex;
 }
 
 .api-key-value span {

@@ -1,116 +1,42 @@
 var KeySection = {
     template: `
-    <div class="row member-container">
-        <div class="member-section">
-            <div class="member-header">Dismac</div>
-            <ul class="member-list">
-                <li>
-                    <span class="email">chirag.p@wagento.com</span>
-                    <span class="permissions">
-                        <span class="badge bg-primary">Set-Up Search</span>
-                        <span class="badge bg-primary">Search Features</span>
-                        <span class="badge bg-primary">View Search</span>
-                        <span class="badge bg-primary">Recommend</span>
-                        <span class="badge bg-secondary">Others</span>
-                    </span>
-                </li>
-                <li>
-                    <span class="email">chsaldana@dismac.com.bo</span>
-                    <span class="permissions">
-                        <span class="badge bg-primary">Set-Up Search</span>
-                        <span class="badge bg-primary">Search Features</span>
-                        <span class="badge bg-primary">View Search</span>
-                        <span class="badge bg-secondary">Others</span>
-                        <span class="badge bg-secondary">General</span>
-                    </span>
-                </li>
-                <li>
-                    <span class="email">crubindecelis@dismac.com.bo</span>
-                    <span class="permissions">
-                        <span class="badge bg-primary">Set-Up Search</span>
-                        <span class="badge bg-primary">Search Features</span>
-                        <span class="badge bg-primary">View Search</span>
-                        <span class="badge bg-secondary">Others</span>
-                    </span>
-                </li>
-                <li>
-                    <span class="email">eflores@dismac.com.bo</span>
-                    <span class="permissions">
-                        <span class="badge bg-primary">Set-Up Search</span>
-                        <span class="badge bg-primary">Search Features</span>
-                        <span class="badge bg-primary">View Search</span>
-                        <span class="badge bg-primary">Recommend</span>
-                        <span class="badge bg-secondary">Others</span>
-                        <span class="badge bg-secondary">General</span>
-                    </span>
-                </li>
-                <li>
-                    <span class="email">ehhuallata@dismac.com.bo (you)</span>
-                    <span class="permissions">
-                        <span class="badge bg-primary">Set-Up Search</span>
-                        <span class="badge bg-primary">Search Features</span>
-                        <span class="badge bg-primary">View Search</span>
-                        <span class="badge bg-primary">Recommend</span>
-                        <span class="badge bg-secondary">Others</span>
-                        <span class="badge bg-secondary">General</span>
-                    </span>
-                </li>
-                <li>
-                    <span class="email">emcostas@dismac.com.bo</span>
-                    <span class="permissions">
-                        <span class="badge bg-primary">Set-Up Search</span>
-                        <span class="badge bg-primary">Search Features</span>
-                        <span class="badge bg-primary">View Search</span>
-                        <span class="badge bg-primary">Recommend</span>
-                        <span class="badge bg-secondary">Others</span>
-                        <span class="badge bg-secondary">General</span>
-                    </span>
-                </li>
-                <li>
-                    <span class="email">masuchet@dismac.com.bo (Owner)</span>
-                    <span class="permissions">
-                        <span class="badge bg-primary">Set-Up Search</span>
-                        <span class="badge bg-primary">Search Features</span>
-                        <span class="badge bg-primary">View Search</span>
-                        <span class="badge bg-primary">Recommend</span>
-                        <span class="badge bg-secondary">Others</span>
-                        <span class="badge bg-secondary">General</span>
-                    </span>
-                </li>
-                <li>
-                    <span class="email">meserrano@dismac.com.bo</span>
-                    <span class="permissions">
-                        <span class="badge bg-primary">Set-Up Search</span>
-                        <span class="badge bg-primary">Search Features</span>
-                        <span class="badge bg-primary">View Search</span>
-                        <span class="badge bg-primary">Recommend</span>
-                        <span class="badge bg-secondary">Others</span>
-                        <span class="badge bg-secondary">General</span>
-                    </span>
-                </li>
-                <li>
-                    <span class="email">mfrojas@dismac.com.bo</span>
-                    <span class="permissions">
-                        <span class="badge bg-primary">Set-Up Search</span>
-                        <span class="badge bg-primary">Search Features</span>
-                        <span class="badge bg-primary">View Search</span>
-                        <span class="badge bg-primary">Recommend</span>
-                        <span class="badge bg-secondary">Others</span>
-                        <span class="badge bg-secondary">General</span>
-                    </span>
-                </li>
-                <li>
-                    <span class="email">mrrivera@dismac.com.bo</span>
-                    <span class="permissions">
-                        <span class="badge bg-primary">Set-Up Search</span>
-                        <span class="badge bg-primary">Search Features</span>
-                        <span class="badge bg-primary">View Search</span>
-                        <span class="badge bg-primary">Recommend</span>
-                        <span class="badge bg-secondary">Others</span>
-                        <span class="badge bg-secondary">General</span>
-                    </span>
-                </li>
-            </ul>
+    <div class="api-key-container">
+        <div class="api-key-section">
+            <div class="api-key-header">Application ID</div>
+            <div class="api-key-value">HolaNMundo</div>
+        </div>
+        <div class="api-key-section">
+            <div class="api-key-header">Search API Key</div>
+            <div class="api-key-value">
+                <span>ff5a86f713772d4c221b11820d5a3901</span>
+                <button class="btn btn-warning btn-sm">Regenerate</button>
+            </div>
+        </div>
+        <div class="api-key-section">
+            <div class="api-key-header">Write API Key</div>
+            <div class="api-key-value">
+                <span>••••••••••••••••••••••••••••••••••••••</span>
+                <button class="btn btn-warning btn-sm">Regenerate</button>
+            </div>
+        </div>
+        <div class="api-key-section">
+            <div class="api-key-header">Admin API Key</div>
+            <div class="api-key-value">
+                <span>••••••••••••••••••••••••••••••••••••••</span>
+                <button class="btn btn-warning btn-sm">Regenerate</button>
+            </div>
+        </div>
+        <div class="api-key-section">
+            <div class="api-key-header">Analytics API Key</div>
+            <div class="api-key-value">24915dc8bb7abe34a6063766cc0170b2</div>
+        </div>
+        <div class="api-key-section">
+            <div class="api-key-header">Usage API Key</div>
+            <div class="api-key-value">aa14b5a40b66ba962d2c58d472f70120</div>
+        </div>
+        <div class="api-key-section">
+            <div class="api-key-header">Monitoring API Key</div>
+            <div class="api-key-value">517359c6965beeaa1a397908b1642c70</div>
         </div>
     </div>
     `,
