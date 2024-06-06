@@ -71,11 +71,6 @@ var SettingsSection = {
         </div>
     </div>
     `,
-    mounted() {
-        $(document).ready(function() {
-            $('.list-group-item').on('click', function() {
-                alert('This feature is currently not implemented.');
-            });
-        });        
+    mounted() {     
     }
 };
