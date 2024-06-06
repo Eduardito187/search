@@ -11,8 +11,8 @@ var SettingsSection = {
                         </div>
                         <div class="card-body">
                             <div class="list-group">
-                                <a href="#" class="list-group-item list-group-item-action">Applications</a>
-                                <a href="#" class="list-group-item list-group-item-action">Infrastructure</a>
+                                <router-link class="list-group-item list-group-item-action" to="/application">Applications</router-link>
+                                <router-link class="list-group-item list-group-item-action" to="/infraestructura">Infrastructure</router-link>
                             </div>
                         </div>
                     </div>
@@ -42,8 +42,8 @@ var SettingsSection = {
                         </div>
                         <div class="card-body">
                             <div class="list-group">
-                                <a href="#" class="list-group-item list-group-item-action">API Keys</a>
-                                <a href="#" class="list-group-item list-group-item-action">Team</a>
+                                <router-link class="list-group-item list-group-item-action" to="/keys">API Keys</router-link>
+                                <router-link class="list-group-item list-group-item-action" to="/team">Team</router-link>
                             </div>
                         </div>
                     </div>
@@ -59,10 +59,10 @@ var SettingsSection = {
                         </div>
                         <div class="card-body">
                             <div class="list-group">
-                                <a href="#" class="list-group-item list-group-item-action">Account details</a>
-                                <a href="#" class="list-group-item list-group-item-action">Email notifications</a>
-                                <a href="#" class="list-group-item list-group-item-action">Contacts</a>
-                                <a href="#" class="list-group-item list-group-item-action">Support</a>
+                                <router-link class="list-group-item list-group-item-action" to="/account">Account details</router-link>
+                                <router-link class="list-group-item list-group-item-action" to="/notifications">Notificationss</router-link>
+                                <router-link class="list-group-item list-group-item-action" to="/contacts">Contacts</router-link>
+                                <router-link class="list-group-item list-group-item-action" to="/support">Support</router-link>
                             </div>
                         </div>
                     </div>
