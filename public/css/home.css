@@ -332,3 +332,64 @@ canvas {
     background-color: #007bff;
     border-color: #007bff;
 }
+
+.member-container {
+    margin: 20px;
+}
+
+.member-section {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.member-header {
+    font-weight: bold;
+}
+
+.member-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.member-list li {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+.member-list li .email {
+    flex-grow: 1;
+}
+
+.member-list li .permissions {
+    flex-grow: 2;
+}
+
+.badge {
+    margin-right: 5px;
+}
+
+.api-key-container {
+    margin: 20px;
+}
+
+.api-key-section {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.api-key-header {
+    font-weight: bold;
+}
+
+.api-key-value {
+    margin-top: 10px;
+}
+
+.api-key-value span {
+    display: block;
+}

@@ -33,10 +33,11 @@ const routes = [
   { path: '/support', component: SupportSection, name: 'Support' },
   { path: '/contacts', component: ContactsSection, name: 'Contacts' },
   { path: '/notifications', component: NotificationsSection, name: 'Notifications' },
-  { path: '/account', component: AccountSection, name: 'Account' }
+  { path: '/account', component: AccountSection, name: 'Account' },
+  { path: '/team', component: TeamSection, name: 'Team' },
+  { path: '/keys', component: KeySection, name: 'Keys' }
 ];
 
-// Creamos la instancia del enrutador
 const router = new VueRouter({
   mode: 'history',
   routes
@@ -75,7 +76,6 @@ new Vue({
           if (data.status && data.code == 200) {
             self.customer = data.response;
             self.loadedPage = true;
-            console.log(data);
           }
         })
         .catch(error => {
