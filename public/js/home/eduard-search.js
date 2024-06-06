@@ -55,6 +55,7 @@ new Vue({
   data: {
     customer: null,
     loadedPage: false,
+    routesBase: ['/', 'dashboard', 'indexes', 'users', 'settings']
   },
   methods: {
     loadedCustomer() {
@@ -83,6 +84,13 @@ new Vue({
         .catch(error => {
           console.log(error, 'alert-danger');
         });
+    },
+    isBackAction () {
+      console.log(this.$route.path);
+      return this.routesBase.includes(this.$route.path)
+    },
+    backPage() {
+      this.$router.go(-1);
     },
     deleteCookie(name) {
       document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
