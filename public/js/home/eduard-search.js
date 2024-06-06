@@ -86,8 +86,7 @@ new Vue({
         });
     },
     isBackAction () {
-      console.log(this.$route.path);
-      return this.routesBase.includes(this.$route.path)
+      return !this.routesBase.includes(this.$route.path)
     },
     backPage() {
       this.$router.go(-1);
