@@ -22,6 +22,7 @@ use App\Models\RankingSorting;
 use App\Models\SortingType;
 use App\Models\TypeAttribute;
 use Illuminate\Support\Str;
+use App\Helpers\Search\Core as CoreSearch;
 
 class Import
 {
@@ -35,8 +36,19 @@ class Import
      */
     public $coreHttp;
 
+    /**
+     * @var array
+     */
+    protected $productProccess = [];
+
+    /**
+     * @var CoreSearch
+     */
+    protected $coreSearch;
+
     public function __construct() {
         $this->coreHttp = new CoreHttp();
+        $this->coreSearch = new CoreSearch();
     }
 
     /**
@@ -180,6 +192,7 @@ class Import
 
             $client = $this->indexConfiguration->indexCatalog->client;
             $this->importProduct($params, $client, $this->indexConfiguration->id_index_catalog);
+            $this->createdIndexList($this->productProccess, $this->indexConfiguration->indexCatalog);
 
             return $this->coreHttp->constructResponse([], "Producto creado exitosamente.", 200, true);
         } catch (Exception $e) {
@@ -480,9 +493,62 @@ class Import
                 }
             }
 
+            $this->createdIndexList($this->productProccess, $this->indexConfiguration->indexCatalog);
+
             return $this->coreHttp->constructResponse([], "Productos creados exitosamente.", 200, true);
         } catch (Exception $e) {
             return $this->coreHttp->constructResponse([], $e->getMessage(), 500, false);
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function createdIndexList($productProccess, $index)
+    {
+        $attributesSearch = $this->coreSearch->getSearchAttributesByIndex($index);
+
+        foreach ($productProccess as $productId) {
+            $indexValues = [];
+
+            foreach ($attributesSearch as $attributeSearchable) {
+                $indexValues = array_merge(
+                    $indexValues,
+                    $this->coreSearch->getProductValueSearch(
+                        $attributeSearchable->id_attribute,
+                        $index->id,
+                        $productId
+                    )
+                );
+                $indexValues = array_merge(
+                    $indexValues,
+                    $this->coreSearch->getProductInfoBasic($productId),
+                );
+            }
+
+            $this->savedIndex($productId, $index->id, $indexValues);
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function savedIndex(int $idProduct, int $idIndex, array $listValue = [])
+    {
+        foreach ($listValue as $value) {
+            try {
+                $newProductIndex = new ProductIndex();
+                $newProductIndex->id_product = $idProduct;
+                $newProductIndex->id_index_catalog = $idIndex;
+                $newProductIndex->value = $value;
+                $newProductIndex->status = 1;
+                $newProductIndex->created_at = date("Y-m-d H:i:s");
+                $newProductIndex->updated_at = null;
+                $newProductIndex->save();
+                return $newProductIndex;
+            } catch (Exception $e) {
+                return null;
+            }
         }
     }
 
@@ -984,6 +1050,7 @@ class Import
                 );
 
                 if ($updateProduct != null) {
+                    $this->productProccess[] = $updateProduct->id;
                     $this->setProductMedia($updateProduct->id, $idIndex, $product["image"]);
 
                     if (isset($product["attributes"]) && is_array($product["attributes"])) {
@@ -998,6 +1065,7 @@ class Import
                 );
 
                 if ($newProduct != null) {
+                    $this->productProccess[] = $newProduct->id;
                     $this->setProductMedia($newProduct->id, $idIndex, $product["image"]);
                     $this->createProductIndex($newProduct, $idIndex);
 

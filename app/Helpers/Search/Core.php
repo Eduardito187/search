@@ -641,6 +641,28 @@ class Core
     /**
      * @param int $idAttribute
      * @param int $idIndex
+     * @param int $idProduct
+     * @return array
+     */
+    public function getProductValueSearch(int $idAttribute, int $idIndex, int $idProduct)
+    {
+        return ProductAttribute::join('product_index', function ($join) use ($idAttribute, $idIndex) {
+                $join->on('product_attribute.id_product', '=', 'product_index.id_product')
+                     ->on('product_attribute.id_index', '=', 'product_index.id_index');
+            })
+            ->where('product_attribute.id_attribute', $idAttribute)
+            ->where('product_attribute.id_index', $idIndex)
+            ->where('product_index.status', 1)
+            ->where('product_attribute.id_product', $idProduct)
+            ->pluck('product_attribute.value')
+            ->unique()
+            ->toArray();
+        
+    }
+
+    /**
+     * @param int $idAttribute
+     * @param int $idIndex
      * @param string $query
      * @param array $excludeIds
      * @return array
@@ -666,6 +688,25 @@ class Core
             ->unique()
             ->toArray();
         
+    }
+
+    /**
+     * @param int $idProduct
+     * @return array
+     */
+    public function getProductInfoBasic(int $idProduct)
+    {
+        $product = Product::find($idProduct);
+
+        if ($product == null) {
+            return [];
+        }
+
+        if ($product->status == false) {
+            return [];
+        }
+
+        return [$product->sku, $product->name];
     }
 
     /**
