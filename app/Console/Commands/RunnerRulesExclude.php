@@ -32,6 +32,7 @@ class RunnerRulesExclude extends Command
      */
     public function handle()
     {
+        /*
         $allRulesExcludes = AttributesRulesExclude::all();
 
         foreach ($allRulesExcludes as $rule) {
@@ -97,6 +98,7 @@ class RunnerRulesExclude extends Command
                 Log::channel('runnerRulesExclude')->info("productsId => ".json_encode(array_merge($idProductsDisabled, $productsWithoutAttributes)));
             }
         }
+        */
 
         Log::channel('runnerRulesExclude')->info("Cron runnerRulesExclude ejecutado.");
         return Command::SUCCESS;

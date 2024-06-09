@@ -4,11 +4,11 @@ namespace App\Console\Commands;
 
 use App\Models\Attributes;
 use App\Models\Client;
+use App\Models\IndexProducts;
 use App\Models\Product;
 use App\Models\ProductAttribute;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
-use App\Models\ProductIndex;
 use Carbon\Carbon;
 
 class DisabledIndexProducts extends Command
@@ -35,7 +35,7 @@ class DisabledIndexProducts extends Command
     public function handle()
     {
         $fechaLimite = Carbon::now()->subHours(24);
-        ProductIndex::where('status', true)->where('updated_at', '<', $fechaLimite)->update(['status' => false]);
+        IndexProducts::where('status', true)->where('updated_at', '<', $fechaLimite)->update(['status' => false]);
         $allClient = Client::all();
 
         foreach ($allClient as $key => $client) {
@@ -43,7 +43,6 @@ class DisabledIndexProducts extends Command
 
             if (!$price) {
                 foreach ($client->indexes as $key => $index) {
-                    ProductIndex::where('status', true)->where('id_index', $index->id)->update(['status' => false]);
                     Product::where('status', true)->where('id_client', $client->id)->update(['status' => false]);
                 }
             } else {
@@ -53,7 +52,6 @@ class DisabledIndexProducts extends Command
                         $query->where('value', null)
                             ->orWhere('value', '<', 1);
                     })->pluck('id_product')->toArray();
-                    ProductIndex::where('status', true)->whereIn('id_product', $filteredProducts)->update(['status' => false]);
                     Product::where('status', true)->whereIn('id', $filteredProducts)->update(['status' => false]);
 
                     $productsWithoutAttributes = Product::whereNotIn('id', function ($query) {
@@ -63,7 +61,6 @@ class DisabledIndexProducts extends Command
                                     ->orWhere('value', '<', 1);
                             });
                     })->pluck('id')->toArray();
-                    ProductIndex::where('status', true)->whereIn('id_product', $productsWithoutAttributes)->update(['status' => false]);
                     Product::where('status', true)->whereIn('id', $productsWithoutAttributes)->update(['status' => false]);
                 }
             }

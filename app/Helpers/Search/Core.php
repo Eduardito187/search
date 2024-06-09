@@ -16,6 +16,7 @@ use App\Models\AttributesRulesExclude;
 use App\Models\BackupQuery;
 use App\Models\FiltersAttributes;
 use App\Models\HistoryCustomer;
+use App\Models\IndexProducts;
 use App\Models\ProductIndex;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
@@ -77,30 +78,9 @@ class Core
             $responseProductIds = [];
 
             if ($backupQuery == null) {
-                foreach ($attributesSearch as $attributeSearchable) {
-                    $idProductList = array_merge(
-                        $idProductList,
-                        $this->getProductsIdFilters(
-                            $attributeSearchable->id_attribute,
-                            $index->id,
-                            $query,
-                            $idProductList
-                        )
-                    );
-                }
-
-                $idProductList = array_merge(
-                    $idProductList,
-                    $this->getProductsLike(
-                        $index->id_client,
-                        $query,
-                        $idProductList
-                    )
-                );
+                $idProductList = $this->searchInIndexProductsTake($index->id, $query, 6);
 
                 if (count($idProductList) > 0) {
-                    $idProductList = $this->getProductsIndexFilters($idProductList, $index->id);
-                    $idProductList = $this->getProductsFilters($idProductList);
                     $this->setBackupQuery($index->id, $header["customer-uuid"][0], $query, $idProductList, $filters);
                 }
 
@@ -163,46 +143,13 @@ class Core
             if (isset($body["filters"])) {
                 $filters = $body["filters"];
             }
-    
-            $attributesSearch = $this->getSearchAttributesByIndex($index);
-    
-            if (count($attributesSearch) == 0) {
-                throw new Exception("El indice no cuenta con atributos para su busqueda.");
-            }
 
             $idProductList = [];
             $backupQuery = $this->getBackupQuery($index->id, $header["customer-uuid"][0], $query, $idProductList, $filters);
             $responseProductIds = [];
 
             if ($backupQuery == null) {
-                foreach ($attributesSearch as $attributeSearchable) {
-                    $idProductList = array_merge(
-                        $idProductList,
-                        $this->getProductsIdFilters(
-                            $attributeSearchable->id_attribute,
-                            $index->id,
-                            $query,
-                            $idProductList
-                        )
-                    );
-                }
-    
-                $idProductList = array_merge(
-                    $idProductList,
-                    $this->getProductsLike(
-                        $index->id_client,
-                        $query,
-                        $idProductList
-                    )
-                );
-    
-                if (count($idProductList) > 0) {
-                    $idProductList = $this->getProductsIndexFilters($idProductList, $index->id);
-                }
-    
-                if (count($idProductList) > 0) {
-                    $idProductList = $this->getProductsFilters($idProductList);
-                }
+                $idProductList = $this->searchInIndexProducts($index->id, $query);
 
                 if ($filters != null && count($filters) > 0) {
                     foreach ($filters as $key => $filter) {
@@ -250,6 +197,24 @@ class Core
         } catch (Exception $e) {
             return $this->coreHttp->constructResponse([], $e->getMessage(), 500, false);
         }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function searchInIndexProducts($index, $query)
+    {
+        return IndexProducts::where('id_index_catalog', $index)->where('value', 'like', '%' . $query . '%')->where('status', 1)
+        ->pluck('id_product')->unique()->values()->toArray();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function searchInIndexProductsTake($index, $query, $take = 1)
+    {
+        return IndexProducts::where('id_index_catalog', $index)->where('value', 'like', '%' . $query . '%')->where('status', 1)
+        ->pluck('id_product')->unique()->values()->take($take)->toArray();
     }
 
     /**
