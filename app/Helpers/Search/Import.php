@@ -555,7 +555,6 @@ class Import
                 $newIndexProducts->created_at = date("Y-m-d H:i:s");
                 $newIndexProducts->updated_at = null;
                 $newIndexProducts->save();
-                return $newIndexProducts;
             } catch (Exception $e) {
                 return null;
             }
