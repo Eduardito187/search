@@ -618,13 +618,12 @@ class Core
      */
     public function getProductValueSearch(int $idAttribute, int $idIndex, int $idProduct)
     {
-        return ProductAttribute::join('product_index', function ($join) use ($idAttribute, $idIndex) {
-                $join->on('product_attribute.id_product', '=', 'product_index.id_product')
-                     ->on('product_attribute.id_index', '=', 'product_index.id_index');
+        return ProductAttribute::join('product', function ($join) use ($idAttribute, $idIndex) {
+                $join->on('product_attribute.id_product', '=', 'product.id');
             })
             ->where('product_attribute.id_attribute', $idAttribute)
             ->where('product_attribute.id_index', $idIndex)
-            ->where('product_index.status', 1)
+            ->where('product.status', 1)
             ->where('product_attribute.id_product', $idProduct)
             ->pluck('product_attribute.value')
             ->unique()

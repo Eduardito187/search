@@ -194,6 +194,7 @@ class Import
             $client = $this->indexConfiguration->indexCatalog->client;
             $this->importProduct($params, $client, $this->indexConfiguration->id_index_catalog);
             $this->createdIndexList($this->productProccess, $this->indexConfiguration->indexCatalog);
+            $this->diabledProductList($this->productProccess, $this->indexConfiguration->indexCatalog);
 
             return $this->coreHttp->constructResponse([], "Producto creado exitosamente.", 200, true);
         } catch (Exception $e) {
@@ -495,6 +496,7 @@ class Import
             }
 
             $this->createdIndexList($this->productProccess, $this->indexConfiguration->indexCatalog);
+            $this->diabledProductList($this->productProccess, $this->indexConfiguration->indexCatalog);
 
             return $this->coreHttp->constructResponse([], "Productos creados exitosamente.", 200, true);
         } catch (Exception $e) {
@@ -529,6 +531,79 @@ class Import
             );
             $this->deleteIndexProduct($index->id, $productId);
             $this->savedIndex($productId, $index->id, $indexValues);
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function diabledProductList($listValue, $index)
+    {
+        $allRulesExcludes = AttributesRulesExclude::all();
+
+        foreach ($allRulesExcludes as $rule) {
+            $idProductsDisabled = [];
+
+            switch ($rule->id_condition) {
+                case 1:
+                    $idProductsDisabled = ProductAttribute::join('product_index', function ($join) use ($rule, $index) {
+                        $join->on('product_attribute.id_product', '=', 'product_index.id_product')
+                                ->on('product_attribute.id_index', '=', 'product_index.id_index');
+                    })
+                    ->where('product_attribute.id_attribute', $rule->id_attribute)
+                    ->where('product_attribute.value', '>=', $rule->value)
+                    ->where('product_attribute.id_index', $index->id)
+                    ->where('product_index.status', 1)
+                    ->whereIn('product_attribute.id_product', $listValue)
+                    ->pluck('product_attribute.id_product')->toArray();
+                case 2:
+                    $idProductsDisabled = ProductAttribute::join('product_index', function ($join) use ($rule, $index) {
+                        $join->on('product_attribute.id_product', '=', 'product_index.id_product')
+                                ->on('product_attribute.id_index', '=', 'product_index.id_index');
+                    })
+                    ->where('product_attribute.id_attribute', $rule->id_attribute)
+                    ->where('product_attribute.value', '>', $rule->value)
+                    ->where('product_attribute.id_index', $index->id)
+                    ->where('product_index.status', 1)
+                    ->whereIn('product_attribute.id_product', $listValue)
+                    ->pluck('product_attribute.id_product')->toArray();
+                case 3:
+                    $idProductsDisabled = ProductAttribute::join('product_index', function ($join) use ($rule, $index) {
+                        $join->on('product_attribute.id_product', '=', 'product_index.id_product')
+                                ->on('product_attribute.id_index', '=', 'product_index.id_index');
+                    })
+                    ->where('product_attribute.id_attribute', $rule->id_attribute)
+                    ->where('product_attribute.value', '<=', $rule->value)
+                    ->where('product_attribute.id_index', $index->id)
+                    ->where('product_index.status', 1)
+                    ->whereIn('product_attribute.id_product', $listValue)
+                    ->pluck('product_attribute.id_product')->toArray();
+                case 4:
+                    $idProductsDisabled = ProductAttribute::join('product_index', function ($join) use ($rule, $index) {
+                        $join->on('product_attribute.id_product', '=', 'product_index.id_product')
+                                ->on('product_attribute.id_index', '=', 'product_index.id_index');
+                    })
+                    ->where('product_attribute.id_attribute', $rule->id_attribute)
+                    ->where('product_attribute.value', '<', $rule->value)
+                    ->where('product_attribute.id_index', $index->id)
+                    ->where('product_index.status', 1)
+                    ->whereIn('product_attribute.id_product', $listValue)
+                    ->pluck('product_attribute.id_product')->toArray();
+                case 5:
+                    $idProductsDisabled = ProductAttribute::join('product_index', function ($join) use ($rule, $index) {
+                        $join->on('product_attribute.id_product', '=', 'product_index.id_product')
+                                ->on('product_attribute.id_index', '=', 'product_index.id_index');
+                    })
+                    ->where('product_attribute.id_attribute', $rule->id_attribute)
+                    ->where('product_attribute.value', '=', $rule->value)
+                    ->where('product_attribute.id_index', $index->id)
+                    ->where('product_index.status', 1)
+                    ->whereIn('product_attribute.id_product', $listValue)
+                    ->pluck('product_attribute.id_product')->toArray();
+            }
+
+            ProductIndex::where('status', true)->whereIn('id_product', $idProductsDisabled)->update(['status' => false]);
+            IndexProducts::where('status', true)->whereIn('id_product', $idProductsDisabled)->update(['status' => false]);
         }
     }
 
