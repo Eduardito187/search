@@ -11,7 +11,7 @@ class ProductIndex extends Model
 {
     use HasFactory;
 
-    protected $table = 'product_index';
+    protected $table = 'index_products';
     protected $fillable = ['id_product', 'id_index_catalog', 'value', 'status'];
     protected $hidden = ['created_at', 'updated_at'];
     public $incrementing = false;
