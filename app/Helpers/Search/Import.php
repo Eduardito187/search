@@ -521,14 +521,23 @@ class Import
                         $productId
                     )
                 );
-                $indexValues = array_merge(
-                    $indexValues,
-                    $this->coreSearch->getProductInfoBasic($productId),
-                );
             }
 
+            $indexValues = array_merge(
+                $indexValues,
+                $this->coreSearch->getProductInfoBasic($productId),
+            );
+            $this->deleteIndexProduct($index->id, $productId);
             $this->savedIndex($productId, $index->id, $indexValues);
         }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function deleteIndexProduct($idIndex, $idProduct)
+    {
+        return IndexProducts::where('id_index_catalog', $idIndex)->where('id_product', $idProduct)->delete();
     }
 
     /**
