@@ -23,6 +23,7 @@ use App\Models\SortingType;
 use App\Models\TypeAttribute;
 use Illuminate\Support\Str;
 use App\Helpers\Search\Core as CoreSearch;
+use App\Models\IndexProducts;
 
 class Import
 {
@@ -537,15 +538,15 @@ class Import
     {
         foreach ($listValue as $value) {
             try {
-                $newProductIndex = new ProductIndex();
-                $newProductIndex->id_product = $idProduct;
-                $newProductIndex->id_index_catalog = $idIndex;
-                $newProductIndex->value = $value;
-                $newProductIndex->status = 1;
-                $newProductIndex->created_at = date("Y-m-d H:i:s");
-                $newProductIndex->updated_at = null;
-                $newProductIndex->save();
-                return $newProductIndex;
+                $newIndexProducts = new IndexProducts();
+                $newIndexProducts->id_product = $idProduct;
+                $newIndexProducts->id_index_catalog = $idIndex;
+                $newIndexProducts->value = $value;
+                $newIndexProducts->status = 1;
+                $newIndexProducts->created_at = date("Y-m-d H:i:s");
+                $newIndexProducts->updated_at = null;
+                $newIndexProducts->save();
+                return $newIndexProducts;
             } catch (Exception $e) {
                 return null;
             }

@@ -11,9 +11,8 @@ class ProductIndex extends Model
 {
     use HasFactory;
 
-    protected $table = 'index_products';
-    protected $fillable = ['id_product', 'id_index_catalog', 'value', 'status'];
-    protected $hidden = ['created_at', 'updated_at'];
+    protected $table = 'product_index';
+    protected $fillable = ['id_product', 'id_index', 'status', 'updated_at'];
     public $incrementing = false;
     public $timestamps = false;
     
@@ -22,6 +21,6 @@ class ProductIndex extends Model
     }
 
     public function indexCatalog() {
-        return $this->hasOne(IndexCatalog::class, 'id', 'id_index_catalog');
+        return $this->hasOne(IndexCatalog::class, 'id', 'id_index');
     }
 }
