@@ -96,7 +96,7 @@ class Core
 
             return $this->coreHttp->constructResponse(
                 [
-                    "products" => $this->responseProducts($responseProductIds, $index),
+                    "products" => $this->responseProducts($responseProductIds, $index, true),
                     "count" => count($responseProductIds),
                     "total" => count($idProductList),
                     "suggestion" => $this->getSuggestionQuery($index->id, $header["customer-uuid"][0], $query)
@@ -351,9 +351,10 @@ class Core
     /**
      * @param array $productsId
      * @param IndexCatalog $index
+     * @param bool $fead
      * @return array
      */
-    public function responseProducts(array $productsId, IndexCatalog $index)
+    public function responseProducts(array $productsId, IndexCatalog $index, bool $fead = false)
     {
         if (count($productsId) == 0) {
             return [];
@@ -367,7 +368,7 @@ class Core
             $rankingSortable[$value] = [];
         }
 
-        return $this->getValuesProduct($rankingSortable, $products, $index->id, $index->id_client);
+        return $this->getValuesProduct($rankingSortable, $products, $index->id, $index->id_client, $fead);
     }
 
     /**
@@ -402,20 +403,26 @@ class Core
      * @param mixed $products
      * @param int $indexId
      * @param int $clientId
+     * @param bool $feed
      * @return array
      */
-    public function getValuesProduct(array $rankingSortable, mixed $products, $indexId, $clientId)
+    public function getValuesProduct(array $rankingSortable, mixed $products, int $indexId, int $clientId, bool $feed = false)
     {
         $itemsResponse = [];
-        $allAttributes = $this->getAllAtributesIdEnabled();
-        $price = Attributes::where('code', 'price')->where('id_client', $clientId)->first();
-        $specialPrice = Attributes::where('code', 'special_price')->where('id_client', $clientId)->first();
-        $cuotaInicial = Attributes::where('code', 'cuota_inicial')->where('id_client', $clientId)->first();
-        $cuotaMonto3 = Attributes::where('code', 'minicuota_monto_tres')->where('id_client', $clientId)->first();
-        $numberFormat = [$price->id, $specialPrice->id, $cuotaInicial->id, $cuotaMonto3->id];
-        $miniCuotaTotal = Attributes::where('code', 'minicuota_cuota_total')->where('id_client', $clientId)->first();
-        $arrayFormat = [$miniCuotaTotal->id];
+        $numberFormat = [];
+    	$arrayFormat = [];
         $productsAttributes = [];
+        $allAttributes = $this->getAllAtributesIdEnabled();
+
+        if ($feed) {
+            $price = Attributes::where('code', 'price')->where('id_client', $clientId)->first();
+            $specialPrice = Attributes::where('code', 'special_price')->where('id_client', $clientId)->first();
+            $cuotaInicial = Attributes::where('code', 'cuota_inicial')->where('id_client', $clientId)->first();
+            $cuotaMonto3 = Attributes::where('code', 'minicuota_monto_tres')->where('id_client', $clientId)->first();
+            $numberFormat = [$price->id, $specialPrice->id, $cuotaInicial->id, $cuotaMonto3->id];
+            $miniCuotaTotal = Attributes::where('code', 'minicuota_cuota_total')->where('id_client', $clientId)->first();
+            $arrayFormat = [$miniCuotaTotal->id];
+        }
 
         foreach ($products as $productData) {
             $valueAttribute = [];
