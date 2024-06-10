@@ -57,6 +57,10 @@ class CustomValidateToken
             $request->header($this->translate->getAuthorization()) != null
         ) {
             if ($this->coreHttp->isValidToken($request->header($this->translate->getAuthorization()))) {
+                if ($request->header($this->translate->getCustomerUuid()) != null) {
+                    $this->coreHttp->setCustomerHistoryUuid($request->ip(), $request->header($this->translate->getCustomerUuid()));
+                }
+
                 return $next($request);
             } else {
                 return abort(self::ERROR_402, $this->translate->getTokenDecline());

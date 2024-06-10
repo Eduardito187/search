@@ -15,6 +15,7 @@ class Translate
     const AUTHORIZATION = "Authorization";
     const TOKEN_DECLINE = "TOKEN decline.";
     const ACCESS_DECLINE = "Access decline.";
+    const CUSTOMER_UUID = "customer-uuid";
     const COLUMN_DOMAIN = "domain";
     const COLUMN_CREATED = "created_at";
     const COLUMN_UPDATED = "updated_at";
@@ -513,6 +514,14 @@ class Translate
     public function getAccessDecline()
     {
         return self::ACCESS_DECLINE;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCustomerUuid()
+    {
+        return self::CUSTOMER_UUID;
     }
 
     /**

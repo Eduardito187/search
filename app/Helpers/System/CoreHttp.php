@@ -9,6 +9,7 @@ use App\Helpers\Text\Translate;
 use App\Models\Config;
 use App\Models\RestrictDomain;
 use App\Models\SystemToken;
+use App\Models\HistoryCustomersUuid;
 
 class CoreHttp
 {
@@ -26,6 +27,9 @@ class CoreHttp
         $this->translate = new Translate();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function constructResponse($response, $responseText = "", $code = 500, $status = false)
     {
         return array(
@@ -45,8 +49,7 @@ class CoreHttp
     }
 
     /**
-     * @param string $domain
-     * @return bool
+     * @inheritDoc
      */
     public function restrictDoamin(string $domain)
     {
@@ -54,8 +57,7 @@ class CoreHttp
     }
 
     /**
-     * @param string $apiKey
-     * @return bool
+     * @inheritDoc
      */
     public function existApiKey(string $apiKey)
     {
@@ -63,8 +65,7 @@ class CoreHttp
     }
 
     /**
-     * @param string $apiKey
-     * @return bool
+     * @inheritDoc
      */
     public function existApiKeyAll(string $apiKey)
     {
@@ -72,7 +73,7 @@ class CoreHttp
     }
 
     /**
-     * @param array $headers
+     * @inheritDoc
      */
     public function validateApiKey($headers, $all = false)
     {
@@ -96,7 +97,7 @@ class CoreHttp
     }
 
     /**
-     * @return string|null
+     * @inheritDoc
      */
     public function getToken($token)
     {
@@ -114,7 +115,7 @@ class CoreHttp
     }
 
     /**
-     * @return bool
+     * @inheritDoc
      */
     public function isValidToken($token)
     {
@@ -136,7 +137,7 @@ class CoreHttp
     }
 
     /**
-     * @return bool
+     * @inheritDoc
      */
     public function isValidAdminToken($token)
     {
@@ -150,7 +151,7 @@ class CoreHttp
     }
 
     /**
-     * @return string
+     * @inheritDoc
      */
     public function getTokenRequest($header)
     {
@@ -170,7 +171,7 @@ class CoreHttp
     }
 
     /**
-     * @return bool
+     * @inheritDoc
      */
     public function validateTokenRequest($header)
     {
@@ -189,8 +190,40 @@ class CoreHttp
         return AutorizationToken::where('token', $token)->where('status', true)->exists();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getClientToken($token)
     {
         return AutorizationToken::where('token', $token)->where('status', true)->first();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setCustomerHistoryUuid($ip, $customerUuid)
+    {
+        $entry = HistoryCustomersUuid::where('ip', $ip)->where('customer_uuid', $customerUuid)->whereDate('created_at', date("Y-m-d"))->first();
+
+        if (!$entry) {
+            $this->saveHistoryUuid($ip, $customerUuid);
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function saveHistoryUuid($ip, $customerUuid)
+    {
+        try {
+            $newHistoryCustomersUuid = new HistoryCustomersUuid();
+            $newHistoryCustomersUuid->ip = $ip;
+            $newHistoryCustomersUuid->customer_uuid = $customerUuid;
+            $newHistoryCustomersUuid->created_at = date("Y-m-d H:i:s");
+            $newHistoryCustomersUuid->updated_at = null;
+            $newHistoryCustomersUuid->save();
+        } catch (Exception $e) {
+            return null;
+        }
     }
 }
