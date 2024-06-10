@@ -57,6 +57,7 @@ class SearchProccess
         $this->query = $query;
         $this->countItems = $countItems;
         $this->code = $code;
+        \Illuminate\Support\Facades\Log::info("runner SearchProccess");
     }
 
     /**

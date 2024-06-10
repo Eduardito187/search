@@ -36,6 +36,7 @@ class AfterSearchProccess implements ShouldQueue
     public function __construct()
     {
         $this->historySearch = new HistorySearch();
+        \Illuminate\Support\Facades\Log::info("runner AfterSearchProccess");
     }
 
     /**
@@ -46,6 +47,7 @@ class AfterSearchProccess implements ShouldQueue
      */
     public function handle(SearchProccess $event)
     {
+        \Illuminate\Support\Facades\Log::info("runner AfterSearchProccess handle");
         $this->historySearch->saveQuerySearchHistory(
             $event->idClient,
             $event->idIndex,

@@ -16,6 +16,7 @@ class HistorySearch
      */
     public function saveQuerySearchHistory($idClient, $idIndex, $customerUuid, $query, $countItems, $code)
     {
+        \Illuminate\Support\Facades\Log::info("runner AfterSearchProccess saveQuerySearchHistory");
         try {
             $newHistoryQuerySearch = new HistoryQuerySearch();
             $newHistoryQuerySearch->id_client = $idClient;
@@ -28,6 +29,7 @@ class HistorySearch
             $newHistoryQuerySearch->updated_at = null;
             $newHistoryQuerySearch->save();
         } catch (Exception $e) {
+            \Illuminate\Support\Facades\Log::info("runner AfterSearchProccess saveQuerySearchHistory => ".$e->getMessage());
             return null;
         }
     }
