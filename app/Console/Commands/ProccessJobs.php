@@ -29,9 +29,8 @@ class ProccessJobs extends Command
      */
     public function handle()
     {
-        $returnVar = NULL;
-        $output  = NULL;
-        exec("php artisan queue:work database --queue=listeners --stop-when-empty", $output, $returnVar);
+        exec("php artisan queue:work database --queue=search_proccess --stop-when-empty");
+        exec("php artisan queue:work database --queue=indexation_proccess --stop-when-empty");
         return Command::SUCCESS;
     }
 }
