@@ -7,7 +7,7 @@ use App\Helpers\History\HistorySearch;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class AfterSearchProccess
+class AfterSearchProccess implements ShouldQueue
 {
     /**
      * The name of the connection the job should be sent to.
