@@ -17,10 +17,16 @@ class FiltersAttributes extends Model
     public $incrementing = false;
     public $timestamps = false;
 
+    /**
+     * @inheritDoc
+     */
     public function attribute() {
         return $this->hasOne(Attributes::class, 'id', 'id_attribute');
     }
 
+    /**
+     * @inheritDoc
+     */
     public function indexCatalog() {
         return $this->hasOne(Client::class, 'id', 'id_client');
     }

@@ -19,9 +19,16 @@ class CustomersAccount extends Model
     protected $keyType = 'integer';
     public $timestamps = false;
 
+    /**
+     * @inheritDoc
+     */
     public function client() {
         return $this->hasOne(Client::class, 'id', 'id_client');
     }
+
+    /**
+     * @inheritDoc
+     */
     public function customerAccountInformation() {
         return $this->hasOne(CustomerAccountInformation::class, 'id_customers_account', 'id');
     }

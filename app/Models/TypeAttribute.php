@@ -18,6 +18,9 @@ class TypeAttribute extends Model
     protected $keyType = 'integer';
     public $timestamps = false;
 
+    /**
+     * @inheritDoc
+     */
     public function attributes() {
         return $this->hasMany(Attributes::class, 'id', 'id_type');
     }

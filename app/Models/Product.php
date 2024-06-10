@@ -17,7 +17,10 @@ class Product extends Model
     public $incrementing = true;
     protected $keyType = 'integer';
     public $timestamps = false;
-    
+
+    /**
+     * @inheritDoc
+     */
     public function productMedia() {
         return $this->hasMany(ProductMedia::class, 'id_product', 'id');
     }

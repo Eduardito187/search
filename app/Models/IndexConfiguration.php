@@ -18,6 +18,9 @@ class IndexConfiguration extends Model
     protected $keyType = 'integer';
     public $timestamps = false;
 
+    /**
+     * @inheritDoc
+     */
     public function indexCatalog() {
         return $this->hasOne(IndexCatalog::class, 'id', 'id_index_catalog');
     }

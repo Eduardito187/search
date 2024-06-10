@@ -19,10 +19,16 @@ class Attributes extends Model
     protected $keyType = 'integer';
     public $timestamps = false;
 
+    /**
+     * @inheritDoc
+     */
     public function typeAttribute() {
         return $this->hasOne(TypeAttribute::class, 'id_type', 'id');
     }
 
+    /**
+     * @inheritDoc
+     */
     public function client() {
         return $this->hasOne(Client::class, 'id_client', 'id');
     }

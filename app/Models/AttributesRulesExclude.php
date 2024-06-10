@@ -18,14 +18,23 @@ class AttributesRulesExclude extends Model
     public $incrementing = false;
     public $timestamps = false;
 
+    /**
+     * @inheritDoc
+     */
     public function client() {
         return $this->hasOne(Client::class, 'id', 'id_client');
     }
 
+    /**
+     * @inheritDoc
+     */
     public function attribute() {
         return $this->hasOne(Attributes::class, 'id', 'id_attribute');
     }
 
+    /**
+     * @inheritDoc
+     */
     public function condition() {
         return $this->hasOne(ConditionsExcludes::class, 'id', 'id_condition');
     }

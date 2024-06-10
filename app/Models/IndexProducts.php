@@ -19,10 +19,16 @@ class IndexProducts extends Model
     protected $keyType = 'integer';
     public $timestamps = false;
 
+    /**
+     * @inheritDoc
+     */
     public function getProduct() {
         return $this->hasOne(Product::class, 'id', 'id_product');
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getIndex() {
         return $this->hasOne(IndexCatalog::class, 'id', 'id_index_catalog');
     }

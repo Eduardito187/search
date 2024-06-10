@@ -20,14 +20,23 @@ class IndexCatalog extends Model
     protected $keyType = 'integer';
     public $timestamps = false;
 
+    /**
+     * @inheritDoc
+     */
     public function indexConfiguration() {
         return $this->hasOne(IndexConfiguration::class, 'id', 'id_index_catalog');
     }
 
+    /**
+     * @inheritDoc
+     */
     public function client() {
         return $this->hasOne(Client::class, 'id', 'id_client');
     }
 
+    /**
+     * @inheritDoc
+     */
     public function productsIndex() {
         return $this->hasMany(ProductIndex::class, 'id_index', 'id_index');
     }

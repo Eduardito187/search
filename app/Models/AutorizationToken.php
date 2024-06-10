@@ -20,10 +20,16 @@ class AutorizationToken extends Model
     protected $keyType = 'integer';
     public $timestamps = false;
 
+    /**
+     * @inheritDoc
+     */
     public function indexAccess() {
         return $this->hasMany(AccessIndex::class, 'id_autorization_token', 'id');
     }
 
+    /**
+     * @inheritDoc
+     */
     public function client() {
         return $this->hasOne(Client::class, 'id', 'id_client');
     }

@@ -17,14 +17,23 @@ class RankingSorting extends Model
     public $incrementing = false;
     public $timestamps = false;
 
+    /**
+     * @inheritDoc
+     */
     public function attribute() {
         return $this->hasOne(Attributes::class, 'id', 'id_attribute');
     }
 
+    /**
+     * @inheritDoc
+     */
     public function indexCatalog() {
         return $this->hasOne(IndexCatalog::class, 'id', 'id_index');
     }
 
+    /**
+     * @inheritDoc
+     */
     public function sortingType() {
         return $this->hasOne(SortingType::class, 'id', 'id_sort_type');
     }

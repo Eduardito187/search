@@ -17,11 +17,17 @@ class Client extends Model
     public $incrementing = true;
     protected $keyType = 'integer';
     public $timestamps = false;
-    
+
+    /**
+     * @inheritDoc
+     */
     public function indexes() {
         return $this->hasMany(IndexCatalog::class, 'id_client', 'id');
     }
 
+    /**
+     * @inheritDoc
+     */
     public function autorizationToken() {
         return $this->hasOne(AutorizationToken::class, 'id_client', 'id');
     }

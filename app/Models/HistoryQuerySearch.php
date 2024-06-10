@@ -5,36 +5,31 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\IndexCatalog;
-use App\Models\AutorizationToken;
 use App\Models\Client;
 
-class AccessIndex extends Model
+class HistoryQuerySearch extends Model
 {
     use HasFactory;
 
-    protected $table = 'access_index';
-    protected $fillable = ['id_autorization_token', 'id_index', 'id_client'];
-    public $incrementing = false;
+    protected $table = 'history_query_search';
+    protected $fillable = ['id_client', 'id_index', 'customer_uuid', 'query', 'count_items'];
+    protected $hidden = ['created_at', 'updated_at'];
+    protected $primaryKey = 'id';
+    public $incrementing = true;
+    protected $keyType = 'integer';
     public $timestamps = false;
 
     /**
      * @inheritDoc
      */
-    public function client() {
+    public function getClient() {
         return $this->hasOne(Client::class, 'id', 'id_client');
     }
 
     /**
      * @inheritDoc
      */
-    public function index() {
+    public function getIndex() {
         return $this->hasOne(IndexCatalog::class, 'id', 'id_index');
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function autorizationToken() {
-        return $this->hasOne(AutorizationToken::class, 'id', 'id_autorization_token');
     }
 }

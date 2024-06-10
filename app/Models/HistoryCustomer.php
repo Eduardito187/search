@@ -16,6 +16,9 @@ class HistoryCustomer extends Model
     public $incrementing = false;
     public $timestamps = false;
 
+    /**
+     * @inheritDoc
+     */
     public function indexCatalog() {
         return $this->hasOne(IndexCatalog::class, 'id', 'id_index');
     }
