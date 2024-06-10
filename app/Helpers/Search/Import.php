@@ -2,6 +2,7 @@
 
 namespace App\Helpers\Search;
 
+use App\Events\IndexationProccess;
 use App\Models\Attributes;
 use App\Models\AttributeSearch;
 use App\Models\IndexCatalog;
@@ -24,6 +25,7 @@ use App\Models\TypeAttribute;
 use Illuminate\Support\Str;
 use App\Helpers\Search\Core as CoreSearch;
 use App\Models\IndexProducts;
+use Illuminate\Support\Facades\Event;
 
 class Import
 {
@@ -195,6 +197,14 @@ class Import
             $this->importProduct($params, $client, $this->indexConfiguration->id_index_catalog);
             $this->createdIndexList($this->productProccess, $this->indexConfiguration->indexCatalog);
             $this->diabledProductList($this->productProccess, $this->indexConfiguration->indexCatalog);
+
+            Event::dispatch(
+                new IndexationProccess(
+                    count($this->productProccess),
+                    $client->id,
+                    $this->indexConfiguration->id_index_catalog
+                )
+            );
 
             return $this->coreHttp->constructResponse([], "Producto creado exitosamente.", 200, true);
         } catch (Exception $e) {
@@ -497,6 +507,14 @@ class Import
 
             $this->createdIndexList($this->productProccess, $this->indexConfiguration->indexCatalog);
             $this->diabledProductList($this->productProccess, $this->indexConfiguration->indexCatalog);
+
+            Event::dispatch(
+                new IndexationProccess(
+                    count($this->productProccess),
+                    $client->id,
+                    $this->indexConfiguration->id_index_catalog
+                )
+            );
 
             return $this->coreHttp->constructResponse([], "Productos creados exitosamente.", 200, true);
         } catch (Exception $e) {

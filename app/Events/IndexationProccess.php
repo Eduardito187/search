@@ -10,9 +10,14 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class SearchProccess
+class IndexationProccess
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
+
+    /**
+     * @var int
+     */
+    public $countItems;
 
     /**
      * @var int
@@ -25,38 +30,15 @@ class SearchProccess
     public $idIndex;
 
     /**
-     * @var string
-     */
-    public $customerUuid;
-
-    /**
-     * @var string
-     */
-    public $query;
-
-    /**
-     * @var int
-     */
-    public $countItems;
-
-    /**
-     * @var string
-     */
-    public $code;
-
-    /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($idClient, $idIndex, $customerUuid, $query, $countItems, $code)
+    public function __construct($countItems, $idClient, $idIndex)
     {
+        $this->countItems = $countItems;
         $this->idClient = $idClient;
         $this->idIndex = $idIndex;
-        $this->customerUuid = $customerUuid;
-        $this->query = $query;
-        $this->countItems = $countItems;
-        $this->code = $code;
     }
 
     /**
