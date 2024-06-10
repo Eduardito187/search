@@ -35,6 +35,9 @@ class Client
         $this->proccessImport = new Import();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function proccessCreateCliente($params, $headers)
     {
         try {
@@ -84,6 +87,9 @@ class Client
         }
     }
 
+    /**
+     * @inheritDoc
+     */
     public function createClient($name, $code)
     {
         try {

@@ -2,6 +2,7 @@
 
 namespace App\Helpers\Search;
 
+use App\Events\SearchProccess;
 use App\Models\Attributes;
 use App\Models\AttributeSearch;
 use Exception;
@@ -18,8 +19,7 @@ use App\Models\FiltersAttributes;
 use App\Models\HistoryCustomer;
 use App\Models\IndexProducts;
 use App\Models\ProductIndex;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Event;
 
 class Core
 {
@@ -58,6 +58,7 @@ class Core
             $query = $body["query"];
             $filters = null;
             $index = $this->getIndexByApiKey($header["api-key"][0]);
+            $customerUuid = $header["customer-uuid"][0];
 
             if ($index->count_product == 0) {
                 throw new Exception("El indice no cuenta con productos disponible para su busqueda.");
@@ -74,32 +75,43 @@ class Core
             }
 
             $idProductList = [];
-            $backupQuery = $this->getBackupQuery($index->id, $header["customer-uuid"][0], $query, $idProductList, $filters);
+            $backupQuery = $this->getBackupQuery($index->id, $customerUuid, $query, $idProductList, $filters);
             $responseProductIds = [];
 
             if ($backupQuery == null) {
                 $idProductList = $this->searchInIndexProductsTake($index->id, $query, 6);
 
                 if (count($idProductList) > 0) {
-                    $this->setBackupQuery($index->id, $header["customer-uuid"][0], $query, $idProductList, $filters);
+                    $this->setBackupQuery($index->id, $customerUuid, $query, $idProductList, $filters);
                 }
 
                 $responseProductIds = array_slice($idProductList, 0, $this->indexConfiguration->limit_product_feed);
 
                 if (count($responseProductIds) > 0) {
-                    $this->setHistoryResult($index->id, $header["customer-uuid"][0], $query, $responseProductIds);
+                    $this->setHistoryResult($index->id, $customerUuid, $query, $responseProductIds);
                 }
             } else {
                 $idProductList = json_decode($backupQuery->list_products);
                 $responseProductIds = array_slice($idProductList, 0, $this->indexConfiguration->limit_product_feed);
             }
 
+            Event::dispatch(
+                new SearchProccess(
+                    $index->id_client,
+                    $index->id,
+                    $customerUuid,
+                    $query,
+                    count($idProductList),
+                    "feed_response"
+                )
+            );
+
             return $this->coreHttp->constructResponse(
                 [
                     "products" => $this->responseProducts($responseProductIds, $index, true),
                     "count" => count($responseProductIds),
                     "total" => count($idProductList),
-                    "suggestion" => $this->getSuggestionQuery($index->id, $header["customer-uuid"][0], $query)
+                    "suggestion" => $this->getSuggestionQuery($index->id, $customerUuid, $query)
                 ],
                 "Proceso ejecutado exitosamente.",
                 200,
@@ -131,6 +143,7 @@ class Core
             $filters = null;
             $pagination = 1;
             $index = $this->getIndexByApiKey($header["api-key"][0]);
+            $customerUuid = $header["customer-uuid"][0];
     
             if ($index->count_product == 0) {
                 throw new Exception("El indice no cuenta con productos disponible para su busqueda.");
@@ -145,7 +158,7 @@ class Core
             }
 
             $idProductList = [];
-            $backupQuery = $this->getBackupQuery($index->id, $header["customer-uuid"][0], $query, $idProductList, $filters);
+            $backupQuery = $this->getBackupQuery($index->id, $customerUuid, $query, $idProductList, $filters);
             $responseProductIds = [];
 
             if ($backupQuery == null) {
@@ -171,18 +184,29 @@ class Core
                 }
 
                 if (count($idProductList) > 0) {
-                    $this->setBackupQuery($index->id, $header["customer-uuid"][0], $query, $idProductList, $filters);
+                    $this->setBackupQuery($index->id, $customerUuid, $query, $idProductList, $filters);
                 }
         
                 $responseProductIds = array_slice($idProductList, (($pagination - 1) * $this->indexConfiguration->page_limit), $this->indexConfiguration->page_limit);
     
                 if (count($responseProductIds) > 0) {
-                    $this->setHistoryResult($index->id, $header["customer-uuid"][0], $query, $responseProductIds);
+                    $this->setHistoryResult($index->id, $customerUuid, $query, $responseProductIds);
                 }
             } else {
                 $idProductList = json_decode($backupQuery->list_products);
                 $responseProductIds = array_slice($idProductList, (($pagination - 1) * $this->indexConfiguration->page_limit), $this->indexConfiguration->page_limit);
             }
+
+            Event::dispatch(
+                new SearchProccess(
+                    $index->id_client,
+                    $index->id,
+                    $customerUuid,
+                    $query,
+                    count($idProductList),
+                    "page_search_response"
+                )
+            );
     
             return $this->coreHttp->constructResponse(
                 [
