@@ -21,7 +21,7 @@ class AfterIndexationProccess implements ShouldQueue
      *
      * @var string|null
      */
-    public string $queue = 'listeners';
+    public string $queue = 'indexation_proccess';
 
     /**
      * @var HistoryIndexation

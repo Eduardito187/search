@@ -21,7 +21,7 @@ class AfterSearchProccess implements ShouldQueue
      *
      * @var string|null
      */
-    public string $queue = 'listeners';
+    public string $queue = 'search_proccess';
 
     /**
      * @var HistorySearch
