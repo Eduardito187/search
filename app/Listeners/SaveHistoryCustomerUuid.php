@@ -2,12 +2,12 @@
 
 namespace App\Listeners;
 
-use App\Events\SearchProccess;
-use App\Helpers\History\HistorySearch;
+use App\Events\HistoryCustomerUuid;
+use App\Helpers\System\CoreHttp;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class AfterSearchProccess implements ShouldQueue
+class SaveHistoryCustomerUuid implements ShouldQueue
 {
     /**
      * The name of the connection the job should be sent to.
@@ -21,12 +21,12 @@ class AfterSearchProccess implements ShouldQueue
      *
      * @var string|null
      */
-    public string $queue = 'search_proccess';
+    public string $queue = 'save_history_customer_uuid';
 
     /**
-     * @var HistorySearch
+     * @var CoreHttp
      */
-    protected $historySearch;
+    protected $coreHttp;
 
     /**
      * Create the event listener.
@@ -35,24 +35,20 @@ class AfterSearchProccess implements ShouldQueue
      */
     public function __construct()
     {
-        $this->historySearch = new HistorySearch();
+        $this->coreHttp = new coreHttp();
     }
 
     /**
      * Handle the event.
      *
-     * @param  \App\Events\SearchProccess  $event
+     * @param  \App\Events\HistoryCustomerUuid  $event
      * @return void
      */
-    public function handle(SearchProccess $event)
+    public function handle(HistoryCustomerUuid $event)
     {
-        $this->historySearch->saveQuerySearchHistory(
-            $event->idClient,
-            $event->idIndex,
-            $event->customerUuid,
-            $event->query,
-            $event->countItems,
-            $event->code
+        $this->coreHttp->setCustomerHistoryUuid(
+            $event->ip,
+            $event->customerUuid
         );
     }
 }

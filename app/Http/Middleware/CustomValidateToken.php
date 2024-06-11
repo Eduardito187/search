@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Events\HistoryCustomerUuid;
 use \Closure;
 use \Illuminate\Http\Request;
 use App\Helpers\Text\Translate;
@@ -9,6 +10,7 @@ use \Illuminate\Http\Response;
 use \Illuminate\Http\RedirectResponse;
 use App\Helpers\System\Core;
 use App\Helpers\System\CoreHttp;
+use Illuminate\Support\Facades\Event;
 
 class CustomValidateToken
 {
@@ -58,7 +60,12 @@ class CustomValidateToken
         ) {
             if ($this->coreHttp->isValidToken($request->header($this->translate->getAuthorization()))) {
                 if ($request->header($this->translate->getCustomerUuid()) != null) {
-                    $this->coreHttp->setCustomerHistoryUuid($request->ip(), $request->header($this->translate->getCustomerUuid()));
+                    Event::dispatch(
+                        new HistoryCustomerUuid(
+                            $request->ip(),
+                            $request->header($this->translate->getCustomerUuid())
+                        )
+                    );
                 }
 
                 return $next($request);
