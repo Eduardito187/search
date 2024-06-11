@@ -2,15 +2,15 @@ var HomeSection = {
     template: `
     <div>
         <div class="jumbotron">
-            <h1 class="display-4">Welcome!</h1>
-            <p class="lead">Check what's happening on your EduardSearch implementation.</p>
+            <h1 class="display-4">Bienvenido!</h1>
+            <p class="lead">Comprueba lo que esta sucediendo con tu implementación de EduardSearch.</p>
             <hr class="my-4">
             <div class="mb-4"></div>
         </div>
 
         <div class="card mb-4">
             <div class="card-header">
-                Busquedas
+                <i class="fa fa-search" aria-hidden="true"></i> Busquedas
             </div>
             <div class="card-body">
                 <blockquote class="blockquote mb-0">
@@ -22,7 +22,7 @@ var HomeSection = {
 
         <div class="card mb-4">
             <div class="card-header">
-                Sugeridos
+                <i class="fa fa-list" aria-hidden="true"></i> Sugeridos
             </div>
             <div class="card-body">
                 <blockquote class="blockquote mb-0">
@@ -34,7 +34,7 @@ var HomeSection = {
 
         <div class="card mb-4">
             <div class="card-header">
-                Data
+                <i class="fa fa-database" aria-hidden="true"></i> Data
             </div>
             <div class="card-body">
                 <blockquote class="blockquote mb-0">

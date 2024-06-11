@@ -11,6 +11,7 @@ use \Illuminate\Http\RedirectResponse;
 use App\Helpers\System\Core;
 use App\Helpers\System\CoreHttp;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Session;
 
 class CustomValidateToken
 {
@@ -48,6 +49,8 @@ class CustomValidateToken
      */
     public function handle(Request $request, Closure $next)
     {
+        Session::put('start_time', microtime(true));
+
         if ($request->getHost() != "" || $request->getHost() != null) {
             if ($this->coreHttp->restrictDoamin($request->getHost())) {
                 return abort(self::ERROR_404, $this->translate->getAccessDecline());

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreign('id_index')->references('id')->on('index_catalog')->onDelete('cascade');
             $table->string('customer_uuid');
             $table->string('query');
+            $table->double('time_execution');
             $table->string('code');
             $table->integer('count_items');
             $table->timestamp('created_at');

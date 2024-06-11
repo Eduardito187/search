@@ -40,6 +40,11 @@ class SearchProccess
     public $countItems;
 
     /**
+     * @var float
+     */
+    public $timeExecution;
+
+    /**
      * @var string
      */
     public $code;
@@ -49,13 +54,14 @@ class SearchProccess
      *
      * @return void
      */
-    public function __construct($idClient, $idIndex, $customerUuid, $query, $countItems, $code)
+    public function __construct($idClient, $idIndex, $customerUuid, $query, $countItems, $timeExecution, $code)
     {
         $this->idClient = $idClient;
         $this->idIndex = $idIndex;
         $this->customerUuid = $customerUuid;
         $this->query = $query;
         $this->countItems = $countItems;
+        $this->timeExecution = $timeExecution;
         $this->code = $code;
     }
 

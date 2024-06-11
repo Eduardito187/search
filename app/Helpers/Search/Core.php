@@ -20,6 +20,7 @@ use App\Models\HistoryCustomer;
 use App\Models\IndexProducts;
 use App\Models\ProductIndex;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Session;
 
 class Core
 {
@@ -95,6 +96,9 @@ class Core
                 $responseProductIds = array_slice($idProductList, 0, $this->indexConfiguration->limit_product_feed);
             }
 
+            $responseProducts = $this->responseProducts($responseProductIds, $index, true);
+            $searchTimeEnd = microtime(true);
+
             Event::dispatch(
                 new SearchProccess(
                     $index->id_client,
@@ -102,16 +106,33 @@ class Core
                     $customerUuid,
                     $query,
                     count($idProductList),
+                    (($searchTimeEnd - Session::get('start_time')) * 1000),
                     "feed_response"
+                )
+            );
+
+            $suggestionTimeStart = microtime(true);
+            $suggestionResponse = $this->getSuggestionQuery($index->id, $customerUuid, $query);
+            $suggestionTimeEnd = microtime(true);
+
+            Event::dispatch(
+                new SearchProccess(
+                    $index->id_client,
+                    $index->id,
+                    $customerUuid,
+                    $query,
+                    count($suggestionResponse),
+                    (($suggestionTimeEnd - $suggestionTimeStart) * 1000),
+                    "suggestion_feed_response"
                 )
             );
 
             return $this->coreHttp->constructResponse(
                 [
-                    "products" => $this->responseProducts($responseProductIds, $index, true),
+                    "products" => $responseProducts,
                     "count" => count($responseProductIds),
                     "total" => count($idProductList),
-                    "suggestion" => $this->getSuggestionQuery($index->id, $customerUuid, $query)
+                    "suggestion" => $suggestionResponse
                 ],
                 "Proceso ejecutado exitosamente.",
                 200,
@@ -197,6 +218,9 @@ class Core
                 $responseProductIds = array_slice($idProductList, (($pagination - 1) * $this->indexConfiguration->page_limit), $this->indexConfiguration->page_limit);
             }
 
+            $responseProducts = $this->responseProducts($responseProductIds, $index);
+            $searchTimeEnd = microtime(true);
+
             Event::dispatch(
                 new SearchProccess(
                     $index->id_client,
@@ -204,13 +228,14 @@ class Core
                     $customerUuid,
                     $query,
                     count($idProductList),
+                    (($searchTimeEnd - Session::get('start_time')) * 1000),
                     "page_search_response"
                 )
             );
     
             return $this->coreHttp->constructResponse(
                 [
-                    "products" => $this->responseProducts($responseProductIds, $index),
+                    "products" => $responseProducts,
                     "count" => count($responseProductIds),
                     "total" => count($idProductList)
                 ],

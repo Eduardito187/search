@@ -52,6 +52,7 @@ class AfterSearchProccess implements ShouldQueue
             $event->customerUuid,
             $event->query,
             $event->countItems,
+            $event->timeExecution,
             $event->code
         );
     }
