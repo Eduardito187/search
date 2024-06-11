@@ -48,7 +48,7 @@ new Vue({
   data: {
     customer: null,
     loadedPage: false,
-    routesBase: ['/', '/dashboard', '/indexes', '/users', '/settings']
+    routesBase: ['/', '/dashboard', '/indexes', '/users', '/settings', '/home']
   },
   methods: {
     loadedCustomer() {
