@@ -14,8 +14,9 @@ var HomeSection = {
             </div>
             <div class="card-body">
                 <blockquote class="blockquote mb-0">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                    <p>Solicitudes de busquedas.</p>
+                    <hr>
+                    <p>Tiempo de procesamiento.</p>
                 </blockquote>
             </div>
         </div>
@@ -26,8 +27,7 @@ var HomeSection = {
             </div>
             <div class="card-body">
                 <blockquote class="blockquote mb-0">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                    <p>Productos sugeridos.</p>
                 </blockquote>
             </div>
         </div>
