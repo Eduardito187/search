@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Events\HistoryCustomerUuid;
 use App\Events\IndexationProccess;
 use App\Listeners\AfterIndexationProccess;
 use Illuminate\Auth\Events\Registered;
@@ -10,6 +11,7 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use Illuminate\Support\Facades\Event;
 use App\Events\SearchProccess;
 use App\Listeners\AfterSearchProccess;
+use App\Listeners\SaveHistoryCustomerUuid;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -27,6 +29,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         IndexationProccess::class => [
             AfterIndexationProccess::class
+        ],
+        HistoryCustomerUuid::class => [
+            SaveHistoryCustomerUuid::class
         ]
     ];
 
