@@ -430,6 +430,10 @@ canvas {
 .content-chart-eduard-search .apexcharts-toolbar,
 .content-chart-eduard-search .apexcharts-yaxis,
 .content-chart-eduard-search .apexcharts-gridlines-horizontal,
-.content-chart-eduard-search .apexcharts-gridline {
+.content-chart-eduard-search .apexcharts-gridline,
+.content-chart-eduard-search .apexcharts-grid-borders,
+.content-chart-eduard-search .apexcharts-xaxis-tick,
+.content-chart-eduard-search .apexcharts-xcrosshairs,
+.content-chart-eduard-search .apexcharts-ycrosshairs {
     display: none !important;
 }
