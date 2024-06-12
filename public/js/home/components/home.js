@@ -17,7 +17,7 @@ var HomeSection = {
                     <div class="row">
                         <div class="col-md-6 text-start">
                             <div class="row">
-                                <small clas="small-title">Solicitudes de busquedas.</small>
+                                <small clas="small-title">Solicitudes de busquedas</small>
                             </div>
                             <div class="row">
                                 <span class="detail-description">2.57M</span>
@@ -30,7 +30,7 @@ var HomeSection = {
                     <div class="row">
                         <div class="col-md-6 text-start">
                             <div class="row">
-                                <small clas="small-title">Tiempo de procesamiento.</small>
+                                <small clas="small-title">Tiempo de procesamiento</small>
                             </div>
                             <div class="row">
                                 <span class="detail-description">100ms</span>
@@ -52,7 +52,7 @@ var HomeSection = {
                     <div class="row">
                         <div class="col-md-6 text-start">
                             <div class="row">
-                                <small clas="small-title">Productos sugeridos.</small>
+                                <small clas="small-title">Productos sugeridos</small>
                             </div>
                             <div class="row">
                                 <span class="detail-description">2K</span>
@@ -74,7 +74,7 @@ var HomeSection = {
                     <div class="row">
                         <div class="col-md-6 text-start">
                             <div class="row">
-                                <small clas="small-title">Registros.</small>
+                                <small clas="small-title">Registros</small>
                             </div>
                             <div class="row">
                                 <span class="detail-description">500K</span>
@@ -86,7 +86,14 @@ var HomeSection = {
                     <hr>
                     <div class="row">
                         <div class="col-md-12 text-start">
-                            <small clas="small-title">Indices.</small>
+                            <small clas="small-title">Indices</small>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="d-flex bd-highlight">
+                                <div class="p-2 flex-grow-1 bd-highlight">Flex item</div>
+                                <div class="p-2 bd-highlight">Flex item</div>
+                                <div class="p-2 bd-highlight">Third flex item</div>
+                            </div>
                         </div>
                     </div>
                 </blockquote>
