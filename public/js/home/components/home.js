@@ -15,11 +15,13 @@ var HomeSection = {
             <div class="card-body">
                 <blockquote class="blockquote mb-0">
                     <div class="row">
-                        <div class="col-md-6 text-aling-left">
-                            <p>Solicitudes de busquedas.</p>
+                        <div class="col-md-6 text-start">
+                            <div class="row">
+                                <small>Solicitudes de busquedas.</small>
+                            </div>
+                            <div class="row"></div>
                         </div>
-                        <div class="col-md-6 text-aling-right">
-                            <p>Solicitudes de busquedas.</p>
+                        <div class="col-md-6 text-end">
                         </div>
                     </div>
                     <hr>
