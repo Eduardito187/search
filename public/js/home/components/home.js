@@ -90,9 +90,9 @@ var HomeSection = {
                         </div>
                         <div class="col-md-12">
                             <div class="d-flex bd-highlight">
-                                <div class="p-2 flex-grow-1 bd-highlight">Flex item</div>
-                                <div class="p-2 bd-highlight">Flex item</div>
-                                <div class="p-2 bd-highlight">Third flex item</div>
+                                <div class="p-2 flex-grow-1 bd-highlight">Index</div>
+                                <div class="p-2 bd-highlight">Consultas</div>
+                                <div class="p-2 bd-highlight">Registros</div>
                             </div>
                         </div>
                     </div>
