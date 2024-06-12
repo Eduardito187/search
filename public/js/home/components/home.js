@@ -110,33 +110,31 @@ var HomeSection = {
         initializeCharts() {
             var options = {
                 chart: {
-                  height: 200,
-                  type: "line",
-                  stacked: true
+                    height: 100,
+                    type: "line"
                 },
                 colors: ["#FF1654"],
                 series: [
-                  {
-                    name: "Series B",
-                    data: [20, 29, 37, 36, 44, 45, 50, 58]
-                  }
+                    {
+                        name: "Series B",
+                        data: [20, 29, 37, 36, 44, 45, 50, 58]
+                    }
                 ],
                 xaxis: {
-                  show: false,
-                  categories: [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016],labels: {
-                        show: true,}
+                    show: false,
+                    categories: [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016],
+                    labels: {
+                        show: true,
+                    }
                 },
                 stroke: {
-                  curve: 'smooth',
-                },
-                toolbar: {
-                      show: true
+                    curve: 'smooth',
                 }
-              };
-              
-              var chart = new ApexCharts(document.querySelector("#chart-busquedas"), options);
-              
-              chart.render();
+            };
+
+            var chart = new ApexCharts(document.querySelector("#chart-busquedas"), options);
+
+            chart.render();
         }
     },
     created() {
