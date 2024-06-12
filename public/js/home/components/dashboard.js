@@ -49,7 +49,7 @@ var DashboardSection = {
                 }],
                 chart: {
                     type: 'bar',
-                    height: 350
+                    height: 150
                 },
                 plotOptions: {
                     bar: {
