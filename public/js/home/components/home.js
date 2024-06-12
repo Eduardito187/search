@@ -18,7 +18,7 @@ var HomeSection = {
                         <div class="col-md-6 text-aling-left">
                             <p>Solicitudes de busquedas.</p>
                         </div>
-                        <div class="col-md-6 text-aling-left">
+                        <div class="col-md-6 text-aling-right">
                             <p>Solicitudes de busquedas.</p>
                         </div>
                     </div>
