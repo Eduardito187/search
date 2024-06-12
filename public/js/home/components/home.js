@@ -24,6 +24,7 @@ var HomeSection = {
                             </div>
                         </div>
                         <div class="col-md-6 text-end">
+                            <div class="content-chart-eduard-search" id="chart-busquedas"></div>
                         </div>
                     </div>
                     <hr>
@@ -100,5 +101,47 @@ var HomeSection = {
             </div>
         </div>
     </div>
-    `
+    `,
+    data() {
+        return {
+        };
+    },
+    methods: {
+        initializeCharts() {
+            var options = {
+                chart: {
+                  height: 200,
+                  type: "line",
+                  stacked: true
+                },
+                colors: ["#FF1654"],
+                series: [
+                  {
+                    name: "Series B",
+                    data: [20, 29, 37, 36, 44, 45, 50, 58]
+                  }
+                ],
+                xaxis: {
+                  show: false,
+                  categories: [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016],labels: {
+                        show: true,}
+                },
+                stroke: {
+                  curve: 'smooth',
+                },
+                toolbar: {
+                      show: true
+                }
+              };
+              
+              var chart = new ApexCharts(document.querySelector("#chart-busquedas"), options);
+              
+              chart.render();
+        }
+    },
+    created() {
+    },
+    mounted() {
+        this.initializeCharts();
+    }
 };
