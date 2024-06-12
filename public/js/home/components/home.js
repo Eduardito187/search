@@ -14,7 +14,14 @@ var HomeSection = {
             </div>
             <div class="card-body">
                 <blockquote class="blockquote mb-0">
-                    <p>Solicitudes de busquedas.</p>
+                    <div class="row">
+                        <div class="col-md-6 text-aling-left">
+                            <p>Solicitudes de busquedas.</p>
+                        </div>
+                        <div class="col-md-6 text-aling-left">
+                            <p>Solicitudes de busquedas.</p>
+                        </div>
+                    </div>
                     <hr>
                     <p>Tiempo de procesamiento.</p>
                 </blockquote>
