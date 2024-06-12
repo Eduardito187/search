@@ -17,15 +17,28 @@ var HomeSection = {
                     <div class="row">
                         <div class="col-md-6 text-start">
                             <div class="row">
-                                <small>Solicitudes de busquedas.</small>
+                                <small clas="small-title">Solicitudes de busquedas.</small>
                             </div>
-                            <div class="row"></div>
+                            <div class="row">
+                                <span class="detail-description">2.57M</span>
+                            </div>
                         </div>
                         <div class="col-md-6 text-end">
                         </div>
                     </div>
                     <hr>
-                    <p>Tiempo de procesamiento.</p>
+                    <div class="row">
+                        <div class="col-md-6 text-start">
+                            <div class="row">
+                                <small clas="small-title">Tiempo de procesamiento.</small>
+                            </div>
+                            <div class="row">
+                                <span class="detail-description">100ms</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-end">
+                        </div>
+                    </div>
                 </blockquote>
             </div>
         </div>
@@ -36,7 +49,18 @@ var HomeSection = {
             </div>
             <div class="card-body">
                 <blockquote class="blockquote mb-0">
-                    <p>Productos sugeridos.</p>
+                    <div class="row">
+                        <div class="col-md-6 text-start">
+                            <div class="row">
+                                <small clas="small-title">Productos sugeridos.</small>
+                            </div>
+                            <div class="row">
+                                <span class="detail-description">2K</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-end">
+                        </div>
+                    </div>
                 </blockquote>
             </div>
         </div>
@@ -47,8 +71,24 @@ var HomeSection = {
             </div>
             <div class="card-body">
                 <blockquote class="blockquote mb-0">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                    <div class="row">
+                        <div class="col-md-6 text-start">
+                            <div class="row">
+                                <small clas="small-title">Registros.</small>
+                            </div>
+                            <div class="row">
+                                <span class="detail-description">500K</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-end">
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-12 text-start">
+                            <small clas="small-title">Indices.</small>
+                        </div>
+                    </div>
                 </blockquote>
             </div>
         </div>
