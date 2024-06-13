@@ -40,4 +40,53 @@ class IndexCatalog extends Model
     public function productsIndex() {
         return $this->hasMany(ProductIndex::class, 'id_index', 'id_index');
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function historyIndex() {
+        return $this->hasMany(HistoryIndexProccess::class, 'id_index', 'id');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function recentMonthHistoryIndex() {
+        return $this->hasMany(HistoryIndexProccess::class, 'id_index', 'id')->where('created_at', '>=', now()->subDays(30));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function historyQuerySearch() {
+        return $this->hasMany(HistoryQuerySearch::class, 'id_index', 'id');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function recentMonthHistoryQuerySearch() {
+        return $this->hasMany(HistoryQuerySearch::class, 'id_index', 'id')->whereIn('code', ['feed_response', 'page_search_response'])->where('created_at', '>=', now()->subDays(30));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function recentMonthHistoryQuerySearchFeed() {
+        return $this->hasMany(HistoryQuerySearch::class, 'id_index', 'id')->where('code', 'feed_response')->where('created_at', '>=', now()->subDays(30));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function recentMonthHistoryQuerySearchPage() {
+        return $this->hasMany(HistoryQuerySearch::class, 'id_index', 'id')->where('code', 'page_search_response')->where('created_at', '>=', now()->subDays(30));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function recentMonthHistoryQuerySearchSuggestion() {
+        return $this->hasMany(HistoryQuerySearch::class, 'id_index', 'id')->where('code', 'suggestion_feed_response')->where('created_at', '>=', now()->subDays(30));
+    }
 }

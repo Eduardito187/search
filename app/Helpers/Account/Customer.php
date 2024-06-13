@@ -277,8 +277,8 @@ class Customer
         foreach ($currentClient->indexes as $key => $index) {
             $dataIndex[] = [
                 "code" => $index->code,
-                "query" => 0,
-                "record" => 0
+                "query" => $index->recentMonthHistoryQuerySearch()->count(),
+                "record" => $index->recentMonthHistoryIndex()->sum("count")
             ];
         }
 
