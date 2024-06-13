@@ -261,8 +261,8 @@ class Customer
         $currentClient = $customer->client;
         //$currentClient->recentMonthHistoryIndex;
         return [
-            "query" => $this->generateStructureDataBody($currentClient->recentMonthHistoryQuerySearch(), true),
-            "suggestion" => $this->generateStructureDataBody($currentClient->recentMonthHistoryQuerySearchSuggestion()),
+            "query" => $this->generateStructureDataBody($currentClient, "query", true),
+            "suggestion" => $this->generateStructureDataBody($currentClient, "suggestion"),
             "data" => []
         ];
     }
@@ -270,13 +270,13 @@ class Customer
     /**
      * @inheritDoc
      */
-    public function generateStructureDataBody($collection, $generateTime = false)
+    public function generateStructureDataBody($client, $type, $generateTime = false)
     {
         $data = [];
-        $data["counter"] = $this->getCounterDataArray($collection);
+        $data["counter"] = $this->getCounterDataArray($client, $type);
 
         if ($generateTime) {
-            $data["time"] = $this->getTimeDataArray($collection);
+            $data["time"] = $this->getTimeDataArray($client);
         }
 
         return $data;
@@ -299,12 +299,20 @@ class Customer
     /**
      * @inheritDoc
      */
-    public function getCounterDataArray($collection)
+    public function getCounterDataArray($client, $type)
     {
         $structure = $this->generateDateArray();
 
         foreach ($structure["label"] as $key => $date) {
-            $structure["data"][] = $collection->where("created_at", "=", $date)->count();
+            $data = 0;
+
+            if ($type == "query") {
+                $data = $client->recentMonthHistoryQuerySearchByDate($date);
+            } else if ($type == "suggestion") {
+                $data = $client->recentMonthHistoryQuerySearchSuggestionByDate($date);
+            }
+
+            $structure["data"][] = $data;
         }
 
         return $structure;

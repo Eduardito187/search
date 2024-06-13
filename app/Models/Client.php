@@ -45,7 +45,7 @@ class Client extends Model
      * @inheritDoc
      */
     public function recentMonthHistoryIndex() {
-        return $this->hasMany(HistoryIndexProccess::class, 'id_client', 'id');
+        return $this->hasMany(HistoryIndexProccess::class, 'id_client', 'id')->where('created_at', '>=', now()->subDays(30));
     }
 
     /**
@@ -58,28 +58,42 @@ class Client extends Model
     /**
      * @inheritDoc
      */
+    public function recentMonthHistoryQuerySearchByDate($date) {
+        return $this->hasMany(HistoryQuerySearch::class, 'id_client', 'id')->whereIn('code', ['feed_response', 'page_search_response'])->where('created_at', '=', $date);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function recentMonthHistoryQuerySearchSuggestionByDate($date) {
+        return $this->hasMany(HistoryQuerySearch::class, 'id_client', 'id')->where('code', 'suggestion_feed_response')->where('created_at', '=', $date);
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function recentMonthHistoryQuerySearch() {
-        return $this->hasMany(HistoryQuerySearch::class, 'id_client', 'id')->whereIn('code', ['feed_response', 'page_search_response']);
+        return $this->hasMany(HistoryQuerySearch::class, 'id_client', 'id')->whereIn('code', ['feed_response', 'page_search_response'])->where('created_at', '>=', now()->subDays(30));
     }
 
     /**
      * @inheritDoc
      */
     public function recentMonthHistoryQuerySearchFeed() {
-        return $this->hasMany(HistoryQuerySearch::class, 'id_client', 'id')->where('code', 'feed_response');
+        return $this->hasMany(HistoryQuerySearch::class, 'id_client', 'id')->where('code', 'feed_response')->where('created_at', '>=', now()->subDays(30));
     }
 
     /**
      * @inheritDoc
      */
     public function recentMonthHistoryQuerySearchPage() {
-        return $this->hasMany(HistoryQuerySearch::class, 'id_client', 'id')->where('code', 'page_search_response');
+        return $this->hasMany(HistoryQuerySearch::class, 'id_client', 'id')->where('code', 'page_search_response')->where('created_at', '>=', now()->subDays(30));
     }
 
     /**
      * @inheritDoc
      */
     public function recentMonthHistoryQuerySearchSuggestion() {
-        return $this->hasMany(HistoryQuerySearch::class, 'id_client', 'id')->where('code', 'suggestion_feed_response');
+        return $this->hasMany(HistoryQuerySearch::class, 'id_client', 'id')->where('code', 'suggestion_feed_response')->where('created_at', '>=', now()->subDays(30));
     }
 }
