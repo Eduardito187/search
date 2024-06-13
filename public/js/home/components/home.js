@@ -135,7 +135,7 @@ var HomeSection = {
                         self.initializeCharts("Solicitudes", self.queryData.counter.label, self.queryData.counter.data, "#chart-query-counter");
                         self.initializeCharts("Tiempo", self.queryData.time.label, self.queryData.time.data, "#chart-time-counter");
                         self.initializeCharts("Sugeridos", self.suggestionData.counter.label, self.suggestionData.counter.data, "#chart-suggestion-counter");
-                    }, 500);
+                    }, 1000);
                 }
             }).catch(error => {
                 console.error('Error en la solicitud:', error);
