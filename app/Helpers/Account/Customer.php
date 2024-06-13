@@ -107,12 +107,23 @@ class Customer
         if (!isset($body["mail"])) {
             throw new Exception("Parametros no validos.");
         }
+
+        $customer = $this->getCustomerByMail($body["mail"]);
+
+        if (is_null($customer)) {
+            throw new Exception("Customer no identificado.");
+        }
+    }
+
+    private function getCustomerByMail(string $mail)
+    {
+        return CustomersAccount::where('mail', $mail)->first();
     }
 
     private function validateCustomerEncryption(string $keyEncryption)
     {
         $descryptionMail = $this->decrypt($keyEncryption);
-        $customer = CustomersAccount::where('mail', $descryptionMail)->first();
+        $customer = $this->getCustomerByMail($descryptionMail);
 
         if (is_null($customer)) {
             throw new Exception("Customer no identificado.");
@@ -124,7 +135,7 @@ class Customer
     private function getCustomerByEncryption(string $keyEncryption)
     {
         $descryptionMail = $this->decrypt($keyEncryption);
-        $customer = CustomersAccount::where('mail', $descryptionMail)->first();
+        $customer = $this->getCustomerByMail($descryptionMail);
 
         if (is_null($customer)) {
             throw new Exception("Customer no identificado.");
@@ -155,7 +166,7 @@ class Customer
 
     private function validateLoginAccount(string $mail, string $password)
     {
-        $customer = CustomersAccount::where('mail', $mail)->first();
+        $customer = $this->getCustomerByMail($mail);
 
         if ($customer && $customer->password === $this->encryptedPawd($password)) {
             $encryptKey = $this->encrypt($mail);
