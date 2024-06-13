@@ -113,26 +113,19 @@ var HomeSection = {
     },
     methods: {
         initializeCharts(labelName, labelArray, valueArray, itemId) {
-            /*
-            var options = {
-                chart: {height: 100,type: "line"},
-                colors: ["#FF1654"],
-                series: [{name: labelName,data: valueArray}],
-                xaxis: {categories: labelArray},
-                stroke: {curve: 'smooth'}
-            };
-            */
-           let auxLabel = [];
-           for (let index = 0; index < labelArray.length; index++) {
-            auxLabel.push(index);
-           }
-           console.log(auxLabel, valueArray);
+            let auxLabel = [];
+
+            for (let index = 0; index < labelArray.length; index++) {
+                auxLabel.push(index);
+            }
+
             var options = {
                 chart: {height: 100,type: "line",stacked: false},
                 colors: ["#FF1654"],
-                series: [{name: labelName,data: [20, 29, 37, 36, 44, 45, 50, 58]}],
+                series: [{name: labelName,data: valueArray}],
                 xaxis: {categories: auxLabel},
                 yaxis: [{axisTicks: {show: true},axisBorder: {show: true,color: "#FF1654"},labels: {style: {colors: "#FF1654"}}}],
+                tooltip: {shared: false,intersect: true,x: {show: false}}
             };
             var chart = new ApexCharts(document.querySelector(itemId), options);
             chart.render();
