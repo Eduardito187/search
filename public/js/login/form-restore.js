@@ -13,10 +13,23 @@ new Vue({
             this.messageInfo = message;
         },
         validateData() {
-            console.log(this.mail);
             if (!validateEmail()) {
                 alert('Please enter a valid email address.');
             }
+
+            window.fetchBackendData('api/account/reset-password', 'POST', {mail:this.mail,password:this.password}).then(data => {
+                if (data.status) {
+                    if (data.response.status) {
+                        window.location.href = '/login';
+                    } else {
+                        self.setMessageAlert(response.response.message, 'alert-danger');
+                    }
+                } else {
+                    self.setMessageAlert(data.responseText, 'alert-danger');
+                }
+            }).catch(error => {
+                console.error('Error en la solicitud:', error);
+            });
         },
         validateEmail() {
             var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

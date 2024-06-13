@@ -7,6 +7,7 @@ use App\Models\CustomersAccount;
 use Exception;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\Helpers\SendMail;
 
 class Customer
 {
@@ -109,6 +110,7 @@ class Customer
         }
 
         $customer = $this->getCustomerByMail($body["mail"]);
+        new SendMail("mail.confirmation", $customer->mail, "Restauracion de contraseña.", []);
 
         if (is_null($customer)) {
             throw new Exception("Customer no identificado.");

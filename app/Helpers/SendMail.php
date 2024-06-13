@@ -2,7 +2,6 @@
 
 namespace App\Helpers;
 
-use App\Classes\Helper\Text;
 use Exception;
 use Illuminate\Support\Facades\View;
 
@@ -12,11 +11,9 @@ class SendMail
     protected $title;
     protected $message;
     protected $headers = [];
-    protected $text;
 
     public function __construct(string $view, string $to, string $title, array $dataMail)
     {
-        $this->text = new Text();
         $this->to = $to;
         $this->title = $title;
         $this->message = $this->renderView($view, $dataMail);

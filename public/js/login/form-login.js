@@ -22,39 +22,21 @@ new Vue({
                 return false;
             }
 
-            $.ajax({
-                url: window.configFrontend.base_url_frontend+'api/account/login',
-                type: 'POST',
-                data: JSON.stringify(
-                    {
-                        mail:this.mail,
-                        password:this.password
-                    }
-                ),
-                contentType: 'application/json',
-                dataType: 'json',
-                showLoader: true,
-                headers: {
-                    'Authorization': "Bearer "+window.configFrontend.token_access_frontend,
-                    'Cache-Control': 'no-cache'
-                },
-                success: function (response) {
-                    if (response.status) {
-                        if (response.response.status) {
-                            localStorage.setItem('customer_frontend', response.response.customer);
-                            self.createCookie('customer_backend', response.response.customer);
-                            self.setMessageAlert(response.response.message, 'alert-success');
-                            window.location.href = '/home';
-                        } else {
-                            self.setMessageAlert(response.response.message, 'alert-danger');
-                        }
+            window.fetchBackendData('api/account/login', 'POST', {mail:this.mail,password:this.password}).then(data => {
+                if (data.status) {
+                    if (data.response.status) {
+                        localStorage.setItem('customer_frontend', data.response.customer);
+                        self.createCookie('customer_backend', data.response.customer);
+                        self.setMessageAlert(data.response.message, 'alert-success');
+                        window.location.href = '/home';
                     } else {
-                        self.setMessageAlert(response.responseText, 'alert-danger');
+                        self.setMessageAlert(response.response.message, 'alert-danger');
                     }
-                },
-                error: function (error) {
-                    self.setMessageAlert(error, 'alert-danger');
+                } else {
+                    self.setMessageAlert(data.responseText, 'alert-danger');
                 }
+            }).catch(error => {
+                console.error('Error en la solicitud:', error);
             });
         },
         createCookie(name, valor) {

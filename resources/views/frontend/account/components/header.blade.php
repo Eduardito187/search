@@ -13,6 +13,23 @@
         <script src="{{ asset('js/Axios/axios.min.js') }}"></script>
         <script>
             window.configFrontend = <?= json_encode(\App\Helpers\Base\ConfigFrontend::getConfigFrontend()); ?>;
+            
+            window.fetchBackendData = function(url, method, bodyData = null) {
+                return fetch(window.configFrontend.base_url_frontend+url, {
+                    method: method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': "Bearer " + window.configFrontend.token_access_frontend,
+                        'Cache-Control': 'no-cache'
+                    },
+                    body: JSON.stringify(bodyData)
+                })
+                .then(response => response.json())
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    throw error;
+                });
+            }
         </script>
         @yield('custom-header')
     </head>
