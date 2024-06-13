@@ -125,9 +125,6 @@ var HomeSection = {
         },
         getDashboardData() {
             let self = this;
-            chart-query-counter
-            chart-time-counter
-            chart-suggestion-counter
             window.fetchFontendData('api/account/dashboard-data', 'POST').then(data => {
                 if (data.status && data.code == 200) {
                     self.queryData = data.response.query;
@@ -136,8 +133,8 @@ var HomeSection = {
 
                     setInterval(function () {
                         self.initializeCharts("Solicitudes", self.queryData.counter.label, self.queryData.counter.data, "#chart-query-counter");
-                        self.initializeCharts("Tiempo", self.queryData.time.label, self.queryData.time.data, "#chart-query-counter");
-                        self.initializeCharts("Sugeridos", self.suggestionData.counter.label, self.suggestionData.counter.data, "#chart-query-counter");
+                        self.initializeCharts("Tiempo", self.queryData.time.label, self.queryData.time.data, "#chart-time-counter");
+                        self.initializeCharts("Sugeridos", self.suggestionData.counter.label, self.suggestionData.counter.data, "#chart-suggestion-counter");
                     }, 1000);
                 }
             }).catch(error => {
