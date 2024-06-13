@@ -261,8 +261,8 @@ class Customer
         $currentClient = $customer->client;
 
         return [
-            "query" => $this->generateStructureDataBody($currentClient->recentMonthHistoryQuerySearch(), true),
-            "suggestion" => $this->generateStructureDataBody($currentClient->recentMonthHistoryQuerySearchSuggestion()),
+            "query" => $this->generateStructureDataBody($currentClient->recentMonthHistoryQuerySearch()),
+            "suggestion" => $this->generateStructureSuggestionBody($currentClient->recentMonthHistoryQuerySearchSuggestion()),
             "data" => $this->generateStructureDataIndexes($currentClient)
         ];
     }
@@ -299,14 +299,22 @@ class Customer
     /**
      * @inheritDoc
      */
-    public function generateStructureDataBody($collection, $generateTime = false)
+    public function generateStructureSuggestionBody($collection)
+    {
+        $data = [];
+        $data["counter"] = $this->getCounterSuggestionDataArray($collection);
+        $data["time"] = $this->getTimeDataArray($collection);
+
+        return $data;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function generateStructureDataBody($collection)
     {
         $data = [];
         $data["counter"] = $this->getCounterDataArray($collection);
-
-        if ($generateTime) {
-            $data["time"] = $this->getTimeDataArray($collection);
-        }
 
         return $data;
     }
@@ -323,6 +331,22 @@ class Customer
         }
 
         return ["value" => 0, "label" => $datesArray, "data" => []];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getCounterSuggestionDataArray($collection)
+    {
+        $structure = $this->generateDateArray();
+
+        foreach ($structure["label"] as $key => $date) {
+            $newCollection = clone $collection;
+            $structure["data"][] = $newCollection->whereDate("created_at", "=", $date)->sum("count_items") ?? 0;
+        }
+
+        $structure["value"] = array_sum($structure["data"]);
+        return $structure;
     }
 
     /**
