@@ -117,7 +117,7 @@ var HomeSection = {
                 chart: {height: 100,type: "line"},
                 colors: ["#FF1654"],
                 series: [{name: labelName,data: valueArray}],
-                xaxis: {show: false,categories: [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008],labels: {show: true}},
+                xaxis: {show: false,categories: labelArray,labels: {show: true}},
                 stroke: {curve: 'smooth'}
             };
             var chart = new ApexCharts(document.querySelector(itemId), options);
@@ -130,12 +130,9 @@ var HomeSection = {
                     self.queryData = data.response.query;
                     self.suggestionData = data.response.suggestion;
                     self.dataIndex = data.response.data;
-
-                    setTimeout(function () {
-                        self.initializeCharts("Solicitudes", self.queryData.counter.label, self.queryData.counter.data, "#chart-query-counter");
-                        self.initializeCharts("Tiempo", self.queryData.time.label, self.queryData.time.data, "#chart-time-counter");
-                        self.initializeCharts("Sugeridos", self.suggestionData.counter.label, self.suggestionData.counter.data, "#chart-suggestion-counter");
-                    }, 1000);
+                    self.initializeCharts("Solicitudes", self.queryData.counter.label, self.queryData.counter.data, "#chart-query-counter");
+                    self.initializeCharts("Tiempo", self.queryData.time.label, self.queryData.time.data, "#chart-time-counter");
+                    self.initializeCharts("Sugeridos", self.suggestionData.counter.label, self.suggestionData.counter.data, "#chart-suggestion-counter");
                 }
             }).catch(error => {
                 console.error('Error en la solicitud:', error);
