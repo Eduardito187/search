@@ -117,7 +117,7 @@ var HomeSection = {
                 chart: {height: 100,type: "line"},
                 colors: ["#FF1654"],
                 series: [{name: labelName,data: valueArray}],
-                xaxis: {show: false,categories: labelArray,labels: {show: true}},
+                xaxis: {categories: labelArray},
                 stroke: {curve: 'smooth'}
             };
             var chart = new ApexCharts(document.querySelector(itemId), options);
