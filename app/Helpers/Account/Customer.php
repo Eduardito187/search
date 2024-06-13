@@ -228,6 +228,34 @@ class Customer
     /**
      * @inheritDoc
      */
+    public function getAppsData(array $body, array $header = [])
+    {
+        try {
+            if (
+                !is_array($header) ||
+                !isset($header["customer-key"]) ||
+                !is_array($header["customer-key"]) ||
+                count($header["customer-key"]) == 0
+            ) {
+                throw new Exception("Parametros no validos.");
+            }
+
+            $customer = $this->getCustomerByEncryption($header["customer-key"][0]);
+
+            return $this->coreHttp->constructResponse(
+                [],
+                "Proceso ejecutado exitosamente.",
+                200,
+                true
+            );
+        } catch (Exception $e) {
+            return $this->coreHttp->constructResponse([], $e->getMessage(), 500, false);
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function getDashboardData(array $body, array $header = [])
     {
         try {
@@ -345,7 +373,7 @@ class Customer
             $structure["data"][] = round($newCollection->whereDate("created_at", "=", $date)->sum("count_items") ?? 0);
         }
 
-        $structure["value"] = array_sum($structure["data"]);
+        $structure["value"] = $this->convertNumber(array_sum($structure["data"]));
         return $structure;
     }
 
@@ -361,7 +389,7 @@ class Customer
             $structure["data"][] = $newCollection->whereDate("created_at", "=", $date)->count() ?? 0;
         }
 
-        $structure["value"] = array_sum($structure["data"]);
+        $structure["value"] = $this->convertNumber(array_sum($structure["data"]));
         return $structure;
     }
 
@@ -377,7 +405,7 @@ class Customer
             $structure["data"][] = round($newCollection->whereDate("created_at", "=", $date)->sum("count") ?? 0);
         }
 
-        $structure["value"] = array_sum($structure["data"]);
+        $structure["value"] = $this->convertNumber(array_sum($structure["data"]));
         return $structure;
     }
 
@@ -395,6 +423,20 @@ class Customer
 
         $structure["value"] = round(array_sum($structure["data"]) / count($structure["data"]));
         return $structure;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function convertNumber($number)
+    {
+        if ($number < 1000) {
+            return $number;
+        } elseif ($number < 1000000) {
+            return round($number / 1000, 1) . 'K';
+        } else {
+            return round($number / 1000000, 1) . 'M';
+        }
     }
 
     /**

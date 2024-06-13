@@ -16,8 +16,8 @@ class Account extends Controller
     /**
      * Constructor Account Customer
      */
-    public function __construct() {
-        $this->customer = new Customer();
+    public function __construct(Customer $customer) {
+        $this->customer = $customer;
     }
 
     /**
@@ -98,6 +98,20 @@ class Account extends Controller
     {
         return response()->json(
             $this->customer->getDashboardData(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getAppsData(Request $request)
+    {
+        return response()->json(
+            $this->customer->getAppsData(
                 $request->all(),
                 $request->header()
             )
