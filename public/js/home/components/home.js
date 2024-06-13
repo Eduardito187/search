@@ -94,14 +94,26 @@ var HomeSection = {
                         </div>
                         <div class="col-md-12">
                             <div class="col-12 d-flex bd-highlight">
-                                <div class="col-8 pl-5 bd-highlight">Index</div>
-                                <div class="col-2 bd-highlight text-center">Consultas</div>
-                                <div class="col-2 bd-highlight text-center">Registros</div>
+                                <div class="col-8 pl-5 bd-highlight">
+                                    <small clas="small-title">Index</small>
+                                </div>
+                                <div class="col-2 bd-highlight text-center">
+                                    <small clas="small-title">Consultas</small>
+                                </div>
+                                <div class="col-2 bd-highlight text-center">
+                                    <small clas="small-title">Registros</small>
+                                </div>
                             </div>
                             <div v-for="data in dataIndex.index" class="col-12 d-flex">
-                                <div class="col-8 pl-5">{{data.code}}</div>
-                                <div class="col-2 pl-5 text-center">{{data.query}}</div>
-                                <div class="col-2 pl-5 text-center">{{data.record}}</div>
+                                <div class="col-8 pl-5">
+                                    <small clas="small-title">{{data.code}}</small>
+                                </div>
+                                <div class="col-2 pl-5 text-center">
+                                    <small clas="small-title">{{data.query}}</small>
+                                </div>
+                                <div class="col-2 pl-5 text-center">
+                                    <small clas="small-title">{{data.record}}</small>
+                                </div>
                             </div>
                         </div>
                     </div>
