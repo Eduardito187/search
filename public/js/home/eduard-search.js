@@ -17,6 +17,24 @@ $(document).ready(function() {
   }
 });
 
+window.fetchFontendData = function(url, method, bodyData = null) {
+  return fetch(window.configFrontend.base_url_frontend+url, {
+      method: method,
+      headers: {
+          'Content-Type': 'application/json',
+          'Authorization': "Bearer " + window.configFrontend.token_access_frontend,
+          'Cache-Control': 'no-cache',
+          'Customer-Key': localStorage.getItem('customer_frontend')
+      },
+      body: JSON.stringify(bodyData)
+  })
+  .then(response => response.json())
+  .catch(error => {
+      console.error('Error fetching data:', error);
+      throw error;
+  });
+}
+
 const routes = [
   { path: '/home', component: HomeSection, name: 'Home' },
   { path: '/dashboard', component: DashboardSection, name: 'Dashboard' },
@@ -58,40 +76,20 @@ new Vue({
 
       let self = this;
 
-      fetch(window.configFrontend.base_url_frontend + 'api/account/customer-information', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': "Bearer " + window.configFrontend.token_access_frontend,
-          'Cache-Control': 'no-cache',
-          'Customer-Key': localStorage.getItem('customer_frontend')
+      window.fetchFontendData('api/account/customer-information', 'POST').then(data => {
+        if (data.status && data.code == 200) {
+          self.customer = data.response;
+          self.loadedPage = true;
         }
-      })
-        .then(response => response.json())
-        .then(data => {
-          if (data.status && data.code == 200) {
-            self.customer = data.response;
-            self.loadedPage = true;
-          }
-        })
-        .catch(error => {
-          console.log(error, 'alert-danger');
-        });
-      
-        
-      fetch(window.configFrontend.base_url_frontend + 'api/account/dashboard-data', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': "Bearer " + window.configFrontend.token_access_frontend,
-          'Cache-Control': 'no-cache',
-          'Customer-Key': localStorage.getItem('customer_frontend')
-        }
-      })
-        .then(response => response.json())
-        .then(data => {
-          console.log(data);
-        });
+      }).catch(error => {
+        console.error('Error en la solicitud:', error);
+      });
+
+      window.fetchFontendData('api/account/dashboard-data', 'POST').then(data => {
+        console.log(data);
+      }).catch(error => {
+        console.error('Error en la solicitud:', error);
+      });
     },
     isBackAction () {
       return !this.routesBase.includes(this.$route.path)
