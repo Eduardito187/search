@@ -8,58 +8,60 @@ var HomeSection = {
             <div class="mb-4"></div>
         </div>
 
-        <div class="card mb-4">
+        <div v-if="queryData != null" class="card mb-4">
             <div class="card-header">
                 <i class="fa fa-search" aria-hidden="true"></i> Busquedas
             </div>
             <div class="card-body">
                 <blockquote class="blockquote mb-0">
-                    <div class="row mb-40p">
+                    <div v-if="queryData.counter" class="row mb-40p">
                         <div class="col-md-6 text-start">
                             <div class="row mt-4">
                                 <small clas="small-title">Solicitudes de busquedas</small>
                             </div>
                             <div class="row">
-                                <span class="detail-description">2.57M</span>
+                                <span class="detail-description">{{queryData.counter.value}}</span>
                             </div>
                         </div>
                         <div class="col-md-6 text-end">
-                            <div class="content-chart-eduard-search" id="chart-busquedas"></div>
+                            <div class="content-chart-eduard-search" id="chart-query-counter"></div>
                         </div>
                     </div>
                     <hr>
-                    <div class="row mb-40p">
+                    <div v-if="queryData.time" class="row mb-40p">
                         <div class="col-md-6 text-start">
                             <div class="row">
                                 <small clas="small-title">Tiempo de procesamiento</small>
                             </div>
                             <div class="row">
-                                <span class="detail-description">100ms</span>
+                                <span class="detail-description">{{queryData.time.value}}</span>
                             </div>
                         </div>
                         <div class="col-md-6 text-end">
+                            <div class="content-chart-eduard-search" id="chart-time-counter"></div>
                         </div>
                     </div>
                 </blockquote>
             </div>
         </div>
 
-        <div class="card mb-4">
+        <div v-if="suggestionData != null" class="card mb-4">
             <div class="card-header">
                 <i class="fa fa-list" aria-hidden="true"></i> Sugeridos
             </div>
             <div class="card-body">
                 <blockquote class="blockquote mb-0">
-                    <div class="row mb-40p">
+                    <div v-if="suggestionData.counter != null" class="row mb-40p">
                         <div class="col-md-6 text-start">
                             <div class="row">
                                 <small clas="small-title">Productos sugeridos</small>
                             </div>
                             <div class="row">
-                                <span class="detail-description">2K</span>
+                                <span class="detail-description">{{suggestionData.counter.value}}</span>
                             </div>
                         </div>
                         <div class="col-md-6 text-end">
+                            <div class="content-chart-eduard-search" id="chart-suggestion-counter"></div>
                         </div>
                     </div>
                 </blockquote>
@@ -104,40 +106,47 @@ var HomeSection = {
     `,
     data() {
         return {
+            queryData: null,
+            suggestionData: null,
+            dataIndex: null
         };
     },
     methods: {
-        initializeCharts() {
+        initializeCharts(labelName, labelArray, valueArray, itemId) {
             var options = {
-                chart: {
-                    height: 100,
-                    type: "line"
-                },
+                chart: {height: 100,type: "line"},
                 colors: ["#FF1654"],
-                series: [
-                    {
-                        name: "Series B",
-                        data: [20, 29, 37, 36, 44, 45, 50, 58]
-                    }
-                ],
-                xaxis: {
-                    show: false,
-                    categories: [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016],
-                    labels: {
-                        show: true,
-                    }
-                },
-                stroke: {
-                    curve: 'smooth',
-                }
+                series: [{name: labelName,data: valueArray}],
+                xaxis: {show: false,categories: labelArray,labels: {show: true}},
+                stroke: {curve: 'smooth'}
             };
-
-            var chart = new ApexCharts(document.querySelector("#chart-busquedas"), options);
-
+            var chart = new ApexCharts(document.querySelector(itemId), options);
             chart.render();
+        },
+        getDashboardData() {
+            let self = this;
+            chart-query-counter
+            chart-time-counter
+            chart-suggestion-counter
+            window.fetchFontendData('api/account/dashboard-data', 'POST').then(data => {
+                if (data.status && data.code == 200) {
+                    self.queryData = data.response.query;
+                    self.suggestionData = data.response.suggestion;
+                    self.dataIndex = data.response.data;
+
+                    setInterval(function () {
+                        self.initializeCharts("Solicitudes", self.queryData.counter.label, self.queryData.counter.data, "#chart-query-counter");
+                        self.initializeCharts("Tiempo", self.queryData.time.label, self.queryData.time.data, "#chart-query-counter");
+                        self.initializeCharts("Sugeridos", self.suggestionData.counter.label, self.suggestionData.counter.data, "#chart-query-counter");
+                    }, 1000);
+                }
+            }).catch(error => {
+                console.error('Error en la solicitud:', error);
+            });
         }
     },
     created() {
+        this.getDashboardData();
     },
     mounted() {
         this.initializeCharts();

@@ -162,9 +162,10 @@ var DashboardSection = {
 
             var chart = new ApexCharts(document.querySelector("#doughnutChartV2"), options);
             chart.render();
-        }
+        },
     },
     created() {
+        this.getDashboardData();
     },
     mounted() {
         this.initializeCharts();

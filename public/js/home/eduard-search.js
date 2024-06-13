@@ -84,12 +84,6 @@ new Vue({
       }).catch(error => {
         console.error('Error en la solicitud:', error);
       });
-
-      window.fetchFontendData('api/account/dashboard-data', 'POST').then(data => {
-        console.log(data);
-      }).catch(error => {
-        console.error('Error en la solicitud:', error);
-      });
     },
     isBackAction () {
       return !this.routesBase.includes(this.$route.path)
