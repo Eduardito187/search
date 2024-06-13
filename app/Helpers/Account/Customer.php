@@ -353,7 +353,7 @@ class Customer
             $structure["data"][] = round($newCollection->whereDate("created_at", "=", $date)->sum("count") ?? 0);
         }
 
-        $structure["value"] = round(array_sum($structure["data"]) / count($structure["data"]));
+        $structure["value"] = array_sum($structure["data"]);
         return $structure;
     }
 
