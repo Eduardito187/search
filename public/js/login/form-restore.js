@@ -13,7 +13,7 @@ new Vue({
             this.messageInfo = message;
         },
         validateData() {
-            if (!validateEmail()) {
+            if (!this.validateEmail()) {
                 alert('Please enter a valid email address.');
             }
 
