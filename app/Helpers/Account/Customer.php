@@ -306,7 +306,7 @@ class Customer
         foreach ($structure["label"] as $key => $date) {
             $structure["data"][] = $collection->where("created_at", "like", "%".$date."%")->count();
         }
-
+ 
         return $structure;
     }
 
