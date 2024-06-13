@@ -259,7 +259,7 @@ class Customer
     public function getDataDashboard($customer)
     {
         $currentClient = $customer->client;
-        //$currentClient->recentMonthHistoryIndex;
+
         return [
             "query" => $this->generateStructureDataBody($currentClient->recentMonthHistoryQuerySearch(), true),
             "suggestion" => $this->generateStructureDataBody($currentClient->recentMonthHistoryQuerySearchSuggestion()),
@@ -284,7 +284,7 @@ class Customer
 
         return [
             "index" => $dataIndex,
-            "counter" => []
+            "counter" => $this->getCounterDataArray($currentClient->recentMonthHistoryIndex())
         ];
     }
 
