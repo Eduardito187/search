@@ -122,12 +122,16 @@ var HomeSection = {
                 stroke: {curve: 'smooth'}
             };
             */
-           console.log(labelArray, valueArray);
+           let auxLabel = [];
+           for (let index = 0; index < labelArray.length; index++) {
+            auxLabel.push(labelArray[index]);
+           }
+           console.log(auxLabel, valueArray);
             var options = {
                 chart: {height: 100,type: "line",stacked: false},
                 colors: ["#FF1654"],
                 series: [{name: labelName,data: [20, 29, 37, 36, 44, 45, 50, 58]}],
-                xaxis: {categories: labelArray},
+                xaxis: {categories: auxLabel},
                 yaxis: [{axisTicks: {show: true},axisBorder: {show: true,color: "#FF1654"},labels: {style: {colors: "#FF1654"}}}],
             };
             var chart = new ApexCharts(document.querySelector(itemId), options);
@@ -142,9 +146,9 @@ var HomeSection = {
                     self.dataIndex = data.response.data;
 
                     setTimeout(function () {
-                        self.initializeCharts("Solicitudes", data.response.query.counter.label, data.response.query.counter.data, "#chart-query-counter");
-                        self.initializeCharts("Tiempo", data.response.query.time.label, data.response.query.time.data, "#chart-time-counter");
-                        self.initializeCharts("Sugeridos", data.response.suggestion.counter.label, data.response.suggestion.counter.data, "#chart-suggestion-counter");
+                        self.initializeCharts("Solicitudes", self.queryData.counter.label, self.queryData.counter.data, "#chart-query-counter");
+                        self.initializeCharts("Tiempo", self.queryData.time.label, self.queryData.time.data, "#chart-time-counter");
+                        self.initializeCharts("Sugeridos", self.suggestionData.counter.label, self.suggestionData.counter.data, "#chart-suggestion-counter");
                     }, 1000);
                 }
             }).catch(error => {
