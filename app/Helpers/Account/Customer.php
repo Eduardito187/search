@@ -261,8 +261,8 @@ class Customer
         $currentClient = $customer->client;
         //$currentClient->recentMonthHistoryIndex;
         return [
-            "query" => $this->generateStructureDataBody($currentClient, "query", true),
-            "suggestion" => $this->generateStructureDataBody($currentClient, "suggestion"),
+            "query" => $this->generateStructureDataBody($currentClient->recentMonthHistoryQuerySearch(), true),
+            "suggestion" => $this->generateStructureDataBody($currentClient->recentMonthHistoryQuerySearchSuggestion()),
             "data" => []
         ];
     }
@@ -270,13 +270,13 @@ class Customer
     /**
      * @inheritDoc
      */
-    public function generateStructureDataBody($client, $type, $generateTime = false)
+    public function generateStructureDataBody($collection, $generateTime = false)
     {
         $data = [];
-        $data["counter"] = $this->getCounterDataArray($client, $type);
+        $data["counter"] = $this->getCounterDataArray($collection);
 
         if ($generateTime) {
-            $data["time"] = $this->getTimeDataArray($client);
+            $data["time"] = $this->getTimeDataArray($collection);
         }
 
         return $data;
@@ -299,20 +299,12 @@ class Customer
     /**
      * @inheritDoc
      */
-    public function getCounterDataArray($client, $type)
+    public function getCounterDataArray($collection)
     {
         $structure = $this->generateDateArray();
 
         foreach ($structure["label"] as $key => $date) {
-            $data = 0;
-
-            if ($type == "query") {
-                $data = $client->recentMonthHistoryQuerySearchByDate($date);
-            } else if ($type == "suggestion") {
-                $data = $client->recentMonthHistoryQuerySearchSuggestionByDate($date);
-            }
-
-            $structure["data"][] = $data;
+            $structure["data"][] = $collection->whereDate("created_at", "like", "%".$date."%")->count();
         }
 
         return $structure;
@@ -326,7 +318,7 @@ class Customer
         $structure = $this->generateDateArray();
 
         foreach ($structure["label"] as $key => $date) {
-            $structure["data"][] = $collection->where("created_at", "=", $date)->avg("time_execution");
+            $structure["data"][] = $collection->whereDate("created_at", "like", "%".$date."%")->avg("time_execution");
         }
 
         return $structure;
