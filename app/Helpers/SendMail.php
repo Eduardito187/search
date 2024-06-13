@@ -4,6 +4,7 @@ namespace App\Helpers;
 
 use Exception;
 use Illuminate\Support\Facades\View;
+use App\Helpers\Base\ConfigFrontend;
 
 class SendMail
 {
@@ -16,6 +17,12 @@ class SendMail
     {
         $this->to = $to;
         $this->title = $title;
+
+        if (is_array($dataMail)) {
+            $dataMail["base_url"] = ConfigFrontend::getValueConfig(ConfigFrontend::BASE_URL_FRONTEND);
+            $dataMail["app_name"] = ConfigFrontend::getValueConfig(ConfigFrontend::APP_NAME_FRONTEND);
+        }
+
         $this->message = $this->renderView($view, $dataMail);
         $this->setHeaders();
         $this->createMail();

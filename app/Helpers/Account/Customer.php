@@ -110,7 +110,11 @@ class Customer
         }
 
         $customer = $this->getCustomerByMail($body["mail"]);
-        new SendMail("mail.confirmation", $customer->mail, "Restauracion de contraseña.", []);
+        new SendMail("mail.confirmation", $customer->mail, "Restauracion de contraseña.", [
+            "title" => "Restaura tu contraseña",
+            "description" => "Haga clic aquí para restablecer la contraseña.",
+            "footer_text" => "Si esto fue un error, simplemente ignora este correo electrónico y no pasará nada."
+        ]);
 
         if (is_null($customer)) {
             throw new Exception("Customer no identificado.");

@@ -22,7 +22,7 @@ new Vue({
                     if (data.response.status) {
                         window.location.href = '/login';
                     } else {
-                        self.setMessageAlert(response.response.message, 'alert-danger');
+                        self.setMessageAlert(data.response.message, 'alert-danger');
                     }
                 } else {
                     self.setMessageAlert(data.responseText, 'alert-danger');
