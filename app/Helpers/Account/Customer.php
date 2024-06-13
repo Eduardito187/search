@@ -272,20 +272,28 @@ class Customer
      */
     public function generateStructureDataIndexes($currentClient)
     {
+        return [
+            "index" => $this->getDataIndexDashboard($currentClient),
+            "counter" => $this->getCounterDataRecordArray($currentClient->recentMonthHistoryIndex())
+        ];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getDataIndexDashboard($currentClient)
+    {
         $dataIndex = [];
 
         foreach ($currentClient->indexes as $key => $index) {
             $dataIndex[] = [
                 "code" => $index->code,
-                "query" => $index->recentMonthHistoryQuerySearch()->count(),
-                "record" => $index->recentMonthHistoryIndex()->sum("count")
+                "query" => round($index->recentMonthHistoryQuerySearch()->count()),
+                "record" => round($index->recentMonthHistoryIndex()->sum("count"))
             ];
         }
 
-        return [
-            "index" => $dataIndex,
-            "counter" => $this->getCounterDataRecordArray($currentClient->recentMonthHistoryIndex())
-        ];
+        return $dataIndex;
     }
 
     /**
@@ -329,7 +337,7 @@ class Customer
             $structure["data"][] = $newCollection->whereDate("created_at", "=", $date)->count() ?? 0;
         }
 
-        $structure["value"] = array_sum($structure["data"]) / count($structure["data"]);
+        $structure["value"] = round(array_sum($structure["data"]) / count($structure["data"]));
         return $structure;
     }
 
@@ -345,7 +353,7 @@ class Customer
             $structure["data"][] = round($newCollection->whereDate("created_at", "=", $date)->sum("count") ?? 0);
         }
 
-        $structure["value"] = array_sum($structure["data"]) / count($structure["data"]);
+        $structure["value"] = round(array_sum($structure["data"]) / count($structure["data"]));
         return $structure;
     }
 
@@ -361,7 +369,7 @@ class Customer
             $structure["data"][] = round($newCollection->whereDate("created_at", "=", $date)->avg("time_execution") ?? 0);
         }
 
-        $structure["value"] = array_sum($structure["data"]) / count($structure["data"]);
+        $structure["value"] = round(array_sum($structure["data"]) / count($structure["data"]));
         return $structure;
     }
 
