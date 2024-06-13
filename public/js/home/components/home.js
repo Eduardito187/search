@@ -122,8 +122,9 @@ var HomeSection = {
                 stroke: {curve: 'smooth'}
             };
             */
+           console.log(labelArray, valueArray);
             var options = {
-                chart: {height: 350,type: "line",stacked: false},
+                chart: {height: 100,type: "line",stacked: false},
                 colors: ["#FF1654"],
                 series: [{name: labelName,data: [20, 29, 37, 36, 44, 45, 50, 58]}],
                 xaxis: {categories: ["2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016"]},
