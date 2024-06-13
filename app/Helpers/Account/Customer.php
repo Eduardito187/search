@@ -263,7 +263,28 @@ class Customer
         return [
             "query" => $this->generateStructureDataBody($currentClient->recentMonthHistoryQuerySearch(), true),
             "suggestion" => $this->generateStructureDataBody($currentClient->recentMonthHistoryQuerySearchSuggestion()),
-            "data" => []
+            "data" => $this->generateStructureDataIndexes($currentClient)
+        ];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function generateStructureDataIndexes($currentClient)
+    {
+        $dataIndex = [];
+
+        foreach ($currentClient->indexes as $key => $index) {
+            $dataIndex[] = [
+                "code" => $index->code,
+                "query" => 0,
+                "record" => 0
+            ];
+        }
+
+        return [
+            "index" => $dataIndex,
+            "counter" => []
         ];
     }
 
@@ -293,7 +314,7 @@ class Customer
             $datesArray[] = Carbon::today()->subDays($i)->toDateString();
         }
 
-        return ["label" => $datesArray, "data" => []];
+        return ["value" => 0, "label" => $datesArray, "data" => []];
     }
 
     /**
@@ -308,6 +329,7 @@ class Customer
             $structure["data"][] = $newCollection->whereDate("created_at", "=", $date)->count() ?? 0;
         }
 
+        $structure["value"] = array_sum($structure["data"]) / count($structure["data"]);
         return $structure;
     }
 
@@ -323,6 +345,7 @@ class Customer
             $structure["data"][] = round($newCollection->whereDate("created_at", "=", $date)->avg("time_execution") ?? 0);
         }
 
+        $structure["value"] = array_sum($structure["data"]) / count($structure["data"]);
         return $structure;
     }
 
