@@ -93,15 +93,15 @@ var HomeSection = {
                             <small clas="small-title">Indices</small>
                         </div>
                         <div class="col-md-12">
-                            <div class="d-flex bd-highlight">
-                                <div class="p-2 flex-grow-1 bd-highlight">Index</div>
-                                <div class="p-2 bd-highlight">Consultas</div>
-                                <div class="p-2 bd-highlight">Registros</div>
+                            <div class="col-12 d-flex bd-highlight">
+                                <div class="col-8 bd-highlight">Index</div>
+                                <div class="col-2 bd-highlight text-center">Consultas</div>
+                                <div class="col-2 bd-highlight text-center">Registros</div>
                             </div>
-                            <div v-for="data in dataIndex.index" class="d-flex">
-                                <div class="p-2 flex-grow-1">{{data.code}}</div>
-                                <div class="p-2">{{data.query}}</div>
-                                <div class="p-2">{{data.record}}</div>
+                            <div v-for="data in dataIndex.index" class="col-12 d-flex bd-highlight">
+                                <div class="col-8 bd-highlight">{{data.code}}</div>
+                                <div class="col-2 bd-highlight text-center">{{data.query}}</div>
+                                <div class="col-2 bd-highlight text-center">{{data.record}}</div>
                             </div>
                         </div>
                     </div>
