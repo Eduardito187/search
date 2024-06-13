@@ -304,7 +304,7 @@ class Customer
         $structure = $this->generateDateArray();
 
         foreach ($structure["label"] as $key => $date) {
-            $structure["data"][] = $collection->where("created_at", "like", "%".$date."%")->count("created_at");
+            $structure["data"][] = $collection->where("created_at", "like", "%".$date."%")->where("none", 1)->count();
         }
 
         return $structure;

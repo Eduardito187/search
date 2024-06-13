@@ -59,7 +59,7 @@ class Client extends Model
      * @inheritDoc
      */
     public function recentMonthHistoryQuerySearch() {
-        return $this->hasMany(HistoryQuerySearch::class, 'id_client', 'id')->whereIn('code', ['feed_response', 'page_search_response']);
+        return $this->hasMany(HistoryQuerySearch::class, 'id_client', 'id')->whereIn('code', ['feed_response', 'page_search_response'])->where('created_at', '>=', now()->subDays(30));
     }
 
     /**
