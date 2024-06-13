@@ -51,7 +51,7 @@ class Client extends Model
     /**
      * @inheritDoc
      */
-    public function HistoryQuerySearch() {
+    public function historyQuerySearch() {
         return $this->hasMany(HistoryQuerySearch::class, 'id_client', 'id');
     }
 
