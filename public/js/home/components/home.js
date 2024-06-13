@@ -98,10 +98,10 @@ var HomeSection = {
                                 <div class="col-2 bd-highlight text-center">Consultas</div>
                                 <div class="col-2 bd-highlight text-center">Registros</div>
                             </div>
-                            <div v-for="data in dataIndex.index" class="col-12 d-flex bd-highlight">
-                                <div class="col-8 bd-highlight">{{data.code}}</div>
-                                <div class="col-2 bd-highlight text-center">{{data.query}}</div>
-                                <div class="col-2 bd-highlight text-center">{{data.record}}</div>
+                            <div v-for="data in dataIndex.index" class="col-12 d-flex">
+                                <div class="col-8 pl-5">{{data.code}}</div>
+                                <div class="col-2 pl-5 text-center">{{data.query}}</div>
+                                <div class="col-2 pl-5 text-center">{{data.record}}</div>
                             </div>
                         </div>
                     </div>

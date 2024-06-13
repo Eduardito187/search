@@ -431,6 +431,10 @@ canvas {
     margin-bottom: -40px !important;
 }
 
+.pl-5 {
+    padding-left: 5px;
+}
+
 .content-chart-eduard-search .apexcharts-xaxis,
 .content-chart-eduard-search .apexcharts-toolbar,
 .content-chart-eduard-search .apexcharts-yaxis,
