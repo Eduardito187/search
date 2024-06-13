@@ -149,6 +149,5 @@ var HomeSection = {
         this.getDashboardData();
     },
     mounted() {
-        this.initializeCharts();
     }
 };
