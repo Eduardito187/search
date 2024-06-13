@@ -124,7 +124,7 @@ var HomeSection = {
             */
            let auxLabel = [];
            for (let index = 0; index < labelArray.length; index++) {
-            auxLabel.push(labelArray[index]);
+            auxLabel.push(index);
            }
            console.log(auxLabel, valueArray);
             var options = {
