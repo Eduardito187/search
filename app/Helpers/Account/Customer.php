@@ -284,7 +284,7 @@ class Customer
 
         return [
             "index" => $dataIndex,
-            "counter" => $this->getCounterDataArray($currentClient->recentMonthHistoryIndex())
+            "counter" => $this->getCounterDataRecordArray($currentClient->recentMonthHistoryIndex())
         ];
     }
 
@@ -327,6 +327,22 @@ class Customer
         foreach ($structure["label"] as $key => $date) {
             $newCollection = clone $collection;
             $structure["data"][] = $newCollection->whereDate("created_at", "=", $date)->count() ?? 0;
+        }
+
+        $structure["value"] = array_sum($structure["data"]) / count($structure["data"]);
+        return $structure;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getCounterDataRecordArray($collection)
+    {
+        $structure = $this->generateDateArray();
+
+        foreach ($structure["label"] as $key => $date) {
+            $newCollection = clone $collection;
+            $structure["data"][] = $newCollection->whereDate("created_at", "=", $date)->sum("count") ?? 0;
         }
 
         $structure["value"] = array_sum($structure["data"]) / count($structure["data"]);
