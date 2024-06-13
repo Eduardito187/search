@@ -130,9 +130,12 @@ var HomeSection = {
                     self.queryData = data.response.query;
                     self.suggestionData = data.response.suggestion;
                     self.dataIndex = data.response.data;
-                    self.initializeCharts("Solicitudes", self.queryData.counter.label, self.queryData.counter.data, "#chart-query-counter");
-                    self.initializeCharts("Tiempo", self.queryData.time.label, self.queryData.time.data, "#chart-time-counter");
-                    self.initializeCharts("Sugeridos", self.suggestionData.counter.label, self.suggestionData.counter.data, "#chart-suggestion-counter");
+
+                    setTimeout(function () {
+                        self.initializeCharts("Solicitudes", self.queryData.counter.label, self.queryData.counter.data, "#chart-query-counter");
+                        self.initializeCharts("Tiempo", self.queryData.time.label, self.queryData.time.data, "#chart-time-counter");
+                        self.initializeCharts("Sugeridos", self.suggestionData.counter.label, self.suggestionData.counter.data, "#chart-suggestion-counter");
+                    }, 1000);
                 }
             }).catch(error => {
                 console.error('Error en la solicitud:', error);
