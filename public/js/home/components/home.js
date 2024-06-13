@@ -68,26 +68,27 @@ var HomeSection = {
             </div>
         </div>
 
-        <div class="card mb-4">
+        <div v-if="dataIndex != null" class="card mb-4">
             <div class="card-header">
                 <i class="fa fa-database" aria-hidden="true"></i> Data
             </div>
             <div class="card-body">
                 <blockquote class="blockquote mb-0">
-                    <div class="row mb-40p">
+                    <div v-if="dataIndex.counter != null" class="row mb-40p">
                         <div class="col-md-6 text-start">
                             <div class="row">
                                 <small clas="small-title">Registros</small>
                             </div>
                             <div class="row">
-                                <span class="detail-description">500K</span>
+                                <span class="detail-description">{{dataIndex.counter.value}}</span>
                             </div>
                         </div>
                         <div class="col-md-6 text-end">
+                            <div class="content-chart-eduard-search" id="chart-data-counter"></div>
                         </div>
                     </div>
-                    <hr>
-                    <div class="row">
+                    <hr v-if="dataIndex.index != null">
+                    <div v-if="dataIndex.index != null" class="row">
                         <div class="col-md-12 text-start">
                             <small clas="small-title">Indices</small>
                         </div>
@@ -96,6 +97,11 @@ var HomeSection = {
                                 <div class="p-2 flex-grow-1 bd-highlight">Index</div>
                                 <div class="p-2 bd-highlight">Consultas</div>
                                 <div class="p-2 bd-highlight">Registros</div>
+                            </div>
+                            <div v-for="data in dataIndex.index" class="d-flex">
+                                <div class="p-2 flex-grow-1">{{data.code}}</div>
+                                <div class="p-2">{{data.query}}</div>
+                                <div class="p-2">{{data.record}}</div>
                             </div>
                         </div>
                     </div>
@@ -142,6 +148,7 @@ var HomeSection = {
                         self.initializeCharts("Solicitudes", self.queryData.counter.label, self.queryData.counter.data, "#chart-query-counter");
                         self.initializeCharts("Tiempo", self.queryData.time.label, self.queryData.time.data, "#chart-time-counter");
                         self.initializeCharts("Sugeridos", self.suggestionData.counter.label, self.suggestionData.counter.data, "#chart-suggestion-counter");
+                        self.initializeCharts("Data", self.dataIndex.counter.label, self.dataIndex.counter.data, "#chart-data-counter");
                     }, 1000);
                 }
             }).catch(error => {
