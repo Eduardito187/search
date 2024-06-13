@@ -127,7 +127,7 @@ var HomeSection = {
                 chart: {height: 100,type: "line",stacked: false},
                 colors: ["#FF1654"],
                 series: [{name: labelName,data: [20, 29, 37, 36, 44, 45, 50, 58]}],
-                xaxis: {categories: ["2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016"]},
+                xaxis: {categories: labelArray},
                 yaxis: [{axisTicks: {show: true},axisBorder: {show: true,color: "#FF1654"},labels: {style: {colors: "#FF1654"}}}],
             };
             var chart = new ApexCharts(document.querySelector(itemId), options);
