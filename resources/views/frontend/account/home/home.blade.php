@@ -10,7 +10,7 @@
 <div class="container-screen" id="home-container">
     <aside class="sidebar" v-if="loadedPage">
       <div class="sidebar-header">
-        <img src="https://via.placeholder.com/50" alt="Logo" class="logo">
+        <img src="/img/default-user.png" alt="Logo" class="logo">
         <span class="brand" v-if="customer != null">@{{customer.first_name}}</span>
       </div>
       <nav class="menu">
