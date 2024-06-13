@@ -320,7 +320,7 @@ class Customer
 
         foreach ($structure["label"] as $key => $date) {
             $newCollection = clone $collection;
-            $structure["data"][] = $newCollection->whereDate("created_at", "=", $date)->avg("time_execution") ?? 0;
+            $structure["data"][] = round($newCollection->whereDate("created_at", "=", $date)->avg("time_execution") ?? 0);
         }
 
         return $structure;
