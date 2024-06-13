@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\IndexCatalog;
+use App\Models\HistoryIndexProccess;
+use App\Models\HistoryQuerySearch;
 
 class Client extends Model
 {
@@ -30,5 +32,54 @@ class Client extends Model
      */
     public function autorizationToken() {
         return $this->hasOne(AutorizationToken::class, 'id_client', 'id');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function historyIndex() {
+        return $this->hasMany(HistoryIndexProccess::class, 'id_client', 'id');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function recentMonthHistoryIndex() {
+        return $this->hasMany(HistoryIndexProccess::class, 'id_client', 'id')->where('created_at', '>=', now()->subDays(30));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function HistoryQuerySearch() {
+        return $this->hasMany(HistoryQuerySearch::class, 'id_client', 'id');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function recentMonthHistoryQuerySearch() {
+        return $this->hasMany(HistoryQuerySearch::class, 'id_client', 'id')->whereIn('code', ['feed_response', 'page_search_response'])->where('created_at', '>=', now()->subDays(30));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function recentMonthHistoryQuerySearchFeed() {
+        return $this->hasMany(HistoryQuerySearch::class, 'id_client', 'id')->where('code', 'feed_response')->where('created_at', '>=', now()->subDays(30));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function recentMonthHistoryQuerySearchPage() {
+        return $this->hasMany(HistoryQuerySearch::class, 'id_client', 'id')->where('code', 'page_search_response')->where('created_at', '>=', now()->subDays(30));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function recentMonthHistoryQuerySearchSuggestion() {
+        return $this->hasMany(HistoryQuerySearch::class, 'id_client', 'id')->where('code', 'suggestion_feed_response')->where('created_at', '>=', now()->subDays(30));
     }
 }

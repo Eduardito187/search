@@ -14,9 +14,9 @@ var HomeSection = {
             </div>
             <div class="card-body">
                 <blockquote class="blockquote mb-0">
-                    <div class="row">
+                    <div class="row mb-40p">
                         <div class="col-md-6 text-start">
-                            <div class="row">
+                            <div class="row mt-4">
                                 <small clas="small-title">Solicitudes de busquedas</small>
                             </div>
                             <div class="row">
@@ -28,7 +28,7 @@ var HomeSection = {
                         </div>
                     </div>
                     <hr>
-                    <div class="row">
+                    <div class="row mb-40p">
                         <div class="col-md-6 text-start">
                             <div class="row">
                                 <small clas="small-title">Tiempo de procesamiento</small>
@@ -50,7 +50,7 @@ var HomeSection = {
             </div>
             <div class="card-body">
                 <blockquote class="blockquote mb-0">
-                    <div class="row">
+                    <div class="row mb-40p">
                         <div class="col-md-6 text-start">
                             <div class="row">
                                 <small clas="small-title">Productos sugeridos</small>
@@ -72,7 +72,7 @@ var HomeSection = {
             </div>
             <div class="card-body">
                 <blockquote class="blockquote mb-0">
-                    <div class="row">
+                    <div class="row mb-40p">
                         <div class="col-md-6 text-start">
                             <div class="row">
                                 <small clas="small-title">Registros</small>

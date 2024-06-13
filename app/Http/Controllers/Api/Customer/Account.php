@@ -89,4 +89,18 @@ class Account extends Controller
             )
         );
     }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getDashboardData(Request $request)
+    {
+        return response()->json(
+            $this->customer->getDashboardData(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
 }

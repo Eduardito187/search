@@ -77,6 +77,21 @@ new Vue({
         .catch(error => {
           console.log(error, 'alert-danger');
         });
+      
+        
+      fetch(window.configFrontend.base_url_frontend + 'api/account/dashboard-data', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': "Bearer " + window.configFrontend.token_access_frontend,
+          'Cache-Control': 'no-cache',
+          'Customer-Key': localStorage.getItem('customer_frontend')
+        }
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+        });
     },
     isBackAction () {
       return !this.routesBase.includes(this.$route.path)

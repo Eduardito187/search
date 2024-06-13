@@ -6,6 +6,8 @@ use App\Helpers\System\CoreHttp;
 use App\Models\CustomersAccount;
 use Exception;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use Illuminate\Support\Collection;
 
 class Customer
 {
@@ -23,8 +25,7 @@ class Customer
     }
 
     /**
-     * @param Request $request
-     * @return array
+     * @inheritDoc
      */
     public function closeSession(array $body, array $header = [])
     {
@@ -53,8 +54,7 @@ class Customer
     }
 
     /**
-     * @param string $key
-     * @return void
+     * @inheritDoc
      */
     public function removeCookie(string $key)
     {
@@ -62,9 +62,7 @@ class Customer
     }
 
     /**
-     * @param string $key
-     * @param string $value
-     * @return void
+     * @inheritDoc
      */
     public function setCookie(string $key, string $value)
     {
@@ -72,9 +70,7 @@ class Customer
     }
 
     /**
-     * @param array $body
-     * @param array $header
-     * @return array
+     * @inheritDoc
      */
     public function getCustomerInformation(array $body, array $header = [])
     {
@@ -89,7 +85,7 @@ class Customer
             }
 
             return $this->coreHttp->constructResponse(
-                $this->getCustomerByEncryption($header["customer-key"][0]),
+                $this->getCustomerArrayByEncryption($header["customer-key"][0]),
                 "Proceso ejecutado exitosamente.",
                 200,
                 true
@@ -100,9 +96,7 @@ class Customer
     }
 
     /**
-     * @param array $body
-     * @param array $header
-     * @return array
+     * @inheritDoc
      */
     public function customerValidateLogin(array $body, array $header = [])
     {
@@ -123,9 +117,7 @@ class Customer
     }
 
     /**
-     * @param array $body
-     * @param array $header
-     * @return array
+     * @inheritDoc
      */
     public function customerResetPassword(array $body, array $header = [])
     {
@@ -146,8 +138,7 @@ class Customer
     }
 
     /**
-     * @param string $keyEncryption
-     * @return bool
+     * @inheritDoc
      */
     public function validateCustomerEncryption(string $keyEncryption)
     {
@@ -163,10 +154,25 @@ class Customer
     }
 
     /**
-     * @param string $keyEncryption
-     * @return array
+     * @inheritDoc
      */
     public function getCustomerByEncryption(string $keyEncryption)
+    {
+        $descryptionMail = $this->decrypt($keyEncryption);
+        
+        $customer = CustomersAccount::where('mail', $descryptionMail)->first();
+
+        if ($customer == null) {
+            throw new Exception("Customer no indentificado.");
+        }
+
+        return $customer;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getCustomerArrayByEncryption(string $keyEncryption)
     {
         $descryptionMail = $this->decrypt($keyEncryption);
         
@@ -180,8 +186,7 @@ class Customer
     }
 
     /**
-     * @param CustomersAccount $customer
-     * @return array
+     * @inheritDoc
      */
     public function entityCustomerArray(CustomersAccount $customer)
     {
@@ -198,9 +203,7 @@ class Customer
     }
 
     /**
-     * @param string $mail
-     * @param string $password
-     * @return array
+     * @inheritDoc
      */
     public function validateLoginAccount($mail, $password)
     {
@@ -223,9 +226,111 @@ class Customer
     }
 
     /**
-     * @param array $body
-     * @param array $header
-     * @return array
+     * @inheritDoc
+     */
+    public function getDashboardData(array $body, array $header = [])
+    {
+        try {
+            if (
+                !is_array($header) ||
+                !isset($header["customer-key"]) ||
+                !is_array($header["customer-key"]) ||
+                count($header["customer-key"]) == 0
+            ) {
+                throw new Exception("Parametros no validos.");
+            }
+
+            $customer = $this->getCustomerByEncryption($header["customer-key"][0]);
+
+            return $this->coreHttp->constructResponse(
+                $this->getDataDashboard($customer),
+                "Proceso ejecutado exitosamente.",
+                200,
+                true
+            );
+        } catch (Exception $e) {
+            return $this->coreHttp->constructResponse([], $e->getMessage(), 500, false);
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getDataDashboard($customer)
+    {
+        $currentClient = $customer->client;
+        //$currentClient->recentMonthHistoryIndex;
+        return [
+            "query" => $this->generateStructureDataBody($currentClient->recentMonthHistoryQuerySearch, true),
+            "suggestion" => $this->generateStructureDataBody($currentClient->recentMonthHistoryQuerySearchSuggestion),
+            "data" => []
+        ];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function generateStructureDataBody($collection, $generateTime = false)
+    {
+        $data = [];
+        $data["counter"] = $this->getCounterDataArray($collection);
+
+        if ($generateTime) {
+            $data["time"] = $this->getTimeDataArray($collection);
+        }
+
+        return $data;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function generateDateArray()
+    {
+        $dates = new Collection();
+
+        for ($i = 0; $i < 30; $i++) {
+            $dates->push(Carbon::today()->subDays($i)->toDateString());
+        }
+
+        $dates = $dates->reverse();
+        $arrayDate = $dates->map(function ($date) {
+            return $date;
+        });
+
+        return ["label" => $arrayDate->toArray(), "data" => []];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getCounterDataArray($collection)
+    {
+        $structure = $this->generateDateArray();
+
+        foreach ($structure["label"] as $key => $date) {
+            $structure["data"][] = $collection->whereDate("created_at", $date)->count() ?? 0;
+        }
+
+        return $structure;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getTimeDataArray($collection)
+    {
+        $structure = $this->generateDateArray();
+
+        foreach ($structure["label"] as $key => $date) {
+            $structure["data"][] = $collection->whereDate("created_at", $date)->avg("time_execution") ?? 0;
+        }
+
+        return $structure;
+    }
+
+    /**
+     * @inheritDoc
      */
     public function generatePasswordCustomer(array $body, array $header = [])
     {
@@ -248,16 +353,14 @@ class Customer
     }
 
     /**
-     * @param string $password
-     * @return string
+     * @inheritDoc
      */
     public function encryptedPawd(string $password){
         return hash_hmac('sha256', $password, env('ENCRYPTION_KEY'));
     }
 
     /**
-     * @param string $data
-     * @return string
+     * @inheritDoc
      */
     function encrypt($data)
     {
@@ -267,8 +370,7 @@ class Customer
     }
 
     /**
-     * @param string $data
-     * @return string
+     * @inheritDoc
      */
     function decrypt($data)
     {
@@ -276,5 +378,4 @@ class Customer
         $encrypted_data = base64_decode($data);
         return openssl_decrypt($encrypted_data, 'aes-256-cbc', env('ENCRYPTION_KEY'), 0, $iv);
     }
-    
 }

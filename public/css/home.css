@@ -426,6 +426,11 @@ canvas {
     background-color: rgba(86, 61, 124, 0.15);
     border: 1px solid rgba(86, 61, 124, 0.15);
 }
+
+.mb-40p {
+    margin-bottom: -40px;
+}
+
 .content-chart-eduard-search .apexcharts-xaxis,
 .content-chart-eduard-search .apexcharts-toolbar,
 .content-chart-eduard-search .apexcharts-yaxis,
