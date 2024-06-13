@@ -502,7 +502,7 @@ class Import
                 if (!is_array($params["products"])) {
                     throw new Exception("El parametro products no cumple con el formato requerido.");
                 } else {
-                    $countBatch = $params["products"];
+                    $countBatch = count($params["products"]);
                     $this->importProducts($params["products"], $client, $this->indexConfiguration->id_index_catalog);
                 }
             }
