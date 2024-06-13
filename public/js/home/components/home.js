@@ -142,9 +142,9 @@ var HomeSection = {
                     self.dataIndex = data.response.data;
 
                     setTimeout(function () {
-                        self.initializeCharts("Solicitudes", self.queryData.counter.label, self.queryData.counter.data, "#chart-query-counter");
-                        self.initializeCharts("Tiempo", self.queryData.time.label, self.queryData.time.data, "#chart-time-counter");
-                        self.initializeCharts("Sugeridos", self.suggestionData.counter.label, self.suggestionData.counter.data, "#chart-suggestion-counter");
+                        self.initializeCharts("Solicitudes", data.response.query.counter.label, data.response.query.counter.data, "#chart-query-counter");
+                        self.initializeCharts("Tiempo", data.response.query.time.label, data.response.query.time.data, "#chart-time-counter");
+                        self.initializeCharts("Sugeridos", data.response.suggestion.counter.label, data.response.suggestion.counter.data, "#chart-suggestion-counter");
                     }, 1000);
                 }
             }).catch(error => {
