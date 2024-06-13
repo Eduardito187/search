@@ -304,7 +304,7 @@ class Customer
         $structure = $this->generateDateArray();
 
         foreach ($structure["label"] as $key => $date) {
-            $structure["data"][] = $collection->whereDate("created_at", "=", $date)->count();
+            $structure["data"][] = $date;
         }
 
         return $structure;
@@ -318,7 +318,7 @@ class Customer
         $structure = $this->generateDateArray();
 
         foreach ($structure["label"] as $key => $date) {
-            $structure["data"][] = $collection->whereDate("created_at", "=", $date)->avg("time_execution");
+            $structure["data"][] = $date;
         }
 
         return $structure;
