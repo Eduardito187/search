@@ -342,7 +342,7 @@ class Customer
 
         foreach ($structure["label"] as $key => $date) {
             $newCollection = clone $collection;
-            $structure["data"][] = $newCollection->whereDate("created_at", "=", $date)->sum("count") ?? 0;
+            $structure["data"][] = round($newCollection->whereDate("created_at", "=", $date)->sum("count") ?? 0);
         }
 
         $structure["value"] = array_sum($structure["data"]) / count($structure["data"]);
