@@ -18,6 +18,7 @@ class SendMail
         $this->title = $title;
         $this->message = $this->renderView($view, $dataMail);
         $this->setHeaders();
+        $this->createMail();
     }
 
     protected function renderView($view, $data)
