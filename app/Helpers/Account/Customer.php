@@ -303,7 +303,6 @@ class Customer
     {
         $data = [];
         $data["counter"] = $this->getCounterSuggestionDataArray($collection);
-        $data["time"] = $this->getTimeDataArray($collection);
 
         return $data;
     }
@@ -315,6 +314,7 @@ class Customer
     {
         $data = [];
         $data["counter"] = $this->getCounterDataArray($collection);
+        $data["time"] = $this->getTimeDataArray($collection);
 
         return $data;
     }
