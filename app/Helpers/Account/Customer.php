@@ -7,188 +7,139 @@ use App\Models\CustomersAccount;
 use Exception;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use Illuminate\Support\Collection;
 
 class Customer
 {
-    /**
-     * @var CoreHttp
-     */
     protected $coreHttp;
 
-    /**
-     * Constructor Customer Account Helper
-     */
-    public function __construct()
+    public function __construct(CoreHttp $coreHttp)
     {
-        $this->coreHttp = new CoreHttp();
+        $this->coreHttp = $coreHttp;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function closeSession(array $body, array $header = [])
     {
-        try {
-            if (
-                !is_array($header) ||
-                !isset($header["customer-key"]) ||
-                !is_array($header["customer-key"]) ||
-                count($header["customer-key"]) == 0
-            ) {
-                throw new Exception("Parametros no validos.");
-            }
-
-            $this->validateCustomerEncryption($header["customer-key"][0]);
-            $this->removeCookie("customer_backend");
-
-            return $this->coreHttp->constructResponse(
-                [],
-                "Proceso ejecutado exitosamente.",
-                200,
-                true
-            );
-        } catch (Exception $e) {
-            return $this->coreHttp->constructResponse([], $e->getMessage(), 500, false);
-        }
+        return $this->executeWithValidation(
+            function() use ($header) {
+                $this->validateCustomerKey($header);
+                $this->removeCookie("customer_backend");
+                return [];
+            },
+            "Proceso ejecutado exitosamente."
+        );
     }
 
-    /**
-     * @inheritDoc
-     */
     public function removeCookie(string $key)
     {
-        $_COOKIE[$key] = null;
+        unset($_COOKIE[$key]);
     }
 
-    /**
-     * @inheritDoc
-     */
     public function setCookie(string $key, string $value)
     {
         $_COOKIE[$key] = $value;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getCustomerInformation(array $body, array $header = [])
     {
-        try {
-            if (
-                !is_array($header) ||
-                !isset($header["customer-key"]) ||
-                !is_array($header["customer-key"]) ||
-                count($header["customer-key"]) == 0
-            ) {
-                throw new Exception("Parametros no validos.");
-            }
-
-            return $this->coreHttp->constructResponse(
-                $this->getCustomerArrayByEncryption($header["customer-key"][0]),
-                "Proceso ejecutado exitosamente.",
-                200,
-                true
-            );
-        } catch (Exception $e) {
-            return $this->coreHttp->constructResponse([], $e->getMessage(), 500, false);
-        }
+        return $this->executeWithValidation(
+            function() use ($header) {
+                $this->validateCustomerKey($header);
+                return $this->getCustomerArrayByEncryption($header["customer-key"][0]);
+            },
+            "Proceso ejecutado exitosamente."
+        );
     }
 
-    /**
-     * @inheritDoc
-     */
     public function customerValidateLogin(array $body, array $header = [])
     {
-        try {
-            if (!is_array($body) || !isset($body["password"]) || !isset($body["mail"])) {
-                throw new Exception("Parametros no validos.");
-            }
-
-            return $this->coreHttp->constructResponse(
-                $this->validateLoginAccount($body["mail"], $body["password"]),
-                "Proceso ejecutado exitosamente.",
-                200,
-                true
-            );
-        } catch (Exception $e) {
-            return $this->coreHttp->constructResponse([], $e->getMessage(), 500, false);
-        }
+        return $this->executeWithValidation(
+            function() use ($body) {
+                $this->validateLoginParams($body);
+                return $this->validateLoginAccount($body["mail"], $body["password"]);
+            },
+            "Proceso ejecutado exitosamente."
+        );
     }
 
-    /**
-     * @inheritDoc
-     */
     public function customerResetPassword(array $body, array $header = [])
     {
-        try {
-            if (!is_array($body) || !isset($body["mail"])) {
-                throw new Exception("Parametros no validos.");
-            }
+        return $this->executeWithValidation(
+            function() use ($body) {
+                $this->validateResetPasswordParams($body);
+                return [];
+            },
+            "Proceso ejecutado exitosamente."
+        );
+    }
 
-            return $this->coreHttp->constructResponse(
-                [],
-                "Proceso ejecutado exitosamente.",
-                200,
-                true
-            );
+    private function executeWithValidation(callable $callback, string $successMessage)
+    {
+        try {
+            $result = $callback();
+            return $this->coreHttp->constructResponse($result, $successMessage, 200, true);
         } catch (Exception $e) {
             return $this->coreHttp->constructResponse([], $e->getMessage(), 500, false);
         }
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function validateCustomerEncryption(string $keyEncryption)
+    private function validateCustomerKey(array $header)
+    {
+        if (
+            !isset($header["customer-key"]) ||
+            !is_array($header["customer-key"]) ||
+            count($header["customer-key"]) === 0
+        ) {
+            throw new Exception("Parametros no validos.");
+        }
+
+        $this->validateCustomerEncryption($header["customer-key"][0]);
+    }
+
+    private function validateLoginParams(array $body)
+    {
+        if (!isset($body["password"]) || !isset($body["mail"])) {
+            throw new Exception("Parametros no validos.");
+        }
+    }
+
+    private function validateResetPasswordParams(array $body)
+    {
+        if (!isset($body["mail"])) {
+            throw new Exception("Parametros no validos.");
+        }
+    }
+
+    private function validateCustomerEncryption(string $keyEncryption)
     {
         $descryptionMail = $this->decrypt($keyEncryption);
-        
         $customer = CustomersAccount::where('mail', $descryptionMail)->first();
 
-        if ($customer == null) {
-            throw new Exception("Customer no indentificado.");
+        if (is_null($customer)) {
+            throw new Exception("Customer no identificado.");
         }
 
         return true;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function getCustomerByEncryption(string $keyEncryption)
+    private function getCustomerByEncryption(string $keyEncryption)
     {
         $descryptionMail = $this->decrypt($keyEncryption);
-        
         $customer = CustomersAccount::where('mail', $descryptionMail)->first();
 
-        if ($customer == null) {
-            throw new Exception("Customer no indentificado.");
+        if (is_null($customer)) {
+            throw new Exception("Customer no identificado.");
         }
 
         return $customer;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function getCustomerArrayByEncryption(string $keyEncryption)
+    private function getCustomerArrayByEncryption(string $keyEncryption)
     {
-        $descryptionMail = $this->decrypt($keyEncryption);
-        
-        $customer = CustomersAccount::where('mail', $descryptionMail)->first();
-
-        if ($customer == null) {
-            throw new Exception("Customer no indentificado.");
-        }
-
+        $customer = $this->getCustomerByEncryption($keyEncryption);
         return $this->entityCustomerArray($customer);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function entityCustomerArray(CustomersAccount $customer)
+    private function entityCustomerArray(CustomersAccount $customer)
     {
         $customerAccountInformation = $customer->customerAccountInformation;
 
@@ -202,89 +153,78 @@ class Customer
         ];
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function validateLoginAccount($mail, $password)
+    private function validateLoginAccount(string $mail, string $password)
     {
         $customer = CustomersAccount::where('mail', $mail)->first();
 
-        if ($customer != null) {
-            $encryptPassword = $this->encryptedPawd($password);
+        if ($customer && $customer->password === $this->encryptedPawd($password)) {
+            $encryptKey = $this->encrypt($mail);
+            $this->setCookie("customer_backend", $encryptKey);
 
-            if ($customer->password == $encryptPassword) {
-                $encryptKey = $this->encrypt($mail);
-                $this->setCookie("customer_backend", $encryptKey);
-
-                return ["message" => 'Inicio de sesion exitoso.', "status" => true, 'customer' => $encryptKey];
-            } else {
-                return ["message" => 'Contraseña erronea.', "status" => false];
-            }
+            return ["message" => 'Inicio de sesión exitoso.', "status" => true, 'customer' => $encryptKey];
         }
 
-        return ["message" => 'El mail no esta asignado a una cuenta.', "status" => false];
+        return ["message" => 'Credenciales no válidas.', "status" => false];
     }
 
-    /**
-     * @inheritDoc
-     */
+    public function generatePasswordCustomer(array $body, array $header = [])
+    {
+        return $this->executeWithValidation(
+            function() use ($body) {
+                if (!isset($body["password"])) {
+                    throw new Exception("Parametros no validos.");
+                }
+
+                return ["password" => $this->encryptedPawd($body["password"])];
+            },
+            "Proceso ejecutado exitosamente."
+        );
+    }
+
+    private function encryptedPawd(string $password)
+    {
+        return hash_hmac('sha256', $password, env('ENCRYPTION_KEY'));
+    }
+
+    private function encrypt($data)
+    {
+        $iv = str_repeat('0', openssl_cipher_iv_length('aes-256-cbc'));
+        $encrypted = openssl_encrypt($data, 'aes-256-cbc', env('ENCRYPTION_KEY'), 0, $iv);
+        return base64_encode($encrypted);
+    }
+
+    private function decrypt($data)
+    {
+        $iv = str_repeat('0', openssl_cipher_iv_length('aes-256-cbc'));
+        $encrypted_data = base64_decode($data);
+        return openssl_decrypt($encrypted_data, 'aes-256-cbc', env('ENCRYPTION_KEY'), 0, $iv);
+    }
+
     public function getAppsData(array $body, array $header = [])
     {
-        try {
-            if (
-                !is_array($header) ||
-                !isset($header["customer-key"]) ||
-                !is_array($header["customer-key"]) ||
-                count($header["customer-key"]) == 0
-            ) {
-                throw new Exception("Parametros no validos.");
-            }
-
-            $customer = $this->getCustomerByEncryption($header["customer-key"][0]);
-
-            return $this->coreHttp->constructResponse(
-                [],
-                "Proceso ejecutado exitosamente.",
-                200,
-                true
-            );
-        } catch (Exception $e) {
-            return $this->coreHttp->constructResponse([], $e->getMessage(), 500, false);
-        }
+        return $this->executeWithValidation(
+            function() use ($header) {
+                $this->validateCustomerKey($header);
+                $customer = $this->getCustomerByEncryption($header["customer-key"][0]);
+                return [];
+            },
+            "Proceso ejecutado exitosamente."
+        );
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getDashboardData(array $body, array $header = [])
     {
-        try {
-            if (
-                !is_array($header) ||
-                !isset($header["customer-key"]) ||
-                !is_array($header["customer-key"]) ||
-                count($header["customer-key"]) == 0
-            ) {
-                throw new Exception("Parametros no validos.");
-            }
-
-            $customer = $this->getCustomerByEncryption($header["customer-key"][0]);
-
-            return $this->coreHttp->constructResponse(
-                $this->getDataDashboard($customer),
-                "Proceso ejecutado exitosamente.",
-                200,
-                true
-            );
-        } catch (Exception $e) {
-            return $this->coreHttp->constructResponse([], $e->getMessage(), 500, false);
-        }
+        return $this->executeWithValidation(
+            function() use ($header) {
+                $this->validateCustomerKey($header);
+                $customer = $this->getCustomerByEncryption($header["customer-key"][0]);
+                return $this->getDataDashboard($customer);
+            },
+            "Proceso ejecutado exitosamente."
+        );
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function getDataDashboard($customer)
+    private function getDataDashboard($customer)
     {
         $currentClient = $customer->client;
 
@@ -295,10 +235,7 @@ class Customer
         ];
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function generateStructureDataIndexes($currentClient)
+    private function generateStructureDataIndexes($currentClient)
     {
         return [
             "index" => $this->getDataIndexDashboard($currentClient),
@@ -306,14 +243,11 @@ class Customer
         ];
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function getDataIndexDashboard($currentClient)
+    private function getDataIndexDashboard($currentClient)
     {
         $dataIndex = [];
 
-        foreach ($currentClient->indexes as $key => $index) {
+        foreach ($currentClient->indexes as $index) {
             $dataIndex[] = [
                 "code" => $index->code,
                 "query" => round($index->recentMonthHistoryQuerySearch()->count()),
@@ -324,33 +258,20 @@ class Customer
         return $dataIndex;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function generateStructureSuggestionBody($collection)
+    private function generateStructureSuggestionBody($collection)
     {
-        $data = [];
-        $data["counter"] = $this->getCounterSuggestionDataArray($collection);
-
-        return $data;
+        return ["counter" => $this->getCounterSuggestionDataArray($collection)];
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function generateStructureDataBody($collection)
+    private function generateStructureDataBody($collection)
     {
-        $data = [];
-        $data["counter"] = $this->getCounterDataArray($collection);
-        $data["time"] = $this->getTimeDataArray($collection);
-
-        return $data;
+        return [
+            "counter" => $this->getCounterDataArray($collection),
+            "time" => $this->getTimeDataArray($collection)
+        ];
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function generateDateArray()
+    private function generateDateArray()
     {
         $datesArray = [];
 
@@ -361,14 +282,11 @@ class Customer
         return ["value" => 0, "label" => $datesArray, "data" => []];
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function getCounterSuggestionDataArray($collection)
+    private function getCounterSuggestionDataArray($collection)
     {
         $structure = $this->generateDateArray();
 
-        foreach ($structure["label"] as $key => $date) {
+        foreach ($structure["label"] as $date) {
             $newCollection = clone $collection;
             $structure["data"][] = round($newCollection->whereDate("created_at", "=", $date)->sum("count_items") ?? 0);
         }
@@ -377,14 +295,11 @@ class Customer
         return $structure;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function getCounterDataArray($collection)
+    private function getCounterDataArray($collection)
     {
         $structure = $this->generateDateArray();
 
-        foreach ($structure["label"] as $key => $date) {
+        foreach ($structure["label"] as $date) {
             $newCollection = clone $collection;
             $structure["data"][] = $newCollection->whereDate("created_at", "=", $date)->count() ?? 0;
         }
@@ -393,14 +308,11 @@ class Customer
         return $structure;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function getCounterDataRecordArray($collection)
+    private function getCounterDataRecordArray($collection)
     {
         $structure = $this->generateDateArray();
 
-        foreach ($structure["label"] as $key => $date) {
+        foreach ($structure["label"] as $date) {
             $newCollection = clone $collection;
             $structure["data"][] = round($newCollection->whereDate("created_at", "=", $date)->sum("count") ?? 0);
         }
@@ -409,14 +321,11 @@ class Customer
         return $structure;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function getTimeDataArray($collection)
+    private function getTimeDataArray($collection)
     {
         $structure = $this->generateDateArray();
 
-        foreach ($structure["label"] as $key => $date) {
+        foreach ($structure["label"] as $date) {
             $newCollection = clone $collection;
             $structure["data"][] = round($newCollection->whereDate("created_at", "=", $date)->avg("time_execution") ?? 0);
         }
@@ -425,10 +334,7 @@ class Customer
         return $structure;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function convertNumber($number)
+    private function convertNumber($number)
     {
         if ($number < 1000) {
             return $number;
@@ -437,55 +343,5 @@ class Customer
         } else {
             return round($number / 1000000, 1) . 'M';
         }
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function generatePasswordCustomer(array $body, array $header = [])
-    {
-        try {
-            if (!is_array($body) || !isset($body["password"])) {
-                throw new Exception("Parametros no validos.");
-            }
-
-            return $this->coreHttp->constructResponse(
-                [
-                    "password" => $this->encryptedPawd($body["password"])
-                ],
-                "Proceso ejecutado exitosamente.",
-                200,
-                true
-            );
-        } catch (Exception $e) {
-            return $this->coreHttp->constructResponse([], $e->getMessage(), 500, false);
-        }
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function encryptedPawd(string $password){
-        return hash_hmac('sha256', $password, env('ENCRYPTION_KEY'));
-    }
-
-    /**
-     * @inheritDoc
-     */
-    function encrypt($data)
-    {
-        $iv = str_repeat('0', openssl_cipher_iv_length('aes-256-cbc'));
-        $encrypted = openssl_encrypt($data, 'aes-256-cbc', env('ENCRYPTION_KEY'), 0, $iv);
-        return base64_encode($encrypted);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    function decrypt($data)
-    {
-        $iv = str_repeat('0', openssl_cipher_iv_length('aes-256-cbc'));
-        $encrypted_data = base64_decode($data);
-        return openssl_decrypt($encrypted_data, 'aes-256-cbc', env('ENCRYPTION_KEY'), 0, $iv);
     }
 }
