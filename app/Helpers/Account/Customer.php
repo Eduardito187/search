@@ -287,18 +287,13 @@ class Customer
      */
     public function generateDateArray()
     {
-        $dates = new Collection();
+        $datesArray = [];
 
         for ($i = 0; $i < 30; $i++) {
-            $dates->push(Carbon::today()->subDays($i)->toDateString());
+            $datesArray[] = Carbon::today()->subDays($i)->toDateString();
         }
 
-        $dates = $dates->reverse();
-        $arrayDate = $dates->map(function ($date) {
-            return $date;
-        });
-
-        return ["label" => $arrayDate->toArray(), "data" => []];
+        return ["label" => $datesArray, "data" => []];
     }
 
     /**
