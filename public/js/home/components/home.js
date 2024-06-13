@@ -116,7 +116,7 @@ var HomeSection = {
             var options = {
                 chart: {height: 100,type: "line"},
                 colors: ["#FF1654"],
-                series: [{name: labelName,data: valueArray}],
+                series: [{name: labelName,data: [20, 29, 37, 36, 44, 45, 50, 58]}],
                 xaxis: {show: false,categories: labelArray,labels: {show: true}},
                 stroke: {curve: 'smooth'}
             };
