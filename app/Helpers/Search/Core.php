@@ -314,14 +314,18 @@ class Core
             $filterResponse = [];
 
             foreach ($filterOrder as $key => $filter) {
-                $typeFilter = $this->getTypeFilter($index->id_client, $filter->id_attribute);
+                $filterData = $this->getValueAttributeFilter($filter->id_attribute, $index->id, $responseProductIds);
 
-                $filterResponse[] = [
-                    "label" => $filter->attribute->label,
-                    "code" => $filter->attribute->code,
-                    "type" => $typeFilter,
-                    "data" => $this->getValueAttributeFilter($filter->id_attribute, $index->id, $responseProductIds)
-                ];
+                if (count($filterData) > 0) {
+                    $typeFilter = $this->getTypeFilter($index->id_client, $filter->id_attribute);
+    
+                    $filterResponse[] = [
+                        "label" => $filter->attribute->label,
+                        "code" => $filter->attribute->code,
+                        "type" => $typeFilter,
+                        "data" => $filterData
+                    ];
+                }
             }
     
             return $this->coreHttp->constructResponse(
