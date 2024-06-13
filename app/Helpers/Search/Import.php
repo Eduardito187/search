@@ -200,7 +200,7 @@ class Import
 
             Event::dispatch(
                 new IndexationProccess(
-                    count($this->productProccess),
+                    1,
                     $client->id,
                     $this->indexConfiguration->id_index_catalog
                 )
@@ -496,11 +496,13 @@ class Import
             }
 
             $client = $this->indexConfiguration->indexCatalog->client;
+            $countBatch = 0;
 
             if (array_key_exists("products", $params) ) {
                 if (!is_array($params["products"])) {
                     throw new Exception("El parametro products no cumple con el formato requerido.");
                 } else {
+                    $countBatch = $params["products"];
                     $this->importProducts($params["products"], $client, $this->indexConfiguration->id_index_catalog);
                 }
             }
@@ -510,7 +512,7 @@ class Import
 
             Event::dispatch(
                 new IndexationProccess(
-                    count($this->productProccess),
+                    $countBatch,
                     $client->id,
                     $this->indexConfiguration->id_index_catalog
                 )
