@@ -22,21 +22,25 @@ class PasswordResetController extends Controller
     {
         $request->validate([
             'token' => 'required',
-            'password' => 'required|confirmed|min:8',
+            'password' => 'required|confirmed',
         ]);
 
         $passwordReset = DB::table('password_resets')
             ->where('token', $request->token)
             ->where('email', "eduardchavez302@gmail.com")
             ->first();
+        
+        if (strlen($request->password) < 8) {
+            return back()->withErrors(['password' => 'This password reset token is invalid or has expired.']);
+        }
 
-        if (!$passwordReset || Carbon::parse($passwordReset->created_at)->addMinutes(10)->isPast()) {
-            return back()->withErrors(['email' => 'This password reset token is invalid or has expired.']);
+        if (!$passwordReset || Carbon::parse($passwordReset->created_at)->addMinutes(1)->isPast()) {
+            return back()->withErrors(['account' => 'This password reset token is invalid or has expired.']);
         }
 
         $user = \App\Models\CustomersAccount::where('mail', "eduardchavez302@gmail.com")->first();
         if (!$user) {
-            return back()->withErrors(['email' => 'We can\'t find a user with that email address.']);
+            return back()->withErrors(['account' => 'We can\'t find a user with that email address.']);
         }
 
         $user->password = Hash::make($request->password);

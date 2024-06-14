@@ -17,6 +17,11 @@
                 <form method="POST" action="{{ route('password.update') }}">
                     @csrf
                     <input type="hidden" name="token" value="{{ $token }}">
+                    @error('account')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
 
                     <div class="input-group">
                         <i class="fa fa-lock"></i>
