@@ -4,7 +4,9 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><?= $title; ?></title>
-        <link rel="stylesheet" href="{{ asset('css/confirm-account.css') }}">
+        <style>
+            @import url('<?= $base_url; ?>/css/confirm-account.css');
+        </style>
     </head>
     <body>
         <div class="container">
