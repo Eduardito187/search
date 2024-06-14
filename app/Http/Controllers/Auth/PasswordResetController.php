@@ -15,7 +15,7 @@ class PasswordResetController extends Controller
 {
     public function showResetForm($token)
     {
-        return view('restore-password.blade', ['token' => $token]);
+        return view('reset.restore-password', ['token' => $token]);
     }
 
     public function reset(Request $request)
