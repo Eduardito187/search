@@ -6,7 +6,7 @@
         <title><?= $title; ?></title>
     </head>
     <body>
-        <div style="width: 100%;padding: 20px;text-align: center;">
+        <div style="width: calc(100% - 40px);padding: 20px;text-align: center;">
             <div style="font-size: 24px;font-weight: bold;color: #333;">
                 <img src="<?= $base_url; ?>/img/picture-logo.png" alt="Logo" style="width: 40px;height: 40px;border-radius: 50%;margin-right: 10px;" />
             </div>
@@ -17,7 +17,7 @@
                 <div style="font-size: 16px;color: #666;line-height: 1.5;margin: 20px 0;"><?= $footer_text; ?></div>
             </div>
             <div style="font-size: 12px;color: #999;margin-top: 20px;">
-                Copyright © <?= date("Y"); ?> <a href="<?= $base_url; ?>" style="color: #007bff;text-decoration: none;"><?= $app_name; ?></a>. All Rights Reserved.
+                Copyright © <?= date("Y"); ?> <a href="<?= $base_url; ?>" style="color: #007bff;text-decoration: none;"><?= $app_name; ?></a>.All Rights Reserved.
             </div>
         </div>
     </body>
