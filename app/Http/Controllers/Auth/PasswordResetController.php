@@ -15,7 +15,7 @@ class PasswordResetController extends Controller
 {
     public function showResetForm($token)
     {
-        return view('reset.restore-password', ['token' => $token]);
+        return view('frontend.account.reset.restore-password', ['token' => $token]);
     }
 
     public function reset(Request $request)
