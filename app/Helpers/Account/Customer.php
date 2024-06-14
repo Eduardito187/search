@@ -305,8 +305,8 @@ class Customer
             "app" => $customer->client->name,
             "code" => $customer->client->code,
             "index" => $customer->client->indexes()->count(),
-            "search" => $this->convertNumber($customer->client->recentMonthHistoryQuerySearch()->coun() ?? 0),
-            "record" => $this->convertNumber($customer->client->recentMonthHistoryIndex()->sum("count") ?? 0)
+            "search" => $this->convertNumber(intval($customer->client->recentMonthHistoryQuerySearch()->count() ?? 0)),
+            "record" => $this->convertNumber(intval($customer->client->recentMonthHistoryIndex()->sum("count") ?? 0))
         );
 
         return $data;
