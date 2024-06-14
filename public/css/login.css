@@ -91,3 +91,8 @@ body .container .login-form #loginForm .forgot-password:hover {
 body .container .login-form #loginForm {
     margin-bottom: 10px;
 }
+
+.invalid-feedback {
+    display: block !important;
+    margin-bottom: 10px;
+}
