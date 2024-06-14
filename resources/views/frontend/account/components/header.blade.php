@@ -33,4 +33,4 @@
         </script>
         @yield('custom-header')
     </head>
-    <body class="{{ $bodyClass }}">
+    <body class="{{ $bodyClass ?? '' }}">
