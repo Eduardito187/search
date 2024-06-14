@@ -257,16 +257,59 @@ class Customer
         return openssl_decrypt($encrypted_data, 'aes-256-cbc', env('ENCRYPTION_KEY'), 0, $iv);
     }
 
-    public function getAppsData(array $body, array $header = [])
+    public function getInfraestructureData(array $body, array $header = [])
     {
         return $this->executeWithValidation(
             function() use ($header) {
                 $this->validateCustomerKey($header);
                 $customer = $this->getCustomerByEncryption($header["customer-key"][0]);
-                return [];
+                return $this->getInfraestructureDataArray($customer);
             },
             "Proceso ejecutado exitosamente."
         );
+    }
+
+    public function getAplicationData(array $body, array $header = [])
+    {
+        return $this->executeWithValidation(
+            function() use ($header) {
+                $this->validateCustomerKey($header);
+                $customer = $this->getCustomerByEncryption($header["customer-key"][0]);
+                return $this->getAplicationDataArray($customer);
+            },
+            "Proceso ejecutado exitosamente."
+        );
+    }
+
+    public function getInfraestructureDataArray(CustomersAccount $customer)
+    {
+        $data = [];
+
+        foreach ($customer->client->indexes as $key => $index) {
+            $data[] = array(
+                "code" => $index->code,
+                "name" => $index->name,
+                "search" => $this->convertNumber($index->recentMonthHistoryIndex()->coun() ?? 0),
+                "record" => $this->convertNumber($index->recentMonthHistoryQuerySearch()->coun() ?? 0)
+            );
+        }
+
+        return $data;
+    }
+
+    public function getAplicationDataArray(CustomersAccount $customer)
+    {
+        $data = [];
+
+        $data[] = array(
+            "app" => $customer->client->name,
+            "code" => $customer->client->code,
+            "index" => $customer->client->indexes()->count(),
+            "search" => $this->convertNumber($customer->client->recentMonthHistoryQuerySearch()->coun() ?? 0),
+            "record" => $this->convertNumber($customer->client->recentMonthHistoryIndex()->sum("count") ?? 0)
+        );
+
+        return $data;
     }
 
     public function getDashboardData(array $body, array $header = [])
@@ -281,7 +324,7 @@ class Customer
         );
     }
 
-    private function getDataDashboard($customer)
+    private function getDataDashboard(CustomersAccount $customer)
     {
         $currentClient = $customer->client;
 
@@ -345,7 +388,7 @@ class Customer
 
         foreach ($structure["label"] as $date) {
             $newCollection = clone $collection;
-            $structure["data"][] = round($newCollection->whereDate("created_at", "=", $date)->sum("count_items") ?? 0);
+            $structure["data"][] = round($newCollection->whereDate("created_at", "=", $date)->count() ?? 0);
         }
 
         $structure["value"] = $this->convertNumber(array_sum($structure["data"]));

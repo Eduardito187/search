@@ -44,13 +44,6 @@ class Client extends Model
     /**
      * @inheritDoc
      */
-    public function recentMonthHistoryIndex() {
-        return $this->hasMany(HistoryIndexProccess::class, 'id_client', 'id')->where('created_at', '>=', now()->subDays(30));
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function historyQuerySearch() {
         return $this->hasMany(HistoryQuerySearch::class, 'id_client', 'id');
     }
@@ -60,6 +53,13 @@ class Client extends Model
      */
     public function recentMonthHistoryQuerySearch() {
         return $this->hasMany(HistoryQuerySearch::class, 'id_client', 'id')->whereIn('code', ['feed_response', 'page_search_response'])->where('created_at', '>=', now()->subDays(30));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function recentMonthHistoryIndex() {
+        return $this->hasMany(HistoryIndexProccess::class, 'id_client', 'id')->where('created_at', '>=', now()->subDays(30));
     }
 
     /**

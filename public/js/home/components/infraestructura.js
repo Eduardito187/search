@@ -23,6 +23,26 @@ var InfraestructuraSection = {
         </div>
     </div>
     `,
+    data() {
+        return {
+            dataPage: []
+        };
+    },
+    methods: {
+        getDataPage() {
+            let self = this;
+            window.fetchFontendData('api/account/infraestructure-data', 'POST').then(data => {
+                if (data.status && data.code == 200) {
+                    self.dataPage = data.response;
+                }
+            }).catch(error => {
+                console.error('Error en la solicitud:', error);
+            });
+        }
+    },
+    created() {
+        this.getDataPage();
+    },
     mounted() {
     }
 };

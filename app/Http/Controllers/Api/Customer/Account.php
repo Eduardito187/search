@@ -108,10 +108,24 @@ class Account extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function getAppsData(Request $request)
+    public function getInfraestructureData(Request $request)
     {
         return response()->json(
-            $this->customer->getAppsData(
+            $this->customer->getInfraestructureData(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getAplicationData(Request $request)
+    {
+        return response()->json(
+            $this->customer->getAplicationData(
                 $request->all(),
                 $request->header()
             )
