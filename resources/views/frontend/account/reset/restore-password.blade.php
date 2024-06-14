@@ -16,13 +16,11 @@
             <div id="loginForm">
                 <form method="POST" action="{{ route('password.update') }}">
                     @csrf
-
                     <input type="hidden" name="token" value="{{ $token }}">
 
-                    <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
                     <div class="input-group">
-                        <i class="fa fa-shield"></i>
-                        <input type="password" id="password" name="password" class="@error('password') is-invalid @enderror" required autocomplete="new-password">
+                        <i class="fa fa-lock"></i>
+                        <input type="password" id="password" name="password" placeholder="Password" class="@error('password') is-invalid @enderror" required autocomplete="new-password">
                     </div>
                     @error('password')
                         <span class="invalid-feedback" role="alert">
@@ -30,17 +28,12 @@
                         </span>
                     @enderror
 
-                    <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
                     <div class="input-group">
-                        <i class="fa fa-shield"></i>
-                        <input type="password" id="password-confirm" name="password_confirmation" required autocomplete="new-password">
+                        <i class="fa fa-lock"></i>
+                        <input type="password" id="password-confirm" name="password_confirmation" placeholder="Confirm Password" required autocomplete="new-password">
                     </div>
 
-                    <div class="form-group row mb-0">
-                        <button type="submit" class="btn btn-primary">
-                            {{ __('Reset Password') }}
-                        </button>
-                    </div>
+                    <button type="submit">{{ __('Reset Password') }}</button>
                 </form>
             </div>
             <div>
