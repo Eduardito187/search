@@ -42,8 +42,8 @@ class SendMail
         $this->headers = [
             'MIME-Version: 1.0',
             'Content-type: text/html; charset=UTF-8',
-            'From: PlatformDismac <platformdismac@grazcompany.com>',
-            'Reply-To: platformdismac@grazcompany.com',
+            'From: EduardSearch <no-reply@eduardsearch.com>',
+            'Reply-To: no-reply@eduardsearch.com',
             'X-Mailer: PHP/' . phpversion()
         ];
     }

@@ -10,7 +10,11 @@ use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
 use App\Events\SearchProccess;
+use App\Events\SendEmailConfirmRestorePassword;
+use App\Events\SendEmailRestorePassword;
 use App\Listeners\AfterSearchProccess;
+use App\Listeners\RestorePassword;
+use App\Listeners\RestorePasswordConfirm;
 use App\Listeners\SaveHistoryCustomerUuid;
 
 class EventServiceProvider extends ServiceProvider
@@ -32,6 +36,12 @@ class EventServiceProvider extends ServiceProvider
         ],
         HistoryCustomerUuid::class => [
             SaveHistoryCustomerUuid::class
+        ],
+        SendEmailRestorePassword::class => [
+            RestorePassword::class
+        ],
+        SendEmailConfirmRestorePassword::class => [
+            RestorePasswordConfirm::class
         ]
     ];
 

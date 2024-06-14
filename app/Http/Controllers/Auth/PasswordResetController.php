@@ -6,13 +6,24 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
 use Carbon\Carbon;
-use App\Mail\ResetPasswordMail;
+use App\Helpers\Account\Customer;
+use App\Models\PasswordReset;
 
 class PasswordResetController extends Controller
 {
+    /**
+     * @var Customer
+     */
+    protected $customer;
+
+    /**
+     * Constructor Auth PasswordResetController
+     */
+    public function __construct(Customer $customer) {
+        $this->customer = $customer;
+    }
+
     public function showResetForm($token)
     {
         return view('frontend.account.reset.restore-password', ['token' => $token]);
@@ -26,7 +37,7 @@ class PasswordResetController extends Controller
             'password_confirmation' => 'required|confirmed'
         ]);
 
-        $passwordReset = DB::table('password_resets')->where('token', $request->token)->first();
+        $passwordReset = PasswordReset::where('token', $request->token)->active()->first();
         
         if (strlen($request->password) < 8) {
             return back()->withErrors(['password' => 'La contraseña no cumple con los parametros de seguridad.']);
@@ -40,15 +51,16 @@ class PasswordResetController extends Controller
             return back()->withErrors(['account' => 'El link es invalido o ha expirado.']);
         }
 
-        $user = \App\Models\CustomersAccount::where('mail', $passwordReset->email)->first();
+        $user = $this->customer->getCustomerByMail($passwordReset->email);
+
         if (!$user) {
             return back()->withErrors(['account' => 'Cuenta invalida.']);
         }
 
-        $user->password = Hash::make($request->password);
+        $user->password = $this->customer->encryptedPawd($request->password);
         $user->save();
-
-        DB::table('password_resets')->where('email', $passwordReset->email)->delete();
+        $this->customer->sendEventConfirmRestorePassword($passwordReset->email);
+        $passwordReset->delete();
 
         return redirect('/login')->with('status', '¡Tu contraseña ha sido restablecida!');
     }

@@ -32,6 +32,8 @@ class ProccessJobs extends Command
         exec("php artisan queue:work database --queue=search_proccess --stop-when-empty");
         exec("php artisan queue:work database --queue=indexation_proccess --stop-when-empty");
         exec("php artisan queue:work database --queue=save_history_customer_uuid --stop-when-empty");
+        exec("php artisan queue:work database --queue=restore_password --stop-when-empty");
+        exec("php artisan queue:work database --queue=restore_password_confirm --stop-when-empty");
         return Command::SUCCESS;
     }
 }

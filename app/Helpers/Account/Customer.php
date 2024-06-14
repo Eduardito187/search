@@ -2,13 +2,16 @@
 
 namespace App\Helpers\Account;
 
+use App\Events\SendEmailConfirmRestorePassword;
+use App\Events\SendEmailRestorePassword;
 use App\Helpers\System\CoreHttp;
 use App\Models\CustomersAccount;
 use Exception;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Helpers\SendMail;
-use Illuminate\Support\Facades\DB;
+use App\Models\PasswordReset;
+use Illuminate\Support\Facades\Event;
 
 use Illuminate\Support\Str;
 
@@ -106,6 +109,43 @@ class Customer
         }
     }
 
+    public function sendConfirmRestorePassword($email)
+    {
+        new SendMail("mail.reset-password", $email, "Restauracion de contraseña.", [
+            "title" => "Contraseña restaurada",
+            "footer_text" => "Felicidades tu contraseña ha sido restaurada exitosamente."
+        ]);
+    }
+
+    public function sendEventRestorePassword($mail)
+    {
+        Event::dispatch(new SendEmailRestorePassword($mail));
+    }
+
+    public function sendEventConfirmRestorePassword($mail)
+    {
+        Event::dispatch(new SendEmailConfirmRestorePassword($mail));
+    }
+
+    public function proccessRestorePassword($email)
+    {
+        $token = Str::random(60);
+        PasswordReset::updateOrCreate(
+            ['email' => $email],
+            [
+                'token' => $token,
+                'created_at' => Carbon::now()
+            ]
+        );
+
+        new SendMail("mail.confirmation-password", $email, "Restauracion de contraseña.", [
+            "title" => "Restaura tu contraseña",
+            "description" => "Haga clic aquí para restablecer la contraseña.",
+            "footer_text" => "Si esto fue un error, simplemente ignora este correo electrónico y no pasará nada.",
+            "token" => $token
+        ]);
+    }
+
     private function validateResetPasswordParams(array $body)
     {
         if (!isset($body["mail"])) {
@@ -113,28 +153,15 @@ class Customer
         }
 
         $customer = $this->getCustomerByMail($body["mail"]);
-        $token = Str::random(60);
 
-        DB::table('password_resets')->updateOrInsert(
-            ['email' => $customer->mail],
-            [
-                'token' => $token,
-                'created_at' => Carbon::now()
-            ]
-        );
-        new SendMail("mail.confirmation", $customer->mail, "Restauracion de contraseña.", [
-            "title" => "Restaura tu contraseña",
-            "description" => "Haga clic aquí para restablecer la contraseña.",
-            "footer_text" => "Si esto fue un error, simplemente ignora este correo electrónico y no pasará nada.",
-            "token" => $token
-        ]);
-
-        if (is_null($customer)) {
+        if ($customer == null) {
             throw new Exception("Customer no identificado.");
         }
+
+        $this->sendEventRestorePassword($customer->mail);
     }
 
-    private function getCustomerByMail(string $mail)
+    public function getCustomerByMail(string $mail)
     {
         return CustomersAccount::where('mail', $mail)->first();
     }
@@ -211,7 +238,7 @@ class Customer
         );
     }
 
-    private function encryptedPawd(string $password)
+    public function encryptedPawd(string $password)
     {
         return hash_hmac('sha256', $password, env('ENCRYPTION_KEY'));
     }

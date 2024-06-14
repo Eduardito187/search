@@ -33,9 +33,9 @@ class AfterIndexationProccess implements ShouldQueue
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(HistoryIndexation $historyIndexation)
     {
-        $this->historyIndexation = new HistoryIndexation();
+        $this->historyIndexation = $historyIndexation;
     }
 
     /**

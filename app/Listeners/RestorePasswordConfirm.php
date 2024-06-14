@@ -2,12 +2,12 @@
 
 namespace App\Listeners;
 
-use App\Events\HistoryCustomerUuid;
-use App\Helpers\System\CoreHttp;
+use App\Events\SendEmailConfirmRestorePassword;
+use App\Helpers\Account\Customer;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class SaveHistoryCustomerUuid implements ShouldQueue
+class RestorePasswordConfirm implements ShouldQueue
 {
     /**
      * The name of the connection the job should be sent to.
@@ -21,34 +21,33 @@ class SaveHistoryCustomerUuid implements ShouldQueue
      *
      * @var string|null
      */
-    public string $queue = 'save_history_customer_uuid';
+    public string $queue = 'restore_password_confirm';
 
     /**
-     * @var CoreHttp
+     * @var Customer
      */
-    protected $coreHttp;
+    protected $customer;
 
     /**
      * Create the event listener.
      *
      * @return void
      */
-    public function __construct(CoreHttp $coreHttp)
+    public function __construct(Customer $customer)
     {
-        $this->coreHttp = $coreHttp;
+        $this->customer = $customer;
     }
 
     /**
      * Handle the event.
      *
-     * @param  \App\Events\HistoryCustomerUuid  $event
+     * @param SendEmailConfirmRestorePassword $event
      * @return void
      */
-    public function handle(HistoryCustomerUuid $event)
+    public function handle(SendEmailConfirmRestorePassword $event)
     {
-        $this->coreHttp->setCustomerHistoryUuid(
-            $event->ip,
-            $event->customerUuid
+        $this->customer->sendConfirmRestorePassword(
+            $event->email
         );
     }
 }

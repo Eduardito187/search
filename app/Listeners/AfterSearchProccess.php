@@ -33,9 +33,9 @@ class AfterSearchProccess implements ShouldQueue
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(HistorySearch $historySearch)
     {
-        $this->historySearch = new HistorySearch();
+        $this->historySearch = $historySearch;
     }
 
     /**
