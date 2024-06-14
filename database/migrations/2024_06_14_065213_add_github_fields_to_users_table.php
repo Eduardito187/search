@@ -21,6 +21,7 @@ return new class extends Migration
         });
     }
 
+    /** */
     public function down()
     {
         Schema::table('customers_account', function (Blueprint $table) {
