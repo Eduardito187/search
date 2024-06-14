@@ -4,22 +4,20 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><?= $title; ?></title>
-        <style>
-            @import url('<?= $base_url; ?>/css/confirm-account.css');
-        </style>
     </head>
     <body>
-        <div class="container">
-            <div class="logo">
-                <img src="<?= $base_url; ?>/img/picture-logo.png" alt="Logo" class="logo-picture" />
+        <div style="width: 100%;padding: 20px;text-align: center;">
+            <div style="font-size: 24px;font-weight: bold;color: #333;">
+                <img src="<?= $base_url; ?>/img/picture-logo.png" alt="Logo" style="width: 40px;height: 40px;border-radius: 50%;margin-right: 10px;" />
             </div>
-            <div class="email-content">
-                <div class="title"><?= $title; ?></div>
-                <div class="message"><?= $description; ?></div>
-                <div class="message"><?= $footer_text; ?></div>
+            <div style="background-color: #fff;max-width: 600px;margin: 20px auto;padding: 20px;box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);border-radius: 8px;">
+                <div style="font-size: 32px;font-weight: bold;color: #333;"><?= $title; ?></div>
+                <div style="font-size: 16px;color: #666;line-height: 1.5;margin: 20px 0;"><?= $description; ?></div>
+                <a href="#" style="display: inline-block;padding: 15px 25px;font-size: 16px;color: #fff;background-color: #007bff;text-decoration: none;border-radius: 5px;margin: 20px 0;">Click here to reset your password</a>
+                <div style="font-size: 16px;color: #666;line-height: 1.5;margin: 20px 0;"><?= $footer_text; ?></div>
             </div>
-            <div class="footer">
-                Copyright © <?= date("Y"); ?> <a href="<?= $base_url; ?>"><?= $app_name; ?></a>. All Rights Reserved.
+            <div style="font-size: 12px;color: #999;margin-top: 20px;">
+                Copyright © <?= date("Y"); ?> <a href="<?= $base_url; ?>" style="color: #007bff;text-decoration: none;"><?= $app_name; ?></a>. All Rights Reserved.
             </div>
         </div>
     </body>
