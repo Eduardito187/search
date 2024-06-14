@@ -12,11 +12,11 @@ var InfraestructuraSection = {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Santa Cruz</td>
-                        <td>scz</td>
-                        <td>6M</td>
-                        <td>500K</td>
+                    <tr v-for="data in dataPage">
+                        <td>{{data.name}}</td>
+                        <td>{{data.code}}</td>
+                        <td>{{data.search}}</td>
+                        <td>{{data.record}}</td>
                     </tr>
                 </tbody>
             </table>

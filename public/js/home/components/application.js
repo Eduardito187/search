@@ -13,12 +13,12 @@ var ApplicationSection = {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Dismac</td>
-                        <td>Dismac</td>
-                        <td>6</td>
-                        <td>13M</td>
-                        <td>1M</td>
+                    <tr v-for="data in dataPage">
+                        <td>{{data.app}}</td>
+                        <td>{{data.code}}</td>
+                        <td>{{data.index}}</td>
+                        <td>{{data.search}}</td>
+                        <td>{{data.record}}</td>
                     </tr>
                 </tbody>
             </table>

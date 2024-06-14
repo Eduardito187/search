@@ -289,8 +289,8 @@ class Customer
             $data[] = array(
                 "code" => $index->code,
                 "name" => $index->name,
-                "search" => $this->convertNumber($index->recentMonthHistoryIndex()->coun() ?? 0),
-                "record" => $this->convertNumber($index->recentMonthHistoryQuerySearch()->coun() ?? 0)
+                "search" => $this->convertNumber(intval($index->recentMonthHistoryQuerySearch()->count() ?? 0)),
+                "record" => $this->convertNumber(intval($index->recentMonthHistoryIndex()->sum("count") ?? 0))
             );
         }
 
