@@ -94,5 +94,5 @@ body .container .login-form #loginForm {
 
 .invalid-feedback {
     display: block !important;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
