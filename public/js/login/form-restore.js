@@ -18,12 +18,8 @@ new Vue({
             }
 
             window.fetchBackendData('api/account/reset-password', 'POST', {mail:this.mail,password:this.password}).then(data => {
-                if (data.status) {
-                    if (data.response.status) {
-                        window.location.href = '/login';
-                    } else {
-                        self.setMessageAlert(data.response.message, 'alert-danger');
-                    }
+                if (data.status && data.code == 200) {
+                    window.location.href = '/login';
                 } else {
                     self.setMessageAlert(data.responseText, 'alert-danger');
                 }

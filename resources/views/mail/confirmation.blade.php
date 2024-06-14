@@ -12,8 +12,7 @@
             </div>
             <div style="background-color: #fff;max-width: 600px;margin: 20px auto;padding: 20px;box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);border-radius: 8px;">
                 <div style="font-size: 32px;font-weight: bold;color: #333;"><?= $title; ?></div>
-                <div style="font-size: 16px;color: #666;line-height: 1.5;margin: 20px 0;"><?= $description; ?></div>
-                <a href="#" style="display: inline-block;padding: 15px 25px;font-size: 16px;color: #fff;background-color: #007bff;text-decoration: none;border-radius: 5px;margin: 20px 0;">Click here to reset your password</a>
+                <a href="{{ url('password/reset', $token) }}" style="display: inline-block;padding: 15px 25px;font-size: 16px;color: #fff;background-color: #007bff;text-decoration: none;border-radius: 5px;margin: 20px 0;"><?= $description; ?></a>
                 <div style="font-size: 16px;color: #666;line-height: 1.5;margin: 20px 0;"><?= $footer_text; ?></div>
             </div>
             <div style="font-size: 12px;color: #999;margin-top: 20px;">

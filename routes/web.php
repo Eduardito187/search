@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\PasswordResetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,3 +56,6 @@ Route::get('/restore-password', function () {
 
     return view('frontend.account.reset.reset')->with('bodyClass', 'body-restore');
 });
+
+Route::get('password/reset/{token}', [PasswordResetController::class, 'showResetForm'])->name('password.reset');
+Route::post('password/reset', [PasswordResetController::class, 'reset'])->name('password.update');

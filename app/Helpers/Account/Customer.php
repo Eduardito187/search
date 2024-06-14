@@ -8,6 +8,9 @@ use Exception;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Helpers\SendMail;
+use Illuminate\Support\Facades\DB;
+
+use Illuminate\Support\Str;
 
 class Customer
 {
@@ -110,10 +113,20 @@ class Customer
         }
 
         $customer = $this->getCustomerByMail($body["mail"]);
+        $token = Str::random(60);
+
+        DB::table('password_resets')->updateOrInsert(
+            ['email' => $customer->mail],
+            [
+                'token' => $token,
+                'created_at' => Carbon::now()
+            ]
+        );
         new SendMail("mail.confirmation", $customer->mail, "Restauracion de contraseña.", [
             "title" => "Restaura tu contraseña",
             "description" => "Haga clic aquí para restablecer la contraseña.",
-            "footer_text" => "Si esto fue un error, simplemente ignora este correo electrónico y no pasará nada."
+            "footer_text" => "Si esto fue un error, simplemente ignora este correo electrónico y no pasará nada.",
+            "token" => $token
         ]);
 
         if (is_null($customer)) {
