@@ -33,8 +33,8 @@ class PasswordResetController extends Controller
     {
         $request->validate([
             'token' => 'required',
-            'password' => 'required|confirmed',
-            'password_confirmation' => 'required|confirmed'
+            'password' => 'required',
+            'password_confirmation' => 'required'
         ]);
 
         $passwordReset = PasswordReset::where('token', $request->token)->active()->first();

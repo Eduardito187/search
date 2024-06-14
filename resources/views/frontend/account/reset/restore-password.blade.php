@@ -35,7 +35,7 @@
 
                     <div class="input-group">
                         <i class="fa fa-lock"></i>
-                        <input type="password" id="password-confirm" name="password_confirmation" placeholder="Confirm Password" required autocomplete="new-password">
+                        <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password" required autocomplete="new-password">
                     </div>
 
                     <button type="submit">{{ __('Reset Password') }}</button>
