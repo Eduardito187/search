@@ -14,6 +14,11 @@
             </div>
             <h2 v-html="appName"></h2>
             <div id="loginForm">
+                @if (session('status'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
+                @endif
                 <div v-if="messageInfo.length > 0" :class="'alert '+classMessageInfo" role="alert" v-html="messageInfo"></div>
                 <div class="input-group">
                     <i class="fa fa-user"></i>

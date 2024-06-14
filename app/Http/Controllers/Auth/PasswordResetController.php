@@ -25,29 +25,26 @@ class PasswordResetController extends Controller
             'password' => 'required|confirmed',
         ]);
 
-        $passwordReset = DB::table('password_resets')
-            ->where('token', $request->token)
-            ->where('email', "eduardchavez302@gmail.com")
-            ->first();
+        $passwordReset = DB::table('password_resets')->where('token', $request->token)->first();
         
         if (strlen($request->password) < 8) {
-            return back()->withErrors(['password' => 'This password reset token is invalid or has expired.']);
+            return back()->withErrors(['password' => 'La contraseña no cumple con los parametros de seguridad.']);
         }
 
-        if (!$passwordReset || Carbon::parse($passwordReset->created_at)->addMinutes(1)->isPast()) {
-            return back()->withErrors(['account' => 'This password reset token is invalid or has expired.']);
+        if (!$passwordReset || Carbon::parse($passwordReset->created_at)->addMinutes(10)->isPast()) {
+            return back()->withErrors(['account' => 'El link es invalido o ha expirado.']);
         }
 
-        $user = \App\Models\CustomersAccount::where('mail', "eduardchavez302@gmail.com")->first();
+        $user = \App\Models\CustomersAccount::where('mail', $passwordReset->email)->first();
         if (!$user) {
-            return back()->withErrors(['account' => 'We can\'t find a user with that email address.']);
+            return back()->withErrors(['account' => 'Cuenta invalida.']);
         }
 
         $user->password = Hash::make($request->password);
         $user->save();
 
-        DB::table('password_resets')->where('email', "eduardchavez302@gmail.com")->delete();
+        DB::table('password_resets')->where('email', $passwordReset->email)->delete();
 
-        return redirect('/login')->with('status', 'Your password has been reset!');
+        return redirect('/login')->with('status', '¡Tu contraseña ha sido restablecida!');
     }
 }
