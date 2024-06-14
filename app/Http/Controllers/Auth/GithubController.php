@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
-use App\Models\User;
+use App\Models\CustomersAccount;
 
 class GithubController extends Controller
 {
@@ -28,7 +28,29 @@ class GithubController extends Controller
     {
         $githubUser = Socialite::driver('github')->user();
         /*
-        $user = User::updateOrCreate(
+customer_account_information =>
+id
+id_customers_account
+first_name
+last_name
+phone_number
+company
+created_at
+updated_at
+
+customer_accoun =>
+id
+id_client
+mail
+password
+status
+created_at
+updated_at
+github_id
+avatar
+github_nickname
+token
+        $user = CustomersAccount::updateOrCreate(
             ['email' => $githubUser->getEmail()],
             [
                 'name' => $githubUser->getName(),
@@ -38,8 +60,7 @@ class GithubController extends Controller
                 'github_nickname' => $githubUser->getNickname()
             ]
         );
-        */
-
+*/
         return redirect()->intended('/home');
     }
 }
