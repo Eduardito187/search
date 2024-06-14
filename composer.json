@@ -12,6 +12,7 @@
         "kawankoding/laravel-fcm": "^0.2.8",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
+        "laravel/socialite": "^5.14",
         "laravel/tinker": "^2.7",
         "phpmailer/phpmailer": "^6.9",
         "tecnickcom/tcpdf": "^6.6"
