@@ -8,7 +8,7 @@
     <body>
         <div style="width: calc(100% - 40px);padding: 20px;text-align: center;">
             <div style="font-size: 24px;font-weight: bold;color: #333;">
-                <img src="<?= $base_url; ?>/img/picture-logo.png" alt="Logo" style="width: 40px;height: 40px;border-radius: 50%;margin-right: 10px;" />
+                <img src="<?= $base_url; ?>/img/picture-logo.png" alt="Logo" style="width: 100px;height: 100px;border-radius: 50%;margin-right: 10px;" />
             </div>
             <div style="background-color: #fff;max-width: 600px;margin: 20px auto;padding: 20px;box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);border-radius: 8px;">
                 <div style="font-size: 32px;font-weight: bold;color: #333;"><?= $title; ?></div>
