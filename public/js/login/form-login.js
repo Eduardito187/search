@@ -13,6 +13,9 @@ new Vue({
             this.classMessageInfo = className;
             this.messageInfo = message;
         },
+        redirectGitHub() {
+            window.location.href = '/login/github';
+        },
         validateData() {
             let self = this;
             this.messageInfo = '';
