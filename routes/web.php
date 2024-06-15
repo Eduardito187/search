@@ -61,4 +61,4 @@ Route::get('/restore-password', function () {
 Route::get('password/reset/{token}', [PasswordResetController::class, 'showResetForm'])->name('password.reset');
 Route::post('password/reset', [PasswordResetController::class, 'reset'])->name('password.update');
 Route::get('login/github', [GithubController::class, 'redirectToProvider'])->name('login.github');
-Route::get('login/auth/git-hub', [GithubController::class, 'handleProviderCallback']);
+Route::get('auth/git-hub', [GithubController::class, 'handleProviderCallback']);
