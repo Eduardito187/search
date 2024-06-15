@@ -37,9 +37,7 @@ class GithubController extends Controller
      */
     public function handleProviderCallback()
     {
-        $githubUser = Socialite::driver('github');
-        print_r($githubUser);
-        $githubUser = $githubUser->user();
+        $githubUser = Socialite::driver('github')->user();
         print_r($githubUser);
 
         $customerAccount = $this->customer->getCustomerByMail($githubUser->getEmail());
