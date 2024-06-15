@@ -38,40 +38,20 @@ class GithubController extends Controller
     public function handleProviderCallback()
     {
         $githubUser = Socialite::driver('github')->user();
-        /*
-customer_account_information =>
-id
-id_customers_account
-first_name
-last_name
-phone_number
-company
-created_at
-updated_at
 
-customer_accoun =>
-id
-id_client
-mail
-password
-status
-created_at
-updated_at
-github_id
-avatar
-github_nickname
-token
-        $user = CustomersAccount::updateOrCreate(
-            ['email' => $githubUser->getEmail()],
-            [
-                'name' => $githubUser->getName(),
-                'github_id' => $githubUser->getId(),
-                'avatar' => $githubUser->getAvatar(),
-                'token' => $githubUser->token,
-                'github_nickname' => $githubUser->getNickname()
-            ]
-        );
-*/
-        return redirect()->intended('/home');
+        $customerAccount = $this->customer->getCustomerByMail($githubUser->getEmail());
+
+        if ($customerAccount == null) {
+            return redirect('/login')->with('error-danger', "El email ".$githubUser->getEmail()." no se encuentra asociado a una cuenta.");
+        }
+
+        $customerAccount->first_name = $githubUser->getName();
+        $customerAccount->github_id = $githubUser->getId();
+        $customerAccount->avatar = $githubUser->getAvatar();
+        $customerAccount->token = $githubUser->token;
+        $customerAccount->github_nickname = $githubUser->getNickname();
+        $customerAccount->save();
+
+        return redirect()->intended('/home')->with('message-success', 'Sesión iniciada exitosamente por gitHub.');
     }
 }

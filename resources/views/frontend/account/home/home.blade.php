@@ -33,6 +33,21 @@
         <h1>@{{$route.name}}</h1>
       </header>
       <section class="dashboard-content" id="content-page">
+        @if (session('message-success'))
+          <div class="alert alert-success" role="alert">
+            {{ session('message-success') }}
+          </div>
+        @endif
+        @if (session('error-danger'))
+          <div class="alert alert-danger" role="alert">
+            {{ session('error-danger') }}
+          </div>
+        @endif
+        @if (session('error-warning'))
+          <div class="alert alert-warning" role="alert">
+            {{ session('error-warning') }}
+          </div>
+        @endif
         <router-view></router-view>
       </section>
       <div class="footer">
