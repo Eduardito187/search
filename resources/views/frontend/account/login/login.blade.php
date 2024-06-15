@@ -31,7 +31,6 @@
                 <div class="row">
                     <button type="button" class="btn-eduard-search" :disabled="mail.length == 0 || password.length == 0 ? true : false" @click="validateData">
                         Inicio de sesión
-                        <img src="{{ asset('img/picture-logo.png') }}" alt="Avatar">
                     </button>
                 </div>
                 <div class="row">
