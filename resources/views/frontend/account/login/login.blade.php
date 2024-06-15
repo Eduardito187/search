@@ -38,7 +38,7 @@
                     <small>GitHub</small>
                     <i class="fa fa-github"></i>
                 </button>
-                <a href="/restore-password" class="forgot-password">Forgot Password?</a>
+                <a href="/restore-password" class="forgot-password">¿Has olvidado tu contraseña?</a>
             </div>
             <div>
                 <small><strong v-html="versionApp"></strong></small>
