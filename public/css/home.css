@@ -446,3 +446,9 @@ canvas {
 .content-chart-eduard-search .apexcharts-ycrosshairs {
     display: none !important;
 }
+
+.picture-app-home {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+}

@@ -4,7 +4,7 @@ var HomeSection = {
         <div class="jumbotron">
             <div class="d-flex">
                 <div class="flex-shrink-0">
-                    <img :src="logoApp" alt="Eduard Search">
+                    <img class="picture-app-home" :src="logoApp" alt="Eduard Search">
                 </div>
                 <div class="flex-grow-1 ms-3">
                     <h2 class="display-4">Bienvenido!</h2>
