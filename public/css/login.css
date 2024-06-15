@@ -83,6 +83,7 @@ body .container .login-form #loginForm {
 }
 
 .btn-github {
+    width: 245px;
     display: inline-flex;
     align-items: center;
     padding: 10px 20px;
@@ -106,8 +107,7 @@ body .container .login-form #loginForm {
 }
 
 .btn-eduard-search {
-    display: inline-flex;
-    align-items: center;
+    width: 245px;
     padding: 10px 20px;
     font-size: 16px;
     font-weight: bold;
@@ -126,4 +126,14 @@ body .container .login-form #loginForm {
 
 .btn-eduard-search img {
     margin-left: 10px;
+}
+
+.other-login {
+    color: rgb(94, 108, 132);
+    display: block;
+    font-size: 14px;
+    line-height: 16px;
+    margin-bottom: 16px;
+    font-weight: 600;
+    text-align: center;
 }

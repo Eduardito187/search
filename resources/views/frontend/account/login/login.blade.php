@@ -34,7 +34,7 @@
                     </button>
                 </div>
                 <div class="row">
-                    <small>O Inicia sesión con:</small>
+                    <small class="other-login">O Inicia sesión con:</small>
                 </div>
                 <div class="row">
                     <button type="button" class="btn-github" @click="redirectGitHub">
