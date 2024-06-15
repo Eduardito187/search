@@ -28,8 +28,8 @@
                     <i class="fa fa-lock"></i>
                     <input type="password" name="password" v-model="password" placeholder="Password" required>
                 </div>
-                <button type="button" :disabled="mail.length == 0 || password.length == 0 ? true : false" @click="validateData">LOGIN</button>
-                <button type="button" @click="redirectGitHub">Login with GitHub</button>
+                <button type="button" class="btn-eduard-search" :disabled="mail.length == 0 || password.length == 0 ? true : false" @click="validateData">LOGIN</button>
+                <button type="button" class="btn-github" @click="redirectGitHub">Login with GitHub <i class="fa fa-github"></i></button>
                 <a href="/restore-password" class="forgot-password">Forgot Password?</a>
             </div>
             <div>

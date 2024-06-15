@@ -62,21 +62,6 @@ body .container .login-form #loginForm .input-group input {
     font-size: 16px;
 }
 
-body .container .login-form #loginForm button {
-    width: 100%;
-    padding: 10px;
-    background: #8a2be2;
-    border: none;
-    border-radius: 5px;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-body .container .login-form #loginForm button:hover {
-    background: #6a1bb0;
-}
-
 body .container .login-form #loginForm .forgot-password {
     display: block;
     margin-top: 10px;
@@ -95,4 +80,42 @@ body .container .login-form #loginForm {
 .invalid-feedback {
     display: block !important;
     margin-bottom: 20px;
+}
+
+.btn-github {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #333;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-github:hover {
+    background-color: #555;
+}
+
+.btn-github .fa {
+    margin-left: 10px;
+}
+
+.btn-eduard-search {
+    width: 100%;
+    padding: 10px;
+    background: #8a2be2;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn-eduard-search:hover {
+    background: #6a1bb0;
 }
