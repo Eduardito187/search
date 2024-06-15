@@ -99,6 +99,9 @@ new Vue({
       this.deleteCookie('customer_backend');
       //this.$router.push('/login');
       window.location.href = '/login';
+    },
+    redirecHome() {
+      window.location.href = '/home';
     }
   },
   created() {

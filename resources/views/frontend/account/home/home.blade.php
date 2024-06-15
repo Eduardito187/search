@@ -9,7 +9,7 @@
 @section('content')
 <div class="container-screen" id="home-container">
     <aside class="sidebar" v-if="loadedPage">
-      <div class="sidebar-header">
+      <div class="sidebar-header" @click="redirecHome">
         <img src="/img/default-user.png" alt="Logo" class="logo">
         <span class="brand" v-if="customer != null">@{{customer.first_name}}</span>
       </div>

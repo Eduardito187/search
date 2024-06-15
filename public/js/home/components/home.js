@@ -7,12 +7,11 @@ var HomeSection = {
                     <img class="picture-app-home" :src="logoApp" alt="Eduard Search">
                 </div>
                 <div class="flex-grow-1 ms-3">
-                    <h2 class="display-4">Bienvenido!</h2>
+                    <h2 class="display-5">Bienvenido!</h2>
                     <p class="lead">Comprueba lo que esta sucediendo con tu implementación de EduardSearch.</p>
                 </div>
             </div>
             <hr class="my-4">
-            <div class="mb-4"></div>
         </div>
 
         <div v-if="queryData != null" class="card mb-4">
