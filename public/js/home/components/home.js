@@ -2,8 +2,15 @@ var HomeSection = {
     template: `
     <div>
         <div class="jumbotron">
-            <h1 class="display-4">Bienvenido!</h1>
-            <p class="lead">Comprueba lo que esta sucediendo con tu implementación de EduardSearch.</p>
+            <div class="d-flex">
+                <div class="flex-shrink-0">
+                    <img :src="logoApp" alt="Eduard Search">
+                </div>
+                <div class="flex-grow-1 ms-3">
+                    <h2 class="display-4">Bienvenido!</h2>
+                    <p class="lead">Comprueba lo que esta sucediendo con tu implementación de EduardSearch.</p>
+                </div>
+            </div>
             <hr class="my-4">
             <div class="mb-4"></div>
         </div>
@@ -126,7 +133,8 @@ var HomeSection = {
         return {
             queryData: null,
             suggestionData: null,
-            dataIndex: null
+            dataIndex: null,
+            logoApp: '',
         };
     },
     methods: {
@@ -169,6 +177,7 @@ var HomeSection = {
         }
     },
     created() {
+        this.logoApp = window.configFrontend.base_url_frontend+'img/picture-logo.png';
     },
     mounted() {
         this.getDashboardData();

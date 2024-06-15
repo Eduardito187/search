@@ -3,12 +3,23 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
-use App\Models\CustomersAccount;
+use App\Helpers\Account\Customer;
 
 class GithubController extends Controller
 {
+    /**
+     * @var Customer
+     */
+    protected $customer;
+
+    /**
+     * Constructor Auth PasswordResetController
+     */
+    public function __construct(Customer $customer) {
+        $this->customer = $customer;
+    }
+
     /**
      * Redirect the user to the GitHub authentication page.
      *

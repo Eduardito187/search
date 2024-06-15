@@ -12,17 +12,27 @@ var AccountSection = {
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="access-level" class="form-label">First name</label>
-                                    <input type="text" class="form-control" />
+                                    <input type="text" id="firstName" name="firstName" class="form-control" />
                                 </div>
                                 <div class="col-md-6">
                                     <label for="period" class="form-label">Last name</label>
-                                    <input type="text" class="form-control" />
+                                    <input type="text" id="lastName" name="lastName" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="access-level" class="form-label">Phone number</label>
+                                    <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="period" class="form-label">Company</label>
+                                    <input type="text" id="company" name="company" class="form-control" />
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <label for="access-level" class="form-label">Email</label>
-                                    <input type="text" class="form-control" />
+                                    <input type="text" id="email" name="email" class="form-control" />
                                 </div>
                             </div>
                         </div>
