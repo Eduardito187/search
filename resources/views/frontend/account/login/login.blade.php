@@ -30,7 +30,7 @@
                 </div>
                 <div class="row">
                     <button type="button" class="btn-eduard-search" :disabled="mail.length == 0 || password.length == 0 ? true : false" @click="validateData">
-                        Inicio de sesión
+                        <small>Inicio de sesión</small>
                     </button>
                 </div>
                 <div class="row">
@@ -38,7 +38,7 @@
                 </div>
                 <div class="row">
                     <button type="button" class="btn-github" @click="redirectGitHub">
-                        GitHub 
+                        <small>GitHub</small>
                         <i class="fa fa-github"></i>
                     </button>
                 </div>
