@@ -28,8 +28,21 @@
                     <i class="fa fa-lock"></i>
                     <input type="password" name="password" v-model="password" placeholder="Password" required>
                 </div>
-                <button type="button" class="btn-eduard-search" :disabled="mail.length == 0 || password.length == 0 ? true : false" @click="validateData">LOGIN</button>
-                <button type="button" class="btn-github" @click="redirectGitHub">Login with GitHub <i class="fa fa-github"></i></button>
+                <div class="row">
+                    <button type="button" class="btn-eduard-search" :disabled="mail.length == 0 || password.length == 0 ? true : false" @click="validateData">
+                        Inicio de sesión
+                        <img src="{{ asset('img/picture-logo.png') }}" alt="Avatar">
+                    </button>
+                </div>
+                <div class="row">
+                    <small>O Inicia sesión con:</small>
+                </div>
+                <div class="row">
+                    <button type="button" class="btn-github" @click="redirectGitHub">
+                        GitHub 
+                        <i class="fa fa-github"></i>
+                    </button>
+                </div>
                 <a href="/restore-password" class="forgot-password">Forgot Password?</a>
             </div>
             <div>
