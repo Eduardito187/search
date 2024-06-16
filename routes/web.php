@@ -58,6 +58,10 @@ Route::get('/restore-password', function () {
     return view('frontend.account.reset.reset')->with('bodyClass', 'body-restore');
 });
 
+Route::get('/', function () {
+    return view('frontend.home');
+});
+
 Route::get('password/reset/{token}', [PasswordResetController::class, 'showResetForm'])->name('password.reset');
 Route::post('password/reset', [PasswordResetController::class, 'reset'])->name('password.update');
 Route::get('login/github', [GithubController::class, 'redirectToProvider'])->name('login.github');
