@@ -51,6 +51,17 @@
             color: #333;
             text-decoration: none;
             font-size: 1em;
+            padding: 10px 20px;
+            color: #6e8efb;
+            font-weight: 600;
+            text-decoration: unset !important;
+        }
+        nav a:hover,
+        nav a:active,
+        nav a:visited {
+            background-color: #6e8efb;
+            color: #fff;
+            border-radius: 20px;
         }
         .hero {
             background: linear-gradient(135deg, #6e8efb, #a777e3);
