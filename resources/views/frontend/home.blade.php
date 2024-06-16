@@ -98,7 +98,10 @@
             max-width: 600px;
             margin-left: 50px;
         }
-
+        .container-main {
+            width: 100%;
+            text-align: center;
+        }
         .container-mk {
             max-width: 1200px;
             padding: 20px;
@@ -208,48 +211,52 @@
         </div>
         <img src="https://via.placeholder.com/600x400" alt="Illustration" class="illustration">
     </div>
-    <div class="container-mk">
-        <div class="title">Scaling ahead of your needs</div>
-        <div class="subtitle">Customers depend on Eduard Search to handle more queries than any other hosted search engine.</div>
-        <div class="stats">
-            <div class="stat">
-                <div class="stat-value">1.7+ trillion</div>
-                <div class="stat-description">searches every year</div>
+    <main class="container-main">
+        <div class="container-mk">
+            <div class="title">Scaling ahead of your needs</div>
+            <div class="subtitle">Customers depend on Eduard Search to handle more queries than any other hosted search engine.</div>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value">1.7+ trillion</div>
+                    <div class="stat-description">searches every year</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">99.999%</div>
+                    <div class="stat-description">uptime SLA available</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">17,000+</div>
+                    <div class="stat-description">customers across 150+ countries</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">30+ billion</div>
+                    <div class="stat-description">records indexed</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">100%</div>
+                    <div class="stat-description">compliant & secure with SAML, SOC3, ISO27001, HIPAA, C5, MACH Alliance</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">382%</div>
+                    <div class="stat-description">ROI according to Forrester Research</div>
+                </div>
             </div>
-            <div class="stat">
-                <div class="stat-value">99.999%</div>
-                <div class="stat-description">uptime SLA available</div>
+            <a href="#" class="contact-button">Contact sales</a>
+        </div>
+    </main>
+    <main class="container-main">
+        <div class="container-merchand">
+            <div class="text-content">
+                <div class="title">Make merchandising effortless</div>
+                <div class="description">
+                    Combine the art of merchandising with the science of algorithms. Design online journeys that start with audience understanding - and end with better business outcomes.
+                </div>
+                <a href="#" class="button">Discover the Merchandising Studio</a>
             </div>
-            <div class="stat">
-                <div class="stat-value">17,000+</div>
-                <div class="stat-description">customers across 150+ countries</div>
-            </div>
-            <div class="stat">
-                <div class="stat-value">30+ billion</div>
-                <div class="stat-description">records indexed</div>
-            </div>
-            <div class="stat">
-                <div class="stat-value">100%</div>
-                <div class="stat-description">compliant & secure with SAML, SOC3, ISO27001, HIPAA, C5, MACH Alliance</div>
-            </div>
-            <div class="stat">
-                <div class="stat-value">382%</div>
-                <div class="stat-description">ROI according to Forrester Research</div>
+            <div class="image-content">
+                <img src="image.png" alt="Merchandising Studio">
             </div>
         </div>
-        <a href="#" class="contact-button">Contact sales</a>
-    </div>
-    <div class="container-merchand">
-        <div class="text-content">
-            <div class="title">Make merchandising effortless</div>
-            <div class="description">
-                Combine the art of merchandising with the science of algorithms. Design online journeys that start with audience understanding - and end with better business outcomes.
-            </div>
-            <a href="#" class="button">Discover the Merchandising Studio</a>
-        </div>
-        <div class="image-content">
-            <img src="image.png" alt="Merchandising Studio">
-        </div>
-    </div>
+    </main>
 </body>
 </html>
