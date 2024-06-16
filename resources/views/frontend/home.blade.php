@@ -201,6 +201,62 @@
             max-width: 100%;
             border-radius: 10px;
         }
+        .footer {
+            width: 100%;
+            padding: 40px 20px;
+            background-color: #0b0c2a;
+        }
+        .footer-container {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+            margin: 10px;
+        }
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.2em;
+            color: #ffffff;
+        }
+        .footer-column ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        .footer-column ul li a {
+            color: #a9b2c3;
+            text-decoration: none;
+        }
+        .footer-column ul li a:hover {
+            text-decoration: underline;
+        }
+        .footer-bottom {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.8em;
+            color: #a9b2c3;
+        }
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .footer-social a {
+            color: #a9b2c3;
+            margin: 0 10px;
+            text-decoration: none;
+            font-size: 1.5em;
+        }
+        .footer-social a:hover {
+            color: #ffffff;
+        }
     </style>
 </head>
 <body>
@@ -278,5 +334,111 @@
             </div>
         </div>
     </main>
+    <div class="hero">
+        <div class="container hero-content">
+            <h1>UI/UX DESIGN</h1>
+            <p>Landing Page</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <a href="#" class="cta">REGISTER</a>
+        </div>
+        <img src="https://via.placeholder.com/600x400" alt="Illustration" class="illustration">
+    </div>
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>Solutions</h3>
+                <ul>
+                    <li><a href="#">Overview</a></li>
+                    <li><a href="#">AI Search</a></li>
+                    <li><a href="#">AI Browse</a></li>
+                    <li><a href="#">AI Recommendations</a></li>
+                    <li><a href="#">Pricing</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Use cases</h3>
+                <ul>
+                    <li><a href="#">Overview</a></li>
+                    <li><a href="#">Enterprise search</a></li>
+                    <li><a href="#">Headless commerce</a></li>
+                    <li><a href="#">Mobile & app search</a></li>
+                    <li><a href="#">Voice search</a></li>
+                    <li><a href="#">Image search</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Developers</h3>
+                <ul>
+                    <li><a href="#">Developer Hub</a></li>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">Integrations</a></li>
+                    <li><a href="#">Engineering blog</a></li>
+                    <li><a href="#">Discord community</a></li>
+                    <li><a href="#">API status</a></li>
+                    <li><a href="#">DocSearch</a></li>
+                    <li><a href="#">For Open Source</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Integrations</h3>
+                <ul>
+                    <li><a href="#">Salesforce Commerce Cloud B2C</a></li>
+                    <li><a href="#">Shopify</a></li>
+                    <li><a href="#">Adobe Commerce</a></li>
+                    <li><a href="#">Netlify</a></li>
+                    <li><a href="#">Commercetools</a></li>
+                    <li><a href="#">BigCommerce</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Industries</h3>
+                <ul>
+                    <li><a href="#">Overview</a></li>
+                    <li><a href="#">B2C ecommerce</a></li>
+                    <li><a href="#">B2B ecommerce</a></li>
+                    <li><a href="#">Marketplaces</a></li>
+                    <li><a href="#">SaaS</a></li>
+                    <li><a href="#">Media</a></li>
+                    <li><a href="#">Startups</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Distributed & secure</h3>
+                <ul>
+                    <li><a href="#">Global infrastructure</a></li>
+                    <li><a href="#">Security & compliance</a></li>
+                    <li><a href="#">Azure</a></li>
+                    <li><a href="#">AWS</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="#">About Eduard Search</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Newsroom</a></li>
+                    <li><a href="#">Events</a></li>
+                    <li><a href="#">Leadership</a></li>
+                    <li><a href="#">Social impact</a></li>
+                    <li><a href="#">Contact us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-social">
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-instagram"></i></a>
+            <a href="#"><i class="fa fa-youtube"></i></a>
+        </div>
+        <div class="footer-bottom">
+            ©2024 Eduard Search - All rights reserved. <br>
+            <a href="#">Cookie settings</a> | 
+            <a href="#">Privacy policy</a> | 
+            <a href="#">Terms of service</a> | 
+            <a href="#">Acceptable use policy</a> | 
+            <a href="#">Anti-Modern Slavery Statement</a>
+        </div>
+    </footer>
 </body>
 </html>
