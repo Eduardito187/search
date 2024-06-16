@@ -17,6 +17,8 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+            margin-left: auto;
+            margin-right: auto;
         }
         .container-header {
             width: 100%;
@@ -100,32 +102,44 @@
         }
         .container-main {
             width: 100%;
-            text-align: center;
         }
         .container-mk {
             max-width: 1200px;
             padding: 20px;
+            margin-left: auto;
+            margin-right: auto;
         }
         .container-mk .title {
             font-size: 2em;
             font-weight: bold;
             margin-bottom: 10px;
+            text-align: center;
         }
         .container-mk .subtitle {
             font-size: 1.2em;
             margin-bottom: 30px;
             color: #777777;
+            text-align: center;
         }
         .container-mk .stats {
             display: flex;
-            justify-content: space-around;
-            align-items: center;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 10px;
         }
-        .container-mk .stat {
-            flex: 1;
-            margin: 10px;
-            min-width: 200px;
+        .container-mk .stats .row {
+            display: flex;
+            gap: 10px;
+        }
+        .container-mk .stats .row .stat {
+            width: 100px;
+            height: 100px;
+            background-color: #4A90E2;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5em;
+            border-radius: 5px;
         }
         .container-mk .stat-value {
             font-size: 2em;
@@ -154,6 +168,8 @@
             justify-content: space-between;
             padding: 20px;
             box-sizing: border-box;
+            margin-left: auto;
+            margin-right: auto;
         }
         .container-merchand .text-content {
             max-width: 50%;
