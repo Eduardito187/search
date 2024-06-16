@@ -203,7 +203,6 @@
         }
         .footer {
             width: 100%;
-            padding: 40px 20px;
             background-color: #0b0c2a;
         }
         .footer-container {
@@ -320,6 +319,15 @@
             <a href="#" class="contact-button">Contact sales</a>
         </div>
     </main>
+    <div class="hero">
+        <div class="container hero-content">
+            <h1>UI/UX DESIGN</h1>
+            <p>Landing Page</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <a href="#" class="cta">REGISTER</a>
+        </div>
+        <img src="https://via.placeholder.com/600x400" alt="Illustration" class="illustration">
+    </div>
     <main class="container-main">
         <div class="container-merchand">
             <div class="text-content">
@@ -334,15 +342,6 @@
             </div>
         </div>
     </main>
-    <div class="hero">
-        <div class="container hero-content">
-            <h1>UI/UX DESIGN</h1>
-            <p>Landing Page</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <a href="#" class="cta">REGISTER</a>
-        </div>
-        <img src="https://via.placeholder.com/600x400" alt="Illustration" class="illustration">
-    </div>
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-column">
