@@ -27,7 +27,7 @@ class GithubController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function redirectToProvider()
+    public function redirectToProvider(Request $request)
     {
         return Socialite::driver('github')->redirect();
     }

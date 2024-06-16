@@ -60,6 +60,6 @@ class PasswordResetController extends Controller
         $this->customer->sendEventConfirmRestorePassword($passwordReset->email);
         $passwordReset->delete();
 
-        return redirect('/login')->with('status', '¡Tu contraseña ha sido restablecida!');
+        return redirect('/login')->with('message-success', '¡Tu contraseña ha sido restablecida!');
     }
 }

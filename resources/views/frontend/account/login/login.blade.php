@@ -14,10 +14,20 @@
             </div>
             <h2 v-html="appName"></h2>
             <div id="loginForm">
-                @if (session('status'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
-                    </div>
+                @if (session('message-success'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('message-success') }}
+                </div>
+                @endif
+                @if (session('error-danger'))
+                <div class="alert alert-danger" role="alert">
+                    {{ session('error-danger') }}
+                </div>
+                @endif
+                @if (session('error-warning'))
+                <div class="alert alert-warning" role="alert">
+                    {{ session('error-warning') }}
+                </div>
                 @endif
                 <div v-if="messageInfo.length > 0" :class="'alert '+classMessageInfo" role="alert" v-html="messageInfo"></div>
                 <div class="input-group">
