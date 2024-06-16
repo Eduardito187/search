@@ -237,10 +237,10 @@
             text-decoration: underline;
         }
         .footer-bottom {
-            text-align: center;
             margin-top: 30px;
             font-size: 0.8em;
             color: #a9b2c3;
+            display: ruby-text;
         }
         .footer-social {
             display: flex;
@@ -422,13 +422,15 @@
                     <li><a href="#">Contact us</a></li>
                 </ul>
             </div>
-        </div>
-        <div class="footer-social">
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-instagram"></i></a>
-            <a href="#"><i class="fa fa-youtube"></i></a>
+            <div class="footer-column">
+                <div class="footer-social">
+                    <a href="#"><i class="fa fa-linkedin"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-instagram"></i></a>
+                    <a href="#"><i class="fa fa-youtube"></i></a>
+                </div>
+            </div>
         </div>
         <div class="footer-bottom">
             <div>©2024 Eduard Search - All rights reserved.</div>
