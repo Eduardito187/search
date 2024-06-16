@@ -78,7 +78,9 @@
 <body>
     <header>
         <div class="container">
-            <div class="logo">Logo</div>
+            <div class="logo">
+                <img src="{{ asset('img/logo-small.png') }}" alt="Avatar">
+            </div>
             <nav>
                 <a href="#">Home</a>
                 <a href="#">About</a>
