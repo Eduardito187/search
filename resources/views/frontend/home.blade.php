@@ -126,11 +126,11 @@
             flex-direction: column;
             gap: 10px;
         }
-        .container-mk .stats .row {
+        .container-mk .stats .row-stats {
             display: flex;
             gap: 10px;
         }
-        .container-mk .stats .row .stat {
+        .container-mk .stats .row-stats .stat {
             width: 100px;
             height: 100px;
             background-color: #4A90E2;
@@ -232,29 +232,33 @@
             <div class="title">Scaling ahead of your needs</div>
             <div class="subtitle">Customers depend on Eduard Search to handle more queries than any other hosted search engine.</div>
             <div class="stats">
-                <div class="stat">
-                    <div class="stat-value">1.7+ trillion</div>
-                    <div class="stat-description">searches every year</div>
+                <div class="row-stats">
+                    <div class="stat">
+                        <div class="stat-value">1.7+ trillion</div>
+                        <div class="stat-description">searches every year</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">99.999%</div>
+                        <div class="stat-description">uptime SLA available</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">17,000+</div>
+                        <div class="stat-description">customers across 150+ countries</div>
+                    </div>
                 </div>
-                <div class="stat">
-                    <div class="stat-value">99.999%</div>
-                    <div class="stat-description">uptime SLA available</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-value">17,000+</div>
-                    <div class="stat-description">customers across 150+ countries</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-value">30+ billion</div>
-                    <div class="stat-description">records indexed</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-value">100%</div>
-                    <div class="stat-description">compliant & secure with SAML, SOC3, ISO27001, HIPAA, C5, MACH Alliance</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-value">382%</div>
-                    <div class="stat-description">ROI according to Forrester Research</div>
+                <div class="row-stats">
+                    <div class="stat">
+                        <div class="stat-value">30+ billion</div>
+                        <div class="stat-description">records indexed</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">100%</div>
+                        <div class="stat-description">compliant & secure with SAML, SOC3, ISO27001, HIPAA, C5, MACH Alliance</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">382%</div>
+                        <div class="stat-description">ROI according to Forrester Research</div>
+                    </div>
                 </div>
             </div>
             <a href="#" class="contact-button">Contact sales</a>
