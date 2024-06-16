@@ -102,6 +102,7 @@
         }
         .container-main {
             width: 100%;
+            margin-top: 50px;
         }
         .container-mk {
             max-width: 1200px;
@@ -131,9 +132,8 @@
             gap: 10px;
         }
         .container-mk .stats .row-stats .stat {
-            width: 100px;
-            height: 100px;
-            background-color: #4A90E2;
+            width: 33.3333%;
+            height: 150px;
             color: white;
             display: flex;
             justify-content: center;
