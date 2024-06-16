@@ -18,6 +18,10 @@
             margin: 0 auto;
             padding: 20px;
         }
+        .container-header {
+            width: 100%;
+            display: contents;
+        }
         header {
             background: white;
             padding: 20px 0;
@@ -30,10 +34,18 @@
             font-size: 1.5em;
             color: #333;
             font-weight: bold;
+            padding-left: 20px;
+        }
+        header .nav {
+            padding-right: 20px;
+        }
+        header .logo img {
+            width: 100px;
+            border-radius: 10px;
         }
         nav {
             display: flex;
-            gap: 20px;
+            gap: 30px;
         }
         nav a {
             color: #333;
@@ -77,7 +89,7 @@
 </head>
 <body>
     <header>
-        <div class="container">
+        <div class="container-header">
             <div class="logo">
                 <img src="{{ asset('img/logo-small.png') }}" alt="Avatar">
             </div>
