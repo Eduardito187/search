@@ -45,7 +45,7 @@
         }
         nav {
             display: flex;
-            gap: 30px;
+            gap: 40px;
         }
         nav a {
             color: #333;
@@ -53,7 +53,8 @@
             font-size: 1em;
         }
         .hero {
-            background: #e7f3ff;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            transition: top 0.3s ease;
             padding: 100px 20px;
             text-align: center;
             display: flex;
@@ -62,6 +63,7 @@
         }
         .hero-content {
             max-width: 600px;
+            text-align: left;
         }
         .hero h1 {
             font-size: 3em;
@@ -93,7 +95,7 @@
             <div class="logo">
                 <img src="{{ asset('img/logo-small.png') }}" alt="Avatar">
             </div>
-            <nav>
+            <nav class="nav">
                 <a href="#">Home</a>
                 <a href="#">About</a>
                 <a href="#">Services</a>
