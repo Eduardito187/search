@@ -41,22 +41,31 @@ class GithubController extends Controller
     {
         try {
             $githubUser = Socialite::driver('github')->stateless()->user();
-            dd($githubUser);
-            $customerAccount = $this->customer->getCustomerByMail($githubUser->getEmail());
 
-            if ($customerAccount == null) {
-                return redirect('/login')->with('error-danger', "El email ".$githubUser->getEmail()." no se encuentra asociado a una cuenta.");
+            if ($githubUser == null) {
+                return redirect('/login')->with('error-danger', "Lo sentimos, no logramos recolectar información de GitHub.");
             }
 
-            $customerAccount->first_name = $githubUser->getName();
-            $customerAccount->github_id = $githubUser->getId();
-            $customerAccount->avatar = $githubUser->getAvatar();
+            if ($githubUser->email == null) {
+                return redirect('/login')->with('error-danger', "Lo sentimos, tu e-mail de GitHub se encuentra privado.");
+            }
+
+            $customerAccount = $this->customer->getCustomerByMail($githubUser->email);
+
+            if ($customerAccount == null) {
+                return redirect('/login')->with('error-danger', "El email ".$githubUser->email." no se encuentra asociado a una cuenta.");
+            }
+
+            $customerAccount->first_name = $githubUser->name;
+            $customerAccount->github_id = $githubUser->id;
+            $customerAccount->avatar = $githubUser->avatar;
             $customerAccount->token = $githubUser->token;
-            $customerAccount->github_nickname = $githubUser->getNickname();
+            $customerAccount->github_nickname = $githubUser->nickname;
             $customerAccount->save();
         } catch (Exception $e) {
-            print_r(['error' => $e->getMessage()]);
-            //return redirect('/login')->with('error', 'No se pudo autenticar con GitHub. Error: ' . $e->getMessage());
+            return redirect('/login')->with('error-danger', $e->getMessage());
         }
+
+        return redirect()->intended('/home')->with('message-success', 'Sesión iniciada exitosamente por gitHub.');
     }
 }
