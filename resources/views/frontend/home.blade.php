@@ -431,12 +431,14 @@
             <a href="#"><i class="fa fa-youtube"></i></a>
         </div>
         <div class="footer-bottom">
-            ©2024 Eduard Search - All rights reserved. <br>
-            <a href="#">Cookie settings</a> | 
-            <a href="#">Privacy policy</a> | 
-            <a href="#">Terms of service</a> | 
-            <a href="#">Acceptable use policy</a> | 
-            <a href="#">Anti-Modern Slavery Statement</a>
+            <div>©2024 Eduard Search - All rights reserved.</div>
+            <div>
+                <a href="#">Cookie settings</a> | 
+                <a href="#">Privacy policy</a> | 
+                <a href="#">Terms of service</a> | 
+                <a href="#">Acceptable use policy</a> | 
+                <a href="#">Anti-Modern Slavery Statement</a>
+            </div>
         </div>
     </footer>
 </body>
