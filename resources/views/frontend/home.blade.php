@@ -216,6 +216,7 @@
             flex: 1;
             min-width: 200px;
             margin: 10px;
+            position: relative;
         }
         .footer-column h3 {
             margin-bottom: 20px;
@@ -246,6 +247,9 @@
             display: flex;
             justify-content: center;
             margin-top: 20px;
+            position: absolute;
+            right: 0px;
+            bottom: 0px;
         }
         .footer-social a {
             color: #a9b2c3;
