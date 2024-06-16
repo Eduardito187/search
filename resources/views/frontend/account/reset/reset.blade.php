@@ -19,7 +19,9 @@
                     <i class="fa fa-user"></i>
                     <input type="email" name="mail" v-model="mail" placeholder="Mail" required>
                 </div>
-                <button type="button" :disabled="mail.length == 0 ? true : false" @click="validateData">Send Reset Link</button>
+                <button type="button" class="btn-eduard-search" :disabled="mail.length == 0 ? true : false" @click="validateData">
+                    <small>Enviar mail de reseteo</small>
+                </button>
             </div>
             <div>
                 <small><strong v-html="versionApp"></strong></small>
