@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Laravel\Socialite\Facades\Socialite;
 use App\Helpers\Account\Customer;
+use Exception;
+use Illuminate\Http\Request;
 
 class GithubController extends Controller
 {
@@ -35,24 +37,26 @@ class GithubController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function handleProviderCallback()
+    public function handleProviderCallback(Request $request)
     {
-        $githubUser = Socialite::driver('github')->user();
-        print_r($githubUser);
+        try {
+            $githubUser = Socialite::driver('github')->stateless()->user();
+            dd($githubUser);
+            $customerAccount = $this->customer->getCustomerByMail($githubUser->getEmail());
 
-        $customerAccount = $this->customer->getCustomerByMail($githubUser->getEmail());
+            if ($customerAccount == null) {
+                return redirect('/login')->with('error-danger', "El email ".$githubUser->getEmail()." no se encuentra asociado a una cuenta.");
+            }
 
-        if ($customerAccount == null) {
-            return redirect('/login')->with('error-danger', "El email ".$githubUser->getEmail()." no se encuentra asociado a una cuenta.");
+            $customerAccount->first_name = $githubUser->getName();
+            $customerAccount->github_id = $githubUser->getId();
+            $customerAccount->avatar = $githubUser->getAvatar();
+            $customerAccount->token = $githubUser->token;
+            $customerAccount->github_nickname = $githubUser->getNickname();
+            $customerAccount->save();
+        } catch (Exception $e) {
+            print_r(['error' => $e->getMessage()]);
+            //return redirect('/login')->with('error', 'No se pudo autenticar con GitHub. Error: ' . $e->getMessage());
         }
-
-        $customerAccount->first_name = $githubUser->getName();
-        $customerAccount->github_id = $githubUser->getId();
-        $customerAccount->avatar = $githubUser->getAvatar();
-        $customerAccount->token = $githubUser->token;
-        $customerAccount->github_nickname = $githubUser->getNickname();
-        $customerAccount->save();
-
-        return redirect()->intended('/home')->with('message-success', 'Sesión iniciada exitosamente por gitHub.');
     }
 }
