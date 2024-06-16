@@ -243,6 +243,12 @@
             color: #a9b2c3;
             display: ruby-text;
         }
+        .footer-bottom .item-footer-bottom {
+            padding: 20px;
+        }
+        .footer-bottom .item-footer-bottom a {
+            padding: 5px 10px;
+        }
         .footer-social {
             display: flex;
             justify-content: center;
@@ -437,8 +443,8 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <div>©2024 Eduard Search - All rights reserved.</div>
-            <div>
+            <div class="item-footer-bottom">©2024 Eduard Search - All rights reserved.</div>
+            <div class="item-footer-bottom">
                 <a href="#">Cookie settings</a> | 
                 <a href="#">Privacy policy</a> | 
                 <a href="#">Terms of service</a> | 
