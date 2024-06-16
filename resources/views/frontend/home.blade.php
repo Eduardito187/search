@@ -45,7 +45,7 @@
         }
         nav {
             display: flex;
-            gap: 40px;
+            gap: 20px;
         }
         nav a {
             color: #333;
@@ -98,6 +98,90 @@
             max-width: 600px;
             margin-left: 50px;
         }
+
+        .container-mk {
+            max-width: 1200px;
+            padding: 20px;
+        }
+        .container-mk .title {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .container-mk .subtitle {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            color: #777777;
+        }
+        .container-mk .stats {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .container-mk .stat {
+            flex: 1;
+            margin: 10px;
+            min-width: 200px;
+        }
+        .container-mk .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #4A90E2;
+        }
+        .container-mk .stat-description {
+            font-size: 1em;
+            color: #777777;
+        }
+        .container-mk .contact-button {
+            margin-top: 30px;
+            padding: 15px 30px;
+            font-size: 1em;
+            color: #ffffff;
+            background-color: #4A90E2;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .container-merchand {
+            max-width: 1200px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .container-merchand .text-content {
+            max-width: 50%;
+        }
+        .container-merchand .title {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .container-merchand .description {
+            font-size: 1em;
+            color: #777777;
+            margin-bottom: 30px;
+        }
+        .container-merchand .button {
+            padding: 15px 30px;
+            font-size: 1em;
+            color: #ffffff;
+            background-color: #4A90E2;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .container-merchand .image-content {
+            max-width: 50%;
+        }
+        .container-merchand .image-content img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
@@ -123,6 +207,49 @@
             <a href="#" class="cta">REGISTER</a>
         </div>
         <img src="https://via.placeholder.com/600x400" alt="Illustration" class="illustration">
+    </div>
+    <div class="container-mk">
+        <div class="title">Scaling ahead of your needs</div>
+        <div class="subtitle">Customers depend on Eduard Search to handle more queries than any other hosted search engine.</div>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-value">1.7+ trillion</div>
+                <div class="stat-description">searches every year</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">99.999%</div>
+                <div class="stat-description">uptime SLA available</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">17,000+</div>
+                <div class="stat-description">customers across 150+ countries</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">30+ billion</div>
+                <div class="stat-description">records indexed</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">100%</div>
+                <div class="stat-description">compliant & secure with SAML, SOC3, ISO27001, HIPAA, C5, MACH Alliance</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">382%</div>
+                <div class="stat-description">ROI according to Forrester Research</div>
+            </div>
+        </div>
+        <a href="#" class="contact-button">Contact sales</a>
+    </div>
+    <div class="container-merchand">
+        <div class="text-content">
+            <div class="title">Make merchandising effortless</div>
+            <div class="description">
+                Combine the art of merchandising with the science of algorithms. Design online journeys that start with audience understanding - and end with better business outcomes.
+            </div>
+            <a href="#" class="button">Discover the Merchandising Studio</a>
+        </div>
+        <div class="image-content">
+            <img src="image.png" alt="Merchandising Studio">
+        </div>
     </div>
 </body>
 </html>
