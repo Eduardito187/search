@@ -395,6 +395,7 @@ canvas {
 
 .api-key-value span {
     display: block;
+    margin-right: 10px;
 }
 
 #header-page {

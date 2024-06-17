@@ -27,16 +27,12 @@ var KeySection = {
             </div>
         </div>
         <div class="api-key-section">
-            <div class="api-key-header">Analytics API Key</div>
+            <div class="api-key-header">Team API Key</div>
             <div class="api-key-value">24915dc8bb7abe34a6063766cc0170b2</div>
         </div>
         <div class="api-key-section">
-            <div class="api-key-header">Usage API Key</div>
+            <div class="api-key-header">Company API Key</div>
             <div class="api-key-value">aa14b5a40b66ba962d2c58d472f70120</div>
-        </div>
-        <div class="api-key-section">
-            <div class="api-key-header">Monitoring API Key</div>
-            <div class="api-key-value">517359c6965beeaa1a397908b1642c70</div>
         </div>
     </div>
     `,
