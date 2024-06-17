@@ -13,7 +13,7 @@ var TeamSection = {
                 </thead>
                 <tbody>
                     <tr v-for="data in dataPage">
-                        <td>chirag.p@wagento.com</td>
+                        <td>{{data.mail}}</td>
                         <td>
                             <span class="permissions">
                                 <span class="badge bg-primary">Set-Up Search</span>
