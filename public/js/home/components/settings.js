@@ -60,7 +60,7 @@ var SettingsSection = {
                         <div class="card-body">
                             <div class="list-group">
                                 <router-link class="list-group-item list-group-item-action" to="/account">Account details</router-link>
-                                <router-link class="list-group-item list-group-item-action" to="/notifications">Notificationss</router-link>
+                                <router-link class="list-group-item list-group-item-action" to="/notifications">Notifications</router-link>
                                 <router-link class="list-group-item list-group-item-action" to="/contacts">Contacts</router-link>
                                 <router-link class="list-group-item list-group-item-action" to="/support">Support</router-link>
                             </div>

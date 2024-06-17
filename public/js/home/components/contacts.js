@@ -1,7 +1,7 @@
 var ContactsSection = {
     template: `
     <div class="row">
-        <div class="col-md-12">
+        <div v-if="dataPage !0 null" class="col-md-12">
             <div class="card">
                 <div class="card-body">
                     <div class="row">
@@ -13,17 +13,17 @@ var ContactsSection = {
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="access-level" class="form-label">Data Privacy Officer name</label>
-                                    <input type="text" class="form-control" />
+                                    <input type="text" v-model="dataPage.name_privacy" class="form-control" />
                                 </div>
                                 <div class="col-md-6">
                                     <label for="period" class="form-label">Phone number</label>
-                                    <input type="text" class="form-control" />
+                                    <input type="text" v-model="dataPage.phone_privacy" class="form-control" />
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <label for="access-level" class="form-label">Mails</label>
-                                    <input type="text" class="form-control" />
+                                    <input type="text" v-model="dataPage.mail_privacy" class="form-control" />
                                 </div>
                             </div>
                         </div>
@@ -38,7 +38,7 @@ var ContactsSection = {
                             <div class="row">
                                 <div class="col-md-12">
                                     <label for="access-level" class="form-label">Mails</label>
-                                    <input type="text" class="form-control" />
+                                    <input type="text" v-model="dataPage.mail_security" class="form-control" />
                                 </div>
                             </div>
                         </div>
@@ -62,12 +62,24 @@ var ContactsSection = {
     data() {
         return {
             savedAction: false,
+            dataPage: null
         };
     },
     methods: {
+        getContactData() {
+            let self = this;
+            window.fetchFontendData('api/account/my-account', 'POST').then(data => {
+                if (data.status && data.code == 200) {
+                    self.dataPage = data.response;
+                }
+            }).catch(error => {
+                console.error('Error en la solicitud:', error);
+            });
+        },
         modifyContact() {}
     },
     created() {
+        this.getContactData();
     },
     mounted() {
     }
