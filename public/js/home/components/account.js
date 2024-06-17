@@ -1,7 +1,7 @@
 var AccountSection = {
     template: `
     <div class="row">
-        <div class="col-md-12">
+        <div v-if="dataPage != null" class="col-md-12">
             <div class="card">
                 <div class="card-body">
                     <div class="row">
@@ -60,7 +60,7 @@ var AccountSection = {
                         </div>
                         <div class="col-md-8 text-end">
                             <div class="col align-self-end">
-                                <button type="button" class="btn-google mt-2" @click="redirectGoogle">
+                                <button type="button" class="btn-google" @click="redirectGoogle">
                                     <small>Google</small>
                                     <i class="fa fa-google"></i>
                                 </button>
@@ -94,10 +94,22 @@ var AccountSection = {
     data() {
         return {
             savedAction: false,
+            dataPage: null
         };
     },
     methods: {
-        modifyAccount() {},
+        getAccountData() {
+            let self = this;
+            window.fetchFontendData('api/account/my-account', 'POST').then(data => {
+                if (data.status && data.code == 200) {
+                    self.dataPage = data.response;
+                }
+            }).catch(error => {
+                console.error('Error en la solicitud:', error);
+            });
+        },
+        modifyAccount() {
+        },
         redirectGitHub() {
             window.location.href = '/login/github';
         },
@@ -106,6 +118,7 @@ var AccountSection = {
         },
     },
     created() {
+        this.getAccountData();
     },
     mounted() {
     }
