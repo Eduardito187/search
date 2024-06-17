@@ -15,10 +15,10 @@
       </div>
       <nav class="menu">
         <ul>
-          <li><router-link to="/dashboard"><i class="fa fa-home"></i> Dashboard</router-link></li>
-          <li><router-link to="/indexes"><i class="fa fa-star"></i> Indexes</router-link></li>
-          <li><router-link to="/users"><i class="fa fa-user"></i> Users</router-link></li>
-          <li><router-link to="/settings"><i class="fa fa-cog"></i> Settings</router-link></li>
+          <li><router-link to="/dashboard"><i class="fa fa-home"></i> Monitoreo</router-link></li>
+          <li><router-link to="/indexes"><i class="fa fa-star"></i> Data</router-link></li>
+          <li><router-link to="/users"><i class="fa fa-user"></i> Busquedas</router-link></li>
+          <li><router-link to="/settings"><i class="fa fa-cog"></i> Recomendaciones</router-link></li>
         </ul>
       </nav>
       <div class="close-session" @click="closeSession()">
