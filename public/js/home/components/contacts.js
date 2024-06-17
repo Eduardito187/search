@@ -1,7 +1,7 @@
 var ContactsSection = {
     template: `
     <div class="row">
-        <div v-if="dataPage !0 null" class="col-md-12">
+        <div v-if="dataPage != null" class="col-md-12">
             <div class="card">
                 <div class="card-body">
                     <div class="row">
