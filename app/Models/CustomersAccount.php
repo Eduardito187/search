@@ -12,7 +12,21 @@ class CustomersAccount extends Model
     use HasFactory;
 
     protected $table = 'customers_account';
-    protected $fillable = ['mail', 'password', 'status', 'name_github', 'github_id', 'avatar_github', 'github_nickname', 'token_github'];
+    protected $fillable = [
+        'mail',
+        'password',
+        'status',
+        'name_github',
+        'github_id',
+        'avatar_github',
+        'github_nickname',
+        'token_github',
+        'name_google',
+        'google_id',
+        'avatar_google',
+        'token_google',
+        'google_refresh_token'
+    ];
     protected $hidden = ['id_client', 'created_at', 'updated_at'];
     protected $primaryKey = 'id';
     public $incrementing = true;
