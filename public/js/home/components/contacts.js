@@ -68,7 +68,7 @@ var ContactsSection = {
     methods: {
         getContactData() {
             let self = this;
-            window.fetchFontendData('api/account/my-account', 'POST').then(data => {
+            window.fetchFontendData('api/account/team-contact', 'POST').then(data => {
                 if (data.status && data.code == 200) {
                     self.dataPage = data.response;
                 }
