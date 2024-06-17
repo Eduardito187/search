@@ -26,7 +26,7 @@ var AccountSection = {
                                 </div>
                                 <div class="col-md-6">
                                     <label for="period" class="form-label">Company</label>
-                                    <input type="text" id="company" name="company" class="form-control" />
+                                    <input type="text" :disabled="true" id="company" name="company" class="form-control" />
                                 </div>
                             </div>
                             <div class="row">
@@ -40,7 +40,12 @@ var AccountSection = {
                     <hr>
                     <div class="row text-end mt-3">
                         <div class="col align-self-end">
-                            <button type="button" class="btn-save-eduard-search">Save</button>
+                            <button type="button" class="btn-save-eduard-search" :disabled="savedAction" @click="modifyAccount">
+                                <span>Save</span>
+                                <div v-if="savedAction" class="spinner-border text-light" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -48,6 +53,16 @@ var AccountSection = {
         </div>
     </div>
     `,
+    data() {
+        return {
+            savedAction: false,
+        };
+    },
+    methods: {
+        modifyAccount() {}
+    },
+    created() {
+    },
     mounted() {
     }
 };

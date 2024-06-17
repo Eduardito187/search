@@ -46,7 +46,12 @@ var ContactsSection = {
                     <hr>
                     <div class="row text-end mt-3">
                         <div class="col align-self-end">
-                            <button type="button" class="btn-save-eduard-search">Save</button>
+                            <button type="button" class="btn-save-eduard-search" :disabled="savedAction" @click="modifyContact">
+                                <span>Save</span>
+                                <div v-if="savedAction" class="spinner-border text-light" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -54,6 +59,16 @@ var ContactsSection = {
         </div>
     </div>
     `,
+    data() {
+        return {
+            savedAction: false,
+        };
+    },
+    methods: {
+        modifyContact() {}
+    },
+    created() {
+    },
     mounted() {
     }
 };

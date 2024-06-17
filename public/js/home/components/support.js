@@ -40,7 +40,12 @@ var SupportSection = {
                     <hr>
                     <div class="row text-end mt-3">
                         <div class="col align-self-end">
-                            <button type="button" class="btn-save-eduard-search">Save</button>
+                            <button type="button" class="btn-save-eduard-search" :disabled="savedAction" @click="modifySupport">
+                                <span>Save</span>
+                                <div v-if="savedAction" class="spinner-border text-light" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -48,6 +53,16 @@ var SupportSection = {
         </div>
     </div>
     `,
+    data() {
+        return {
+            savedAction: false,
+        };
+    },
+    methods: {
+        modifySupport() {}
+    },
+    created() {
+    },
     mounted() {
     }
 };
