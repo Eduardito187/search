@@ -131,4 +131,74 @@ class Account extends Controller
             )
         );
     }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getMyAccount(Request $request)
+    {
+        return response()->json(
+            $this->customer->getMyAccountData(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getUsersTeam(Request $request)
+    {
+        return response()->json(
+            $this->customer->getUsersTeamData(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getNotificationTeam(Request $request)
+    {
+        return response()->json(
+            $this->customer->getNotificationTeamData(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getContactTeam(Request $request)
+    {
+        return response()->json(
+            $this->customer->getContactTeamData(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getSupportTeam(Request $request)
+    {
+        return response()->json(
+            $this->customer->getSupportTeamData(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
 }

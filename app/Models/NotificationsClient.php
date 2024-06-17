@@ -5,14 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Client;
-use App\Models\CustomerAccountInformation;
 
-class CustomersAccount extends Model
+class NotificationsClient extends Model
 {
     use HasFactory;
 
-    protected $table = 'customers_account';
-    protected $fillable = ['mail', 'password', 'status', 'name_github', 'github_id', 'avatar_github', 'github_nickname', 'token_github'];
+    protected $table = 'notifications_client';
+    protected $fillable = ['report_day', 'report_month', 'alert_usage', 'alert_billing', 'ai'];
     protected $hidden = ['id_client', 'created_at', 'updated_at'];
     protected $primaryKey = 'id';
     public $incrementing = true;
@@ -24,12 +23,5 @@ class CustomersAccount extends Model
      */
     public function client() {
         return $this->hasOne(Client::class, 'id', 'id_client');
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function customerAccountInformation() {
-        return $this->hasOne(CustomerAccountInformation::class, 'id_customers_account', 'id');
     }
 }

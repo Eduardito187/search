@@ -281,6 +281,106 @@ class Customer
         );
     }
 
+    public function getMyAccountData(array $body, array $header = [])
+    {
+        return $this->executeWithValidation(
+            function() use ($header) {
+                $this->validateCustomerKey($header);
+                $currentCustomer = $this->getCustomerByEncryption($header["customer-key"][0]);
+
+                return [
+                    "id" => $currentCustomer->id,
+                    "mail" => $currentCustomer->mail,
+                    "first_name" => $currentCustomer->customerAccountInformation->first_name,
+                    "last_name" => $currentCustomer->customerAccountInformation->last_name,
+                    "phone_number" => $currentCustomer->customerAccountInformation->phone_number,
+                    "company" => $currentCustomer->customerAccountInformation->company,
+                    "status" => $currentCustomer->status
+                ];
+            },
+            "Proceso ejecutado exitosamente."
+        );
+    }
+
+    public function getUsersTeamData(array $body, array $header = [])
+    {
+        return $this->executeWithValidation(
+            function() use ($header) {
+                $this->validateCustomerKey($header);
+                $currentCustomer = $this->getCustomerByEncryption($header["customer-key"][0]);
+                $data = [];
+
+                foreach ($currentCustomer->client->allCustomers as $key => $customer) {
+                    $data[] = [
+                        "id" => $customer->id,
+                        "mail" => $customer->mail,
+                        "first_name" => $customer->customerAccountInformation->first_name,
+                        "last_name" => $customer->customerAccountInformation->last_name,
+                        "phone_number" => $customer->customerAccountInformation->phone_number,
+                        "company" => $customer->customerAccountInformation->company,
+                        "status" => $customer->status
+                    ];
+                }
+
+                return $data;
+            },
+            "Proceso ejecutado exitosamente."
+        );
+    }
+
+    public function getNotificationTeamData(array $body, array $header = [])
+    {
+        return $this->executeWithValidation(
+            function() use ($header) {
+                $this->validateCustomerKey($header);
+                $currentCustomer = $this->getCustomerByEncryption($header["customer-key"][0]);
+
+                return [
+                    "report_day" => false,
+                    "report_month" => false,
+                    "alert_usage" => false,
+                    "alert_billing" => false,
+                    "ai" => false
+                ];
+            },
+            "Proceso ejecutado exitosamente."
+        );
+    }
+
+    public function getContactTeamData(array $body, array $header = [])
+    {
+        return $this->executeWithValidation(
+            function() use ($header) {
+                $this->validateCustomerKey($header);
+                $currentCustomer = $this->getCustomerByEncryption($header["customer-key"][0]);
+
+                return [
+                    "name_privacy" => "",
+                    "phone_privacy" => "",
+                    "mail_privacy" => "",
+                    "mail_security" => ""
+                ];
+            },
+            "Proceso ejecutado exitosamente."
+        );
+    }
+
+    public function getSupportTeamData(array $body, array $header = [])
+    {
+        return $this->executeWithValidation(
+            function() use ($header) {
+                $this->validateCustomerKey($header);
+                $currentCustomer = $this->getCustomerByEncryption($header["customer-key"][0]);
+
+                return [
+                    "access_type" => "",
+                    "period" => ""
+                ];
+            },
+            "Proceso ejecutado exitosamente."
+        );
+    }
+
     public function getInfraestructureDataArray(CustomersAccount $customer)
     {
         $data = [];

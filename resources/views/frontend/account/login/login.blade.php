@@ -48,6 +48,10 @@
                     <small>GitHub</small>
                     <i class="fa fa-github"></i>
                 </button>
+                <button type="button" class="btn-google" @click="redirectGitHub">
+                    <small>Google</small>
+                    <i class="fa fa-google"></i>
+                </button>
                 <a href="/restore-password" class="forgot-password">¿Has olvidado tu contraseña?</a>
             </div>
             <div>

@@ -35,6 +35,11 @@ Route::middleware([CustomValidateToken::class])->group(function () {
         Route::post('account/reset-password', 'customerResetPassword');
         Route::post('account/generate-password', 'generatePassword');
         Route::post('account/close-session', 'closeSession');
+        Route::post('account/my-account', 'getMyAccount');
+        Route::post('account/team-users', 'getUsersTeam');
+        Route::post('account/team-notification', 'getNotificationTeam');
+        Route::post('account/team-contact', 'getContactTeam');
+        Route::post('account/team-support', 'getSupportTeam');
     });
 
     Route::controller(System::class)->group(function() {

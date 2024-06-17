@@ -14,19 +14,23 @@ return new class extends Migration
     public function up()
     {
         Schema::table('customers_account', function (Blueprint $table) {
-            $table->string('name_github')->nullable()->unique();
-            $table->string('github_id')->nullable()->unique();
-            $table->string('avatar_github')->nullable();
-            $table->string('github_nickname')->nullable();
-            $table->string('token_github')->nullable();
+            $table->string('name_google')->nullable();
+            $table->string('google_id')->nullable();
+            $table->string('avatar_google')->nullable();
+            $table->string('token_google')->nullable();
+            $table->string('google_refresh_token')->nullable();
         });
     }
 
-    /** */
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
     public function down()
     {
         Schema::table('customers_account', function (Blueprint $table) {
-            $table->dropColumn(['name_github', 'github_id', 'avatar_github', 'github_nickname', 'token_github']);
+            $table->dropColumn(['name_google', 'google_id', 'avatar_google', 'token_google', 'google_refresh_token']);
         });
     }
 };

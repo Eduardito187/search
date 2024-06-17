@@ -105,6 +105,29 @@ body .container .login-form #loginForm {
     margin-left: 10px;
 }
 
+.btn-google {
+    width: 245px;
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #db4a39;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-google:hover {
+    background-color: #eb4634;
+}
+
+.btn-google .fa {
+    margin-left: 10px;
+}
+
 .btn-eduard-search {
     width: 245px;
     padding: 10px 20px;

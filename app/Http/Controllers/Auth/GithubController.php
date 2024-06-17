@@ -56,16 +56,16 @@ class GithubController extends Controller
                 return redirect('/login')->with('error-danger', "El email ".$githubUser->email." no se encuentra asociado a una cuenta.");
             }
 
-            $customerAccount->first_name = $githubUser->name;
+            $customerAccount->name_github = $githubUser->name;
             $customerAccount->github_id = $githubUser->id;
-            $customerAccount->avatar = $githubUser->avatar;
-            $customerAccount->token = $githubUser->token;
+            $customerAccount->avatar_github = $githubUser->avatar;
+            $customerAccount->token_github = $githubUser->token;
             $customerAccount->github_nickname = $githubUser->nickname;
             $customerAccount->save();
         } catch (Exception $e) {
             return redirect('/login')->with('error-danger', $e->getMessage());
         }
 
-        return redirect()->intended('/home')->with('message-success', 'Sesión iniciada exitosamente por gitHub.');
+        return redirect()->intended('/home')->with('message-success', 'Sesión iniciada exitosamente por GitHub.');
     }
 }

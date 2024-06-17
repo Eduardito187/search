@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\IndexCatalog;
 use App\Models\HistoryIndexProccess;
 use App\Models\HistoryQuerySearch;
+use App\Models\CustomersAccount;
+use App\Models\NotificationsClient;
+use App\Models\SupportClient;
+use App\Models\ContactClient;
 
 class Client extends Model
 {
@@ -19,6 +23,34 @@ class Client extends Model
     public $incrementing = true;
     protected $keyType = 'integer';
     public $timestamps = false;
+
+    /**
+     * @inheritDoc
+     */
+    public function notificationClient() {
+        return $this->hasOne(NotificationsClient::class, 'id_client', 'id');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function supportClient() {
+        return $this->hasOne(SupportClient::class, 'id_client', 'id');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function contactClient() {
+        return $this->hasOne(ContactClient::class, 'id_client', 'id');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function allCustomers() {
+        return $this->hasMany(CustomersAccount::class, 'id_client', 'id');
+    }
 
     /**
      * @inheritDoc

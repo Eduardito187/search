@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\Auth\GithubController;
+use App\Http\Controllers\Auth\GoogleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,3 +67,5 @@ Route::get('password/reset/{token}', [PasswordResetController::class, 'showReset
 Route::post('password/reset', [PasswordResetController::class, 'reset'])->name('password.update');
 Route::get('login/github', [GithubController::class, 'redirectToProvider'])->name('login.github');
 Route::get('auth/git-hub', [GithubController::class, 'handleProviderCallback']);
+Route::get('login/google', [GoogleController::class, 'redirectToProvider'])->name('login.google');
+Route::get('auth/google', [GoogleController::class, 'handleProviderCallback']);
