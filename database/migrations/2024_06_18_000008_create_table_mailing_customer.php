@@ -17,7 +17,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_mailing_index')->nullable();
             $table->foreign('id_mailing_index')->references('id')->on('mailing_index')->onDelete('cascade');
-            $table->unsignedBigInteger('id_index')->nullable();
+            $table->unsignedBigInteger('id_wesite_customer')->nullable();
             $table->foreign('id_wesite_customer')->references('id')->on('wesite_customer')->onDelete('cascade');
             $table->boolean('sending');
             $table->timestamp('created_at');
