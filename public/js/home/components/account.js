@@ -19,7 +19,7 @@ var AccountSection = {
                                     <input type="text" v-model="dataPage.last_name" id="lastName" name="lastName" class="form-control" />
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row mt-1">
                                 <div class="col-md-6">
                                     <label for="access-level" class="form-label">Phone number</label>
                                     <input type="text" v-model="dataPage.phone_number" id="phoneNumber" name="phoneNumber" class="form-control" />
@@ -29,7 +29,7 @@ var AccountSection = {
                                     <input type="text" v-model="dataPage.company" :disabled="true" id="company" name="company" class="form-control" />
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row mt-1">
                                 <div class="col-md-12">
                                     <label for="access-level" class="form-label">Email</label>
                                     <input type="text" v-model="dataPage.mail" id="email" name="email" class="form-control" />
