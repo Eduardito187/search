@@ -20,7 +20,7 @@ var SupportSection = {
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="access-level" class="form-label">Access level</label>
-                                    <select v-model=".accedataPagess_type" class="form-select" id="access-level">
+                                    <select v-model="dataPage.access_type" class="form-select" id="access-level">
                                         <option value="read">read</option>
                                         <option value="write">write</option>
                                         <option value="admin">admin</option>
