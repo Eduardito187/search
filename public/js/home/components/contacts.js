@@ -44,9 +44,9 @@ var ContactsSection = {
                         </div>
                     </div>
                     <hr>
-                    <div class="row">
+                    <div class="row text-end mt-3">
                         <div class="col align-self-end">
-                            <button type="submit" class="btn btn-primary mt-3">Save</button>
+                            <button type="button" class="btn-save-eduard-search">Save</button>
                         </div>
                     </div>
                 </div>
