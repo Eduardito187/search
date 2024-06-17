@@ -56,7 +56,7 @@ var AccountSection = {
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-4">
-                            <h5 class="card-title">Integración con Google</h5>
+                            <h5 class="card-title integration-title">Integración con Google</h5>
                         </div>
                         <div class="col-md-8 text-end">
                             <div class="col align-self-end">
@@ -77,7 +77,7 @@ var AccountSection = {
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-4">
-                            <h5 class="card-title">Integración con GitHub</h5>
+                            <h5 class="card-title integration-title">Integración con GitHub</h5>
                         </div>
                         <div class="col-md-8 text-end">
                             <div class="col align-self-end">

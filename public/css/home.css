@@ -476,6 +476,11 @@ canvas {
     margin-left: 10px;
 }
 
+.integration-title {
+    line-height: 44px;
+    margin: 0px !important;
+}
+
 .btn-github {
     width: 245px;
     align-items: center;
