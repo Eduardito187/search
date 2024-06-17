@@ -6,8 +6,8 @@ var NotificationsSection = {
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
-                            <h5 class="card-title">Weekly summary reports</h5>
-                            <p class="card-text">Algolia sends weekly reports to keep you updated on the search activity and usage of your users and other such analytics. Recommended if you are interested in the performance of your search.</p>
+                            <h5 class="card-title">Reporte diario</h5>
+                            <p class="card-text">Notificación diaria que envía un resumen o informe de las actividades, estadísticas o datos relevantes del día.</p>
                         </div>
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" role="switch" id="weeklySummaryReports">
@@ -21,8 +21,8 @@ var NotificationsSection = {
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
-                            <h5 class="card-title">Usage alerts</h5>
-                            <p class="card-text">Receive notifications when your application(s) reach 50%, 80% and 100% of your Free or Committed plan's usage quota.</p>
+                            <h5 class="card-title">Reporte mensual</h5>
+                            <p class="card-text">Notificación mensual que proporciona un resumen o informe de las actividades, estadísticas o datos relevantes del mes.</p>
                         </div>
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" role="switch" id="usageAlerts">
@@ -36,8 +36,8 @@ var NotificationsSection = {
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
-                            <h5 class="card-title">Billing</h5>
-                            <p class="card-text">Receive invoices and notifications about payment/credit card issues. Recommended for application owners and people in charge of billing and invoicing.</p>
+                            <h5 class="card-title">Notificación de uso</h5>
+                            <p class="card-text">Notificación que alerta al usuario sobre el uso excesivo o inusual de un servicio o recurso.</p>
                         </div>
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" role="switch" id="billing">
@@ -51,8 +51,23 @@ var NotificationsSection = {
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
-                            <h5 class="card-title">AI</h5>
-                            <p class="card-text">Algolia sends weekly notifications to keep you updated about your AI features activity. Recommended if you are interested in the impact of AI on your search performance.</p>
+                            <h5 class="card-title">Notificación de pago</h5>
+                            <p class="card-text">Notificación que alerta al usuario sobre asuntos relacionados con la facturación, como pagos pendientes, cargos adicionales o problemas con el método de pago.</p>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="ai">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="card-title">Notificación de IA</h5>
+                            <p class="card-text">Notificación relacionada con el uso o recomendaciones de una inteligencia artificial integrada en el servicio.<br>Esto puede incluir alertas generadas por la IA, recomendaciones personalizadas, o informes sobre el desempeño de modelos de IA.</p>
                         </div>
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" role="switch" id="ai">
