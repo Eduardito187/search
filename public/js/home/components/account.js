@@ -60,11 +60,9 @@ var AccountSection = {
                         </div>
                         <div class="col-md-8 text-end">
                             <div class="col align-self-end">
-                                <button type="button" class="btn-save-eduard-search" :disabled="savedAction" @click="modifyAccount">
-                                    <span>Save</span>
-                                    <div v-if="savedAction" class="spinner-border text-light" role="status">
-                                        <span class="visually-hidden">Loading...</span>
-                                    </div>
+                                <button type="button" class="btn-google mt-2" @click="redirectGoogle">
+                                    <small>Google</small>
+                                    <i class="fa fa-google"></i>
                                 </button>
                             </div>
                         </div>
@@ -81,11 +79,9 @@ var AccountSection = {
                         </div>
                         <div class="col-md-8 text-end">
                             <div class="col align-self-end">
-                                <button type="button" class="btn-save-eduard-search" :disabled="savedAction" @click="modifyAccount">
-                                    <span>Save</span>
-                                    <div v-if="savedAction" class="spinner-border text-light" role="status">
-                                        <span class="visually-hidden">Loading...</span>
-                                    </div>
+                                <button type="button" class="btn-github" @click="redirectGitHub">
+                                    <small>GitHub</small>
+                                    <i class="fa fa-github"></i>
                                 </button>
                             </div>
                         </div>
@@ -101,7 +97,13 @@ var AccountSection = {
         };
     },
     methods: {
-        modifyAccount() {}
+        modifyAccount() {},
+        redirectGitHub() {
+            window.location.href = '/login/github';
+        },
+        redirectGoogle() {
+            window.location.href = '/login/google';
+        },
     },
     created() {
     },

@@ -16,6 +16,9 @@ new Vue({
         redirectGitHub() {
             window.location.href = '/login/github';
         },
+        redirectGoogle() {
+            window.location.href = '/login/google';
+        },
         validateData() {
             let self = this;
             this.messageInfo = '';
