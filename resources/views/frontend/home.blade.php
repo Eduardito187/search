@@ -243,6 +243,11 @@
             color: #a9b2c3;
             display: ruby-text;
         }
+        .row-section {
+            text-align: center;
+            padding-top: 30px;
+            padding-bottom: 60px;
+        }
         .footer-bottom .item-footer-bottom {
             padding: 20px;
         }

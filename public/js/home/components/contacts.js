@@ -45,7 +45,9 @@ var ContactsSection = {
                     </div>
                     <hr>
                     <div class="row">
-                        <button type="submit" class="btn btn-primary mt-3">Save</button>
+                        <div class="col align-self-end">
+                            <button type="submit" class="btn btn-primary mt-3">Save</button>
+                        </div>
                     </div>
                 </div>
             </div>
