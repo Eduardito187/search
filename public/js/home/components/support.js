@@ -1,7 +1,7 @@
 var SupportSection = {
     template: `
     <div class="row">
-        <div class="col-md-12">
+        <div v-if="dataPage != null" class="col-md-12">
             <div class="card">
                 <div class="card-body">
                     <div class="row">
@@ -20,7 +20,7 @@ var SupportSection = {
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="access-level" class="form-label">Access level</label>
-                                    <select class="form-select" id="access-level">
+                                    <select v-model=".accedataPagess_type" class="form-select" id="access-level">
                                         <option value="read">read</option>
                                         <option value="write">write</option>
                                         <option value="admin">admin</option>
@@ -28,7 +28,7 @@ var SupportSection = {
                                 </div>
                                 <div class="col-md-6">
                                     <label for="period" class="form-label">Period</label>
-                                    <select class="form-select" id="period">
+                                    <select v-model="dataPage.period" class="form-select" id="period">
                                         <option value="7">7 days</option>
                                         <option value="14">14 days</option>
                                         <option value="30">30 days</option>
@@ -56,12 +56,24 @@ var SupportSection = {
     data() {
         return {
             savedAction: false,
+            dataPage: null
         };
     },
     methods: {
+        getContactData() {
+            let self = this;
+            window.fetchFontendData('api/account/team-support', 'POST').then(data => {
+                if (data.status && data.code == 200) {
+                    self.dataPage = data.response;
+                }
+            }).catch(error => {
+                console.error('Error en la solicitud:', error);
+            });
+        },
         modifySupport() {}
     },
     created() {
+        this.getContactData();
     },
     mounted() {
     }
