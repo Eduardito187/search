@@ -48,7 +48,7 @@
                     <small>GitHub</small>
                     <i class="fa fa-github"></i>
                 </button>
-                <button type="button" class="btn-google" @click="redirectGitHub">
+                <button type="button" class="btn-google mt-2" @click="redirectGitHub">
                     <small>Google</small>
                     <i class="fa fa-google"></i>
                 </button>
