@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('wesite_customer', function (Blueprint $table) {
+        Schema::create('website_customer', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_client')->nullable();
             $table->foreign('id_client')->references('id')->on('client')->onDelete('cascade');
@@ -36,10 +36,10 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('wesite_customer', function (Blueprint $table) {
+        Schema::dropIfExists('website_customer', function (Blueprint $table) {
             $table->dropConstrainedForeignId('id_index');
             $table->dropConstrainedForeignId('id_client');
         });
-        Schema::dropIfExists('wesite_customer');
+        Schema::dropIfExists('website_customer');
     }
 };

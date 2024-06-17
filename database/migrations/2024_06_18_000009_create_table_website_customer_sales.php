@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('wesite_customer_sales', function (Blueprint $table) {
+        Schema::create('website_customer_sales', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_client')->nullable();
             $table->foreign('id_client')->references('id')->on('client')->onDelete('cascade');
-            $table->unsignedBigInteger('id_wesite_customer')->nullable();
-            $table->foreign('id_wesite_customer')->references('id')->on('wesite_customer')->onDelete('cascade');
+            $table->unsignedBigInteger('id_website_customer')->nullable();
+            $table->foreign('id_website_customer')->references('id')->on('website_customer')->onDelete('cascade');
             $table->double('total')->nullable();
             $table->double('sub_total')->nullable();
             $table->double('discount')->nullable();
@@ -36,10 +36,10 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('wesite_customer_sales', function (Blueprint $table) {
+        Schema::dropIfExists('website_customer_sales', function (Blueprint $table) {
             $table->dropConstrainedForeignId('id_client');
-            $table->dropConstrainedForeignId('wesite_customer');
+            $table->dropConstrainedForeignId('website_customer');
         });
-        Schema::dropIfExists('wesite_customer_sales');
+        Schema::dropIfExists('website_customer_sales');
     }
 };

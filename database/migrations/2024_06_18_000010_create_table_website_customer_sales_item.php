@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('wesite_customer_sales_item', function (Blueprint $table) {
+        Schema::create('website_customer_sales_item', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_wesite_customer_sales')->nullable();
-            $table->foreign('id_wesite_customer_sales')->references('id')->on('wesite_customer_sales')->onDelete('cascade');
+            $table->unsignedBigInteger('id_website_customer_sales')->nullable();
+            $table->foreign('id_website_customer_sales')->references('id')->on('website_customer_sales')->onDelete('cascade');
             $table->string('name')->nullable();
             $table->string('sku')->nullable();
             $table->double('price')->nullable();
@@ -34,9 +34,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('wesite_customer_sales_item', function (Blueprint $table) {
-            $table->dropConstrainedForeignId('id_wesite_customer_sales');
+        Schema::dropIfExists('website_customer_sales_item', function (Blueprint $table) {
+            $table->dropConstrainedForeignId('id_website_customer_sales');
         });
-        Schema::dropIfExists('wesite_customer_sales_item');
+        Schema::dropIfExists('website_customer_sales_item');
     }
 };
