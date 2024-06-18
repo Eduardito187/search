@@ -82,6 +82,7 @@ class SendMailMasive
             $mail->isHTML(true);
             $mail->Subject = $this->title;
             $mail->Body = $this->message;
+            Log::info("Body => ".$this->message);
 
             // Adjuntar archivos (opcional)
             // $mail->addAttachment('/path/to/file');
