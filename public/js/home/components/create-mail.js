@@ -215,18 +215,19 @@ var CreateMailSection = {
                     mentions_item_type: 'profile',
                     autocorrect_capitalize: true
                 });
-
-                if ($(".tox-edit-area__iframe").length == 0) {
-                    tinymce.remove('#mail-template');
-                    this.loadTinyMce();
-                }
+            }
+        },
+        validateLoaderTinyMce() {
+            if ($(".tox-edit-area__iframe").length == 0) {
+                tinymce.remove('#mail-template');
+                this.loadTinyMce();
             }
         },
         checkElementExistence() {
             let element = document.querySelector("#mail-template");
             if (element) {
                 this.loadTinyMce();
-                console.log("delete intervalMailingTemplate");
+                this.validateLoaderTinyMce();
                 clearInterval(window.intervalMailingTemplate);
             }
         }
