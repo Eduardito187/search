@@ -11,7 +11,7 @@ class SendMailMasive
     protected $message;
     protected $headers = [];
 
-    public function __construct(string $template, string $to, string $title)
+    public function __construct(string $title, string $to, string $template)
     {
         $this->to = $to;
         $this->title = $title;
