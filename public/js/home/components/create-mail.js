@@ -233,5 +233,8 @@ var CreateMailSection = {
     },
     updated() {
         window.intervalMailingTemplate = setInterval(this.checkElementExistence(), 500);
+    },
+    destroyed() {
+        tinymce.remove('#mail-template');
     }
 };
