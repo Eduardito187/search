@@ -55,9 +55,6 @@ var CreateMailSection = {
     created() {
     },
     mounted() {
-        const useDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-const isSmallScreen = window.matchMedia('(max-width: 1023.5px)').matches;
-
 tinymce.init({
   selector: 'textarea#full-featured',
   plugins: 'preview powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link math media mediaembed codesample table charmap pagebreak nonbreaking anchor tableofcontents insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker editimage help formatpainter permanentpen pageembed charmap tinycomments mentions quickbars linkchecker emoticons advtable footnotes mergetags autocorrect typography advtemplate markdown revisionhistory',
@@ -112,43 +109,6 @@ tinymce.init({
 		'common/punctuation/hellip'
 	],
 	typography_ignore: [ 'code' ],
-	advtemplate_list: () => {
-    return Promise.resolve([
-      {
-        id: '1',
-        title: 'Resolving tickets',
-        content: '<p>As we have not heard back from you in over a week, we have gone ahead and resolved your ticket.</p>'
-      },
-      {
-        id: '2',
-        title: 'Quick replies',
-        items: [
-          {
-            id: '3',
-            title: 'Message received',
-            content: '<p>Just a quick note to say we have received your message, and will get back to you within 48 hours.</p>'
-          },
-          {
-            id: '4',
-            title: 'Progress update',
-            content: '</p>Just a quick note to let you know we are still working on your case</p>'
-          }
-        ]
-      }
-    ]);
-  },
-  link_list: [
-    { title: 'My page 1', value: 'https://www.tiny.cloud' },
-    { title: 'My page 2', value: 'http://www.moxiecode.com' }
-  ],
-  image_list: [
-    { title: 'My page 1', value: 'https://www.tiny.cloud' },
-    { title: 'My page 2', value: 'http://www.moxiecode.com' }
-  ],
-  image_class_list: [
-    { title: 'None', value: '' },
-    { title: 'Some class', value: 'class-name' }
-  ],
   importcss_append: true,
   height: 600,
   image_caption: true,
@@ -160,61 +120,11 @@ tinymce.init({
   content_style: '.mymention{ color: gray; }',
   contextmenu: 'link image editimage table configurepermanentpen',
   a11y_advanced_options: true,
-  skin: useDarkMode ? 'oxide-dark' : 'oxide',
-  content_css: useDarkMode ? 'dark' : 'default',
-  /*
-  The following settings require more configuration than shown here.
-  For information on configuring the mentions plugin, see:
-  https://www.tiny.cloud/docs/tinymce/6/mentions/.
-  */
+  skin: 'oxide',
+  content_css: 'default',
   mentions_selector: '.mymention',
-  mentions_fetch: mentions_fetch, // TODO: Implement mentions_fetch
-  mentions_menu_hover: mentions_menu_hover, // TODO: Implement mentions_menu_hover
-  mentions_menu_complete: mentions_menu_complete, // TODO: Implement mentions_menu_complete
-  mentions_select: mentions_select, // TODO: Implement mentions_select
   mentions_item_type: 'profile',
-  autocorrect_capitalize: true,
-  mergetags_list: [
-    {
-      title: 'Client',
-      menu: [
-        {
-          value: 'Client.LastCallDate',
-          title: 'Call date'
-        },
-        {
-          value: 'Client.Name',
-          title: 'Client name'
-        }
-      ]
-    },
-    {
-      title: 'Proposal',
-      menu: [
-        {
-          value: 'Proposal.SubmissionDate',
-          title: 'Submission date'
-        }
-      ]
-    },
-    {
-      value: 'Consultant',
-      title: 'Consultant'
-    },
-    {
-      value: 'Salutation',
-      title: 'Salutation'
-    }
-  ],
-  revisionhistory_fetch: () => { // Implement the fetch function for the revision history plugin
-    return Promise.resolve([
-      {
-        revisionId: '1',
-        createdAt: '2023-11-24T22:26:21.578Z',
-        content: '<p>Initial content</p>'
-      },
-    ]);
-  }
+  autocorrect_capitalize: true
 });
     }
 };
