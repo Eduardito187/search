@@ -238,6 +238,6 @@ var CreateMailSection = {
     mounted() {
     },
     updated() {
-        window.intervalMailingTemplate = setInterval(this.checkElementExistence(), 500);
+        window.intervalMailingTemplate = setInterval(this.checkElementExistence(), 200);
     }
 };
