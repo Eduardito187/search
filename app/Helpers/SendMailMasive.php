@@ -41,7 +41,7 @@ class SendMailMasive
 
             return mail($this->to, $this->title, $this->message, $headers);
         } catch (Exception $e) {
-            // Log the error message if needed
+            \Illuminate\Support\Facades\Log::info("error: ".$e->getMessage());
             return false;
         }
     }

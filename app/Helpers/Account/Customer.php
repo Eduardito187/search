@@ -18,7 +18,6 @@ use App\Models\MailingIndex;
 use App\Models\PasswordReset;
 use App\Models\WebSiteCustomer;
 use Illuminate\Support\Facades\Event;
-
 use Illuminate\Support\Str;
 
 class Customer
@@ -349,6 +348,9 @@ class Customer
 
     public function sendMailingCustomer($name, $template, $to)
     {
+        \Illuminate\Support\Facades\Log::info("name: ".$name);
+        \Illuminate\Support\Facades\Log::info("template: ".$template);
+        \Illuminate\Support\Facades\Log::info("email: ".$to);
         new SendMailMasive($name, $to, $template);
     }
 
