@@ -11,7 +11,7 @@ class MailingIndex extends Model
 
     protected $table = 'mailing_index';
     protected $fillable = ['send'];
-    protected $hidden = ['id_client', 'id_index', 'created_at', 'updated_at'];
+    protected $hidden = ['id_client', 'id_index', 'id_mail', 'created_at', 'updated_at'];
     protected $primaryKey = 'id';
     public $incrementing = true;
     protected $keyType = 'integer';

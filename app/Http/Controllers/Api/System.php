@@ -19,9 +19,9 @@ class System extends Controller
      */
     protected $coreHttp;
 
-    public function __construct() {
-        $this->core = new Core();
-        $this->coreHttp = new CoreHttp();
+    public function __construct(Core $core, CoreHttp $coreHttp) {
+        $this->core = $core;
+        $this->coreHttp = $coreHttp;
     }
 
     /**

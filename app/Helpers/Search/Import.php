@@ -49,9 +49,9 @@ class Import
      */
     protected $coreSearch;
 
-    public function __construct() {
-        $this->coreHttp = new CoreHttp();
-        $this->coreSearch = new CoreSearch();
+    public function __construct(CoreHttp $coreHttp, CoreSearch $coreSearch) {
+        $this->coreHttp = $coreHttp;
+        $this->coreSearch = $coreSearch;
     }
 
     /**

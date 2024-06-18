@@ -59,7 +59,7 @@ var CreateMailSection = {
                         </div>
                         <div v-if="timeExecute == 'program'" class="row">
                             <div class="mt-1">
-                                <label class="form-label" for="program-date">Date program</label>
+                                <label class="form-label" for="program-date">Fecha</label>
                                 <input class="form-control" type="datetime-local" id="program-date" v-model="date_program" />
                             </div>
                         </div>
@@ -105,7 +105,14 @@ var CreateMailSection = {
         getAllIndex() {
             let self = this;
 
-            window.fetchFontendData('api/account/team-index', 'POST').then(data => {
+            window.fetchFontendData('api/account/team-index', 'POST', {
+                name : this.name,
+                description : this.description,
+                mail_template : this.mail_template,
+                selectedIndex : this.selectedIndex,
+                timeExecute : this.timeExecute,
+                date_program : this.date_program
+            }).then(data => {
                 if (data.status && data.code == 200) {
                     self.dataPage = data.response;
                     self.loadedPage = true;

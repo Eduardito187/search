@@ -215,4 +215,18 @@ class Account extends Controller
             )
         );
     }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function createMailMasive(Request $request)
+    {
+        return response()->json(
+            $this->customer->createMailMasive(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
 }

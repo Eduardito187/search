@@ -23,8 +23,8 @@ class CoreHttp
      */
     public $responseApi = [];
 
-    public function __construct() {
-        $this->translate = new Translate();
+    public function __construct(Translate $translate) {
+        $this->translate = $translate;
     }
 
     /**

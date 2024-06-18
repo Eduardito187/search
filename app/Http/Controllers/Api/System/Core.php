@@ -19,9 +19,9 @@ class Core extends Controller
      */
     protected $client;
 
-    public function __construct() {
-        $this->coreHttp = new CoreHttp();
-        $this->client = new Client();
+    public function __construct(CoreHttp $coreHttp, Client $client) {
+        $this->coreHttp = $coreHttp;
+        $this->client = $client;
     }
 
     /**

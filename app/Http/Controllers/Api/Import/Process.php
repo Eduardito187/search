@@ -19,9 +19,9 @@ class Process extends Controller
      */
     protected $coreHttp;
 
-    public function __construct() {
-        $this->import = new Import();
-        $this->coreHttp = new CoreHttp();
+    public function __construct(Import $import, CoreHttp $coreHttp) {
+        $this->import = $import;
+        $this->coreHttp = $coreHttp;
     }
 
     /**

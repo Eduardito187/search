@@ -29,10 +29,10 @@ class Client
      */
     public $proccessImport;
 
-    public function __construct() {
-        $this->translate = new Translate();
-        $this->coreHttp = new CoreHttp();
-        $this->proccessImport = new Import();
+    public function __construct(Translate $translate, CoreHttp $coreHttp, Import $import) {
+        $this->translate = $translate;
+        $this->coreHttp = $coreHttp;
+        $this->proccessImport = $import;
     }
 
     /**

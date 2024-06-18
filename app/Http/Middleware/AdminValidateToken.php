@@ -30,11 +30,11 @@ class AdminValidateToken
      */
     protected $coreHttp;
 
-    public function __construct()
+    public function __construct(Translate $translate, Core $core, CoreHttp $coreHttp)
     {
-        $this->translate = new Translate();
-        $this->core = new Core();
-        $this->coreHttp = new coreHttp();
+        $this->translate = $translate;
+        $this->core = $core;
+        $this->coreHttp = $coreHttp;
     }
 
     /**

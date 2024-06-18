@@ -6,6 +6,7 @@ use App\Events\SendEmailConfirmRestorePassword;
 use App\Events\SendEmailRestorePassword;
 use App\Helpers\System\CoreHttp;
 use App\Models\CustomersAccount;
+use App\Models\Mailing;
 use Exception;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -222,6 +223,58 @@ class Customer
         }
 
         return ["message" => 'Credenciales no válidas.', "status" => false];
+    }
+
+    public function validateBodyMail(array $body)
+    {
+        $requiredFields = [
+            'name',
+            'description',
+            'mail_template',
+            'selectedIndex',
+            'timeExecute',
+            'date_program'
+        ];
+
+        foreach ($requiredFields as $field) {
+            if (!isset($body[$field]) || $body[$field] === null) {
+                throw new Exception("Parametros no validos.");
+            }
+        }
+    }
+
+    public function createMailMasive(array $body, array $header = [])
+    {
+        return $this->executeWithValidation(
+            function() use ($header, $body) {
+                $this->validateCustomerKey($header);
+                $customer = $this->getCustomerByEncryption($header["customer-key"][0]);
+                $this->validateBodyMail($body);
+                $this->createMail($body, $customer->client);
+            },
+            "Proceso ejecutado exitosamente."
+        );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function createMail($data, $client)
+    {
+        try {
+            $newMailing = new Mailing();
+            $newMailing->name = '';
+            $newMailing->description = '';
+            $newMailing->run_date = '';
+            $newMailing->send = '';
+            $newMailing->template = '';
+            $newMailing->id_client = '';
+            $newMailing->created_at = date("Y-m-d H:i:s");
+            $newMailing->updated_at = null;
+            $newMailing->save();
+        } catch (Exception $e) {
+            return null;
+        }
     }
 
     public function generatePasswordCustomer(array $body, array $header = [])

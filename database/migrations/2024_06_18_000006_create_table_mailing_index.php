@@ -19,6 +19,8 @@ return new class extends Migration
             $table->foreign('id_client')->references('id')->on('client')->onDelete('cascade');
             $table->unsignedBigInteger('id_index')->nullable();
             $table->foreign('id_index')->references('id')->on('index_catalog')->onDelete('cascade');
+            $table->unsignedBigInteger('id_mail')->nullable();
+            $table->foreign('id_mail')->references('id')->on('mailing')->onDelete('cascade');
             $table->integer('send');
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
@@ -35,6 +37,7 @@ return new class extends Migration
         Schema::dropIfExists('mailing_index', function (Blueprint $table) {
             $table->dropConstrainedForeignId('id_client');
             $table->dropConstrainedForeignId('id_index');
+            $table->dropConstrainedForeignId('id_mail');
         });
         Schema::dropIfExists('mailing_index');
     }

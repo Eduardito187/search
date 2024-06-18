@@ -39,8 +39,8 @@ class Core
      */
     public $coreHttp;
 
-    public function __construct() {
-        $this->coreHttp = new CoreHttp();
+    public function __construct(CoreHttp $coreHttp) {
+        $this->coreHttp = $coreHttp;
     }
 
     /**
