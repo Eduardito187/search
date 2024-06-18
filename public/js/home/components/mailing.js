@@ -58,10 +58,23 @@ var MailingSection = {
     methods: {
         createMail() {
             this.$router.push('/create-mail');
+        },
+        getAllMails() {
+            window.fetchFontendData('api/mailing/all-mail-sender', 'POST').then(data => {
+                if (data.status && data.code == 200) {
+                    self.dataPage = data.response;
+                }
+            }).catch(error => {
+                console.error('Error en la solicitud:', error);
+            });
         }
     },
     created() {
+        this.getAllMails();
     },
     mounted() {
+    },
+    updated() {
+        this.getAllMails();
     }
 };

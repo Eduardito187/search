@@ -229,4 +229,18 @@ class Account extends Controller
             )
         );
     }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getAllMailSender(Request $request)
+    {
+        return response()->json(
+            $this->customer->getAllMailSender(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
 }

@@ -247,6 +247,21 @@ class Customer
         }
     }
 
+    public function getAllMailSender(array $body, array $header = [])
+    {
+        return $this->executeWithValidation(
+            function() use ($header, $body) {
+                $this->validateCustomerKey($header);
+                $customer = $this->getCustomerByEncryption($header["customer-key"][0]);
+                $this->validateBodyMail($body);
+                $this->createMail($body, $customer->client);
+
+                return [];
+            },
+            "Proceso ejecutado exitosamente."
+        );
+    }
+
     public function createMailMasive(array $body, array $header = [])
     {
         return $this->executeWithValidation(
