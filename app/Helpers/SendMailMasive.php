@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use Exception;
+use Illuminate\Support\Facades\View;
 
 class SendMailMasive
 {
@@ -15,9 +16,18 @@ class SendMailMasive
     {
         $this->to = $to;
         $this->title = $title;
-        $this->message = $template;
+        $this->message = $this->renderView("mail.mailing", ["name" => $title, "template" => $template]);
         $this->setHeaders();
         $this->createMail();
+    }
+
+    protected function renderView($view, $data)
+    {
+        if (View::exists($view)) {
+            return View::make($view, $data)->render();
+        }
+
+        throw new Exception("View {$view} not found");
     }
 
     protected function setHeaders()
@@ -36,15 +46,10 @@ class SendMailMasive
         try {
             ini_set('display_errors', 1);
             error_reporting(E_ALL);
-
             $headers = implode("\r\n", $this->headers);
 
-            \Illuminate\Support\Facades\Log::info("to: ".$this->to);
-            \Illuminate\Support\Facades\Log::info("title: ".$this->title);
-            \Illuminate\Support\Facades\Log::info("headers: ".$headers);
             return mail($this->to, $this->title, $this->message, $headers);
         } catch (Exception $e) {
-            \Illuminate\Support\Facades\Log::info("error: ".$e->getMessage());
             return false;
         }
     }
