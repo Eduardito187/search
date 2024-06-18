@@ -71,6 +71,7 @@ var CreateMailSection = {
         }
     },
     created() {
+        this.getAllIndex();
     },
     mounted() {
         tinymce.init({
