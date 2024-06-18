@@ -257,6 +257,18 @@ class Customer
         return openssl_decrypt($encrypted_data, 'aes-256-cbc', env('ENCRYPTION_KEY'), 0, $iv);
     }
 
+    public function getAllIndex(array $body, array $header = [])
+    {
+        return $this->executeWithValidation(
+            function() use ($header) {
+                $this->validateCustomerKey($header);
+                $customer = $this->getCustomerByEncryption($header["customer-key"][0]);
+                return $this->getAllIndexData($customer);
+            },
+            "Proceso ejecutado exitosamente."
+        );
+    }
+
     public function getInfraestructureData(array $body, array $header = [])
     {
         return $this->executeWithValidation(
@@ -379,6 +391,21 @@ class Customer
             },
             "Proceso ejecutado exitosamente."
         );
+    }
+
+    public function getAllIndexData(CustomersAccount $customer)
+    {
+        $data = [];
+
+        foreach ($customer->client->indexes as $key => $index) {
+            $data[] = array(
+                "id" => $index->id,
+                "code" => $index->code,
+                "name" => $index->name
+            );
+        }
+
+        return $data;
     }
 
     public function getInfraestructureDataArray(CustomersAccount $customer)

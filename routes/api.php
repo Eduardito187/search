@@ -40,6 +40,7 @@ Route::middleware([CustomValidateToken::class])->group(function () {
         Route::post('account/team-notification', 'getNotificationTeam');
         Route::post('account/team-contact', 'getContactTeam');
         Route::post('account/team-support', 'getSupportTeam');
+        Route::post('account/team-index', 'getAllIndex');
     });
 
     Route::controller(System::class)->group(function() {
