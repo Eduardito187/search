@@ -72,6 +72,11 @@ class SendMailMasive
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 465;
 
+            $mail->SMTPDebug = 2;
+            $mail->Debugoutput = function($str, $level) {
+                Log::info("SMTP debug level $level; message: $str");
+            };
+
             // Configuración del remitente y destinatario
             $mail->setFrom('no-reply@eduardsearch.com', 'EduardSearch');
             $mail->addAddress($this->to, 'Destinatario');
