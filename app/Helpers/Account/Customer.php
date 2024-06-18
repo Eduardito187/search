@@ -241,6 +241,8 @@ class Customer
             'date_program'
         ];
 
+        print_r($body);
+
         foreach ($requiredFields as $field) {
             if (!isset($body[$field]) || $body[$field] === null) {
                 throw new Exception("Parametros no validos.");
