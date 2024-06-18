@@ -42,7 +42,9 @@ var MailingSection = {
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-end">
                                     <li v-if="current_page > 1" class="page-item disabled">
-                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                                            <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                        </a>
                                     </li>
                                     <li v-if="(current_page-2) > 0" class="page-item">
                                         <a class="page-link" href="#">{{current_page-2}}</a>
@@ -60,7 +62,9 @@ var MailingSection = {
                                         <a class="page-link" href="#">{{current_page+2}}</a>
                                     </li>
                                     <li v-if="current_page != last_page" class="page-item">
-                                        <a class="page-link" href="#">Next</a>
+                                        <a class="page-link" href="#">
+                                            <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                        </a>
                                     </li>
                                 </ul>
                             </nav>
