@@ -3,8 +3,6 @@
 namespace App\Helpers;
 
 use Exception;
-use Illuminate\Support\Facades\View;
-use App\Helpers\Base\ConfigFrontend;
 
 class SendMailMasive
 {

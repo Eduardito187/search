@@ -334,6 +334,8 @@ class Customer
         foreach ($allCustomers as $customer) {
             $this->createMailingCustomer($idMailingIndex, $customer->id, true);
             $this->sendMailingCustomer($mail->name, $mail->template, $customer->email);
+            $customer->send_mail = $customer->send_mail + 1;
+            $customer->save();
             $countMailSender++;
         }
 
