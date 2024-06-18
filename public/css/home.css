@@ -297,6 +297,14 @@ canvas {
     margin-bottom: 10px;
 }
 
+.configuration-item-nav {
+    position: absolute;
+    bottom: 54px;
+    left: 0px;
+    right: 0px;
+    height: 54px;
+}
+
 .close-session {
     display: flex;
     align-items: center;

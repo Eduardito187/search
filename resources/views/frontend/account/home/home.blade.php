@@ -18,10 +18,10 @@
           <li><router-link to="/dashboard"><i class="fa fa-home"></i> Monitoreo</router-link></li>
           <li><router-link to="/indexes"><i class="fa fa-star"></i> Data</router-link></li>
           <li><router-link to="/users"><i class="fa fa-user"></i> Busquedas</router-link></li>
-          <li><router-link to="/settings"><i class="fa fa-cog"></i> Recomendaciones</router-link></li>
-          <li><router-link to="/analitycs"><i class="fa fa-cog"></i> Analiticas</router-link></li>
-          <li><router-link to="/mailing"><i class="fa fa-cog"></i> Mailing</router-link></li>
-          <li><router-link to="/whasapp-sender"><i class="fa fa-cog"></i> Whatsapp Sender</router-link></li>
+          <li><router-link to="/analitycs"><i class="fa fa-bar-chart"></i> Analiticas</router-link></li>
+          <li><router-link to="/mailing"><i class="fa fa-envelope"></i> Mailing</router-link></li>
+          <li><router-link to="/whasapp-sender"><i class="fa fa-whatsapp"></i> Whatsapp Sender</router-link></li>
+          <li class="configuration-item-nav"><router-link to="/settings"><i class="fa fa-cog"></i> Recomendaciones</router-link></li>
         </ul>
       </nav>
       <div class="close-session" @click="closeSession()">
