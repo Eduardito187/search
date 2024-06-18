@@ -33,7 +33,7 @@ var CreateMailSection = {
                 <div class="card">
                     <div class="card-body">
                         <div class="row p-4">
-                            <label class="form-label">Nombre</label>
+                            <label class="form-label">Ciudad</label>
                             <div class="row">
                                 <div v-for="(method, index) in dataPage" :key="method.id" class="form-check">
                                     <input class="form-check-input" type="checkbox" :id="'index_' + method.id" v-model="selectedIndex" :value="method.id" />
