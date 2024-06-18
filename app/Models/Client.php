@@ -11,6 +11,7 @@ use App\Models\CustomersAccount;
 use App\Models\NotificationsClient;
 use App\Models\SupportClient;
 use App\Models\ContactClient;
+use App\Models\Mailing;
 
 class Client extends Model
 {
@@ -23,6 +24,13 @@ class Client extends Model
     public $incrementing = true;
     protected $keyType = 'integer';
     public $timestamps = false;
+
+    /**
+     * @inheritDoc
+     */
+    public function allMailing() {
+        return $this->hasMany(Mailing::class, 'id_client', 'id');
+    }
 
     /**
      * @inheritDoc

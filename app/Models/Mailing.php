@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\MailingIndex;
+use App\Models\Client;
 
 class Mailing extends Model
 {
@@ -16,4 +18,18 @@ class Mailing extends Model
     public $incrementing = true;
     protected $keyType = 'integer';
     public $timestamps = false;
+
+    /**
+     * @inheritDoc
+     */
+    public function allMailingIndex() {
+        return $this->hasMany(MailingIndex::class, 'id_mail', 'id');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function client() {
+        return $this->hasOne(Client::class, 'id', 'id_client');
+    }
 }

@@ -253,13 +253,35 @@ class Customer
             function() use ($header, $body) {
                 $this->validateCustomerKey($header);
                 $customer = $this->getCustomerByEncryption($header["customer-key"][0]);
-                $this->validateBodyMail($body);
-                $this->createMail($body, $customer->client);
+                $data = [];
 
-                return [];
+                foreach ($customer->client->allMailing as $key => $mail) {
+                    $data[] = [
+                        "id" => $mail->id,
+                        "name" => $mail->name,
+                        "description" => $mail->description,
+                        "run_date" => $mail->run_date,
+                        "preview" => $mail->preview_mail,
+                        "send" => $mail->send,
+                        "indexes" => $this->getAllIndexNameMail($mail->allMailingIndex)
+                    ];
+                }
+
+                return $data;
             },
             "Proceso ejecutado exitosamente."
         );
+    }
+
+    public function getAllIndexNameMail($listMailingIndex)
+    {
+        $names = [];
+
+        foreach ($listMailingIndex as $mailingIndex) {
+            $names[] = $mailingIndex->index->name;
+        }
+
+        return $names;
     }
 
     public function createMailMasive(array $body, array $header = [])

@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Client;
+use App\Models\IndexCatalog;
+use App\Models\Mailing;
 
 class MailingIndex extends Model
 {
@@ -16,4 +19,25 @@ class MailingIndex extends Model
     public $incrementing = true;
     protected $keyType = 'integer';
     public $timestamps = false;
+
+    /**
+     * @inheritDoc
+     */
+    public function client() {
+        return $this->hasOne(Client::class, 'id', 'id_client');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function index() {
+        return $this->hasOne(IndexCatalog::class, 'id', 'id_index');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function mail() {
+        return $this->hasOne(Mailing::class, 'id', 'id_mail');
+    }
 }
