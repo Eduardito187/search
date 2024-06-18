@@ -332,7 +332,7 @@ class Customer
 
         foreach ($allCustomers as $customer) {
             $this->createMailingCustomer($idMailingIndex, $customer->id, true);
-            $this->sendMailingCustomer($mail->name, $mail->template, $customer->email);
+            $this->sendMailingCustomer($mail->name, $customer->email, $mail->template);
             $customer->send_mail = $customer->send_mail + 1;
             $customer->save();
             $countMailSender++;
@@ -346,7 +346,7 @@ class Customer
         $mail->save();
     }
 
-    public function sendMailingCustomer($name, $template, $to)
+    public function sendMailingCustomer($name, $to, $template)
     {
         new SendMailMasive($name, $to, $template);
     }

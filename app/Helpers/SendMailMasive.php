@@ -7,9 +7,24 @@ use Illuminate\Support\Facades\View;
 
 class SendMailMasive
 {
+    /**
+     * @var string
+     */
     protected $to;
+
+    /**
+     * @var string
+     */
     protected $title;
+
+    /**
+     * @var string
+     */
     protected $message;
+
+    /**
+     * @var array
+     */
     protected $headers = [];
 
     public function __construct(string $title, string $to, string $template)
@@ -21,15 +36,6 @@ class SendMailMasive
         $this->createMail();
     }
 
-    protected function renderView($view, $data)
-    {
-        if (View::exists($view)) {
-            return View::make($view, $data)->render();
-        }
-
-        throw new Exception("View {$view} not found");
-    }
-
     protected function setHeaders()
     {
         $this->headers = [
@@ -39,6 +45,15 @@ class SendMailMasive
             'Reply-To: no-reply@eduardsearch.com',
             'X-Mailer: PHP/' . phpversion()
         ];
+    }
+
+    protected function renderView($view, $data)
+    {
+        if (View::exists($view)) {
+            return View::make($view, $data)->render();
+        }
+
+        throw new Exception("View {$view} not found");
     }
 
     public function createMail()
