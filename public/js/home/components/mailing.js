@@ -6,7 +6,7 @@ var MailingSection = {
                 <div class="card-body">
                     <div class="row text-end mt-3">
                         <div class="col align-self-end">
-                            <button type="button" class="btn-save-eduard-search">
+                            <button type="button" class="btn-save-eduard-search" @click="createMail()">
                                 <span>Create Mail</span>
                                 <i class="fa fa-plus"></i>
                             </button>
@@ -56,6 +56,9 @@ var MailingSection = {
         };
     },
     methods: {
+        createMail() {
+            this.$router.push('/create-mail');
+        }
     },
     created() {
     },
