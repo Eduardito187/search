@@ -11,6 +11,7 @@
         <script src="{{ asset('js/Vue/vue.js') }}"></script>
         <script src="{{ asset('js/Vue/vue-router.js') }}"></script>
         <script src="{{ asset('js/Axios/axios.min.js') }}"></script>
+        <script src="{{ asset('js/TinyMce/tinymce.min.js') }}"></script>
         <script>
             window.configFrontend = <?= json_encode(\App\Helpers\Base\ConfigFrontend::getConfigFrontend()); ?>;
             
