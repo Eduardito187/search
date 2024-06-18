@@ -58,9 +58,9 @@ var CreateMailSection = {
                             </div>
                         </div>
                         <div v-if="timeExecute == 'program'" class="row">
-                            <div class="form-check">
-                                <label class="form-check-label" for="program-date">Date program</label>
-                                <input class="form-check-input" type="datetime-local" id="program-date" v-model="date_program" />
+                            <div class="form-control">
+                                <label class="form-label" for="program-date">Date program</label>
+                                <input class="form-input" type="datetime-local" id="program-date" v-model="date_program" />
                             </div>
                         </div>
                     </div>
