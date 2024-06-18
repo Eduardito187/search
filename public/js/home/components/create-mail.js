@@ -221,7 +221,7 @@ var CreateMailSection = {
             let element = document.querySelector("#mail-template");
             if (element) {
                 this.loadTinyMce();
-                clearInterval(intervalMailingTemplate);
+                clearInterval(window.intervalMailingTemplate);
             }
         }
     },
@@ -231,6 +231,6 @@ var CreateMailSection = {
     mounted() {
     },
     updated() {
-        var intervalMailingTemplate = setInterval(this.checkElementExistence(), 500);
+        window.intervalMailingTemplate = setInterval(this.checkElementExistence(), 500);
     }
 };
