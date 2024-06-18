@@ -4,6 +4,8 @@ namespace App\Helpers;
 
 use Exception;
 use Illuminate\Support\Facades\View;
+use PHPMailer\PHPMailer\PHPMailer;
+use Illuminate\Support\Facades\Log;
 
 class SendMailMasive
 {
@@ -33,8 +35,7 @@ class SendMailMasive
         $this->title = $title;
         $this->message = $this->renderView("mail.mailing", ["name" => $title, "template" => $template]);
         $this->setHeaders();
-        $sendMail = $this->createMail();
-        \Illuminate\Support\Facades\Log::info("send mail => ".($sendMail ? "Si" : "No"));
+        $this->createMail();
     }
 
     protected function setHeaders()
@@ -59,14 +60,34 @@ class SendMailMasive
 
     public function createMail()
     {
+        $mail = new PHPMailer(true);
+
         try {
-            ini_set('display_errors', 1);
-            error_reporting(E_ALL);
-            $headers = implode("\r\n", $this->headers);
-            \Illuminate\Support\Facades\Log::info($this->message);
-            return mail($this->to, $this->title, $this->message, $headers);
+            // Configuración del servidor SMTP
+            $mail->isSMTP();
+            $mail->Host = 'smtp.hostinger.comm';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'eduard-search@grazcompany.com';
+            $mail->Password = '13011973_Tati';
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 465;
+
+            // Configuración del remitente y destinatario
+            $mail->setFrom('no-reply@eduardsearch.com', 'EduardSearch');
+            $mail->addAddress($this->to, 'Destinatario');
+
+            // Configuración del contenido del correo
+            $mail->isHTML(true);
+            $mail->Subject = $this->title;
+            $mail->Body = $this->message;
+
+            // Adjuntar archivos (opcional)
+            // $mail->addAttachment('/path/to/file');
+
+            $mail->send();
+            Log::info('Correo enviado exitosamente.');
         } catch (Exception $e) {
-            return false;
+            Log::error('Error al enviar el correo: ' . $e->getMessage());
         }
     }
 }
