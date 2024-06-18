@@ -65,7 +65,7 @@ class SendMailMasive
         try {
             // Configuración del servidor SMTP
             $mail->isSMTP();
-            $mail->Host = 'smtp.hostinger.comm';
+            $mail->Host = 'smtp.hostinger.com';
             $mail->SMTPAuth = true;
             $mail->Username = 'eduard-search@grazcompany.com';
             $mail->Password = '13011973_Tati';
