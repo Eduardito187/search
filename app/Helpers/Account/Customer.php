@@ -4,6 +4,7 @@ namespace App\Helpers\Account;
 
 use App\Events\SendEmailConfirmRestorePassword;
 use App\Events\SendEmailRestorePassword;
+use App\Events\SendMailIndex;
 use App\Helpers\System\CoreHttp;
 use App\Models\CustomersAccount;
 use App\Models\Mailing;
@@ -11,7 +12,11 @@ use Exception;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Helpers\SendMail;
+use App\Helpers\SendMailMasive;
+use App\Models\MailingCustomer;
+use App\Models\MailingIndex;
 use App\Models\PasswordReset;
+use App\Models\WebSiteCustomer;
 use Illuminate\Support\Facades\Event;
 
 use Illuminate\Support\Str;
@@ -262,19 +267,104 @@ class Customer
     public function createMail($data, $client)
     {
         try {
+            $dateProgram = date("Y-m-d H:i:s");
+
+            if ($data["timeExecute"] == "program") {
+                $dateProgram = $data["date_program"];
+            }
+
             $newMailing = new Mailing();
-            $newMailing->name = '';
-            $newMailing->description = '';
-            $newMailing->run_date = '';
-            $newMailing->send = '';
-            $newMailing->template = '';
-            $newMailing->id_client = '';
+            $newMailing->name = $data["name"];
+            $newMailing->description = $data["description"];
+            $newMailing->run_date = $dateProgram;
+            $newMailing->send = 0;
+            $newMailing->template = $data["mail_template"];
+            $newMailing->id_client = $client->id;
             $newMailing->created_at = date("Y-m-d H:i:s");
             $newMailing->updated_at = null;
             $newMailing->save();
+
+            foreach ($data["selectedIndex"] as $index) {
+                $this->createMailIndex($client->id, $index, $newMailing->id);
+            }
         } catch (Exception $e) {
             return null;
         }
+    }
+
+    public function createMailIndex($idClient, $idIndex, $idMail)
+    {
+        try {
+            $newMailingIndex = new MailingIndex();
+            $newMailingIndex->send = 0;
+            $newMailingIndex->id_client = $idClient;
+            $newMailingIndex->id_index = $idIndex;
+            $newMailingIndex->id_mail = $idMail;
+            $newMailingIndex->created_at = date("Y-m-d H:i:s");
+            $newMailingIndex->updated_at = null;
+            $newMailingIndex->save();
+            Event::dispatch(new SendMailIndex($idClient, $idIndex, $idMail, $newMailingIndex->id));
+        } catch (Exception $e) {
+            return null;
+        }
+    }
+
+    public function getMailById($idMail)
+    {
+        return Mailing::find($idMail);
+    }
+
+    public function getMailIndexById($idMail)
+    {
+        return MailingIndex::find($idMail);
+    }
+
+    public function proccessMailingIndex($idClient, $idIndex, $idMail, $idMailingIndex)
+    {
+        $allCustomers = $this->getCustomersByIndex($idClient, $idIndex);
+        $mail = $this->getMailById($idMail);
+        $mailIndex = $this->getMailIndexById($idMailingIndex);
+        $countMailSender = 0;
+
+        if ($mail == null) {
+            return;
+        }
+
+        foreach ($allCustomers as $customer) {
+            $this->createMailingCustomer($idMailingIndex, $customer->id, true);
+            $this->sendMailingCustomer($mail->name, $mail->template, $customer->email);
+            $countMailSender++;
+        }
+
+        $mailIndex->send = $mailIndex->send + $countMailSender;
+        $mailIndex->save();
+        $mail->send = $mail->send + $countMailSender;
+        $mail->save();
+    }
+
+    public function sendMailingCustomer($name, $template, $to)
+    {
+        new SendMailMasive($name, $to, $template);
+    }
+
+    public function createMailingCustomer($idMailingIndex, $idCustomer, $status)
+    {
+        try {
+            $newMailingCustomer = new MailingCustomer();
+            $newMailingCustomer->id_mailing_index = $idMailingIndex;
+            $newMailingCustomer->id_website_customer = $idCustomer;
+            $newMailingCustomer->sending = $status;
+            $newMailingCustomer->created_at = date("Y-m-d H:i:s");
+            $newMailingCustomer->updated_at = null;
+            $newMailingCustomer->save();
+        } catch (Exception $e) {
+            return null;
+        }
+    }
+
+    public function getCustomersByIndex($idClient, $idIndex)
+    {
+        return WebSiteCustomer::where("id_client", $idClient)->where("id_index", $idIndex)->get();
     }
 
     public function generatePasswordCustomer(array $body, array $header = [])
