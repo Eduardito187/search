@@ -576,3 +576,8 @@ canvas {
 .count-per-page {
     width: 150px;
 }
+
+.active-page {
+    background-color: #0d6efd !important;
+    color: white !important;
+}
