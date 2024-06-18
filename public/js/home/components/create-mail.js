@@ -149,7 +149,7 @@ var CreateMailSection = {
         loadTinyMce() {
             if ($(".tox-edit-area__iframe").length == 0) {
                 tinymce.init({
-                    selector: 'textarea#mail-template',
+                    selector: '#mail-template',
                     plugins: 'preview importcss searchreplace autolink autosave save directionality visualblocks visualchars fullscreen image link media codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons',
                     mobile: {
                         plugins: 'preview importcss searchreplace autolink autosave save directionality visualblocks visualchars fullscreen image link media code codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons',
