@@ -101,9 +101,6 @@ var CreateMailSection = {
         },
         savedMailing() {
             this.savedTinyMce();
-        },
-        getAllIndex() {
-            let self = this;
 
             window.fetchFontendData('api/account/team-index', 'POST', {
                 name : this.name,
@@ -113,6 +110,17 @@ var CreateMailSection = {
                 timeExecute : this.timeExecute,
                 date_program : this.date_program
             }).then(data => {
+                if (data.status && data.code == 200) {
+                    self.$router.go(-1);
+                }
+            }).catch(error => {
+                console.error('Error en la solicitud:', error);
+            });
+        },
+        getAllIndex() {
+            let self = this;
+
+            window.fetchFontendData('api/account/team-index', 'POST').then(data => {
                 if (data.status && data.code == 200) {
                     self.dataPage = data.response;
                     self.loadedPage = true;
