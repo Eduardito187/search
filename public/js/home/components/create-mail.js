@@ -146,7 +146,7 @@ var CreateMailSection = {
                 console.error('Error en la solicitud:', error);
             });
         },
-        loaddTinyMce() {
+        loadTinyMce() {
             if ($(".tox-edit-area__iframe").length == 0) {
                 tinymce.init({
                     selector: 'textarea#mail-template',
@@ -222,9 +222,10 @@ var CreateMailSection = {
         this.getAllIndex();
     },
     mounted() {
-        this.loaddTinyMce();
+        this.loadTinyMce();
     },
     updated() {
-        this.loaddTinyMce();
+        console.log("updated created-mail");
+        this.loadTinyMce();
     }
 };
