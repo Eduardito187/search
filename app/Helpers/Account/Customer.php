@@ -237,8 +237,7 @@ class Customer
             'description',
             'mail_template',
             'selectedIndex',
-            'timeExecute',
-            'date_program'
+            'timeExecute'
         ];
 
         print_r($body);
