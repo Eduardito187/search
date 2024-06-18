@@ -33,7 +33,8 @@ class SendMailMasive
         $this->title = $title;
         $this->message = $this->renderView("mail.mailing", ["name" => $title, "template" => $template]);
         $this->setHeaders();
-        $this->createMail();
+        $sendMail = $this->createMail();
+        \Illuminate\Support\Facades\Log::info("send mail => ".($sendMail ? "Si" : "No"));
     }
 
     protected function setHeaders()
