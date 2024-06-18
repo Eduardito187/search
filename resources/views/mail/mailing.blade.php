@@ -6,7 +6,7 @@
         <title><?= $name; ?></title>
     </head>
     <body>
-        <div style="width: calc(100% - 40px);padding: 20px;text-align: center;">
+        <div style="width: calc(100% - 40px);max-width: calc(100% - 40px);padding: 20px;text-align: center;">
             <?= $template; ?>
         </div>
     </body>
