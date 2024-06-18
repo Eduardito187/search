@@ -4,7 +4,7 @@ var MailingSection = {
         <div class="row">
             <div class="card">
                 <div class="card-body">
-                    <div class="row text-end mt-3">
+                    <div class="row text-end">
                         <div class="col align-self-end">
                             <button type="button" class="btn-save-eduard-search" @click="createMail()">
                                 <span>Create Mail</span>
