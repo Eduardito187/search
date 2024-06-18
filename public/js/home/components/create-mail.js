@@ -101,12 +101,21 @@ var CreateMailSection = {
             this.mail_template = $("#mail-template").val();
             let self = this;
 
-            html2canvas($(".tox-edit-area__iframe")).then(function(canvas) {
+            if ($(".tox-edit-area__iframe").length == 0) {
+                return;
+            }
+
+            html2canvas($(".tox-edit-area__iframe")[0]).then(function(canvas) {
                 self.previewMail = canvas.toDataURL('image/png');
             });
         },
         savedMailing() {
             this.savedTinyMce();
+
+            if (this.previewMail == '') {
+                return;
+            }
+
             let self = this;
 
             window.fetchFontendData('api/mailing/create-masive', 'POST', {
