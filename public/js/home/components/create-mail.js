@@ -221,6 +221,7 @@ var CreateMailSection = {
             let element = document.querySelector("#mail-template");
             if (element) {
                 this.loadTinyMce();
+                console.log("delete intervalMailingTemplate");
                 clearInterval(window.intervalMailingTemplate);
             }
         }
