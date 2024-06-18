@@ -6,7 +6,7 @@ var CreateMailSection = {
                 <div class="card-body">
                     <div class="row text-end">
                         <div class="col align-self-end">
-                            <button type="button" class="btn-save-eduard-search" @click="savedMailing()">
+                            <button type="button" class="btn-save-eduard-search" @click="verifySaved()">
                                 <span>Create Mail</span>
                                 <i class="fa fa-send"></i>
                             </button>
@@ -105,17 +105,28 @@ var CreateMailSection = {
                 return;
             }
 
-            html2canvas($(".tox-edit-area__iframe")[0]).then(function(canvas) {
-                self.previewMail = canvas.toDataURL('image/png');
-            });
-        },
-        savedMailing() {
-            this.savedTinyMce();
+            const iframe = document.getElementById('mail-template_ifr');
+            const iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
 
-            if (this.previewMail == '') {
-                return;
+            iframe.onload = function() {
+                html2canvas(iframeDocument.body, {useCORS: true,allowTaint: true}).then(function(canvas) {
+                    self.previewMail = canvas.toDataURL('image/jpeg', 0.3);
+                    self.saveDataMailing();
+                }).catch(function(error) {
+                    console.error('Error al capturar el contenido preview:', error);
+                });
+            };
+
+            if (iframeDocument.readyState === 'complete') {
+                html2canvas(iframeDocument.body, {useCORS: true,allowTaint: true}).then(function(canvas) {
+                    self.previewMail = canvas.toDataURL('image/jpeg', 0.3);
+                    self.saveDataMailing();
+                }).catch(function(error) {
+                    console.error('Error al capturar el contenido preview:', error);
+                });
             }
-
+        },
+        saveDataMailing() {
             let self = this;
 
             window.fetchFontendData('api/mailing/create-masive', 'POST', {
@@ -133,6 +144,17 @@ var CreateMailSection = {
             }).catch(error => {
                 console.error('Error en la solicitud:', error);
             });
+        },
+        verifySaved() {
+            if (
+                this.name == '' ||
+                this.description == '' ||
+                this.selectedIndex.length == 0
+            ) {
+                return;
+            }
+
+            this.savedTinyMce();
         },
         getAllIndex() {
             let self = this;
