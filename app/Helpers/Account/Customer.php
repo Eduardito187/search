@@ -255,7 +255,7 @@ class Customer
                 $customer = $this->getCustomerByEncryption($header["customer-key"][0]);
                 $page = 1;
 
-                if (isett($body["pagination"])) {
+                if (isset($body["pagination"])) {
                     $page = $body["pagination"];
                 }
 
