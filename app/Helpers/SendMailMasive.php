@@ -43,8 +43,8 @@ class SendMailMasive
         $this->headers = [
             'MIME-Version: 1.0',
             'Content-type: text/html; charset=UTF-8',
-            'From: EduardSearch <no-reply@eduardsearch.com>',
-            'Reply-To: no-reply@eduardsearch.com',
+            'From: EduardSearch <eduard-search@grazcompany.com>',
+            'Reply-To: eduard-search@grazcompany.com',
             'X-Mailer: PHP/' . phpversion()
         ];
     }
@@ -80,7 +80,7 @@ class SendMailMasive
             };
 
             // Configuración del remitente y destinatario
-            $mail->setFrom('no-reply@eduardsearch.com', 'EduardSearch');
+            $mail->setFrom('eduard-search@grazcompany.com', 'EduardSearch');
             $mail->addAddress($this->to, 'Destinatario');
 
             // Configuración del contenido del correo
