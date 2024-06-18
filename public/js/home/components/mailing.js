@@ -42,6 +42,8 @@ var MailingSection = {
             this.$router.push('/create-mail');
         },
         getAllMails() {
+            let self = this;
+
             window.fetchFontendData('api/mailing/all-mail-sender', 'POST').then(data => {
                 if (data.status && data.code == 200) {
                     self.dataPage = data.response;
