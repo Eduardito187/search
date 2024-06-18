@@ -101,6 +101,7 @@ var CreateMailSection = {
         },
         savedMailing() {
             this.savedTinyMce();
+            let self = this;
 
             window.fetchFontendData('api/mailing/create-masive', 'POST', {
                 name : this.name,
