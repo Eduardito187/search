@@ -16,14 +16,14 @@ class AfterSendMailIndex implements ShouldQueue
      *
      * @var int
      */
-    public $tries = 5;
+    public $tries = 3;
 
     /**
      * The number of seconds the job can run before timing out.
      *
      * @var int
      */
-    public $timeout = 120;
+    public $timeout = 60;
 
     /**
      * The number of seconds to wait before retrying the job.
