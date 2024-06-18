@@ -57,6 +57,12 @@ var CreateMailSection = {
                                 <label class="form-check-label" for="execute-program">Programar</label>
                             </div>
                         </div>
+                        <div v-if="timeExecute == 'program'" class="row">
+                            <div class="form-check">
+                                <label class="form-check-label" for="program-date">Date program</label>
+                                <input class="form-check-input" type="datetime-local" id="program-date" v-model="date_program" />
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="card mt-4">
@@ -84,7 +90,8 @@ var CreateMailSection = {
             description: '',
             mail_template: '',
             selectedIndex: [],
-            timeExecute: ''
+            timeExecute: '',
+            date_program: ''
         };
     },
     methods: {
