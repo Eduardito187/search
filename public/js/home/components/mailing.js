@@ -63,7 +63,8 @@ var MailingSection = {
     data() {
         return {
             savedAction: false,
-            dataPage: null
+            dataPage: null,
+            currentPage: 1
         };
     },
     methods: {
@@ -73,9 +74,9 @@ var MailingSection = {
         getAllMails() {
             let self = this;
 
-            window.fetchFontendData('api/mailing/all-mail-sender', 'POST').then(data => {
+            window.fetchFontendData('api/mailing/all-mail-sender', 'POST', {pagination : this.currentPage}).then(data => {
                 if (data.status && data.code == 200) {
-                    self.dataPage = data.response;
+                    self.dataPage = data.response.data;
                 }
             }).catch(error => {
                 console.error('Error en la solicitud:', error);

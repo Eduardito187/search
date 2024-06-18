@@ -253,10 +253,16 @@ class Customer
             function() use ($header, $body) {
                 $this->validateCustomerKey($header);
                 $customer = $this->getCustomerByEncryption($header["customer-key"][0]);
-                $data = [];
+                $page = 1;
 
-                foreach ($customer->client->allMailing as $key => $mail) {
-                    $data[] = [
+                if (isett($body["pagination"])) {
+                    $page = $body["pagination"];
+                }
+
+                $mailings = $customer->client->allMailing()->paginate(6);
+
+                $dataMail = $mailings->map(function($mail) {
+                    return [
                         "id" => $mail->id,
                         "name" => $mail->name,
                         "description" => $mail->description,
@@ -265,9 +271,15 @@ class Customer
                         "send" => $mail->send,
                         "indexes" => $this->getAllIndexNameMail($mail->allMailingIndex)
                     ];
-                }
+                });
 
-                return $data;
+                return [
+                    'data' => $dataMail,
+                    'current_page' => $mailings->currentPage(),
+                    'last_page' => $mailings->lastPage(),
+                    'per_page' => $mailings->perPage(),
+                    'total' => $mailings->total()
+                ];
             },
             "Proceso ejecutado exitosamente."
         );
