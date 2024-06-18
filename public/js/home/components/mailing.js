@@ -16,7 +16,7 @@ var MailingSection = {
             </div>
         </div>
         <div class="row mt-4">
-            <div v-for="data in dataPage" class="col-md-4">
+            <div v-for="data in dataPage" class="col-md-4 mb-2">
                 <div class="card">
                     <img :src="data.preview" class="card-img-top" :alt="data.name">
                     <div class="card-body">
