@@ -338,8 +338,10 @@ class Customer
         }
 
         $mailIndex->send = $mailIndex->send + $countMailSender;
+        $mailIndex->updated_at = date("Y-m-d H:i:s");
         $mailIndex->save();
         $mail->send = $mail->send + $countMailSender;
+        $mail->updated_at = date("Y-m-d H:i:s");
         $mail->save();
     }
 
