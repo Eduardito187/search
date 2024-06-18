@@ -16,14 +16,8 @@ var MailingSection = {
             </div>
         </div>
         <div class="row">
-            <div class="row text-end">
-                <div class="col align-self-end">
-                    <div class="card count-per-page">
-                        <div class="card-body">
-                            <p>{{total}} item</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="row text-end mt-2">
+                <p>{{total}} items</p>
             </div>
         </div>
         <div class="row mt-4">
