@@ -133,6 +133,8 @@ var CreateMailSection = {
     },
     created() {
         this.getAllIndex();
+    },
+    mounted() {
         tinymce.init({
             selector: 'textarea#mail-template',
             plugins: 'preview importcss searchreplace autolink autosave save directionality visualblocks visualchars fullscreen image link media codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons',
@@ -200,7 +202,5 @@ var CreateMailSection = {
             mentions_item_type: 'profile',
             autocorrect_capitalize: true
         });
-    },
-    mounted() {
     }
 };
