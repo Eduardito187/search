@@ -74,11 +74,6 @@ class SendMailMasive
             $mail->Timeout = 300;
             $mail->SMTPKeepAlive = true;
 
-            $mail->SMTPDebug = 2;
-            $mail->Debugoutput = function($str, $level) {
-                Log::info("SMTP debug level $level; message: $str");
-            };
-
             // Configuración del remitente y destinatario
             $mail->setFrom('eduard-search@grazcompany.com', 'EduardSearch');
             $mail->addAddress($this->to, 'Destinatario');
