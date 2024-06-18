@@ -70,7 +70,9 @@ class SendMailMasive
             $mail->Username = 'eduard-search@grazcompany.com';
             $mail->Password = '13011973_Tati';
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port = 465;
+            $mail->Port = 587;
+            $mail->Timeout = 300;
+            $mail->SMTPKeepAlive = true;
 
             $mail->SMTPDebug = 2;
             $mail->Debugoutput = function($str, $level) {
