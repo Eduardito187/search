@@ -348,9 +348,6 @@ class Customer
 
     public function sendMailingCustomer($name, $template, $to)
     {
-        \Illuminate\Support\Facades\Log::info("name: ".$name);
-        \Illuminate\Support\Facades\Log::info("template: ".$template);
-        \Illuminate\Support\Facades\Log::info("email: ".$to);
         new SendMailMasive($name, $to, $template);
     }
 

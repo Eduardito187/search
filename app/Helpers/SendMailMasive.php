@@ -39,6 +39,9 @@ class SendMailMasive
 
             $headers = implode("\r\n", $this->headers);
 
+            \Illuminate\Support\Facades\Log::info("to: ".$this->to);
+            \Illuminate\Support\Facades\Log::info("title: ".$this->title);
+            \Illuminate\Support\Facades\Log::info("headers: ".$headers);
             return mail($this->to, $this->title, $this->message, $headers);
         } catch (Exception $e) {
             \Illuminate\Support\Facades\Log::info("error: ".$e->getMessage());
