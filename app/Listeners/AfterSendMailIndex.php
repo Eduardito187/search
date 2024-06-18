@@ -12,30 +12,6 @@ class AfterSendMailIndex implements ShouldQueue
     use InteractsWithQueue;
 
     /**
-     * The maximum number of attempts.
-     *
-     * @var int
-     */
-    public $tries = 3;
-
-    /**
-     * The number of seconds the job can run before timing out.
-     *
-     * @var int
-     */
-    public $timeout = 60;
-
-    /**
-     * The number of seconds to wait before retrying the job.
-     *
-     * @return array|int
-     */
-    public function backoff()
-    {
-        return [10, 30, 60];
-    }
-
-    /**
      * The name of the connection the job should be sent to.
      *
      * @var string|null
