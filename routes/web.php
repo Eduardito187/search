@@ -29,7 +29,10 @@ $routes = [
     '/team' => 'team',
     '/keys' => 'keys',
     '/application' => 'application',
-    '/infraestructura' => 'infraestructura'
+    '/infraestructura' => 'infraestructura',
+    '/analitycs' => 'analitycs',
+    '/mailing' => 'mailing',
+    '/whasapp-sender' => 'whasapp-sender',
 ];
 
 // Asociar las rutas a las vistas

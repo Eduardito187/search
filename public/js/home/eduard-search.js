@@ -48,7 +48,10 @@ const routes = [
   { path: '/team', component: TeamSection, name: 'Team' },
   { path: '/keys', component: KeySection, name: 'Keys' },
   { path: '/application', component: ApplicationSection, name: 'Application' },
-  { path: '/infraestructura', component: InfraestructuraSection, name: 'Infraestructura' }
+  { path: '/infraestructura', component: InfraestructuraSection, name: 'Infraestructura' },
+  { path: '/analitycs', component: AnalitycsSection, name: 'Analitycs' },
+  { path: '/mailing', component: MailingSection, name: 'Mailing' },
+  { path: '/whasapp-sender', component: WhatsappSenderSection, name: 'WhatsApp Sender' }
 ];
 
 const router = new VueRouter({
