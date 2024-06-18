@@ -91,13 +91,19 @@ var CreateMailSection = {
             mail_template: '',
             selectedIndex: [],
             timeExecute: '',
-            date_program: ''
+            date_program: '',
+            previewMail: '',
         };
     },
     methods: {
         savedTinyMce() {
             tinyMCE.triggerSave();
             this.mail_template = $("#mail-template").val();
+            let self = this;
+
+            html2canvas(document.getElementById('mail-template_ifr')).then(function(canvas) {
+                self.previewMail = canvas.toDataURL('image/png');
+            });
         },
         savedMailing() {
             this.savedTinyMce();
@@ -109,7 +115,8 @@ var CreateMailSection = {
                 mail_template : this.mail_template,
                 selectedIndex : this.selectedIndex,
                 timeExecute : this.timeExecute,
-                date_program : this.date_program
+                date_program : this.date_program,
+                previewMail: this.previewMail
             }).then(data => {
                 if (data.status && data.code == 200) {
                     self.$router.go(-1);
@@ -139,7 +146,7 @@ var CreateMailSection = {
             selector: 'textarea#mail-template',
             plugins: 'preview importcss searchreplace autolink autosave save directionality visualblocks visualchars fullscreen image link media codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons',
             mobile: {
-                plugins: 'preview importcss searchreplace autolink autosave save directionality visualblocks visualchars fullscreen image link media codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons',
+                plugins: 'preview importcss searchreplace autolink autosave save directionality visualblocks visualchars fullscreen image link media code codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons',
             },
             menu: {
                 tc: {

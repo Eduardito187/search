@@ -22,6 +22,7 @@ return new class extends Migration
             $table->timestamp('run_date');
             $table->integer('send');
             $table->longText('template');
+            $table->longText('preview_mail');
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
         });

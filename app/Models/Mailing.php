@@ -10,7 +10,7 @@ class Mailing extends Model
     use HasFactory;
 
     protected $table = 'mailing';
-    protected $fillable = ['name', 'description', 'run_date', 'send', 'template'];
+    protected $fillable = ['name', 'description', 'run_date', 'send', 'template', 'preview_mail'];
     protected $hidden = ['id_client', 'created_at', 'updated_at'];
     protected $primaryKey = 'id';
     public $incrementing = true;

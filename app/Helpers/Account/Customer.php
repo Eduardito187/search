@@ -236,7 +236,8 @@ class Customer
             'description',
             'mail_template',
             'selectedIndex',
-            'timeExecute'
+            'timeExecute',
+            'previewMail'
         ];
 
         foreach ($requiredFields as $field) {
@@ -279,6 +280,7 @@ class Customer
             $newMailing->run_date = $dateProgram;
             $newMailing->send = 0;
             $newMailing->template = $data["mail_template"];
+            $newMailing->preview_mail = $data['previewMail'];
             $newMailing->id_client = $client->id;
             $newMailing->created_at = date("Y-m-d H:i:s");
             $newMailing->updated_at = null;
