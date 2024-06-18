@@ -4,6 +4,20 @@ var CreateMailSection = {
         <div class="row">
             <div class="card">
                 <div class="card-body">
+                    <div class="row text-end">
+                        <div class="col align-self-end">
+                            <button type="button" class="btn-save-eduard-search" @click="savedMailing()">
+                                <span>Create Mail</span>
+                                <i class="fa fa-send"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="card">
+                <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="row p-4">
@@ -74,6 +88,13 @@ var CreateMailSection = {
         };
     },
     methods: {
+        savedTinyMce() {
+            tinyMCE.triggerSave();
+            this.mail_template = $("#mail-template").val();
+        },
+        savedMailing() {
+            this.savedTinyMce();
+        },
         getAllIndex() {
             let self = this;
 
