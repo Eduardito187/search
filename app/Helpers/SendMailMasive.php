@@ -48,7 +48,7 @@ class SendMailMasive
             error_reporting(E_ALL);
             $headers = implode("\r\n", $this->headers);
 
-            return mail($this->to, $this->title, "HOLA", $headers);
+            return mail($this->to, $this->title, $this->message, $headers);
         } catch (Exception $e) {
             return false;
         }
