@@ -51,7 +51,8 @@ const routes = [
   { path: '/infraestructura', component: InfraestructuraSection, name: 'Infraestructura' },
   { path: '/analitycs', component: AnalitycsSection, name: 'Analitycs' },
   { path: '/mailing', component: MailingSection, name: 'Mailing' },
-  { path: '/whasapp-sender', component: WhatsappSenderSection, name: 'WhatsApp Sender' }
+  { path: '/whasapp-sender', component: WhatsappSenderSection, name: 'WhatsApp Sender' },
+  { path: '/create-mail', component: CreateMailSection, name: 'Creador de Mail' }
 ];
 
 const router = new VueRouter({

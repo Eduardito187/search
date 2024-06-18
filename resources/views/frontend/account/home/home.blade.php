@@ -82,5 +82,6 @@
     <script src="{{ asset('js/home/components/analitycs.js') }}"></script>
     <script src="{{ asset('js/home/components/mailing.js') }}"></script>
     <script src="{{ asset('js/home/components/whatsapp-sender.js') }}"></script>
+    <script src="{{ asset('js/home/components/create-mail.js') }}"></script>
     <script src="{{ asset('js/home/eduard-search.js') }}"></script>
 @endsection
