@@ -15,9 +15,9 @@
       </div>
       <nav class="menu">
         <ul>
-          <li><router-link to="/dashboard"><i class="fa fa-home"></i> Monitoreo</router-link></li>
-          <li><router-link to="/indexes"><i class="fa fa-star"></i> Data</router-link></li>
-          <li><router-link to="/users"><i class="fa fa-user"></i> Busquedas</router-link></li>
+          <li><router-link to="/dashboard"><i class="fa fa-tachometer"></i> Monitoreo</router-link></li>
+          <li><router-link to="/data"><i class="fa fa-database"></i> Data</router-link></li>
+          <li><router-link to="/search"><i class="fa fa-search"></i> Busquedas</router-link></li>
           <li><router-link to="/analitycs"><i class="fa fa-bar-chart"></i> Analiticas</router-link></li>
           <li><router-link to="/mailing"><i class="fa fa-envelope"></i> Mailing</router-link></li>
           <li><router-link to="/whasapp-sender"><i class="fa fa-whatsapp"></i> Whatsapp Sender</router-link></li>
@@ -68,9 +68,9 @@
 @section('custom-footer')
     <script src="{{ asset('js/home/components/home.js') }}"></script>
     <script src="{{ asset('js/home/components/dashboard.js') }}"></script>
-    <script src="{{ asset('js/home/components/indexes.js') }}"></script>
+    <script src="{{ asset('js/home/components/data.js') }}"></script>
     <script src="{{ asset('js/home/components/settings.js') }}"></script>
-    <script src="{{ asset('js/home/components/users.js') }}"></script>
+    <script src="{{ asset('js/home/components/search.js') }}"></script>
     <script src="{{ asset('js/home/components/support.js') }}"></script>
     <script src="{{ asset('js/home/components/contacts.js') }}"></script>
     <script src="{{ asset('js/home/components/notifications.js') }}"></script>

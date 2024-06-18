@@ -38,9 +38,9 @@ window.fetchFontendData = function(url, method, bodyData = null) {
 const routes = [
   { path: '/home', component: HomeSection, name: 'Home' },
   { path: '/dashboard', component: DashboardSection, name: 'Dashboard' },
-  { path: '/indexes', component: IndexesSection, name: 'Index' },
+  { path: '/data', component: IndexesSection, name: 'Data' },
   { path: '/settings', component: SettingsSection, name: 'Setting' },
-  { path: '/users', component: UsersSection, name: 'Users' },
+  { path: '/search', component: SearchSection, name: 'Search' },
   { path: '/support', component: SupportSection, name: 'Support' },
   { path: '/contacts', component: ContactsSection, name: 'Contacts' },
   { path: '/notifications', component: NotificationsSection, name: 'Notifications' },

@@ -1,4 +1,4 @@
-var IndexesSection = {
+var DataSection = {
     template: `
     <div class="container-index">
         <div class="top-cards">

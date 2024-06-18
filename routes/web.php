@@ -18,9 +18,9 @@ use App\Http\Controllers\Auth\GoogleController;
 
 $routes = [
     '/dashboard' => 'dashboard',
-    '/indexes' => 'indexes',
+    '/data' => 'data',
     '/settings' => 'settings',
-    '/users' => 'users',
+    '/search' => 'search',
     '/home' => 'welcome',
     '/support' => 'support',
     '/contacts' => 'contacts',

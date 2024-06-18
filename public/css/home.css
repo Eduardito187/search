@@ -298,7 +298,7 @@ canvas {
 }
 
 .configuration-item-nav {
-    position: absolute;
+    position: absolute !important;
     bottom: 54px;
     left: 0px;
     right: 0px;
