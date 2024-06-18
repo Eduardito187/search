@@ -23,7 +23,7 @@ var MailingSection = {
         <div class="row">
             <div v-for="data in dataPage" class="col-md-4 mb-2">
                 <div class="card">
-                    <img :src="data.preview" class="card-img-top" :alt="data.name">
+                    <img :src="data.preview" class="card-img-top picture-preview-mail" :alt="data.name">
                     <div class="card-body">
                         <h5 class="card-title">{{data.name}}</h5>
                         <p class="card-text">{{data.description}}</p>
