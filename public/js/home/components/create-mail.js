@@ -101,7 +101,7 @@ var CreateMailSection = {
             this.mail_template = $("#mail-template").val();
             let self = this;
 
-            html2canvas(document.getElementById('mail-template_ifr')).then(function(canvas) {
+            html2canvas($(".tox-edit-area__iframe")).then(function(canvas) {
                 self.previewMail = canvas.toDataURL('image/png');
             });
         },
