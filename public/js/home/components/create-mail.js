@@ -215,6 +215,11 @@ var CreateMailSection = {
                     mentions_item_type: 'profile',
                     autocorrect_capitalize: true
                 });
+
+                if ($(".tox-edit-area__iframe").length == 0) {
+                    tinymce.remove('#mail-template');
+                    this.loadTinyMce();
+                }
             }
         },
         checkElementExistence() {
@@ -233,8 +238,5 @@ var CreateMailSection = {
     },
     updated() {
         window.intervalMailingTemplate = setInterval(this.checkElementExistence(), 500);
-    },
-    destroyed() {
-        tinymce.remove('#mail-template');
     }
 };
