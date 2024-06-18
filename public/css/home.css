@@ -572,3 +572,7 @@ canvas {
     font-weight: 600;
     text-align: center;
 }
+
+.count-per-page {
+    width: 150px;
+}

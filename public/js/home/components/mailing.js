@@ -15,6 +15,17 @@ var MailingSection = {
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="row text-end">
+                <div class="col align-self-end">
+                    <div class="card count-per-page">
+                        <div class="card-body">
+                            <p>{{total}} item</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row mt-4">
             <div v-for="data in dataPage" class="col-md-4 mb-2">
                 <div class="card">
@@ -64,7 +75,10 @@ var MailingSection = {
         return {
             savedAction: false,
             dataPage: null,
-            currentPage: 1
+            current_page: 1,
+            last_page: 1,
+            per_page: 0,
+            total: 0
         };
     },
     methods: {
@@ -74,9 +88,13 @@ var MailingSection = {
         getAllMails() {
             let self = this;
 
-            window.fetchFontendData('api/mailing/all-mail-sender', 'POST', {pagination : this.currentPage}).then(data => {
+            window.fetchFontendData('api/mailing/all-mail-sender', 'POST', {pagination : this.current_page}).then(data => {
                 if (data.status && data.code == 200) {
                     self.dataPage = data.response.data;
+                    self.current_page = data.response.current_page;
+                    self.last_page = data.response.last_page;
+                    self.per_page = data.response.per_page;
+                    self.total = data.response.total;
                 }
             }).catch(error => {
                 console.error('Error en la solicitud:', error);
@@ -88,7 +106,4 @@ var MailingSection = {
     },
     mounted() {
     },
-    updated() {
-        this.getAllMails();
-    }
 };

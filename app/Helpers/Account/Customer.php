@@ -259,7 +259,7 @@ class Customer
                     $page = $body["pagination"];
                 }
 
-                $mailings = $customer->client->allMailing()->paginate(6);
+                $mailings = $customer->client->allMailing()->paginate(6, ['*'], 'page', $page);
 
                 $dataMail = $mailings->map(function($mail) {
                     return [
