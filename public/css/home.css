@@ -297,6 +297,10 @@ canvas {
     margin-bottom: 10px;
 }
 
+.tox-promotion {
+    display: none !important;
+}
+
 .configuration-item-nav {
     position: absolute !important;
     bottom: 54px;
