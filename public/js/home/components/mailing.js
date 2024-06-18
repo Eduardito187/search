@@ -15,12 +15,12 @@ var MailingSection = {
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="row text-end mt-2">
+        <div class="row mt-4">
+            <div class="row text-end">
                 <p>{{total}} items</p>
             </div>
         </div>
-        <div class="row mt-4">
+        <div class="row">
             <div v-for="data in dataPage" class="col-md-4 mb-2">
                 <div class="card">
                     <img :src="data.preview" class="card-img-top" :alt="data.name">
@@ -41,19 +41,25 @@ var MailingSection = {
                         <div class="col align-self-end">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-end">
-                                    <li class="page-item disabled">
+                                    <li v-if="current_page > 1" class="page-item disabled">
                                         <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
                                     </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">1</a>
+                                    <li v-if="(current_page-2) > 0" class="page-item">
+                                        <a class="page-link" href="#">{{current_page-2}}</a>
+                                    </li>
+                                    <li v-if="(current_page-1) > 0" class="page-item">
+                                        <a class="page-link" href="#">{{current_page-1}}</a>
                                     </li>
                                     <li class="page-item">
-                                        <a class="page-link" href="#">2</a>
+                                        <a class="page-link" href="#">{{current_page}}</a>
                                     </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">3</a>
+                                    <li v-if="(current_page+1) <= last_page" class="page-item">
+                                        <a class="page-link" href="#">{{current_page+1}}</a>
                                     </li>
-                                    <li class="page-item">
+                                    <li v-if="(current_page+2) <= last_page" class="page-item">
+                                        <a class="page-link" href="#">{{current_page+2}}</a>
+                                    </li>
+                                    <li v-if="current_page != last_page" class="page-item">
                                         <a class="page-link" href="#">Next</a>
                                     </li>
                                 </ul>
