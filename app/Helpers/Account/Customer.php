@@ -240,8 +240,6 @@ class Customer
             'timeExecute'
         ];
 
-        print_r($body);
-
         foreach ($requiredFields as $field) {
             if (!isset($body[$field]) || $body[$field] === null) {
                 throw new Exception("Parametros no validos.");
@@ -257,6 +255,8 @@ class Customer
                 $customer = $this->getCustomerByEncryption($header["customer-key"][0]);
                 $this->validateBodyMail($body);
                 $this->createMail($body, $customer->client);
+
+                return [];
             },
             "Proceso ejecutado exitosamente."
         );
