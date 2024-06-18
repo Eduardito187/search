@@ -41,30 +41,30 @@ var MailingSection = {
                         <div class="col align-self-end">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-end">
-                                    <li v-if="current_page > 1" class="page-item disabled">
-                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                                    <li v-if="current_page > 1" class="page-item" @click="selectedPage(current_page-1)">
+                                        <span class="page-link" href="#" tabindex="-1">
                                             <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                                        </a>
+                                        </span>
                                     </li>
-                                    <li v-if="(current_page-2) > 0" class="page-item">
-                                        <a class="page-link" href="#">{{current_page-2}}</a>
+                                    <li v-if="(current_page-2) > 0" class="page-item" @click="selectedPage(current_page-2)">
+                                        <span class="page-link" href="#">{{current_page-2}}</span>
                                     </li>
-                                    <li v-if="(current_page-1) > 0" class="page-item">
-                                        <a class="page-link" href="#">{{current_page-1}}</a>
+                                    <li v-if="(current_page-1) > 0" class="page-item" @click="selectedPage(current_page-1)">
+                                        <span class="page-link" href="#">{{current_page-1}}</span>
                                     </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">{{current_page}}</a>
+                                    <li class="page-item" @click="selectedPage(current_page)">
+                                        <span class="page-link" href="#">{{current_page}}</span>
                                     </li>
-                                    <li v-if="(current_page+1) <= last_page" class="page-item">
-                                        <a class="page-link" href="#">{{current_page+1}}</a>
+                                    <li v-if="(current_page+1) <= last_page" class="page-item" @click="selectedPage(current_page+1)">
+                                        <span class="page-link" href="#">{{current_page+1}}</span>
                                     </li>
-                                    <li v-if="(current_page+2) <= last_page" class="page-item">
-                                        <a class="page-link" href="#">{{current_page+2}}</a>
+                                    <li v-if="(current_page+2) <= last_page" class="page-item" @click="selectedPage(current_page+2)">
+                                        <span class="page-link" href="#">{{current_page+2}}</span>
                                     </li>
-                                    <li v-if="current_page != last_page" class="page-item">
-                                        <a class="page-link" href="#">
+                                    <li v-if="current_page != last_page" class="page-item" @click="selectedPage(current_page+1)">
+                                        <span class="page-link" href="#">
                                             <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                                        </a>
+                                        </span>
                                     </li>
                                 </ul>
                             </nav>
@@ -88,6 +88,14 @@ var MailingSection = {
     methods: {
         createMail() {
             this.$router.push('/create-mail');
+        },
+        selectedPage(page) {
+            if (this.current_page == page) {
+                return;
+            }
+
+            this.current_page = page;
+            this.getAllMails();
         },
         getAllMails() {
             let self = this;
