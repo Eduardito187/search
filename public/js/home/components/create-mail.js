@@ -216,16 +216,21 @@ var CreateMailSection = {
                     autocorrect_capitalize: true
                 });
             }
+        },
+        checkElementExistence() {
+            let element = document.querySelector("#mail-template");
+            if (element) {
+                this.loadTinyMce();
+                clearInterval(intervalMailingTemplate);
+            }
         }
     },
     created() {
         this.getAllIndex();
     },
     mounted() {
-        this.loadTinyMce();
     },
     updated() {
-        console.log("updated created-mail");
-        this.loadTinyMce();
+        var intervalMailingTemplate = setInterval(this.checkElementExistence(), 500);
     }
 };
