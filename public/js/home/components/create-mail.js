@@ -32,6 +32,21 @@ var CreateMailSection = {
             <div class="col-md-4">
                 <div class="card">
                     <div class="row p-4">
+                        <label class="form-label">Ejecución</label>
+                        <div class="row">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" id="execute-now" v-model="timeExecute" value="now" />
+                                <label class="form-check-label" for="execute-now">Ahora</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" id="execute-program" v-model="timeExecute" value="program" />
+                                <label class="form-check-label" for="execute-program">Programar</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mt-4">
+                    <div class="row p-4">
                         <label class="form-label">Ciudad</label>
                         <div class="row">
                             <div v-for="(method, index) in dataPage" :key="method.id" class="form-check">
@@ -55,6 +70,7 @@ var CreateMailSection = {
             description: '',
             mail_template: '',
             selectedIndex: [],
+            timeExecute: ''
         };
     },
     methods: {
