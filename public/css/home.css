@@ -583,7 +583,12 @@ canvas {
 }
 
 .picture-preview-mail {
+    max-width: 100%;
     height: 300px;
     width: auto;
     margin: auto;
+}
+
+.pagination li {
+    cursor: pointer !important;
 }
