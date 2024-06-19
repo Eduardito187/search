@@ -118,7 +118,5 @@ var MailingSection = {
     },
     created() {
         this.getAllMails();
-    },
-    mounted() {
-    },
+    }
 };
