@@ -33,7 +33,8 @@ $routes = [
     '/analitycs' => 'analitycs',
     '/mailing' => 'mailing',
     '/whasapp-sender' => 'whasapp-sender',
-    '/create-mail' => 'create-mail'
+    '/create-mail' => 'create-mail',
+    '/mail/sender/{id}' => 'mail-view'
 ];
 
 // Asociar las rutas a las vistas

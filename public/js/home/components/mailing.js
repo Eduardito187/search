@@ -86,6 +86,9 @@ var MailingSection = {
         };
     },
     methods: {
+        selectedMail(id) {
+            this.$router.push({ name: 'Mail', params: { id: id } });
+        },
         createMail() {
             this.$router.push('/create-mail');
         },
