@@ -72,7 +72,7 @@ var MailSenderSection = {
         }
     },
     created() {
-        console.log(this.$router.params);
+        console.log(this.$route.params);
         this.getMailData();
     }
 };
