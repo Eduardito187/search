@@ -62,9 +62,9 @@ var MailSenderSection = {
         getMailData() {
             let self = this;
 
-            window.fetchFontendData('api/mailing/get-mail', 'POST', {"mail-id" : 35}).then(data => {
+            window.fetchFontendData('api/mailing/get-mail', 'POST', {"mail-id" : this.$route.params.id}).then(data => {
                 if (data.status && data.code == 200) {
-                    self.savedAction = data.response;
+                    self.dataPage = data.response;
                 }
             }).catch(error => {
                 console.error('Error en la solicitud:', error);
@@ -72,7 +72,6 @@ var MailSenderSection = {
         }
     },
     created() {
-        console.log(this.$route.params);
         this.getMailData();
     }
 };
