@@ -247,6 +247,25 @@ class Customer
         }
     }
 
+    public function getMailQuery(array $body, array $header = [])
+    {
+        return $this->executeWithValidation(
+            function() use ($header, $body) {
+                $this->validateCustomerKey($header);
+                $customer = $this->getCustomerByEncryption($header["customer-key"][0]);
+
+                if (!isset($body["mail-id"])) {
+                    throw new Exception("Parametros no validos.");
+                }
+
+                $mail = $this->getMailById($body["mail-id"]);
+
+                return [];
+            },
+            "Proceso ejecutado exitosamente."
+        );
+    }
+
     public function getAllMailSender(array $body, array $header = [])
     {
         return $this->executeWithValidation(

@@ -52,5 +52,27 @@ var MailSenderSection = {
             </div>
         </div>
     </div>
-    `
+    `,
+    data() {
+        return {
+            dataPage: null
+        };
+    },
+    methods: {
+        getMailData() {
+            let self = this;
+
+            window.fetchFontendData('api/mailing/get-mail', 'POST', {"mail-id" : 35}).then(data => {
+                if (data.status && data.code == 200) {
+                    self.savedAction = data.response;
+                }
+            }).catch(error => {
+                console.error('Error en la solicitud:', error);
+            });
+        }
+    },
+    created() {
+        console.log(this.$router.params);
+        this.getMailData();
+    }
 };

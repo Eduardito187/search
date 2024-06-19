@@ -243,4 +243,18 @@ class Account extends Controller
             )
         );
     }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getMailQuery(Request $request)
+    {
+        return response()->json(
+            $this->customer->getMailQuery(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
 }
