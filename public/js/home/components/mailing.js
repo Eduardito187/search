@@ -21,7 +21,7 @@ var MailingSection = {
             </div>
         </div>
         <div class="row">
-            <div v-for="data in dataPage" class="col-md-4 mb-2" @click="selectedMail(date.id)">
+            <div v-for="data in dataPage" class="col-md-4 mb-2" @click="selectedMail(data.id)">
                 <div class="card">
                     <img :src="data.preview" class="card-img-top picture-preview-mail" :alt="data.name">
                     <div class="card-body">
