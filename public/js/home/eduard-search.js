@@ -187,6 +187,11 @@ const router = new VueRouter({
   routes
 });
 
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title || 'Inicio | EduardSearch';
+  next();
+});
+
 Vue.prototype.$versionApp = window.configFrontend.version_frontend;
 Vue.prototype.$appName = window.configFrontend.app_name_frontend;
 Vue.prototype.$currentYear = window.configFrontend.server_year;
