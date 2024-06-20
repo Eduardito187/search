@@ -284,6 +284,7 @@ class Customer
                     }
 
                     $allCustomers[] = [
+                        "index_id" => $mailIndex->index->id,
                         "index" => $mailIndex->index->name,
                         "customers" => $listCustomer,
                         "total_customer" => count($listCustomer)
