@@ -266,11 +266,12 @@ class Customer
                 $allCustomers = [];
 
                 foreach ($mail->allMailingIndex as $mailIndex) {
+                    $listCustomer = [];
+
                     foreach ($mailIndex->allCustomers as $mailCustomer) {
                         $webSiteCustomer = $mailCustomer->customerWebSite;
 
-                        $allCustomers[] = [
-                            "index" => $mailIndex->index->name,
+                        $listCustomer[] = [
                             "sender" => $mailCustomer->sending,
                             "created_at" => $mailCustomer->created_at,
                             "customer" => [
@@ -281,6 +282,11 @@ class Customer
                             ]
                         ];
                     }
+
+                    $allCustomers[] = [
+                        "index" => $mailIndex->index->name,
+                        "customers" => $listCustomer
+                    ];
                 }
 
                 return $allCustomers;
