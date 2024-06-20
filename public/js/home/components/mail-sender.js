@@ -27,7 +27,7 @@ var MailSenderSection = {
         </div>
         <div class="main-content">
             <div class="sales-overview">
-                <textarea id="mail-template" v-model="mail_template" :value="dataPage.template"></textarea>
+                <textarea id="mail-template" v-model="mail_template"></textarea>
             </div>
             <div class="get-started-image">
                 <img :src="dataPage.preview" />
@@ -66,6 +66,7 @@ var MailSenderSection = {
             window.fetchFontendData('api/mailing/get-mail', 'POST', {"mail-id" : this.$route.params.id}).then(data => {
                 if (data.status && data.code == 200) {
                     self.dataPage = data.response;
+                    self.mail_template = self.dataPage.template;
                 }
             }).catch(error => {
                 console.error('Error en la solicitud:', error);
