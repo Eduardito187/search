@@ -59,6 +59,7 @@ var MailSenderSection = {
                 if (data.status && data.code == 200) {
                     self.dataPage = data.response;
                     self.mail_template = self.dataPage.template;
+                    self.getAllCustomers();
                 }
             }).catch(error => {
                 console.error('Error en la solicitud:', error);
