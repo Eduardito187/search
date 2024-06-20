@@ -27,6 +27,8 @@ var MailSenderSection = {
         </div>
         <div class="main-content">
             <div class="sales-overview">
+                <h2>{{dataPage.name}}</h2>
+                <p>{{dataPage.description}}</p>
                 <textarea id="mail-template" v-model="mail_template"></textarea>
             </div>
             <div class="get-started-image">
