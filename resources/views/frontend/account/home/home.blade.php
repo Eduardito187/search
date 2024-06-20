@@ -15,13 +15,41 @@
       </div>
       <nav class="menu">
         <ul>
-          <li><router-link to="/dashboard"><i class="fa fa-tachometer"></i> Monitoreo</router-link></li>
-          <li><router-link to="/data"><i class="fa fa-database"></i> Data</router-link></li>
-          <li><router-link to="/search"><i class="fa fa-search"></i> Busquedas</router-link></li>
-          <li><router-link to="/analitycs"><i class="fa fa-bar-chart"></i> Analiticas</router-link></li>
-          <li><router-link to="/mailing"><i class="fa fa-envelope"></i> Mailing</router-link></li>
-          <li><router-link to="/whasapp-sender"><i class="fa fa-whatsapp"></i> Whatsapp Sender</router-link></li>
-          <li class="configuration-item-nav"><router-link to="/settings"><i class="fa fa-cog"></i> Recomendaciones</router-link></li>
+          <li>
+            <router-link to="/dashboard">
+              <i class="fa fa-tachometer"></i> Monitoreo
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/data">
+              <i class="fa fa-database"></i> Data
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/search">
+              <i class="fa fa-search"></i> Busquedas
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/analitycs">
+              <i class="fa fa-bar-chart"></i> Analiticas
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/mailing">
+              <i class="fa fa-envelope"></i> Mailing
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/whasapp-sender">
+              <i class="fa fa-whatsapp"></i> Whatsapp Sender
+            </router-link>
+          </li>
+          <li class="configuration-item-nav">
+            <router-link to="/settings">
+              <i class="fa fa-cog"></i> Configuracion
+            </router-link>
+          </li>
         </ul>
       </nav>
       <div class="close-session" @click="closeSession()">
@@ -51,7 +79,9 @@
             {{ session('error-warning') }}
           </div>
         @endif
-        <router-view></router-view>
+        <div class="container mt-5">
+          <router-view></router-view>
+        </div>
       </section>
       <div class="footer">
         <div class="pull-right">
