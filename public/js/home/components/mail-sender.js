@@ -3,7 +3,7 @@ var MailSenderSection = {
     <div v-if="dataPage != null" class="container-index">
         <div class="top-cards">
             <div class="card">
-                <h2><i class="fa fa-data"></i> Total de indices</h2>
+                <h2><i class="fa fa-database"></i> Total de indices</h2>
                 <p>{{dataPage.total_index}}</p>
             </div>
             <div class="card">
@@ -30,9 +30,8 @@ var MailSenderSection = {
                 <h2>Sales Overview</h2>
                 <canvas id="salesChart"></canvas>
             </div>
-            <div class="get-started">
-                <h2>Get started with Argon</h2>
-                <p>There's nothing I really wanted to do in life that I wasn't able to get good at.</p>
+            <div class="get-started-image">
+                <img :src="dataPage.preview" />
             </div>
         </div>
         <div class="bottom-content">
