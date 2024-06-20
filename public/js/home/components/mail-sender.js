@@ -27,8 +27,7 @@ var MailSenderSection = {
         </div>
         <div class="main-content">
             <div class="sales-overview">
-                <h2>Sales Overview</h2>
-                <canvas id="salesChart"></canvas>
+                <textarea id="mail-template" v-model="mail_template" :value="dataPage.template"></textarea>
             </div>
             <div class="get-started-image">
                 <img :src="dataPage.preview" />
@@ -56,7 +55,8 @@ var MailSenderSection = {
     `,
     data() {
         return {
-            dataPage: null
+            dataPage: null,
+            mail_template: ''
         };
     },
     methods: {
@@ -70,9 +70,97 @@ var MailSenderSection = {
             }).catch(error => {
                 console.error('Error en la solicitud:', error);
             });
+        },
+        loadTinyMce() {
+            if ($(".tox-edit-area__iframe").length == 0) {
+                tinymce.init({
+                    selector: '#mail-template',
+                    plugins: 'preview importcss searchreplace autolink autosave save directionality visualblocks visualchars fullscreen image link media codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons',
+                    mobile: {
+                        plugins: 'preview importcss searchreplace autolink autosave save directionality visualblocks visualchars fullscreen image link media code codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons',
+                    },
+                    menu: {
+                        tc: {
+                            title: 'Comments',
+                            items: 'addcomment showcomments deleteallconversations'
+                        }
+                    },
+                    menubar: 'file edit view insert format tools table tc help',
+                    toolbar: "undo redo | aidialog aishortcuts | blocks fontsizeinput | bold italic | align numlist bullist | link image | table media | lineheight  outdent indent | strikethrough forecolor backcolor removeformat | charmap emoticons | code fullscreen preview | save print | pagebreak anchor codesample | addtemplate inserttemplate | addcomment showcomments | ltr rtl | spellcheckdialog a11ycheck", // Note: if a toolbar item requires a plugin, the item will not present in the toolbar if the plugin is not also loaded.
+                    autosave_ask_before_unload: true,
+                    autosave_interval: '30s',
+                    autosave_prefix: '{path}{query}-{id}-',
+                    autosave_restore_when_empty: false,
+                    autosave_retention: '2m',
+                    image_advtab: true,
+                        typography_rules: [
+                            'common/punctuation/quote',
+                            'en-US/dash/main',
+                            'common/nbsp/afterParagraphMark',
+                            'common/nbsp/afterSectionMark',
+                            'common/nbsp/afterShortWord',
+                            'common/nbsp/beforeShortLastNumber',
+                            'common/nbsp/beforeShortLastWord',
+                            'common/nbsp/dpi',
+                            'common/punctuation/apostrophe',
+                            'common/space/delBeforePunctuation',
+                            'common/space/afterComma',
+                            'common/space/afterColon',
+                            'common/space/afterExclamationMark',
+                            'common/space/afterQuestionMark',
+                            'common/space/afterSemicolon',
+                            'common/space/beforeBracket',
+                            'common/space/bracket',
+                            'common/space/delBeforeDot',
+                            'common/space/squareBracket',
+                            'common/number/mathSigns',
+                            'common/number/times',
+                            'common/number/fraction',
+                            'common/symbols/arrow',
+                            'common/symbols/cf',
+                            'common/symbols/copy',
+                            'common/punctuation/delDoublePunctuation',
+                            'common/punctuation/hellip'
+                        ],
+                        typography_ignore: [ 'code' ],
+                    importcss_append: true,
+                    height: 600,
+                    image_caption: true,
+                    quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
+                    noneditable_class: 'mceNonEditable',
+                    toolbar_mode: 'sliding',
+                    spellchecker_ignore_list: ['Ephox', 'Moxiecode', 'tinymce', 'TinyMCE'],
+                    tinycomments_mode: 'embedded',
+                    content_style: '.mymention{ color: gray; }',
+                    contextmenu: 'link image table configurepermanentpen',
+                    a11y_advanced_options: true,
+                    skin: 'oxide',
+                    content_css: 'default',
+                    mentions_selector: '.mymention',
+                    mentions_item_type: 'profile',
+                    autocorrect_capitalize: true
+                });
+            }
+        },
+        validateLoaderTinyMce() {
+            if ($(".tox-edit-area__iframe").length == 0) {
+                tinymce.remove('#mail-template');
+                this.loadTinyMce();
+            }
+        },
+        checkElementExistence() {
+            let element = document.querySelector("#mail-template");
+            if (element) {
+                this.loadTinyMce();
+                this.validateLoaderTinyMce();
+                clearInterval(window.intervalMailingTemplate);
+            }
         }
     },
     created() {
         this.getMailData();
+    },
+    updated() {
+        window.intervalMailingTemplate = setInterval(this.checkElementExistence(), 200);
     }
 };
