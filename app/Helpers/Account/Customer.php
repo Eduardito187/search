@@ -301,7 +301,7 @@ class Customer
 
     public function getCountMailingIndexSend($idIndex, $idMail)
     {
-        return MailingIndex::where('id_index', $idIndex)->where('id_mail', $idMail)->where('send', 1)->count();
+        return MailingIndex::where('id_index', $idIndex)->where('id_mail', $idMail)->sum('send') ?? 0;
     }
 
     public function getAllMailSender(array $body, array $header = [])
