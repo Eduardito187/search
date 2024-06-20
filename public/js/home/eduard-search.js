@@ -36,25 +36,156 @@ window.fetchFontendData = function(url, method, bodyData = null) {
 }
 
 const routes = [
-  { path: '/home', component: HomeSection, name: 'Home' },
-  { path: '/dashboard', component: DashboardSection, name: 'Dashboard' },
-  { path: '/data', component: DataSection, name: 'Data' },
-  { path: '/settings', component: SettingsSection, name: 'Setting' },
-  { path: '/search', component: SearchSection, name: 'Search' },
-  { path: '/support', component: SupportSection, name: 'Support' },
-  { path: '/contacts', component: ContactsSection, name: 'Contacts' },
-  { path: '/notifications', component: NotificationsSection, name: 'Notifications' },
-  { path: '/account', component: AccountSection, name: 'Account' },
-  { path: '/team', component: TeamSection, name: 'Team' },
-  { path: '/keys', component: KeySection, name: 'Keys' },
-  { path: '/application', component: ApplicationSection, name: 'Application' },
-  { path: '/infraestructura', component: InfraestructuraSection, name: 'Infraestructura' },
-  { path: '/analitycs', component: AnalitycsSection, name: 'Analitycs' },
-  { path: '/mailing', component: MailingSection, name: 'Mailing' },
-  { path: '/whasapp-sender', component: WhatsappSenderSection, name: 'WhatsApp Sender' },
-  { path: '/create-mail', component: CreateMailSection, name: 'Creador de Mail' },
-  { path: '/mail/sender/:id', component: MailSenderSection, name: 'Mail' }
+  {
+    path: '/home',
+    component: HomeSection,
+    name: 'Inicio',
+    meta: {
+      title: 'Inicio | EduardSearch'
+    }
+  },
+  {
+    path: '/dashboard',
+    component: DashboardSection,
+    name: 'Monitoreo',
+    meta: {
+      title: 'Monitoreo | EduardSearch'
+    }
+  },
+  {
+    path: '/data',
+    component: DataSection,
+    name: 'Data',
+    meta: {
+      title: 'Data | EduardSearch'
+    }
+  },
+  {
+    path: '/settings',
+    component: SettingsSection,
+    name: 'Configuracion',
+    meta: {
+      title:'Configuracion | EduardSearch'
+    }
+  },
+  {
+    path: '/search',
+    component: SearchSection,
+    name: 'Busquedas',
+    meta: {
+      title:'Busquedas | EduardSearch'
+    }
+  },
+  {
+    path: '/support',
+    component: SupportSection,
+    name: 'Soporte',
+    meta: {
+      title:'Soporte | EduardSearch'
+    }
+  },
+  {
+    path: '/contacts',
+    component: ContactsSection,
+    name: 'Contacto',
+    meta: {
+      title:'Contacto | EduardSearch'
+    }
+  },
+  {
+    path: '/notifications',
+    component: NotificationsSection,
+    name: 'Notificación',
+    meta: {
+      title: 'Notificación | EduardSearch'
+    }
+  },
+  {
+    path: '/account',
+    component: AccountSection,
+    name: 'Cuenta',
+    meta: {
+      title: 'Cuenta | EduardSearch'
+    }
+  },
+  {
+    path: '/team',
+    component: TeamSection,
+    name: 'Equipo',
+    meta: {
+      title: 'Equipo | EduardSearch'
+    }
+  },
+  {
+    path: '/keys',
+    component: KeySection,
+    name: 'Llaves',
+    meta: {
+      title: 'Llaves | EduardSearch'
+    }
+  },
+  {
+    path: '/application',
+    component: ApplicationSection,
+    name: 'Aplicación',
+    meta: {
+      title: 'Aplicación | EduardSearch'
+    }
+  },
+  {
+    path: '/infraestructura',
+    component: InfraestructuraSection,
+    name: 'Infraestructura',
+    meta: {
+      title: 'Infraestructura | EduardSearch'
+    }
+  },
+  {
+    path: '/analitycs',
+    component: AnalitycsSection,
+    name: 'Analitycs',
+    meta: {
+      title: 'Analitycs | EduardSearch'
+    }
+  },
+  {
+    path: '/mailing',
+    component: MailingSection,
+    name: 'Mailing',
+    meta: {
+      title: 'Mailing | EduardSearch'
+    }
+  },
+  {
+    path: '/whasapp-sender',
+    component: WhatsappSenderSection,
+    name: 'WhatsApp Sender',
+    meta: {
+      title: 'WhatsApp Sender | EduardSearch'
+    }
+  },
+  {
+    path: '/create-mail',
+    component: CreateMailSection,
+    name: 'Creador de Mail',
+    meta: {
+      title: 'Creador de Mail | EduardSearch'
+    }
+  },
+  {
+    path: '/mail/sender/:id',
+    component: MailSenderSection,
+    name: 'Mail',
+    meta: {
+      title: 'Mail | EduardSearch'
+    }
+  }
 ];
+
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title || 'Inicio | EduardSearch';
+  next();
+});
 
 const router = new VueRouter({
   mode: 'history',

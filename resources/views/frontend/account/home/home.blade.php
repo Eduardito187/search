@@ -1,6 +1,6 @@
 @extends('frontend.account.components.body-login')
 
-@section('title', 'Home|EduardSearch')
+@section('title', 'Inicio | EduardSearch')
 
 @section('custom-header')
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
