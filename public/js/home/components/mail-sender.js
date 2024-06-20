@@ -36,21 +36,10 @@ var MailSenderSection = {
             </div>
         </div>
         <div class="bottom-content">
-            <div class="sales-by-country">
-                <h2>Sales by Country</h2>
-                <ul>
-                    <li><span><i class="fa fa-flag"></i> United States:</span> 2500, $230,900, Bounce: 29.9%</li>
-                    <li><span><i class="fa fa-flag"></i> Germany:</span> 3900, $440,000, Bounce: 40.22%</li>
-                    <li><span><i class="fa fa-flag"></i> Other:</span> ..., ..., ...</li>
-                </ul>
-            </div>
-            <div class="categories">
-                <h2>Categories</h2>
-                <ul>
-                    <li><i class="fa fa-laptop"></i> Devices: 250 in stock, 346+ sold</li>
-                    <li><i class="fa fa-ticket"></i> Tickets: 123 closed, 15 open</li>
-                    <li><i class="fa fa-exclamation-triangle"></i> Error Logs: ...</li>
-                </ul>
+            <div class="all-customers-list">
+                <h2>Clientes mailing</h2>
+                <div class="row">
+                </div>
             </div>
         </div>
     </div>
@@ -58,7 +47,8 @@ var MailSenderSection = {
     data() {
         return {
             dataPage: null,
-            mail_template: ''
+            mail_template: '',
+            allCustomersSender: [],
         };
     },
     methods: {
@@ -69,6 +59,17 @@ var MailSenderSection = {
                 if (data.status && data.code == 200) {
                     self.dataPage = data.response;
                     self.mail_template = self.dataPage.template;
+                }
+            }).catch(error => {
+                console.error('Error en la solicitud:', error);
+            });
+        },
+        getAllCustomers() {
+            let self = this;
+
+            window.fetchFontendData('api/mailing/all-mail-customer', 'POST', {"mail-id" : this.$route.params.id}).then(data => {
+                if (data.status && data.code == 200) {
+                    self.allCustomersSender = data.response;
                 }
             }).catch(error => {
                 console.error('Error en la solicitud:', error);

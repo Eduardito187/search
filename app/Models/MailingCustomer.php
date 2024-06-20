@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\MailingIndex;
+use App\Models\WebSiteCustomer;
 
 class MailingCustomer extends Model
 {
@@ -16,4 +18,18 @@ class MailingCustomer extends Model
     public $incrementing = true;
     protected $keyType = 'integer';
     public $timestamps = false;
+
+    /**
+     * @inheritDoc
+     */
+    public function mailingIndex() {
+        return $this->hasOne(MailingIndex::class, 'id', 'id_mailing_index');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function customerWebSite() {
+        return $this->hasOne(WebSiteCustomer::class, 'id', 'id_website_customer');
+    }
 }

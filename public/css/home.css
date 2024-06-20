@@ -297,6 +297,14 @@ canvas {
     margin-top: 20px;
 }
 
+.container-index .all-customers-list {
+    width: 100%;
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
 .container-index .sales-by-country, .container-index .categories {
     width: 48%;
     background: #fff;

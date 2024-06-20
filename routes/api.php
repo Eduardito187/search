@@ -44,6 +44,7 @@ Route::middleware([CustomValidateToken::class])->group(function () {
         Route::post('mailing/create-masive', 'createMailMasive');
         Route::post('mailing/all-mail-sender', 'getAllMailSender');
         Route::post('mailing/get-mail', 'getMailQuery');
+        Route::post('mailing/all-mail-customer', 'getAllCustomerMailing');
     });
 
     Route::controller(System::class)->group(function() {

@@ -247,12 +247,51 @@ class Customer
         }
     }
 
+    public function getAllCustomerMailing(array $body, array $header = [])
+    {
+        return $this->executeWithValidation(
+            function() use ($header, $body) {
+                $this->validateCustomerKey($header);
+
+                if (!isset($body["mail-id"])) {
+                    throw new Exception("Parametros no validos.");
+                }
+
+                $mail = $this->getMailById($body["mail-id"]);
+
+                if ($mail == null) {
+                    throw new Exception("El mail solicitado no existe.");
+                }
+
+                $allCustomers = [];
+                foreach ($mail->allMailingIndex as $mailIndex) {
+                    foreach ($mailIndex->allCustomers as $mailCustomer) {
+                        $webSiteCustomer = $mailCustomer->customerWebSite;
+
+                        $allCustomers[] = [
+                            "sender" => $mailCustomer->sending,
+                            "created_at" => $mailCustomer->created_at,
+                            "customer" => [
+                                "id" => $webSiteCustomer->id,
+                                "name" => $webSiteCustomer->name,
+                                "email" => $webSiteCustomer->email,
+                                "phone_number" => $webSiteCustomer->phone_number
+                            ]
+                        ];
+                    }
+                }
+
+                return $allCustomers;
+            },
+            "Proceso ejecutado exitosamente."
+        );
+    }
+
     public function getMailQuery(array $body, array $header = [])
     {
         return $this->executeWithValidation(
             function() use ($header, $body) {
                 $this->validateCustomerKey($header);
-                $customer = $this->getCustomerByEncryption($header["customer-key"][0]);
 
                 if (!isset($body["mail-id"])) {
                     throw new Exception("Parametros no validos.");
