@@ -1,6 +1,6 @@
 var MailSenderSection = {
     template: `
-    <div class="container-index">
+    <div v-if="dataPage != null" class="container-index">
         <div class="top-cards">
             <div class="card">
                 <h2><i class="fa fa-money"></i> TODAY'S MONEY</h2>
@@ -18,9 +18,14 @@ var MailSenderSection = {
                 <span>-2% since last quarter</span>
             </div>
             <div class="card">
-                <h2><i class="fa fa-shopping-cart"></i> SALES</h2>
-                <p>$103,430</p>
-                <span>+5% than last month</span>
+                <div v-if="dataPage.created_at != null" class="row">
+                    <h6>Fecha de creacion</h6>
+                    <small>{{dataPage.created_at}}</small>
+                </div>
+                <div v-if="dataPage.updated_at != null" class="row">
+                    <h6>Ultima edicion</h6>
+                    <small>{{dataPage.updated_at}}</small>
+                </div>
             </div>
         </div>
         <div class="main-content">
