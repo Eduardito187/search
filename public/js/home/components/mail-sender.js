@@ -48,7 +48,16 @@ var MailSenderSection = {
                             </h2>
                             <div :id="data.index_id+'_body'" class="accordion-collapse collapse" :aria-labelledby="data.index_id+'_index'" data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body">
-                                    Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.
+                                    <ul v-for="user in data.customers" class="list-group">
+                                        <li class="list-group-item">
+                                            <div>
+                                                <p><b>Fecha de envio:</b><small> {{user.created_at}}</small></p>
+                                                <p><b>Correo electronico:</b><small> {{user.customer.email}}</small></p>
+                                                <p><b>Nombre:</b><small> {{user.customer.name}}</small></p>
+                                                <p><b>Teléfono:</b><small> {{user.customer.phone_number}}</small></p>
+                                            </div>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
