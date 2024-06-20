@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Client;
 use App\Models\IndexCatalog;
 use App\Models\Mailing;
+use App\Models\MailingCustomer;
 
 class MailingIndex extends Model
 {
@@ -19,6 +20,13 @@ class MailingIndex extends Model
     public $incrementing = true;
     protected $keyType = 'integer';
     public $timestamps = false;
+
+    /**
+     * @inheritDoc
+     */
+    public function allCustomers() {
+        return $this->hasMany(MailingCustomer::class, 'id_mailing_index', 'id');
+    }
 
     /**
      * @inheritDoc

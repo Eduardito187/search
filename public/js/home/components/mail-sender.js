@@ -19,11 +19,11 @@ var MailSenderSection = {
             </div>
             <div class="card">
                 <div v-if="dataPage.created_at != null" class="row">
-                    <h6>Fecha de creacion</h6>
+                    <h6 class="text-start">Fecha de creacion</h6>
                     <small>{{dataPage.created_at}}</small>
                 </div>
-                <div v-if="dataPage.updated_at != null" class="row">
-                    <h6>Ultima edicion</h6>
+                <div v-if="dataPage.updated_at != null" class="row mt-2">
+                    <h6 class="text-start">Ultima edicion</h6>
                     <small>{{dataPage.updated_at}}</small>
                 </div>
             </div>

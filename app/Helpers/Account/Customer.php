@@ -259,6 +259,7 @@ class Customer
                 }
 
                 $mail = $this->getMailById($body["mail-id"]);
+                $countUsers = 0;
 
                 if ($mail == null) {
                     throw new Exception("El mail solicitado no existe.");
@@ -271,28 +272,33 @@ class Customer
                     "run_date" => $mail->run_date,
                     "template" => $mail->template,
                     "preview" => $mail->preview_mail,
-                    "send" => $mail->send,
+                    "indexes" => $this->getAllIndexNameMailData($countUsers, $mail->allMailingIndex),
+                    "total_index" => $mail->allMailingIndex()->count() ?? 0,
+                    "total_users" => $countUsers,
+                    "total_send" => $mail->send,
                     "created_at" => $mail->created_at,
-                    "updated_at" => $mail->updated_at,
-                    "indexes" => $this->getAllIndexNameMailData($mail->allMailingIndex)
+                    "updated_at" => $mail->updated_at
                 ];
             },
             "Proceso ejecutado exitosamente."
         );
     }
 
-    public function getAllIndexNameMailData($listMailingIndex)
+    public function getAllIndexNameMailData(&$countUsers, $listMailingIndex)
     {
         $data = [];
 
         foreach ($listMailingIndex as $mailingIndex) {
+            $countUsers = $countUsers + ($mailingIndex->allCustomers()->where("sending", 1)->count() ?? 0);
+
             $data[] = [
                 "index" => [
                     "id" => $mailingIndex->index->id,
                     "code" => $mailingIndex->index->code,
                     "name" => $mailingIndex->index->name
                 ],
-                "send" => $this->getCountMailingIndexSend($mailingIndex->index->id, $mailingIndex->id_mail)
+                "send" => $this->getCountMailingIndexSend($mailingIndex->index->id, $mailingIndex->id_mail),
+                "customers" => $countUsers
             ];
         }
 
