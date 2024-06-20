@@ -182,11 +182,6 @@ const routes = [
   }
 ];
 
-router.beforeEach((to, from, next) => {
-  document.title = to.meta.title || 'Inicio | EduardSearch';
-  next();
-});
-
 const router = new VueRouter({
   mode: 'history',
   routes
