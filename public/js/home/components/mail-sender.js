@@ -3,19 +3,16 @@ var MailSenderSection = {
     <div v-if="dataPage != null" class="container-index">
         <div class="top-cards">
             <div class="card">
-                <h2><i class="fa fa-money"></i> TODAY'S MONEY</h2>
-                <p>$53,000</p>
-                <span>+55% since yesterday</span>
+                <h2><i class="fa fa-data"></i> Total de indices</h2>
+                <p>{{dataPage.total_index}}</p>
             </div>
             <div class="card">
-                <h2><i class="fa fa-users"></i> TODAY'S USERS</h2>
-                <p>2,300</p>
-                <span>+3% since last week</span>
+                <h2><i class="fa fa-users"></i> Total de usuario</h2>
+                <p>{{dataPage.total_users}}</p>
             </div>
             <div class="card">
-                <h2><i class="fa fa-user-plus"></i> NEW CLIENTS</h2>
-                <p>+3,462</p>
-                <span>-2% since last quarter</span>
+                <h2><i class="fa fa-envelope"></i> Total enviados</h2>
+                <p>{{dataPage.total_send}}</p>
             </div>
             <div class="card">
                 <div v-if="dataPage.created_at != null" class="row">
