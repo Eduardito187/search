@@ -228,6 +228,7 @@ new Vue({
       
           $(".content-page").scroll(function() {
             var st = $(this).scrollTop();
+
             if (st > lastScrollTop && st > headerHeight) {
               $('#header-page').addClass('sticky');
             } else {
@@ -235,9 +236,11 @@ new Vue({
                 $('#header-page').removeClass('sticky');
               }
             }
+
             lastScrollTop = st;
           });
 
+          console.log("clear interval header");
           clearInterval(window.intervalHeaderAnimated);
         }
       });
@@ -247,6 +250,6 @@ new Vue({
     this.loadedCustomer();
   },
   mounted() {
-    window.intervalHeaderAnimated = setInterval(this.loadHeaderAnimate(), 200);
+    window.intervalHeaderAnimated = setInterval(this.loadHeaderAnimate(), 500);
   }
 });
