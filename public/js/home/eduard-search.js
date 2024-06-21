@@ -249,7 +249,7 @@ new Vue({
   created() {
     this.loadedCustomer();
   },
-  mounted() {
+  updated() {
     window.intervalHeaderAnimated = setInterval(this.loadHeaderAnimate(), 500);
   }
 });
