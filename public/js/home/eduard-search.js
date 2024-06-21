@@ -219,29 +219,34 @@ new Vue({
     },
     redirecHome() {
       window.location.href = '/home';
+    },
+    loadHeaderAnimate() {
+      $(document).ready(function() {
+        if ($('#header-page').length > 0) {
+          var lastScrollTop = 0;
+          var headerHeight = $('#header-page').outerHeight();
+      
+          $(".content-page").scroll(function() {
+            var st = $(this).scrollTop();
+            if (st > lastScrollTop && st > headerHeight) {
+              $('#header-page').addClass('sticky');
+            } else {
+              if (st <= headerHeight) {
+                $('#header-page').removeClass('sticky');
+              }
+            }
+            lastScrollTop = st;
+          });
+
+          clearInterval(window.intervalHeaderAnimated);
+        }
+      });
     }
   },
   created() {
     this.loadedCustomer();
   },
   mounted() {
-    $(document).ready(function() {
-      if ($('#header-page').length > 0) {
-        var lastScrollTop = 0;
-        var headerHeight = $('#header-page').outerHeight();
-    
-        $(".content-page").scroll(function() {
-          var st = $(this).scrollTop();
-          if (st > lastScrollTop && st > headerHeight) {
-            $('#header-page').addClass('sticky');
-          } else {
-            if (st <= headerHeight) {
-              $('#header-page').removeClass('sticky');
-            }
-          }
-          lastScrollTop = st;
-        });
-      }
-    });
+    window.intervalHeaderAnimated = setInterval(this.loadHeaderAnimate(), 200);
   }
 });
