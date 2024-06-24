@@ -20,6 +20,12 @@ class Kernel extends ConsoleKernel
         //$schedule->command('runnerRulesExclude:cron')->everyFiveMinutes();
         $schedule->command('disabledIndexProducts:cron')->twiceDaily(0, 12);
         $schedule->command('proccessJobs:cron')->everyMinute();
+        $schedule->command('jobIndexationProccess:cron')->everyMinute();
+        $schedule->command('jobRestorePassword:cron')->everyMinute();
+        $schedule->command('jobRestorePasswordConfirm:cron')->everyMinute();
+        $schedule->command('jobSaveHistoryCustomerUuid:cron')->everyMinute();
+        $schedule->command('jobSearchProccess:cron')->everyMinute();
+        $schedule->command('jobSendMailIndex:cron')->everyMinute();
     }
 
     /**

@@ -617,3 +617,7 @@ canvas {
 .pagination li {
     cursor: pointer !important;
 }
+
+.navigation .pagination {
+    margin-bottom: 0px !important;
+}

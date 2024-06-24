@@ -15,17 +15,12 @@ return new class extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_index')->nullable();
-            $table->foreign('id_index')->references('id')->on('index_catalog')->onDelete('cascade');
             $table->unsignedBigInteger('id_client')->nullable();
             $table->foreign('id_client')->references('id')->on('client')->onDelete('cascade');
             $table->unsignedBigInteger('value_type')->nullable();
             $table->foreign('value_type')->references('id')->on('type_attribute')->onDelete('cascade');
-            $table->string('code_uuid')->nullable();
             $table->string('name')->nullable();
             $table->string('code')->nullable();
-            $table->string('url')->nullable();
-            $table->string('value')->nullable();
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
         });
@@ -39,7 +34,6 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('events', function (Blueprint $table) {
-            $table->dropConstrainedForeignId('id_index');
             $table->dropConstrainedForeignId('id_client');
             $table->dropConstrainedForeignId('value_type');
         });

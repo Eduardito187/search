@@ -84,7 +84,7 @@ class Customer
         );
     }
 
-    private function executeWithValidation(callable $callback, string $successMessage)
+    public function executeWithValidation(callable $callback, string $successMessage)
     {
         try {
             $result = $callback();
@@ -94,7 +94,7 @@ class Customer
         }
     }
 
-    private function validateCustomerKey(array $header)
+    public function validateCustomerKey(array $header)
     {
         if (
             !isset($header["customer-key"]) ||
@@ -183,7 +183,7 @@ class Customer
         return true;
     }
 
-    private function getCustomerByEncryption(string $keyEncryption)
+    public function getCustomerByEncryption(string $keyEncryption)
     {
         $descryptionMail = $this->decrypt($keyEncryption);
         $customer = $this->getCustomerByMail($descryptionMail);
@@ -195,13 +195,13 @@ class Customer
         return $customer;
     }
 
-    private function getCustomerArrayByEncryption(string $keyEncryption)
+    public function getCustomerArrayByEncryption(string $keyEncryption)
     {
         $customer = $this->getCustomerByEncryption($keyEncryption);
         return $this->entityCustomerArray($customer);
     }
 
-    private function entityCustomerArray(CustomersAccount $customer)
+    public function entityCustomerArray(CustomersAccount $customer)
     {
         $customerAccountInformation = $customer->customerAccountInformation;
 
@@ -215,7 +215,7 @@ class Customer
         ];
     }
 
-    private function validateLoginAccount(string $mail, string $password)
+    public function validateLoginAccount(string $mail, string $password)
     {
         $customer = $this->getCustomerByMail($mail);
 

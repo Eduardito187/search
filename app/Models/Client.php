@@ -12,6 +12,7 @@ use App\Models\NotificationsClient;
 use App\Models\SupportClient;
 use App\Models\ContactClient;
 use App\Models\Mailing;
+use App\Models\Events;
 
 class Client extends Model
 {
@@ -24,6 +25,13 @@ class Client extends Model
     public $incrementing = true;
     protected $keyType = 'integer';
     public $timestamps = false;
+
+    /**
+     * @inheritDoc
+     */
+    public function allEvents() {
+        return $this->hasMany(Events::class, 'id_client', 'id');
+    }
 
     /**
      * @inheritDoc

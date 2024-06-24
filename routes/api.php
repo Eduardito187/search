@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\Search\Product as SearchProduct;
 use App\Http\Controllers\Api\Import\Process as SearchProccess;
 use App\Http\Controllers\Api\System\Core as SystemCore;
 use App\Http\Controllers\Api\Customer\Account;
+use App\Http\Controllers\Api\Customer\Events;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::middleware([CustomValidateToken::class])->group(function () {
+    Route::controller(Events::class)->group(function() {
+        Route::post('event/set-value', 'setEvent');
+        Route::post('event/get-all', 'getAllEvents');
+    });
+
     Route::controller(Account::class)->group(function() {
         Route::post('account/dashboard-data', 'getDashboardData');
         Route::post('account/infraestructure-data', 'getInfraestructureData');
