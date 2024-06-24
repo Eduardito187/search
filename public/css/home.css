@@ -621,3 +621,11 @@ canvas {
 .navigation .pagination {
     margin-bottom: 0px !important;
 }
+
+.item-selected {
+    position: relative;
+}
+
+.option-menu {
+    
+}
