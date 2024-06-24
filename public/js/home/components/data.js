@@ -44,14 +44,28 @@ var DataSection = {
                     </thead>
                     <tbody>
                         <tr>
-                            <td><i class="fa fa-database text-success mr-2"></i> dis_prod_montero_products <span class="text-muted">Primary of 4 indices</span></td>
-                            <td>2 hours ago</td>
-                            <td>3.81K</td>
+                            <td>
+                                <i class="fa fa-database text-success mr-2"></i> 
+                                dis_prod_montero_products <span class="text-muted">Primary of 4 indices</span>
+                            </td>
+                            <td>
+                                <small>2 hours ago</small>
+                            </td>
+                            <td>
+                                <small>3.81K</small>
+                            </td>
                         </tr>
                         <tr>
-                            <td><i class="fa fa-database text-success mr-2"></i> dis_prod_montero_products_name_asc <span class="text-muted">Replica of dis_prod_montero_products</span></td>
-                            <td>2 hours ago</td>
-                            <td>3.81K</td>
+                            <td>
+                                <i class="fa fa-database text-success mr-2"></i> 
+                                dis_prod_montero_products_name_asc <span class="text-muted">Replica of dis_prod_montero_products</span>
+                            </td>
+                            <td>
+                                <small>2 hours ago</small>
+                            </td>
+                            <td>
+                                <small>3.81K</small>
+                            </td>
                         </tr>
                         <!-- Repeat similar rows for other indices -->
                     </tbody>
