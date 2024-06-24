@@ -627,5 +627,15 @@ canvas {
 }
 
 .option-menu {
-    
+    position: absolute;
+    z-index: 1;
+    left: 0px;
+    top: 0px;
+    bottom: 0px;
+    width: 3px;
+    background-color: red;
+}
+
+.menu-active {
+    background-color: purple !important;
 }
