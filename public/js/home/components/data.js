@@ -1,7 +1,7 @@
 var DataSection = {
     template: `
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-2">
             <ul class="list-group">
                 <li class="list-group-item item-selected" @click="selectedMenu('events')">
                     <div :class="'option-menu '+(activeSection == 'events' ? 'menu-active' : '')"></div>
@@ -17,7 +17,7 @@ var DataSection = {
                 </li>
             </ul>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-10">
             <div class="container mt-4">
                 <h1>Indices</h1>
                 <div class="d-flex justify-content-between align-items-center">
