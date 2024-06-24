@@ -639,3 +639,7 @@ canvas {
 .menu-active {
     background-color: purple !important;
 }
+
+.filter-apply {
+    width: 130px;
+}

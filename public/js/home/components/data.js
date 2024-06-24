@@ -25,11 +25,11 @@ var DataSection = {
                     <button class="btn btn-primary">Create Index</button>
                 </div>
                 <div class="mt-2 d-flex justify-content-between align-items-center">
-                    <select class="form-control w-auto">
-                        <option>Select Page</option>
-                    </select>
+                    <div class="w-auto"></div>
                     <div class="d-flex align-items-center">
-                        <span>Last updated</span>
+                        <div class="filter-apply">
+                            <small>Last updated</small>
+                        </div>
                         <button class="btn btn-outline-secondary ml-2"><i class="fa fa-sort"></i></button>
                         <input type="text" class="form-control ml-2" placeholder="Filter indices...">
                     </div>
