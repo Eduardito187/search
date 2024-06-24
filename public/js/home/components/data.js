@@ -22,7 +22,7 @@ var DataSection = {
     `,
     data() {
         return {
-            activeSection: '',
+            activeSection: 'events',
         };
     },
     methods: {
