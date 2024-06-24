@@ -30,7 +30,7 @@ var DataSection = {
                     </select>
                     <div class="d-flex align-items-center">
                         <span>Last updated</span>
-                        <button class="btn btn-outline-secondary ml-2"><i class="fas fa-sort"></i></button>
+                        <button class="btn btn-outline-secondary ml-2"><i class="fa fa-sort"></i></button>
                         <input type="text" class="form-control ml-2" placeholder="Filter indices...">
                     </div>
                 </div>
