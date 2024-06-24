@@ -622,13 +622,6 @@ canvas {
     margin-bottom: 0px !important;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #ff6f47;
-    margin: 0;
-    padding: 20px;
-}
-
 .timeline {
     position: relative;
     max-width: 800px;
