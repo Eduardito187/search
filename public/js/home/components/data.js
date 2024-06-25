@@ -2,20 +2,7 @@ var DataSection = {
     template: `
     <div class="row">
         <div class="col-md-2">
-            <ul class="list-group">
-                <li class="list-group-item item-selected" @click="selectedMenu('events')">
-                    <div :class="'option-menu '+(activeSection == 'events' ? 'menu-active' : '')"></div>
-                    Eventos
-                </li>
-                <li class="list-group-item item-selected" @click="selectedMenu('connectors')">
-                    <div :class="'option-menu '+(activeSection == 'connectors' ? 'menu-active' : '')"></div>
-                    Conectores
-                </li>
-                <li class="list-group-item item-selected" @click="selectedMenu('index')">
-                    <div :class="'option-menu '+(activeSection == 'index' ? 'menu-active' : '')"></div>
-                    Indices
-                </li>
-            </ul>
+            <nav-col :items="colNav"></nav-col>
         </div>
         <div class="col-md-10">
             <div class="container mt-4">
@@ -149,6 +136,11 @@ var DataSection = {
     data() {
         return {
             activeSection: 'events',
+            colNav: [
+                {key: "events", label: "Eventos"},
+                {key: "connectors", label: "Conectores"},
+                {key: "index", label: "Indices"}
+            ]
         };
     },
     methods: {
