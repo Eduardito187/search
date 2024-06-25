@@ -643,3 +643,7 @@ canvas {
 .filter-apply {
     width: 130px;
 }
+
+.option-header-select {
+    padding: 10px;
+}

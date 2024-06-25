@@ -19,7 +19,27 @@ var DataSection = {
         </div>
         <div class="col-md-10">
             <div class="container mt-4">
-                <h1>Indices</h1>
+                <h1>Eventos</h1>
+                <div class="row mt-2">
+                    <div class="d-flex justify-content-start">
+                        <div class="option-header-select">
+                            <small>Eventos base</small>
+                        </div>
+                        <div class="option-header-select">
+                            <small>Depurador</small>
+                        </div>
+                        <div class="option-header-select">
+                            <small>Conectores</small>
+                        </div>
+                        <div class="option-header-select">
+                            <small>Ajustes</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2"></div>
+            </div>
+            <div class="container mt-4">
+                <h1>Conectores</h1>
                 <div class="d-flex justify-content-between align-items-center">
                     <span>655 / 1000 indices total</span>
                     <button class="btn btn-primary">Create Index</button>
@@ -30,7 +50,6 @@ var DataSection = {
                         <div class="filter-apply">
                             <small>Last updated</small>
                         </div>
-                        <button class="btn btn-outline-secondary ml-2"><i class="fa fa-sort"></i></button>
                         <input type="text" class="form-control ml-2" placeholder="Filter indices...">
                     </div>
                 </div>
@@ -67,12 +86,74 @@ var DataSection = {
                                 <small>3.81K</small>
                             </td>
                         </tr>
-                        <!-- Repeat similar rows for other indices -->
                     </tbody>
                 </table>
                 <div class="d-flex justify-content-between">
-                    <span class="text-success">Activity within the last 7 days</span>
-                    <span class="text-warning">Building</span>
+                    <span class="text-success">
+                        <small>Activity within the last 7 days</small>
+                    </span>
+                    <span class="text-warning">
+                        <small>Building</small>
+                    </span>
+                </div>
+            </div>
+            <div class="container mt-4">
+                <h1>Indices</h1>
+                <div class="d-flex justify-content-between align-items-center">
+                    <span>655 / 1000 indices total</span>
+                    <button class="btn btn-primary">Create Index</button>
+                </div>
+                <div class="mt-2 d-flex justify-content-between align-items-center">
+                    <div class="w-auto"></div>
+                    <div class="d-flex align-items-center">
+                        <div class="filter-apply">
+                            <small>Last updated</small>
+                        </div>
+                        <input type="text" class="form-control ml-2" placeholder="Filter indices...">
+                    </div>
+                </div>
+                <table class="table mt-4">
+                    <thead>
+                        <tr>
+                            <th>Index</th>
+                            <th>Last build</th>
+                            <th>Records</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <i class="fa fa-database text-success mr-2"></i> 
+                                dis_prod_montero_products <span class="text-muted">Primary of 4 indices</span>
+                            </td>
+                            <td>
+                                <small>2 hours ago</small>
+                            </td>
+                            <td>
+                                <small>3.81K</small>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="fa fa-database text-success mr-2"></i> 
+                                dis_prod_montero_products_name_asc <span class="text-muted">Replica of dis_prod_montero_products</span>
+                            </td>
+                            <td>
+                                <small>2 hours ago</small>
+                            </td>
+                            <td>
+                                <small>3.81K</small>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="d-flex justify-content-between">
+                    <span class="text-success">
+                        <small>Activity within the last 7 days</small>
+                    </span>
+                    <span class="text-warning">
+                        <small>Building</small>
+                    </span>
                 </div>
             </div>
         </div>
