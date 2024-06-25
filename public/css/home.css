@@ -655,6 +655,7 @@ canvas {
 }
 
 .option-header-select {
+    cursor: pointer;
     position: relative;
     padding: 10px;
 }
