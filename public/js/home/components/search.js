@@ -3,6 +3,8 @@ var SearchSection = {
     <div class="row">
         <div class="col-md-2">
             <nav-col :items="colNav"></nav-col>
+            <br>
+            <nav-col :items="colNav"></nav-col>
         </div>
         <div class="col-md-10">
             <div class="container mt-4">
