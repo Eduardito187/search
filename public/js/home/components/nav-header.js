@@ -1,25 +1,26 @@
 Vue.component('nav-header', {
     template: `
     <div class="d-flex justify-content-start separate-nav-header">
-        <div class="option-header-select">
-            <small>Eventos base</small>
-        </div>
-        <div class="option-header-select">
-            <small>Depurador</small>
-        </div>
-        <div class="option-header-select">
-            <small>Conectores</small>
-        </div>
-        <div class="option-header-select">
-            <small>Ajustes</small>
+        <div v-for="item in items" class="option-header-select" @click="selectedMenu(item.key)">
+            <div :class="'header-option-menu '+(activeSection == item.key ? 'menu-active' : '')"></div>
+            <small>{{item.label}}</small>
         </div>
     </div>
     `,
+    props: {
+        items: {
+            type: Array,
+            default: () => []
+        }
+    },
     data() {
         return {
-            activeSection: 'events',
+            activeSection: 'event-base',
         };
     },
     methods: {
+        selectedMenu(key) {
+            this.activeSection = key;
+        }
     }
 });

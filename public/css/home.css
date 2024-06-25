@@ -636,6 +636,16 @@ canvas {
     background-color: red;
 }
 
+.header-option-menu {
+    position: absolute;
+    z-index: 1;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    height: 3px;
+    background-color: red;
+}
+
 .menu-active {
     background-color: purple !important;
 }
