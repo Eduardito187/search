@@ -97,6 +97,7 @@
 
 @section('custom-footer')
     <script src="{{ asset('js/home/components/home.js') }}"></script>
+    <script src="{{ asset('js/home/components/nav-header.js') }}"></script>
     <script src="{{ asset('js/home/components/dashboard.js') }}"></script>
     <script src="{{ asset('js/home/components/data.js') }}"></script>
     <script src="{{ asset('js/home/components/settings.js') }}"></script>

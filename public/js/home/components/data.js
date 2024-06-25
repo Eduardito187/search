@@ -21,20 +21,7 @@ var DataSection = {
             <div class="container mt-4">
                 <h1>Eventos</h1>
                 <div class="row mt-2">
-                    <div class="d-flex justify-content-start">
-                        <div class="option-header-select">
-                            <small>Eventos base</small>
-                        </div>
-                        <div class="option-header-select">
-                            <small>Depurador</small>
-                        </div>
-                        <div class="option-header-select">
-                            <small>Conectores</small>
-                        </div>
-                        <div class="option-header-select">
-                            <small>Ajustes</small>
-                        </div>
-                    </div>
+                    <nav-header></nav-header>
                 </div>
                 <div class="row mt-2"></div>
             </div>

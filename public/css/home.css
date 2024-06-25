@@ -645,5 +645,10 @@ canvas {
 }
 
 .option-header-select {
+    position: relative;
     padding: 10px;
+}
+
+.separate-nav-header {
+    border-bottom: solid rgb(211 211 227) 1px;
 }
