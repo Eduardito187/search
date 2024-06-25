@@ -14,62 +14,10 @@ var DataSection = {
             </div>
             <div class="container mt-4">
                 <h1>Conectores</h1>
-                <div class="d-flex justify-content-between align-items-center">
-                    <span>655 / 1000 indices total</span>
-                    <button class="btn btn-primary">Create Index</button>
+                <div class="row mt-2">
+                    <nav-header :items="headerNavV2"></nav-header>
                 </div>
-                <div class="mt-2 d-flex justify-content-between align-items-center">
-                    <div class="w-auto"></div>
-                    <div class="d-flex align-items-center">
-                        <div class="filter-apply">
-                            <small>Last updated</small>
-                        </div>
-                        <input type="text" class="form-control ml-2" placeholder="Filter indices...">
-                    </div>
-                </div>
-                <table class="table mt-4">
-                    <thead>
-                        <tr>
-                            <th>Index</th>
-                            <th>Last build</th>
-                            <th>Records</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <i class="fa fa-database text-success mr-2"></i> 
-                                dis_prod_montero_products <span class="text-muted">Primary of 4 indices</span>
-                            </td>
-                            <td>
-                                <small>2 hours ago</small>
-                            </td>
-                            <td>
-                                <small>3.81K</small>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <i class="fa fa-database text-success mr-2"></i> 
-                                dis_prod_montero_products_name_asc <span class="text-muted">Replica of dis_prod_montero_products</span>
-                            </td>
-                            <td>
-                                <small>2 hours ago</small>
-                            </td>
-                            <td>
-                                <small>3.81K</small>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="d-flex justify-content-between">
-                    <span class="text-success">
-                        <small>Activity within the last 7 days</small>
-                    </span>
-                    <span class="text-warning">
-                        <small>Building</small>
-                    </span>
-                </div>
+                <div class="row mt-2"></div>
             </div>
             <div class="container mt-4">
                 <h1>Indices</h1>
@@ -146,6 +94,12 @@ var DataSection = {
                 {key: "debug", label: "Depurador"},
                 {key: "connector", label: "Conectores"},
                 {key: "setting", label: "Ajustes"}
+            ],
+            headerNavV2: [
+                {key: "home", label: "Home"},
+                {key: "tasks", label: "Tasks"},
+                {key: "sources", label: "Sources"},
+                {key: "destinations", label: "Destinations"}
             ]
         };
     },
@@ -153,7 +107,5 @@ var DataSection = {
         selectedMenu(option) {
             this.activeSection = option;
         }
-    },
-    created() {
     }
 };

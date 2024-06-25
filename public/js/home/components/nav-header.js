@@ -15,12 +15,17 @@ Vue.component('nav-header', {
     },
     data() {
         return {
-            activeSection: 'event-base',
+            activeSection: '',
         };
     },
     methods: {
         selectedMenu(key) {
             this.activeSection = key;
+        }
+    },
+    created() {
+        if (this.items.length > 0) {
+            this.activeSection = this.items[0].key;
         }
     }
 });
