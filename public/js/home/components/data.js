@@ -18,18 +18,6 @@ var DataSection = {
                 {key: "events", label: "Eventos"},
                 {key: "connectors", label: "Conectores"},
                 {key: "index", label: "Indices"}
-            ],
-            headerNav: [
-                {key: "event-base", label: "Eventos base"},
-                {key: "debug", label: "Depurador"},
-                {key: "connector", label: "Conectores"},
-                {key: "setting", label: "Ajustes"}
-            ],
-            headerNavV2: [
-                {key: "home", label: "Home"},
-                {key: "tasks", label: "Tasks"},
-                {key: "sources", label: "Sources"},
-                {key: "destinations", label: "Destinations"}
             ]
         };
     },

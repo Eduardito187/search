@@ -10,7 +10,12 @@ Vue.component('conectores-section', {
     `,
     data() {
         return {
-            data: '',
+            headerNavV2: [
+                {key: "home", label: "Home"},
+                {key: "tasks", label: "Tasks"},
+                {key: "sources", label: "Sources"},
+                {key: "destinations", label: "Destinations"}
+            ]
         };
     },
     methods: {

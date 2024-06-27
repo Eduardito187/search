@@ -10,7 +10,12 @@ Vue.component('eventos-section', {
     `,
     data() {
         return {
-            data: '',
+            headerNav: [
+                {key: "event-base", label: "Eventos base"},
+                {key: "debug", label: "Depurador"},
+                {key: "connector", label: "Conectores"},
+                {key: "setting", label: "Ajustes"}
+            ],
         };
     },
     methods: {
