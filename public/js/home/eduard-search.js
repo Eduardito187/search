@@ -218,7 +218,8 @@ new Vue({
       window.location.href = '/login';
     },
     redirecHome() {
-      window.location.href = '/home';
+      this.$router.push('/home');
+      //window.location.href = '/home';
     },
     loadHeaderAnimate() {
       $(document).ready(function() {
