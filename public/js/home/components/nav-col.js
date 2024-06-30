@@ -21,7 +21,7 @@ Vue.component('nav-col', {
     methods: {
         selectedMenu(key) {
             this.activeSection = key;
-            this.$event("option_selected", key);
+            this.$emit("option_selected", key);
         }
     },
     created() {
