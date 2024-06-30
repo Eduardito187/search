@@ -2,6 +2,7 @@ var DataSection = {
     template: `
     <div class="row">
         <div class="col-md-2">
+            {{activeSection}}
             <nav-col @option_selected="selectedMenu($event)" :items="colNav"></nav-col>
         </div>
         <div class="col-md-10">
