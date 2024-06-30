@@ -2,12 +2,12 @@ var DataSection = {
     template: `
     <div class="row">
         <div class="col-md-2">
-            <nav-col :items="colNav"></nav-col>
+            <nav-col @option_selected="selectedMenu($event)" :items="colNav"></nav-col>
         </div>
         <div class="col-md-10">
-            <eventos-section></eventos-section>
-            <conectores-section></conectores-section>
-            <indices-section></indices-section>
+            <eventos-section v-if="activeSection == 'events'"></eventos-section>
+            <conectores-section v-if="activeSection == 'connectors'"></conectores-section>
+            <indices-section v-if="activeSection == 'index'"></indices-section>
         </div>
     </div>
     `,
