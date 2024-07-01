@@ -1,7 +1,7 @@
 Vue.component('nav-drop', {
     template: `
     <div class="row">
-        <div class="d-flex header-section-nav-drop">
+        <div class="d-flex header-section-nav-drop" @click="openSectionItem()">
             <i :class="icon" aria-hidden="true"></i>
             <small class="nav-drop-title ms-1">{{title}}</small>
             <i :class="'ms-2 fa '+iconDrop" aria-hidden="true"></i>
