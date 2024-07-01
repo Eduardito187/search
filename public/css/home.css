@@ -662,3 +662,7 @@ canvas {
 .separate-nav-header {
     border-bottom: solid rgb(211 211 227) 1px;
 }
+
+.header-section-nav-drop {
+    cursor: pointer;
+}
