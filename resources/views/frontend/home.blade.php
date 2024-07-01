@@ -31,11 +31,13 @@
         </div>
         <img src="https://via.placeholder.com/600x400" alt="Illustration" class="illustration">
     </div>
-    <div class="dashboard-home">
-        <div class="announcement-home">
-            <h1>We updated our cancelation policy to ensure the user experience</h1>
-            <p>Learn more details on our latest blog post</p>
-            <button id="explore-updates-home">Explore updates</button>
+    <div class="container-section">
+        <div class="dashboard-home">
+            <div class="announcement-home">
+                <h1>We updated our cancelation policy to ensure the user experience</h1>
+                <p>Learn more details on our latest blog post</p>
+                <button id="explore-updates-home">Explore updates</button>
+            </div>
         </div>
     </div>
     <main class="container-main">
