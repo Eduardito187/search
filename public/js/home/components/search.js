@@ -2,9 +2,9 @@ var SearchSection = {
     template: `
     <div class="row">
         <div class="col-md-2">
-            <nav-drop :icon="'fa fa-cog'" :items="colNav"></nav-drop>
+            <nav-drop :title="'Configuracion'" :icon="'fa fa-cog'" :items="colNav"></nav-drop>
             <br>
-            <nav-drop :icon="'fa fa-line-chart'" :items="colNav"></nav-drop>
+            <nav-drop :title="'Observador'" :icon="'fa fa-line-chart'" :items="colNav"></nav-drop>
         </div>
         <div class="col-md-10">
             <div class="container mt-4">

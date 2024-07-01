@@ -3,6 +3,7 @@ Vue.component('nav-drop', {
     <div class="row">
         <div class="d-flex">
             <i :class="icon" aria-hidden="true"></i>
+            <small class="nav-drop-title">{{title}}</small>
         </div>
         <div class="p-2">
             <nav-col :items="items"></nav-col>
@@ -11,6 +12,10 @@ Vue.component('nav-drop', {
     `,
     props: {
         icon: {
+            type: String,
+            default: () => ""
+        },
+        title: {
             type: String,
             default: () => ""
         },
