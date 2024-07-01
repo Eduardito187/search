@@ -3,10 +3,10 @@ Vue.component('nav-drop', {
     <div class="row">
         <div class="d-flex">
             <i :class="icon" aria-hidden="true"></i>
-            <small class="nav-drop-title">{{title}}</small>
-            <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            <small class="nav-drop-title ms-1">{{title}}</small>
+            <i :class="'ms-2 fa '+iconDrop" aria-hidden="true"></i>
         </div>
-        <div class="p-2">
+        <div v-show="showOptions" class="p-2">
             <nav-col :items="items"></nav-col>
         </div>
     </div>
@@ -27,10 +27,22 @@ Vue.component('nav-drop', {
     },
     data() {
         return {
+            iconDrop: 'fa-angle-down',
             activeSection: '',
+            showOptions: true
         };
     },
     methods: {
+        openSectionItem() {
+            this.showOptions = !this.showOptions;
+        },
+        updatedIcon() {
+            if (this.showOptions) {
+                this.iconDrop = "fa-angle-down";
+            } else {
+                this.iconDrop = "fa-angle-right";
+            }
+        },
         selectedMenu(key) {
             this.activeSection = key;
             this.$emit("option_selected", key);
