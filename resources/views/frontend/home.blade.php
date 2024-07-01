@@ -35,8 +35,10 @@
         <div class="dashboard-home">
             <div class="announcement-home">
                 <h1>We updated our cancelation policy to ensure the user experience</h1>
-                <p>Learn more details on our latest blog post</p>
-                <button id="explore-updates-home">Explore updates</button>
+                <div class="content-row">
+                    <button id="explore-updates-home">Explore updates</button>
+                    <p>Learn more details on our latest blog post</p>
+                </div>
             </div>
         </div>
     </div>

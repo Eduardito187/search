@@ -2,9 +2,9 @@ var SearchSection = {
     template: `
     <div class="row">
         <div class="col-md-2">
-            <nav-col :items="colNav"></nav-col>
+            <nav-drop :items="colNav"></nav-drop>
             <br>
-            <nav-col :items="colNav"></nav-col>
+            <nav-drop :items="colNav"></nav-drop>
         </div>
         <div class="col-md-10">
             <div class="container mt-4">
@@ -35,15 +35,14 @@ var SearchSection = {
         return {
             activeSection: 'events',
             colNav: [
-                {key: "events", label: "Eventos"},
-                {key: "connectors", label: "Conectores"},
-                {key: "index", label: "Indices"}
+                {key: "index", label: "Indices"},
+                {key: "suggestions", label: "Sugerencias"},
+                {key: "category", label: "Categorias"},
+                {key: "dictionaries", label: "Dicionario"}
             ],
             headerNav: [
-                {key: "event-base", label: "Eventos base"},
-                {key: "debug", label: "Depurador"},
-                {key: "connector", label: "Conectores"},
-                {key: "setting", label: "Ajustes"}
+                {key: "analitycs", label: "Analitica"},
+                {key: "test", label: "Testing"}
             ],
             headerNavV2: [
                 {key: "home", label: "Home"},

@@ -102,6 +102,7 @@
     <script src="{{ asset('js/home/components/sections/eventos.js') }}"></script>
     <script src="{{ asset('js/home/components/sections/indices.js') }}"></script>
     <script src="{{ asset('js/home/components/nav-col.js') }}"></script>
+    <script src="{{ asset('js/home/components/nav-drop.js') }}"></script>
     <script src="{{ asset('js/home/components/dashboard.js') }}"></script>
     <script src="{{ asset('js/home/components/data.js') }}"></script>
     <script src="{{ asset('js/home/components/settings.js') }}"></script>
