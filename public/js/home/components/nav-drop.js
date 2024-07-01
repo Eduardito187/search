@@ -1,10 +1,19 @@
 Vue.component('nav-drop', {
     template: `
-    <div class="p-2">
-        <nav-col :items="items"></nav-col>
+    <div class="row">
+        <div class="d-flex">
+            <i :class="icon" aria-hidden="true"></i>
+        </div>
+        <div class="p-2">
+            <nav-col :items="items"></nav-col>
+        </div>
     </div>
     `,
     props: {
+        icon: {
+            type: String,
+            default: () => ""
+        },
         items: {
             type: Array,
             default: () => []
