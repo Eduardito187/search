@@ -310,3 +310,30 @@ nav a:visited {
 .footer-social a:hover {
     color: #ffffff;
 }
+
+.dashboard-home {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.dashboard-home .announcement-home {
+    background-color: #3f51b5;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.dashboard-home .announcement-home button {
+    background-color: white;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.dashboard-home .announcement-home button:hover {
+    background-color: lightgray;
+}
