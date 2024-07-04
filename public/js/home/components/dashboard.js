@@ -3,6 +3,10 @@ var DashboardSection = {
     <div class="container-dashboard">
         <record-search></record-search>
         <div class="row mb-4">
+            <limit-search></limit-search>
+            <limit-batch></limit-batch>
+        </div>
+        <div class="row mb-4">
             <div class="col-md-6 margin-bottom-20">
                 <div class="card p-3 chart">
                     <div id="doughnutChart"></div>
