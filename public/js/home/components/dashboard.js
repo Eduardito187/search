@@ -42,6 +42,12 @@ var DashboardSection = {
                 },
                 stroke: {
                     curve: 'smooth'
+                },
+                xaxis: {
+                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                },
+                fill: {
+                    opacity: 1
                 }
             };
 
