@@ -40,6 +40,7 @@ Vue.component('detail-usage-batch', {
             };
 
             var chart = new ApexCharts(document.querySelector("#detail-usage-batch"), options);
+            chart.render();
         }
     },
     mounted() {

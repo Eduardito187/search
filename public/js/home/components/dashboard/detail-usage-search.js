@@ -40,6 +40,7 @@ Vue.component('detail-usage-search', {
             };
 
             var chart = new ApexCharts(document.querySelector("#detail-usage-search"), options);
+            chart.render();
         }
     },
     mounted() {
