@@ -3,24 +3,19 @@ var DashboardSection = {
     <div class="container-dashboard">
         <record-search></record-search>
         <div class="row mb-4">
+            <div class="container-row">
+                <div class="card p-3 chart-large">
+                    <div id="lineChart"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-4">
             <limit-search></limit-search>
             <limit-batch></limit-batch>
         </div>
         <div class="row mb-4">
             <detail-usage-search></detail-usage-search>
             <detail-usage-batch></detail-usage-batch>
-        </div>
-        <div class="row mb-4">
-            <div class="col-md-6 margin-bottom-20">
-                <div class="card p-3 chart">
-                    <div id="lineChart"></div>
-                </div>
-            </div>
-            <div class="col-md-6 margin-bottom-20">
-                <div class="card p-3 chart">
-                    <div id="doughnutChartV2"></div>
-                </div>
-            </div>
         </div>
     </div>
     `,
@@ -60,25 +55,6 @@ var DashboardSection = {
             };
 
             var chart = new ApexCharts(document.querySelector("#lineChart"), options);
-            chart.render();
-
-            var options = {
-                series: [70],
-                chart: {
-                    height: '300px',
-                    type: 'radialBar',
-                },
-                plotOptions: {
-                    radialBar: {
-                        hollow: {
-                            size: '70%',
-                        }
-                    },
-                },
-                labels: ['Cricket'],
-            };
-
-            var chart = new ApexCharts(document.querySelector("#doughnutChartV2"), options);
             chart.render();
         },
     },
