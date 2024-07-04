@@ -7,6 +7,10 @@ use App\Helpers\Account\Customer;
 
 class Analitycs
 {
+    const SEARCH_EVENTS = [];
+    const RECOMMEND_EVENTS = [];
+    const CUSTOM_EVENTS = [];
+
     /**
      * @var CoreHttp
      */
