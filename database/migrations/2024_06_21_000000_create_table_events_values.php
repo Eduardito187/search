@@ -22,7 +22,8 @@ return new class extends Migration
             $table->string('code_uuid')->nullable();
             $table->string('customer_uuid')->nullable();
             $table->string('url')->nullable();
-            $table->string('value')->nullable();
+            $table->double('value_numeric')->nullable();
+            $table->text('value_text')->nullable();
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
         });

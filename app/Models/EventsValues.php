@@ -12,7 +12,7 @@ class EventsValues extends Model
     use HasFactory;
 
     protected $table = 'events_values';
-    protected $fillable = ['code_uuid', 'customer_uuid', 'url', 'value'];
+    protected $fillable = ['code_uuid', 'customer_uuid', 'url', 'value_numeric', 'value_text'];
     protected $hidden = ['id_index', 'id_event', 'created_at', 'updated_at'];
     protected $primaryKey = 'id';
     public $incrementing = true;

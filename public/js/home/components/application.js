@@ -1,7 +1,7 @@
 var ApplicationSection = {
     template: `
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 mb-2">
             <div class="card">
                 <div class="card-body">
                     <div class="row text-end">

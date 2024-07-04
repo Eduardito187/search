@@ -49,4 +49,46 @@ class Events extends Controller
             )
         );
     }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getAllEventSearch(Request $request)
+    {
+        return response()->json(
+            $this->analitycs->getAllEventSearch(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getAllEventRecommend(Request $request)
+    {
+        return response()->json(
+            $this->analitycs->getAllEventRecommend(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getAllEventCustom(Request $request)
+    {
+        return response()->json(
+            $this->analitycs->getAllEventCustom(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
 }

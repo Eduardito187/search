@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\EventsValues;
 use App\Models\TypeAttribute;
+use App\Models\EventSection;
 
 class Events extends Model
 {
@@ -13,11 +14,18 @@ class Events extends Model
 
     protected $table = 'events';
     protected $fillable = ['name', 'code'];
-    protected $hidden = ['id_client', 'value_type', 'created_at', 'updated_at'];
+    protected $hidden = ['id_client', 'value_type', 'created_at', 'updated_at', 'id_event_section'];
     protected $primaryKey = 'id';
     public $incrementing = true;
     protected $keyType = 'integer';
     public $timestamps = false;
+
+    /**
+     * @inheritDoc
+     */
+    public function eventSection() {
+        return $this->hasOne(EventSection::class, 'id_event_section', 'id');
+    }
 
     /**
      * @inheritDoc
