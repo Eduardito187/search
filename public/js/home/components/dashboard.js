@@ -7,9 +7,13 @@ var DashboardSection = {
             <limit-batch></limit-batch>
         </div>
         <div class="row mb-4">
+            <detail-usage-search></detail-usage-search>
+            <detail-usage-batch></detail-usage-batch>
+        </div>
+        <div class="row mb-4">
             <div class="col-md-6 margin-bottom-20">
                 <div class="card p-3 chart">
-                    <div id="doughnutChart"></div>
+                    <div id="lineChart"></div>
                 </div>
             </div>
             <div class="col-md-6 margin-bottom-20">
@@ -56,29 +60,6 @@ var DashboardSection = {
             };
 
             var chart = new ApexCharts(document.querySelector("#lineChart"), options);
-            chart.render();
-
-            var options = {
-                series: [44, 55, 13, 43, 22],
-                chart: {
-                    height: '300px',
-                    type: 'pie',
-                },
-                labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
-                responsive: [{
-                    breakpoint: 480,
-                    options: {
-                        chart: {
-                            width: 200
-                        },
-                        legend: {
-                            position: 'bottom'
-                        }
-                    }
-                }]
-            };
-
-            var chart = new ApexCharts(document.querySelector("#doughnutChart"), options);
             chart.render();
 
             var options = {

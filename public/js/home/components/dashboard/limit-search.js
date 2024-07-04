@@ -1,6 +1,6 @@
 Vue.component('limit-search', {
     template: `
-    <div class="col-md-6 margin-bottom-20">
+    <div class="col-md-6">
         <div class="card p-3 chart">
             <div id="limit-search"></div>
         </div>
