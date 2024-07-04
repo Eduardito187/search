@@ -108,6 +108,7 @@
     <script src="{{ asset('js/home/components/dashboard/limit-batch.js') }}"></script>
     <script src="{{ asset('js/home/components/dashboard/detail-usage-search.js') }}"></script>
     <script src="{{ asset('js/home/components/dashboard/detail-usage-batch.js') }}"></script>
+    <script src="{{ asset('js/home/components/dashboard/usage-operations-search.js') }}"></script>
     <script src="{{ asset('js/home/components/dashboard.js') }}"></script>
     <script src="{{ asset('js/home/components/data.js') }}"></script>
     <script src="{{ asset('js/home/components/settings.js') }}"></script>
