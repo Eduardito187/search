@@ -1,14 +1,7 @@
 var DashboardSection = {
     template: `
     <div class="container-dashboard">
-        <record-search></>
-        <div class="row mb-4">
-            <div class="container-row">
-                <div class="card p-3 chart-large">
-                    <div id="lineChart"></div>
-                </div>
-            </div>
-        </div>
+        <record-search></record-search>
         <div class="row mb-4">
             <div class="col-md-6 margin-bottom-20">
                 <div class="card p-3 chart">
