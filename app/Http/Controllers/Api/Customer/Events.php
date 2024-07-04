@@ -91,4 +91,88 @@ class Events extends Controller
             )
         );
     }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getRecordSearchReportMonth(Request $request)
+    {
+        return response()->json(
+            $this->analitycs->getRecordSearchReportMonth(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getRecordSearchReportDay(Request $request)
+    {
+        return response()->json(
+            $this->analitycs->getRecordSearchReportDay(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getLimitUsageSearch(Request $request)
+    {
+        return response()->json(
+            $this->analitycs->getLimitUsageSearch(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getLimitUsageBatch(Request $request)
+    {
+        return response()->json(
+            $this->analitycs->getLimitUsageBatch(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getUsageIndexSearch(Request $request)
+    {
+        return response()->json(
+            $this->analitycs->getUsageIndexSearch(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getUsageIndexBatch(Request $request)
+    {
+        return response()->json(
+            $this->analitycs->getUsageIndexBatch(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
 }

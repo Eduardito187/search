@@ -30,6 +30,15 @@ Route::middleware([CustomValidateToken::class])->group(function () {
     Route::controller(Events::class)->group(function() {
         Route::post('event/set-value', 'setEvent');
         Route::post('event/get-all', 'getAllEvents');
+        Route::post('event/get-all-event-search', 'getAllEventSearch');
+        Route::post('event/get-all-event-recommend', 'getAllEventRecommend');
+        Route::post('event/get-all-event-custom', 'getAllEventCustom');
+        Route::post('event/get-record-rearch-report-month', 'getRecordSearchReportMonth');
+        Route::post('event/get-record-search-report-day', 'getRecordSearchReportDay');
+        Route::post('event/get-limit-usage-search', 'getLimitUsageSearch');
+        Route::post('event/get-limit-usage-batch', 'getLimitUsageBatch');
+        Route::post('event/get-usage-index-search', 'getUsageIndexSearch');
+        Route::post('event/get-usage-index-batch', 'getUsageIndexBatch');
     });
 
     Route::controller(Account::class)->group(function() {

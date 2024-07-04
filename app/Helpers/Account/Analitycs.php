@@ -71,6 +71,78 @@ class Analitycs
         );
     }
 
+    public function getRecordSearchReportMonth(array $body, array $header = [])
+    {
+        return $this->customer->executeWithValidation(
+            function() use ($body, $header) {
+                $this->customer->validateCustomerKey($header);
+                $customer = $this->customer->getCustomerByEncryption($header["customer-key"][0]);
+                return [];
+            },
+            "Proceso ejecutado exitosamente."
+        );
+    }
+
+    public function getRecordSearchReportDay(array $body, array $header = [])
+    {
+        return $this->customer->executeWithValidation(
+            function() use ($body, $header) {
+                $this->customer->validateCustomerKey($header);
+                $customer = $this->customer->getCustomerByEncryption($header["customer-key"][0]);
+                return [];
+            },
+            "Proceso ejecutado exitosamente."
+        );
+    }
+
+    public function getLimitUsageSearch(array $body, array $header = [])
+    {
+        return $this->customer->executeWithValidation(
+            function() use ($body, $header) {
+                $this->customer->validateCustomerKey($header);
+                $customer = $this->customer->getCustomerByEncryption($header["customer-key"][0]);
+                return [];
+            },
+            "Proceso ejecutado exitosamente."
+        );
+    }
+
+    public function getLimitUsageBatch(array $body, array $header = [])
+    {
+        return $this->customer->executeWithValidation(
+            function() use ($body, $header) {
+                $this->customer->validateCustomerKey($header);
+                $customer = $this->customer->getCustomerByEncryption($header["customer-key"][0]);
+                return [];
+            },
+            "Proceso ejecutado exitosamente."
+        );
+    }
+
+    public function getUsageIndexSearch(array $body, array $header = [])
+    {
+        return $this->customer->executeWithValidation(
+            function() use ($body, $header) {
+                $this->customer->validateCustomerKey($header);
+                $customer = $this->customer->getCustomerByEncryption($header["customer-key"][0]);
+                return [];
+            },
+            "Proceso ejecutado exitosamente."
+        );
+    }
+
+    public function getUsageIndexBatch(array $body, array $header = [])
+    {
+        return $this->customer->executeWithValidation(
+            function() use ($body, $header) {
+                $this->customer->validateCustomerKey($header);
+                $customer = $this->customer->getCustomerByEncryption($header["customer-key"][0]);
+                return [];
+            },
+            "Proceso ejecutado exitosamente."
+        );
+    }
+
     public function getAllEventCustom(array $body, array $header = [])
     {
         return $this->customer->executeWithValidation(
