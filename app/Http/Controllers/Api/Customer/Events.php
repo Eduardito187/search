@@ -152,6 +152,20 @@ class Events extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
+    public function getLimitUsageEvent(Request $request)
+    {
+        return response()->json(
+            $this->analitycs->getLimitUsageEvent(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
     public function getUsageIndexSearch(Request $request)
     {
         return response()->json(

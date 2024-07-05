@@ -37,6 +37,7 @@ Route::middleware([CustomValidateToken::class])->group(function () {
         Route::post('event/get-record-search-report-day', 'getRecordSearchReportDay');
         Route::post('event/get-limit-usage-search', 'getLimitUsageSearch');
         Route::post('event/get-limit-usage-batch', 'getLimitUsageBatch');
+        Route::post('event/get-limit-usage-event', 'getLimitUsageEvent');
         Route::post('event/get-usage-index-search', 'getUsageIndexSearch');
         Route::post('event/get-usage-index-batch', 'getUsageIndexBatch');
     });

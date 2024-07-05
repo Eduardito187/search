@@ -19,7 +19,16 @@ class Client extends Model
     use HasFactory;
 
     protected $table = 'client';
-    protected $fillable = ['name', 'code', 'count_attributes', 'count_products', 'count_index', 'status'];
+    protected $fillable = [
+        'name',
+        'code',
+        'count_attributes',
+        'count_products',
+        'count_index',
+        'status',
+        'limit_query',
+        'limit_record',
+        'limit_event'];
     protected $hidden = ['created_at', 'updated_at'];
     protected $primaryKey = 'id';
     public $incrementing = true;

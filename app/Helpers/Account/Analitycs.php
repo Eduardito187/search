@@ -4,6 +4,8 @@ namespace App\Helpers\Account;
 
 use App\Helpers\System\CoreHttp;
 use App\Helpers\Account\Customer;
+use App\Models\EventSection;
+use Exception;
 
 class Analitycs
 {
@@ -53,7 +55,7 @@ class Analitycs
             function() use ($body, $header) {
                 $this->customer->validateCustomerKey($header);
                 $customer = $this->customer->getCustomerByEncryption($header["customer-key"][0]);
-                return [];
+                return $this->getEventSections("search", $customer->client);
             },
             "Proceso ejecutado exitosamente."
         );
@@ -65,7 +67,7 @@ class Analitycs
             function() use ($body, $header) {
                 $this->customer->validateCustomerKey($header);
                 $customer = $this->customer->getCustomerByEncryption($header["customer-key"][0]);
-                return [];
+                return $this->getEventSections("recommend", $customer->client);
             },
             "Proceso ejecutado exitosamente."
         );
@@ -101,7 +103,7 @@ class Analitycs
             function() use ($body, $header) {
                 $this->customer->validateCustomerKey($header);
                 $customer = $this->customer->getCustomerByEncryption($header["customer-key"][0]);
-                return [];
+                return $this->arrayLimit($customer->client->limit_query);
             },
             "Proceso ejecutado exitosamente."
         );
@@ -113,7 +115,19 @@ class Analitycs
             function() use ($body, $header) {
                 $this->customer->validateCustomerKey($header);
                 $customer = $this->customer->getCustomerByEncryption($header["customer-key"][0]);
-                return [];
+                return $this->arrayLimit($customer->client->limit_record);
+            },
+            "Proceso ejecutado exitosamente."
+        );
+    }
+
+    public function getLimitUsageEvent(array $body, array $header = [])
+    {
+        return $this->customer->executeWithValidation(
+            function() use ($body, $header) {
+                $this->customer->validateCustomerKey($header);
+                $customer = $this->customer->getCustomerByEncryption($header["customer-key"][0]);
+                return $this->arrayLimit($customer->client->limit_event);
             },
             "Proceso ejecutado exitosamente."
         );
@@ -149,7 +163,7 @@ class Analitycs
             function() use ($body, $header) {
                 $this->customer->validateCustomerKey($header);
                 $customer = $this->customer->getCustomerByEncryption($header["customer-key"][0]);
-                return [];
+                return $this->getEventSections("custom", $customer->client);
             },
             "Proceso ejecutado exitosamente."
         );
@@ -191,5 +205,35 @@ class Analitycs
             },
             "Proceso ejecutado exitosamente."
         );
+    }
+
+    public function getEventSections($type, $client)
+    {
+        $eventSection = EventSection::where('code', $type)->first();
+
+        if ($eventSection == null) {
+            throw new Exception("Tipo de evento no identificado.");
+        }
+
+        $events =  $eventSection->events()->where("id_client", $client->id)->get();
+        return $this->convertEventArray($events);
+    }
+
+    public function convertEventArray($events)
+    {
+        $data = [];
+
+        foreach ($events as $event) {
+            # code...
+        }
+
+        return $data;
+    }
+
+    public function arrayLimit($value)
+    {
+        return [
+            "limit" => $value ?? 0
+        ];
     }
 }

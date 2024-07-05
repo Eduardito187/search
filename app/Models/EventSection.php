@@ -21,7 +21,7 @@ class EventSection extends Model
     /**
      * @inheritDoc
      */
-    public function attributes() {
+    public function events() {
         return $this->hasMany(Events::class, 'id', 'id_event_section');
     }
 }
