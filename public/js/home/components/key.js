@@ -36,6 +36,26 @@ var KeySection = {
         </div>
     </div>
     `,
+    data() {
+        return {
+            dataPage: []
+        };
+    },
+    methods: {
+        getDataPage() {
+            let self = this;
+            window.fetchFontendData('api/account/all-keys', 'POST').then(data => {
+                if (data.status && data.code == 200) {
+                    self.dataPage = data.response;
+                }
+            }).catch(error => {
+                console.error('Error en la solicitud:', error);
+            });
+        }
+    },
+    created() {
+        this.getDataPage();
+    },
     mounted() {
     }
 };

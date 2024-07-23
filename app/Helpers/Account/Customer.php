@@ -247,6 +247,34 @@ class Customer
         }
     }
 
+    public function getAllKeys(array $body, array $header = [])
+    {
+        return $this->executeWithValidation(
+            function() use ($header, $body) {
+                $this->validateCustomerKey($header);
+                $customer = $this->getCustomerByEncryption($header["customer-key"][0]);
+                $client = $customer->client;
+                $data = [];
+
+                foreach ($client->indexes as $index) {
+                    $data[] = [
+                        "code" => $index->code,
+                        "name" => $index->name,
+                        "token" => $index->indexConfiguration->api_key
+                    ];
+                }
+
+                return [
+                    "client_token" => $client->autorizationToken->token,
+                    "code" => $client->name,
+                    "name" => $client->code,
+                    "index" => $data
+                ];;
+            },
+            "Proceso ejecutado exitosamente."
+        );
+    }
+
     public function getAllCustomerMailing(array $body, array $header = [])
     {
         return $this->executeWithValidation(

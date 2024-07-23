@@ -271,4 +271,18 @@ class Account extends Controller
             )
         );
     }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getAllKeys(Request $request)
+    {
+        return response()->json(
+            $this->customer->getAllKeys(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
 }
