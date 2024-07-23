@@ -1,38 +1,33 @@
 var KeySection = {
     template: `
     <div class="api-key-container">
-        <div class="api-key-section">
-            <div class="api-key-header">Application ID</div>
-            <div class="api-key-value">HolaNMundo</div>
+        <div v-if="dataPage.name != null" class="api-key-section">
+            <div class="api-key-header">Application name</div>
+            <div class="api-key-value">{{dataPage.name}}</div>
         </div>
-        <div class="api-key-section">
-            <div class="api-key-header">Search API Key</div>
-            <div class="api-key-value">
-                <span>ff5a86f713772d4c221b11820d5a3901</span>
-                <button class="btn btn-warning btn-sm">Regenerate</button>
+        <div v-if="dataPage.code != null" class="api-key-section">
+            <div class="api-key-header">Application code</div>
+            <div class="api-key-value">{{dataPage.code}}</div>
+        </div>
+        <div v-if="dataPage.client_token != null" class="api-key-section">
+            <div class="api-key-header">Application token</div>
+            <div class="api-key-value">{{dataPage.client_token}}</div>
+        </div>
+        <div class="api-key-section p3">
+            <div class="api-key-section">
+                <div class="api-key-header">Write API Key</div>
+                <div class="api-key-value">
+                    <span>••••••••••••••••••••••••••••••••••••••</span>
+                    <button class="btn btn-warning btn-sm">Regenerate</button>
+                </div>
             </div>
-        </div>
-        <div class="api-key-section">
-            <div class="api-key-header">Write API Key</div>
-            <div class="api-key-value">
-                <span>••••••••••••••••••••••••••••••••••••••</span>
-                <button class="btn btn-warning btn-sm">Regenerate</button>
+            <div class="api-key-section">
+                <div class="api-key-header">Admin API Key</div>
+                <div class="api-key-value">
+                    <span>••••••••••••••••••••••••••••••••••••••</span>
+                    <button class="btn btn-warning btn-sm">Regenerate</button>
+                </div>
             </div>
-        </div>
-        <div class="api-key-section">
-            <div class="api-key-header">Admin API Key</div>
-            <div class="api-key-value">
-                <span>••••••••••••••••••••••••••••••••••••••</span>
-                <button class="btn btn-warning btn-sm">Regenerate</button>
-            </div>
-        </div>
-        <div class="api-key-section">
-            <div class="api-key-header">Team API Key</div>
-            <div class="api-key-value">24915dc8bb7abe34a6063766cc0170b2</div>
-        </div>
-        <div class="api-key-section">
-            <div class="api-key-header">Company API Key</div>
-            <div class="api-key-value">aa14b5a40b66ba962d2c58d472f70120</div>
         </div>
     </div>
     `,
