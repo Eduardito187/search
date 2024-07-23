@@ -15,6 +15,7 @@ use App\Helpers\SendMail;
 use App\Helpers\SendMailMasive;
 use App\Models\MailingCustomer;
 use App\Models\MailingIndex;
+use App\Models\NotificationsClient;
 use App\Models\PasswordReset;
 use App\Models\WebSiteCustomer;
 use Illuminate\Support\Facades\Event;
@@ -247,6 +248,77 @@ class Customer
         }
     }
 
+    public function createNotificationClient($idClient)
+    {
+        try {
+            $notification = new NotificationsClient();
+            $notification->report_day = false;
+            $notification->report_month = false;
+            $notification->alert_usage = false;
+            $notification->alert_billing = false;
+            $notification->ai = false;
+            $notification->id_client = $idClient;
+            $notification->created_at = date("Y-m-d H:i:s");
+            $notification->updated_at = null;
+            $notification->save();
+        } catch (Exception $e) {
+            return null;
+        }
+    }
+
+    public function getConfigNotifications(array $body, array $header = [])
+    {
+        return $this->executeWithValidation(
+            function() use ($header, $body) {
+                $this->validateCustomerKey($header);
+                $customer = $this->getCustomerByEncryption($header["customer-key"][0]);
+                $client = $customer->client;
+
+                if (!$client->notificationClient) {
+                    $this->createNotificationClient($client->id);
+                }
+
+                $data = [
+                    "report_day" => boolval($client->notificationClient->report_day ?? false),
+                    "report_month" => boolval($client->notificationClient->report_month ?? false),
+                    "alert_usage" => boolval($client->notificationClient->alert_usage ?? false),
+                    "alert_billing" => boolval($client->notificationClient->alert_billing ?? false),
+                    "ai" => boolval($client->notificationClient->ai ?? false)
+                ];
+
+                return $data;
+            },
+            "Proceso ejecutado exitosamente."
+        );
+    }
+
+    public function setConfigNotifications(array $body, array $header = [])
+    {
+        return $this->executeWithValidation(
+            function() use ($header, $body) {
+                $this->validateCustomerKey($header);
+                $customer = $this->getCustomerByEncryption($header["customer-key"][0]);
+                $client = $customer->client;
+
+                if (isset($body["code"])) {
+                    if (!$client->notificationClient) {
+                        $this->createNotificationClient($client->id);
+                    } else {
+                        NotificationsClient::where('id_client', $client->id)->update(
+                            [
+                                $body["code"] => true,
+                                'updated_at' => date("Y-m-d H:i:s")
+                            ]
+                        );
+                    }
+                }
+
+                return ["status" => true];
+            },
+            "Proceso ejecutado exitosamente."
+        );
+    }
+
     public function getAllKeys(array $body, array $header = [])
     {
         return $this->executeWithValidation(
@@ -269,7 +341,7 @@ class Customer
                     "code" => $client->name,
                     "name" => $client->code,
                     "index" => $data
-                ];;
+                ];
             },
             "Proceso ejecutado exitosamente."
         );
@@ -673,25 +745,6 @@ class Customer
                 }
 
                 return $data;
-            },
-            "Proceso ejecutado exitosamente."
-        );
-    }
-
-    public function getNotificationTeamData(array $body, array $header = [])
-    {
-        return $this->executeWithValidation(
-            function() use ($header) {
-                $this->validateCustomerKey($header);
-                $currentCustomer = $this->getCustomerByEncryption($header["customer-key"][0]);
-
-                return [
-                    "report_day" => false,
-                    "report_month" => false,
-                    "alert_usage" => false,
-                    "alert_billing" => false,
-                    "ai" => false
-                ];
             },
             "Proceso ejecutado exitosamente."
         );

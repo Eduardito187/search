@@ -164,20 +164,6 @@ class Account extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function getNotificationTeam(Request $request)
-    {
-        return response()->json(
-            $this->customer->getNotificationTeamData(
-                $request->all(),
-                $request->header()
-            )
-        );
-    }
-
-    /**
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function getContactTeam(Request $request)
     {
         return response()->json(
@@ -280,6 +266,34 @@ class Account extends Controller
     {
         return response()->json(
             $this->customer->getAllKeys(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getConfigNotifications(Request $request)
+    {
+        return response()->json(
+            $this->customer->getConfigNotifications(
+                $request->all(),
+                $request->header()
+            )
+        );
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function setConfigNotifications(Request $request)
+    {
+        return response()->json(
+            $this->customer->setConfigNotifications(
                 $request->all(),
                 $request->header()
             )

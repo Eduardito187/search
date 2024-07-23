@@ -35,7 +35,7 @@ var KeySection = {
                     <div class="api-key-header">Token</div>
                     <div class="api-key-value">
                         <button class="btn btn-warning btn-sm" @click="copyText(data.token, data.code)">Copy</button>
-                        <span class="ml-1">••••••••••••••••••••••••••••••••</span>
+                        <span>••••••••••••••••••••••••••••••••</span>
                         <button class="btn btn-warning btn-sm">Regenerate</button>
                     </div>
                 </div>

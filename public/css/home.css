@@ -432,6 +432,7 @@ canvas {
 
 .api-key-value span {
     display: block;
+    margin-left: 10px;
     margin-right: 10px;
 }
 

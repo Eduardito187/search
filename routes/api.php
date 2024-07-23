@@ -53,11 +53,12 @@ Route::middleware([CustomValidateToken::class])->group(function () {
         Route::post('account/close-session', 'closeSession');
         Route::post('account/my-account', 'getMyAccount');
         Route::post('account/team-users', 'getUsersTeam');
-        Route::post('account/team-notification', 'getNotificationTeam');
         Route::post('account/team-contact', 'getContactTeam');
         Route::post('account/team-support', 'getSupportTeam');
         Route::post('account/team-index', 'getAllIndex');
         Route::post('account/all-keys', 'getAllKeys');
+        Route::post('account/notification-config', 'getConfigNotifications');
+        Route::post('account/set-config-notification', 'setConfigNotifications');
         Route::post('mailing/create-masive', 'createMailMasive');
         Route::post('mailing/all-mail-sender', 'getAllMailSender');
         Route::post('mailing/get-mail', 'getMailQuery');

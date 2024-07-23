@@ -87,7 +87,7 @@ var NotificationsSection = {
     methods: {
         getNotificationData() {
             let self = this;
-            window.fetchFontendData('api/account/team-notification', 'POST').then(data => {
+            window.fetchFontendData('api/account/notification-config', 'POST').then(data => {
                 if (data.status && data.code == 200) {
                     self.dataPage = data.response;
                 }
