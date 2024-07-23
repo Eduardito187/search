@@ -306,7 +306,7 @@ class Customer
                     } else {
                         NotificationsClient::where('id_client', $client->id)->update(
                             [
-                                $body["code"] => true,
+                                $body["code"] => $body["value"] ?? false,
                                 'updated_at' => date("Y-m-d H:i:s")
                             ]
                         );
