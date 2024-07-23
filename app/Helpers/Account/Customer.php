@@ -260,7 +260,7 @@ class Customer
                     $data[] = [
                         "code" => $index->code,
                         "name" => $index->name,
-                        "token" => $index->indexConfiguration()->api_key ?? ''
+                        "token" => $index->indexConfiguration->api_key ?? ''
                     ];
                 }
 
