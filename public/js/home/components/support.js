@@ -42,7 +42,7 @@ var SupportSection = {
                         <div class="col align-self-end">
                             <button type="button" class="btn-save-eduard-search" :disabled="savedAction" @click="modifySupport">
                                 <span>Save</span>
-                                <div v-if="savedAction" class="spinner-border text-light" role="status">
+                                <div v-if="savedAction" class="spinner-border text-light size-loader" role="status">
                                     <span class="visually-hidden">Loading...</span>
                                 </div>
                             </button>

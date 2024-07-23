@@ -48,7 +48,7 @@ var ContactsSection = {
                         <div class="col align-self-end">
                             <button type="button" class="btn-save-eduard-search" @click="modifyContact">
                                 <span>Save</span>
-                                <div v-if="savedAction" class="spinner-border text-light" role="status">
+                                <div v-if="savedAction" class="spinner-border text-light size-loader" role="status">
                                     <span class="visually-hidden">Loading...</span>
                                 </div>
                             </button>
@@ -87,7 +87,7 @@ var ContactsSection = {
                 "mail_security" : this.dataPage.mail_security ?? ""
             })
             .then(data => {
-                //self.savedAction = false;
+                self.savedAction = false;
             }).catch(error => {
                 console.error('Error en la solicitud:', error);
             });

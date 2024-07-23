@@ -667,3 +667,8 @@ canvas {
 .header-section-nav-drop {
     cursor: pointer;
 }
+
+.size-loader {
+    width: 20px !important;
+    height: 20px !important;
+}
