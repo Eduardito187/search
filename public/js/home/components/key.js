@@ -15,6 +15,14 @@ var KeySection = {
         </div>
         <div v-if="dataPage.index != null" class="api-key-section p3">
             <div v-for="data in dataPage.index" class="api-key-section p3">
+                <div v-if="messageSuccess && alertCode == data.code" class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{messageSuccess}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <div v-if="messageError && alertCode == data.code" class="alert alert-warning alert-dismissible fade show" role="alert">
+                    {{messageError}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
                 <div v-if="data.name != null" class="api-key-section">
                     <div class="api-key-header">Index name</div>
                     <div class="api-key-value">{{data.name}}</div>
@@ -24,10 +32,9 @@ var KeySection = {
                     <div class="api-key-value">{{data.code}}</div>
                 </div>
                 <div class="api-key-section">
-                    <div class="api-key-header">Write API Key</div>
+                    <div class="api-key-header">Token</div>
                     <div class="api-key-value">
-                        <button class="btn btn-warning btn-sm">Show</button>
-                        <input type="hidden" :id="data.code" :value="data.token" />
+                        <button class="btn btn-warning btn-sm mr-1" @click="copyText(data.token, data.code)">Copy</button>
                         <span>••••••••••••••••••••••••••••••••••••••</span>
                         <button class="btn btn-warning btn-sm">Regenerate</button>
                     </div>
@@ -38,18 +45,32 @@ var KeySection = {
     `,
     data() {
         return {
-            dataPage: []
+            dataPage: [],
+            messageError: '',
+            messageSuccess: '',
+            alertCode: ''
         };
     },
     methods: {
         getDataPage() {
             let self = this;
+
             window.fetchFontendData('api/account/all-keys', 'POST').then(data => {
                 if (data.status && data.code == 200) {
                     self.dataPage = data.response;
                 }
             }).catch(error => {
                 console.error('Error en la solicitud:', error);
+            });
+        },
+        copyText(textToCopy, code) {
+            this.alertCode = code;
+            let self = this;
+
+            navigator.clipboard.writeText(textToCopy).then(function() {
+                self.messageSuccess = "Texto copiado al portapapeles.";
+            }).catch(function(err) {
+                self.messageError = err;
             });
         }
     },
