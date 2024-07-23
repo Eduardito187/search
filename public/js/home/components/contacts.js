@@ -46,7 +46,7 @@ var ContactsSection = {
                     <hr>
                     <div class="row text-end mt-3">
                         <div class="col align-self-end">
-                            <button type="button" class="btn-save-eduard-search" :disabled="savedAction" @click="modifyContact">
+                            <button type="button" class="btn-save-eduard-search" @click="modifyContact">
                                 <span>Save</span>
                                 <div v-if="savedAction" class="spinner-border text-light" role="status">
                                     <span class="visually-hidden">Loading...</span>
@@ -76,7 +76,22 @@ var ContactsSection = {
                 console.error('Error en la solicitud:', error);
             });
         },
-        modifyContact() {}
+        modifyContact() {
+            let self = this;
+            self.savedAction = true;
+
+            window.fetchFontendData('api/set-config-contact', 'POST', {
+                "name_privacy" : this.dataPage.name_privacy ?? "",
+                "phone_privacy" : this.dataPage.phone_privacy ?? "",
+                "mail_privacy" : this.dataPage.mail_privacy ?? "",
+                "mail_security" : this.dataPage.mail_security ?? ""
+            })
+            .then(data => {
+                self.savedAction = false;
+            }).catch(error => {
+                console.error('Error en la solicitud:', error);
+            });
+        }
     },
     created() {
         this.getContactData();
