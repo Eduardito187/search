@@ -87,7 +87,7 @@ var ContactsSection = {
                 "mail_security" : this.dataPage.mail_security ?? ""
             })
             .then(data => {
-                self.savedAction = false;
+                //self.savedAction = false;
             }).catch(error => {
                 console.error('Error en la solicitud:', error);
             });
