@@ -24,7 +24,7 @@ class IndexCatalog extends Model
      * @inheritDoc
      */
     public function indexConfiguration() {
-        return $this->hasOne(IndexConfiguration::class, 'id', 'id_index_catalog');
+        return $this->hasOne(IndexConfiguration::class, 'id_index_catalog', 'id');
     }
 
     /**
