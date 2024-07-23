@@ -80,7 +80,7 @@ var ContactsSection = {
             let self = this;
             self.savedAction = true;
 
-            window.fetchFontendData('api/set-config-contact', 'POST', {
+            window.fetchFontendData('api/account/set-config-contact', 'POST', {
                 "name_privacy" : this.dataPage.name_privacy ?? "",
                 "phone_privacy" : this.dataPage.phone_privacy ?? "",
                 "mail_privacy" : this.dataPage.mail_privacy ?? "",
