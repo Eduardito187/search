@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Helpers\SendMail;
 use App\Helpers\SendMailMasive;
+use App\Models\ContactClient;
 use App\Models\MailingCustomer;
 use App\Models\MailingIndex;
 use App\Models\NotificationsClient;
@@ -264,6 +265,74 @@ class Customer
         } catch (Exception $e) {
             return null;
         }
+    }
+
+    public function createContactClient($idClient, $body)
+    {
+        try {
+            $contact = new ContactClient();
+            $contact->name_privacy = $body["name_privacy"] ?? "";
+            $contact->phone_privacy = $body["phone_privacy"] ?? "";
+            $contact->mail_privacy = $body["mail_privacy"] ?? "";
+            $contact->mail_security = $body["mail_security"] ?? "";
+            $contact->id_client = $idClient;
+            $contact->created_at = date("Y-m-d H:i:s");
+            $contact->updated_at = null;
+            $contact->save();
+        } catch (Exception $e) {
+            return null;
+        }
+    }
+
+    public function getConfigContacts(array $body, array $header = [])
+    {
+        return $this->executeWithValidation(
+            function() use ($header, $body) {
+                $this->validateCustomerKey($header);
+                $customer = $this->getCustomerByEncryption($header["customer-key"][0]);
+                $client = $customer->client;
+
+                if (!$client->contactClient) {
+                    $this->createContactClient($client->id, $body);
+                }
+
+                $data = [
+                    "name_privacy" => $client->contactClient->name_privacy ?? "",
+                    "phone_privacy" => $client->contactClient->phone_privacy ?? "",
+                    "mail_privacy" => $client->contactClient->mail_privacy ?? "",
+                    "mail_security" => $client->contactClient->mail_security ?? ""
+                ];
+
+                return $data;
+            },
+            "Proceso ejecutado exitosamente."
+        );
+    }
+
+    public function setConfigContacts(array $body, array $header = [])
+    {
+        return $this->executeWithValidation(
+            function() use ($header, $body) {
+                $this->validateCustomerKey($header);
+                $customer = $this->getCustomerByEncryption($header["customer-key"][0]);
+                $client = $customer->client;
+
+                if (!$client->contactClient) {
+                    $this->createContactClient($client->id, $body);
+                } else {
+                    $contact = $client->contactClient;
+                    $contact->name_privacy = $body["name_privacy"] ?? "";
+                    $contact->phone_privacy = $body["phone_privacy"] ?? "";
+                    $contact->mail_privacy = $body["mail_privacy"] ?? "";
+                    $contact->mail_security = $body["mail_security"] ?? "";
+                    $contact->updated_at = date("Y-m-d H:i:s");
+                    $contact->save();
+                }
+
+                return ["status" => true];
+            },
+            "Proceso ejecutado exitosamente."
+        );
     }
 
     public function getConfigNotifications(array $body, array $header = [])
@@ -745,24 +814,6 @@ class Customer
                 }
 
                 return $data;
-            },
-            "Proceso ejecutado exitosamente."
-        );
-    }
-
-    public function getContactTeamData(array $body, array $header = [])
-    {
-        return $this->executeWithValidation(
-            function() use ($header) {
-                $this->validateCustomerKey($header);
-                $currentCustomer = $this->getCustomerByEncryption($header["customer-key"][0]);
-
-                return [
-                    "name_privacy" => "",
-                    "phone_privacy" => "",
-                    "mail_privacy" => "",
-                    "mail_security" => ""
-                ];
             },
             "Proceso ejecutado exitosamente."
         );
