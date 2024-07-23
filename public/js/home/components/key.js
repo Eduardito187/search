@@ -17,11 +17,11 @@ var KeySection = {
             <div v-for="data in dataPage.index" class="api-key-section p3">
                 <div v-if="messageSuccess && alertCode == data.code" class="alert alert-success alert-dismissible fade show" role="alert">
                     {{messageSuccess}}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" @click="resetAlert"></button>
                 </div>
                 <div v-if="messageError && alertCode == data.code" class="alert alert-warning alert-dismissible fade show" role="alert">
                     {{messageError}}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" @click="resetAlert"></button>
                 </div>
                 <div v-if="data.name != null" class="api-key-section">
                     <div class="api-key-header">Index name</div>
@@ -34,8 +34,8 @@ var KeySection = {
                 <div class="api-key-section">
                     <div class="api-key-header">Token</div>
                     <div class="api-key-value">
-                        <button class="btn btn-warning btn-sm mr-1" @click="copyText(data.token, data.code)">Copy</button>
-                        <span>••••••••••••••••••••••••••••••••••••••</span>
+                        <button class="btn btn-warning btn-sm" @click="copyText(data.token, data.code)">Copy</button>
+                        <span class="ml-1">••••••••••••••••••••••••••••••••</span>
                         <button class="btn btn-warning btn-sm">Regenerate</button>
                     </div>
                 </div>
@@ -62,6 +62,11 @@ var KeySection = {
             }).catch(error => {
                 console.error('Error en la solicitud:', error);
             });
+        },
+        resetAlert() {
+            this.messageError = '';
+            this.messageSuccess = '';
+            this.alertCode = '';
         },
         copyText(textToCopy, code) {
             this.alertCode = code;
